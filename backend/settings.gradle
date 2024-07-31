@@ -1,1 +1,6 @@
 rootProject.name = 'pcloud'
+include 'pcloud-common'
+include 'pcloud-domain'
+include 'pcloud-infrastructure'
+include 'pcloud-api'
+
