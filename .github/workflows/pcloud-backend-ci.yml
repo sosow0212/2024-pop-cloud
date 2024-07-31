@@ -52,4 +52,4 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Test with Gradle
-        run: ./gradlew :market-api:test
+        run: ./gradlew :pcloud-api:test
