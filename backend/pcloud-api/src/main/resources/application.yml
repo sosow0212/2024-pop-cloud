@@ -12,8 +12,3 @@ management:
     web:
       exposure:
         include: prometheus, health
-
-
-jwt:
-  secret: ENC(hQLPUuufo6+rX3SKuCA1WOTUqjyLREZsBF1q4dFrB2+WLMQNVyGhB4d2zskhI6sdCWgDaPBDABZFIg6nk3eLtZErUieH1I33)
-  expiration-period: ENC(akNgWoo0R4MHHtv0+2iBQw==)

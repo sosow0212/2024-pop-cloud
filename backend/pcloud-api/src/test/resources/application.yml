@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    include:
+      - domain
+      - common
+      - infrastructure
+
+jasypt:
+  encryptor:
+    password: password
