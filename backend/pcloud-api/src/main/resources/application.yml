@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    include:
+      - domain
+      - common
+      - infrastructure
+
+management:
+  server:
+    port: 9000
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
