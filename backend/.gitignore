@@ -37,5 +37,6 @@ out/
 .vscode/
 
 ### REST Docs, QueryDSL ###
-/src/main/resources/static/docs/
-/src/main/generated
+pcloud-api/src/main/resources/static/docs/
+pcloud-api/src/main/generated
+pcloud-domain/src/main/generated

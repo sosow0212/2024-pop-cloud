@@ -9,11 +9,75 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
 }
 
-test {
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    asciidoctorExt
+}
+
+dependencies {
+    implementation project(":pcloud-common")
+    implementation project(":pcloud-domain")
+    implementation project(":pcloud-infrastructure")
+
+    // spring web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // REST Docs Test
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+
+    // actuator, prometheus
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+}
+
+def generated = 'src/main/generated'
+
+sourceSets {
+    main.java.srcDirs += [generated]
+}
+
+tasks.withType(JavaCompile) {
+    options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+clean.doLast {
+    file(generated).deleteDir()
+}
+
+tasks.named('test') {
+    outputs.dir snippetsDir
     useJUnitPlatform()
 }
+
+tasks.named('asciidoctor') {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+asciidoctor {
+    dependsOn test
+    configurations 'asciidoctorExt'
+    baseDirFollowsSourceFile()
+}
+
+tasks.register('copyApiDocument', Copy) {
+    dependsOn asciidoctor
+    doFirst {
+        delete file("src/main/resources/static/docs")
+    }
+
+    from asciidoctor.outputDir
+    into file("src/main/resources/static/docs")
+}
+
+bootJar {
+    dependsOn copyApiDocument
+}
+
