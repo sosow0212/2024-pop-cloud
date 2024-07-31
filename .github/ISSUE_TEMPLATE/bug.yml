@@ -1,0 +1,11 @@
+name: "🐞 Bug"
+description: "버그가 발생했나요?"
+labels: "🐞 Bug"
+body:
+  - type: textarea
+    attributes:
+      label: 🐞 Describe
+      description: 버그에 대한 설명을 작성해 주세요.
+      placeholder: 자세히 적을수록 좋습니다!
+    validations:
+      required: true
