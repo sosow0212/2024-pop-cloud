@@ -1,9 +1,6 @@
 spring:
   profiles:
-    include:
-      - domain
-      - common
-      - infrastructure
+    active: local
 
 management:
   server:
