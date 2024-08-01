@@ -5,6 +5,7 @@ import com.api.member.application.request.SignupRequest;
 import com.common.auth.TokenProvider;
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
+import com.domain.domains.member.exception.MemberAlreadyExistedException;
 import com.domain.domains.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class MemberService {
 
     @Transactional
     public String signup(final SignupRequest signupRequest) {
+        validateAlreadyExistedMember(signupRequest);
+
         Member member = Member.builder()
                 .email(signupRequest.email())
                 .password(signupRequest.password())
@@ -26,6 +29,12 @@ public class MemberService {
 
         memberRepository.save(member);
         return tokenProvider.create(member.getId());
+    }
+
+    private void validateAlreadyExistedMember(final SignupRequest signupRequest) {
+        if (memberRepository.existsByEmail(signupRequest.email())) {
+            throw new MemberAlreadyExistedException();
+        }
     }
 
     @Transactional(readOnly = true)
