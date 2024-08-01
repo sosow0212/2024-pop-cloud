@@ -1,4 +1,4 @@
-package com.api.config.filter;
+package com.api.global.config.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

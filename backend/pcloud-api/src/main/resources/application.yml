@@ -1,9 +1,10 @@
 spring:
   profiles:
-    include:
-      - domain
-      - common
-      - infrastructure
+    active: local
+
+server:
+  servlet:
+    context-path: /api
 
 management:
   server:

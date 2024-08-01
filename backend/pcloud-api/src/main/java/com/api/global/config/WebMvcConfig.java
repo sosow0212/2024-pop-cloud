@@ -1,6 +1,6 @@
-package com.api.config;
+package com.api.global.config;
 
-import com.api.config.filter.CorsCustomFilter;
+import com.api.global.config.filter.CorsCustomFilter;
 import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

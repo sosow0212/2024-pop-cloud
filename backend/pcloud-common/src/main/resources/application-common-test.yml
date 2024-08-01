@@ -1,0 +1,7 @@
+jasypt:
+  encryptor:
+    password: password
+
+jwt:
+  secret: testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
+  expiration-period: 10000

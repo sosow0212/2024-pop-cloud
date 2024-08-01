@@ -25,6 +25,10 @@ dependencies {
     implementation project(":pcloud-domain")
     implementation project(":pcloud-infrastructure")
 
+    // testFixtures import
+    testImplementation(testFixtures(project(":pcloud-domain")))
+    testImplementation(testFixtures(project(":pcloud-common")))
+
     // spring web
     implementation 'org.springframework.boot:spring-boot-starter-web'
 

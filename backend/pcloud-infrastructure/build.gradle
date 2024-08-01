@@ -3,4 +3,6 @@ jar { enabled = true }
 
 dependencies {
     implementation project(':pcloud-common')
+    testImplementation(testFixtures(project(":pcloud-domain")))
+    testImplementation(testFixtures(project(":pcloud-common")))
 }

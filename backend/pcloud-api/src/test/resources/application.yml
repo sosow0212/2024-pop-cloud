@@ -4,7 +4,4 @@ spring:
       - domain
       - common
       - infrastructure
-
-jasypt:
-  encryptor:
-    password: password
+    active: test
