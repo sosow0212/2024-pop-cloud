@@ -2,6 +2,10 @@ spring:
   profiles:
     active: local
 
+server:
+  servlet:
+    context-path: /api
+
 management:
   server:
     port: 9000

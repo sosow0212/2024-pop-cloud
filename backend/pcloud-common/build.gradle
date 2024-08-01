@@ -2,14 +2,11 @@ bootJar.enabled = false
 jar.enabled = true
 
 dependencies {
-    // *** 의존 범위까지 적용되는 라이브러리 api ***
-    api 'org.springframework.boot:spring-boot-starter-validation'
-
     // jasypt
     api 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 
+    api 'org.springframework.boot:spring-boot-starter-validation'
 
-    // *** common 모듈 내부 사용 라이브러리 ***
     implementation 'org.springframework.boot:spring-boot-starter-aop'
 
     // jwt
