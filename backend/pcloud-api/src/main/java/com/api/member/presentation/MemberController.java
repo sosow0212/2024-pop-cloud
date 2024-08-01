@@ -1,10 +1,10 @@
 package com.api.member.presentation;
 
-import com.api.config.annotation.AuthMember;
 import com.api.member.application.MemberService;
 import com.api.member.application.request.LoginRequest;
 import com.api.member.application.request.SignupRequest;
 import com.api.member.presentation.response.TokenResponse;
+import com.common.annotation.AuthMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.api.member.infrastructure;
+package com.domain.domains.member.infrastructure;
 
 import com.domain.domains.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

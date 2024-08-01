@@ -1,7 +1,7 @@
 package com.api.config.resolver;
 
-import com.api.config.annotation.AuthMember;
 import com.api.config.interceptor.auth.support.AuthenticationContext;
+import com.common.annotation.AuthMember;
 import com.common.exception.LoginInvalidException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;

@@ -2,6 +2,7 @@ package com.api.member.infrastructure;
 
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
+import com.domain.domains.member.infrastructure.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.api.config.annotation;
+package com.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
