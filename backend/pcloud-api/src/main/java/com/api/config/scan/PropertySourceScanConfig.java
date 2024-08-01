@@ -1,6 +1,5 @@
 package com.api.config.scan;
 
-import com.common.config.YamlPropertySourceFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
