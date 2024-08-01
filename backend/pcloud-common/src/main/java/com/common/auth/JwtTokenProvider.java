@@ -1,10 +1,6 @@
 package com.common.auth;
 
-import com.common.exception.ExpiredTokenException;
-import com.common.exception.SignatureInvalidException;
-import com.common.exception.TokenFormInvalidException;
-import com.common.exception.TokenInvalidException;
-import com.common.exception.UnsupportedTokenException;
+import com.common.exception.AuthException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -22,6 +18,12 @@ import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+
+import static com.common.exception.AuthExceptionType.EXPIRED_TOKEN_EXCEPTION;
+import static com.common.exception.AuthExceptionType.SIGNATURE_INVALID_EXCEPTION;
+import static com.common.exception.AuthExceptionType.TOKEN_FORM_INVALID_EXCEPTION;
+import static com.common.exception.AuthExceptionType.TOKEN_INVALID_EXCEPTION;
+import static com.common.exception.AuthExceptionType.UNSUPPORTED_TOKEN_EXCEPTION;
 
 @Getter
 @NoArgsConstructor
@@ -82,15 +84,15 @@ public class JwtTokenProvider implements TokenProvider {
                     .get("id", Long.class);
             return id;
         } catch (final SecurityException e) {
-            throw new SignatureInvalidException();
+            throw new AuthException(SIGNATURE_INVALID_EXCEPTION);
         } catch (final MalformedJwtException e) {
-            throw new TokenFormInvalidException();
+            throw new AuthException(TOKEN_FORM_INVALID_EXCEPTION);
         } catch (final ExpiredJwtException e) {
-            throw new ExpiredTokenException();
+            throw new AuthException(EXPIRED_TOKEN_EXCEPTION);
         } catch (final UnsupportedJwtException e) {
-            throw new UnsupportedTokenException();
+            throw new AuthException(UNSUPPORTED_TOKEN_EXCEPTION);
         } catch (final IllegalArgumentException e) {
-            throw new TokenInvalidException();
+            throw new AuthException(TOKEN_INVALID_EXCEPTION);
         }
     }
 }

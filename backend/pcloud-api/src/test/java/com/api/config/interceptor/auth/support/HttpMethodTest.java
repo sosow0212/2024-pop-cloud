@@ -1,5 +1,6 @@
 package com.api.config.interceptor.auth.support;
 
+import com.api.global.config.interceptor.auth.support.HttpMethod;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

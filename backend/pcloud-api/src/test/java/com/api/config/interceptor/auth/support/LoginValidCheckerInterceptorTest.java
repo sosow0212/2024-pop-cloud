@@ -1,8 +1,10 @@
 package com.api.config.interceptor.auth.support;
 
-import com.api.config.interceptor.auth.LoginValidCheckerInterceptor;
+import com.api.global.config.interceptor.auth.LoginValidCheckerInterceptor;
+import com.api.global.config.interceptor.auth.support.AuthenticationContext;
 import com.common.auth.JwtTokenProvider;
-import com.common.exception.LoginInvalidException;
+import com.common.exception.AuthException;
+import com.common.exception.AuthExceptionType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -32,6 +34,7 @@ class LoginValidCheckerInterceptorTest {
 
         // when
         assertThatThrownBy(() -> loginValidCheckerInterceptor.preHandle(req, res, new Object()))
-                .isInstanceOf(LoginInvalidException.class);
+                .isInstanceOf(AuthException.class)
+                .hasMessageContaining(AuthExceptionType.SIGNATURE_INVALID_EXCEPTION.getMessage());
     }
 }

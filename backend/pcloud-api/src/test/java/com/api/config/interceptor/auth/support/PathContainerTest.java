@@ -1,5 +1,7 @@
 package com.api.config.interceptor.auth.support;
 
+import com.api.global.config.interceptor.auth.support.HttpMethod;
+import com.api.global.config.interceptor.auth.support.PathContainer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

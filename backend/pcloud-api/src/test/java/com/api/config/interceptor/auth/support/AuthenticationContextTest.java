@@ -1,6 +1,8 @@
 package com.api.config.interceptor.auth.support;
 
-import com.common.exception.LoginInvalidException;
+import com.api.global.config.interceptor.auth.support.AuthenticationContext;
+import com.common.exception.AuthException;
+import com.common.exception.AuthExceptionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -39,7 +41,8 @@ class AuthenticationContextTest {
 
         // when & then
         assertThatThrownBy(() -> authenticationContext.getPrincipal())
-                .isInstanceOf(LoginInvalidException.class);
+                .isInstanceOf(AuthException.class)
+                .hasMessageContaining(AuthExceptionType.LOGIN_INVALID_EXCEPTION.getMessage());
     }
 
     @Test

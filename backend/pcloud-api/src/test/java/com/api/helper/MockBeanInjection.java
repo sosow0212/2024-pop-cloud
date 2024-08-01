@@ -1,6 +1,6 @@
 package com.api.helper;
 
-import com.api.config.interceptor.auth.support.AuthenticationContext;
+import com.api.global.config.interceptor.auth.support.AuthenticationContext;
 import com.api.member.application.MemberService;
 import com.common.auth.TokenProvider;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,7 +14,7 @@ public class MockBeanInjection {
 
     @MockBean
     protected AuthenticationContext authenticationContext;
-    
+
     @MockBean
     protected MemberService memberService;
 }

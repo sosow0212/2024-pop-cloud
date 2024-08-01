@@ -1,7 +1,8 @@
 package com.domain.domains.member.domain;
 
 import com.domain.domains.base.BaseEntity;
-import com.domain.domains.member.exception.PasswordInvalidException;
+import com.domain.domains.member.exception.MemberException;
+import com.domain.domains.member.exception.MemberExceptionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class Member extends BaseEntity {
 
     public void validatePassword(final String password) {
         if (!this.password.equals(password)) {
-            throw new PasswordInvalidException();
+            throw new MemberException(MemberExceptionType.PASSWORD_INVALID_EXCEPTION);
         }
     }
 }

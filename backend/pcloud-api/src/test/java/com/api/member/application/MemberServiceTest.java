@@ -6,9 +6,8 @@ import com.api.member.application.request.SignupRequest;
 import com.common.auth.TokenProvider;
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
-import com.domain.domains.member.exception.MemberAlreadyExistedException;
-import com.domain.domains.member.exception.MemberNotFoundException;
-import com.domain.domains.member.exception.PasswordInvalidException;
+import com.domain.domains.member.exception.MemberException;
+import com.domain.domains.member.exception.MemberExceptionType;
 import member.fixture.FakeMemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -62,7 +61,8 @@ class AuthServiceTest {
 
             // when & then
             assertThatThrownBy(() -> memberService.signup(req))
-                    .isInstanceOf(MemberAlreadyExistedException.class);
+                    .isInstanceOf(MemberException.class)
+                    .hasMessageContaining(MemberExceptionType.MEMBER_ALREADY_EXISTED_EXCEPTION.getMessage());
         }
     }
 
@@ -93,7 +93,8 @@ class AuthServiceTest {
 
             // when & then
             assertThatThrownBy(() -> memberService.login(request))
-                    .isInstanceOf(MemberNotFoundException.class);
+                    .isInstanceOf(MemberException.class)
+                    .hasMessageContaining(MemberExceptionType.MEMBER_NOT_FOUND_EXCEPTION.getMessage());
         }
 
         @Test
@@ -105,7 +106,8 @@ class AuthServiceTest {
 
             // when & then
             assertThatThrownBy(() -> memberService.login(request))
-                    .isInstanceOf(PasswordInvalidException.class);
+                    .isInstanceOf(MemberException.class)
+                    .hasMessageContaining(MemberExceptionType.PASSWORD_INVALID_EXCEPTION.getMessage());
         }
     }
 }

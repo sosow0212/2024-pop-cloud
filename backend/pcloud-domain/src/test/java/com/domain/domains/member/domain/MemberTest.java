@@ -1,6 +1,7 @@
 package com.domain.domains.member.domain;
 
-import com.domain.domains.member.exception.PasswordInvalidException;
+import com.domain.domains.member.exception.MemberException;
+import com.domain.domains.member.exception.MemberExceptionType;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ class MemberTest {
 
         // when & then
         assertThatThrownBy(() -> member.validatePassword("wrong_password"))
-                .isInstanceOf(PasswordInvalidException.class);
+                .isInstanceOf(MemberException.class)
+                .hasMessageContaining(MemberExceptionType.PASSWORD_INVALID_EXCEPTION.getMessage());
     }
 }

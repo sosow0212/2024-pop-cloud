@@ -5,11 +5,13 @@ import com.api.member.application.request.SignupRequest;
 import com.common.auth.TokenProvider;
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
-import com.domain.domains.member.exception.MemberAlreadyExistedException;
-import com.domain.domains.member.exception.MemberNotFoundException;
+import com.domain.domains.member.exception.MemberException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.domain.domains.member.exception.MemberExceptionType.MEMBER_ALREADY_EXISTED_EXCEPTION;
+import static com.domain.domains.member.exception.MemberExceptionType.MEMBER_NOT_FOUND_EXCEPTION;
 
 @RequiredArgsConstructor
 @Service
@@ -33,7 +35,7 @@ public class MemberService {
 
     private void validateAlreadyExistedMember(final SignupRequest signupRequest) {
         if (memberRepository.existsByEmail(signupRequest.email())) {
-            throw new MemberAlreadyExistedException();
+            throw new MemberException(MEMBER_ALREADY_EXISTED_EXCEPTION);
         }
     }
 
@@ -46,6 +48,6 @@ public class MemberService {
 
     private Member findMemberByEmail(final LoginRequest loginRequest) {
         return memberRepository.findByEmail(loginRequest.email())
-                .orElseThrow(MemberNotFoundException::new);
+                .orElseThrow(() -> new MemberException(MEMBER_NOT_FOUND_EXCEPTION));
     }
 }
