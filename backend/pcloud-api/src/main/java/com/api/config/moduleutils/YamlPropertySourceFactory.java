@@ -1,4 +1,4 @@
-package com.api.config.scan;
+package com.api.config.moduleutils;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;

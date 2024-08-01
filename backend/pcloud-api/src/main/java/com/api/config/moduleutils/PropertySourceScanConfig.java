@@ -1,4 +1,4 @@
-package com.api.config.scan;
+package com.api.config.moduleutils;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
