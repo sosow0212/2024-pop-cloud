@@ -5,3 +5,15 @@ jasypt:
 jwt:
   secret: testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
   expiration-period: 10000
+
+oauth2:
+  properties:
+    kakao:
+      client-id: clientId
+      client-secret: clientSecret
+      redirect-uri: localhost:8080/api/redirect
+      token-uri: https://kauth.kakao.com/oauth/token
+      user-info-uri: https://kapi.kakao.com/v2/user/me
+      member-info-key-word-request:
+        email-key-word: kakao_account.email
+        nickname-key-word: kakao_account.profile.nickname
