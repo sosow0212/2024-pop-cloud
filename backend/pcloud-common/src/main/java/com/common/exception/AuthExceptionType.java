@@ -7,7 +7,9 @@ public enum AuthExceptionType implements CustomExceptionType {
     SIGNATURE_INVALID_EXCEPTION(401, "토큰의 서명이 잘못 되었습니다."),
     TOKEN_FORM_INVALID_EXCEPTION(400, "토큰의 형식이 올바르지 않습니다."),
     TOKEN_INVALID_EXCEPTION(400, "토큰의 값이 유효하지 않습니다."),
-    UNSUPPORTED_TOKEN_EXCEPTION(400, "지원하지 않는 토큰 형식입니다.");
+    UNSUPPORTED_TOKEN_EXCEPTION(400, "지원하지 않는 토큰 형식입니다."),
+    REQUEST_FAIL_OF_OAUTH_ACCESS_TOKEN(400, "OAuth 인증 Access-token 발급에 실패하였습니다."),
+    REQUEST_FAIL_OF_OAUTH_MEMBER_INFO(400, "OAuth 유저 정보 조회에 실패하였습니다.");
 
     private final int httpStatusCode;
     private final String message;

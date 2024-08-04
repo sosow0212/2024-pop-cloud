@@ -18,7 +18,7 @@ public enum OAuthPlatform {
 
     public static OAuthPlatform findPlatform(final String name) {
         return Arrays.stream(values())
-                .filter(platform -> name.equals(platform.name))
+                .filter(platform -> platform.name.equals(name.toLowerCase()))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("플랫폼이 없습니다."));
     }

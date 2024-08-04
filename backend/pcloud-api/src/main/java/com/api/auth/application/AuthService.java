@@ -1,9 +1,10 @@
 package com.api.auth.application;
 
-import com.api.auth.application.request.OAuthProviderSource;
+import com.api.auth.application.oauth.OAuthManager;
 import com.common.auth.TokenProvider;
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
+import com.domain.domains.member.domain.vo.OAuthPlatform;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,16 +15,12 @@ public class AuthService {
 
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
-    private final OAuthRequester oAuthRequester;
+    private final OAuthManager oAuthManager;
 
     @Transactional
-    public String loginWithOAuth(
-            final String platform,
-            final String oAuthPermittedCode,
-            final OAuthProviderSource provider
-    ) {
-        String oAuthAccessToken = oAuthRequester.getAccessToken(oAuthPermittedCode, provider);
-        Member member = oAuthRequester.fetchMember(oAuthAccessToken, provider);
+    public String loginWithOAuth(final OAuthPlatform platform, final String oAuthPermittedCode) {
+        String oAuthAccessToken = oAuthManager.getAccessToken(platform, oAuthPermittedCode);
+        Member member = oAuthManager.fetchMember(platform, oAuthAccessToken);
 
         Long memberId = memberRepository.findByOauthId(member.getOauthId())
                 .orElseGet(() -> signup(member))

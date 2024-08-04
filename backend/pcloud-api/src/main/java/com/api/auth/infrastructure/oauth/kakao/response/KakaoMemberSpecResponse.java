@@ -1,4 +1,4 @@
-package com.api.auth.infrastructure.response;
+package com.api.auth.infrastructure.oauth.kakao.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -6,12 +6,13 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.time.LocalDateTime;
 
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
-public record KakaoMemberResponse(
+public record KakaoMemberSpecResponse(
         Long id,
         boolean hasSignedUp,
         LocalDateTime connectedAt,
         KakaoAccount kakaoAccount
 ) {
+
     @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
     public record KakaoAccount(
             boolean profileNeedsAgreement,
@@ -39,6 +40,7 @@ public record KakaoMemberResponse(
             String ci,
             LocalDateTime ciAuthenticatedAt
     ) {
+
         public String formattedPhone() {
             if (phoneNumber == null || !phoneNumber.contains(" ")) {
                 return phoneNumber;
