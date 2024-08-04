@@ -1,7 +1,6 @@
 package com.api.auth.presentation;
 
 import com.api.auth.application.AuthService;
-import com.api.auth.infrastructure.oauth.kakao.request.KakaoOAuthSource;
 import com.api.member.presentation.response.TokenResponse;
 import com.domain.domains.member.domain.vo.OAuthPlatform;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
-    private final KakaoOAuthSource oAuthSource;
 
     @PostMapping("/login/oauth/{platform}")
     public ResponseEntity<TokenResponse> loginWithOAuth(

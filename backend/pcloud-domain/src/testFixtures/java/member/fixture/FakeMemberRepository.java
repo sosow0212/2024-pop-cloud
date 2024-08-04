@@ -19,6 +19,7 @@ public class FakeMemberRepository implements MemberRepository {
                 .id(id)
                 .email(member.getEmail())
                 .password(member.getPassword())
+                .oauthId(member.getOauthId())
                 .build();
 
         map.put(id, savedMember);

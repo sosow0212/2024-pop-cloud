@@ -7,6 +7,7 @@ public enum MemberExceptionType implements CustomExceptionType {
     MEMBER_ALREADY_EXISTED_EXCEPTION(400, "Member가 이미 존재합니다."),
     MEMBER_NOT_FOUND_EXCEPTION(404, "Member가 존재하지 않습니다."),
     PASSWORD_INVALID_EXCEPTION(401, "패스워드가 일치하지 않습니다."),
+    OAUTH_PLATFORM_NOT_FOUND_EXCEPTION(400, "OAuth Platform을 찾을 수 없습니다."),
     ;
 
     private final int httpStatusCode;

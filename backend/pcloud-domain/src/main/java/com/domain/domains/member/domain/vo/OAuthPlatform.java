@@ -1,8 +1,11 @@
 package com.domain.domains.member.domain.vo;
 
+import com.domain.domains.member.exception.MemberException;
 import lombok.Getter;
 
 import java.util.Arrays;
+
+import static com.domain.domains.member.exception.MemberExceptionType.OAUTH_PLATFORM_NOT_FOUND_EXCEPTION;
 
 @Getter
 public enum OAuthPlatform {
@@ -20,6 +23,6 @@ public enum OAuthPlatform {
         return Arrays.stream(values())
                 .filter(platform -> platform.name.equals(name.toLowerCase()))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("플랫폼이 없습니다."));
+                .orElseThrow(() -> new MemberException(OAUTH_PLATFORM_NOT_FOUND_EXCEPTION));
     }
 }
