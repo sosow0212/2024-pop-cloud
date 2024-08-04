@@ -1,5 +1,6 @@
 package com.api.global.config;
 
+import com.api.auth.presentation.support.OAuthArgumentResolver;
 import com.api.global.config.interceptor.auth.LoginValidCheckerInterceptor;
 import com.api.global.config.interceptor.auth.ParseMemberIdFromTokenInterceptor;
 import com.api.global.config.interceptor.auth.PathMatcherInterceptor;
@@ -24,6 +25,7 @@ import static com.api.global.config.interceptor.auth.support.HttpMethod.POST;
 public class AuthConfig implements WebMvcConfigurer {
 
     private final AuthArgumentResolver authArgumentResolver;
+    private final OAuthArgumentResolver oAuthArgumentResolver;
     private final ParseMemberIdFromTokenInterceptor parseMemberIdFromTokenInterceptor;
     private final LoginValidCheckerInterceptor loginValidCheckerInterceptor;
 
@@ -47,5 +49,6 @@ public class AuthConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(authArgumentResolver);
+        resolvers.add(oAuthArgumentResolver);
     }
 }

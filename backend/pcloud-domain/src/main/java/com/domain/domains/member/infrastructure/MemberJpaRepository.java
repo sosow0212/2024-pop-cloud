@@ -1,6 +1,7 @@
 package com.domain.domains.member.infrastructure;
 
 import com.domain.domains.member.domain.Member;
+import com.domain.domains.member.domain.vo.OauthId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -14,4 +15,6 @@ public interface MemberJpaRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    Optional<Member> findByOauthId(OauthId oAuthId);
 }

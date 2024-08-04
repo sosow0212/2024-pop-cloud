@@ -4,10 +4,8 @@ import com.api.member.application.MemberService;
 import com.api.member.application.request.LoginRequest;
 import com.api.member.application.request.SignupRequest;
 import com.api.member.presentation.response.TokenResponse;
-import com.common.annotation.AuthMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +28,5 @@ public class MemberController {
     public ResponseEntity<TokenResponse> login(@RequestBody final LoginRequest loginRequest) {
         String token = memberService.login(loginRequest);
         return ResponseEntity.ok(new TokenResponse(token));
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<Long> test(@AuthMember final Long memberId) {
-        return ResponseEntity.ok(memberId);
     }
 }

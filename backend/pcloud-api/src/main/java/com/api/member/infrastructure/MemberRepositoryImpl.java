@@ -2,6 +2,7 @@ package com.api.member.infrastructure;
 
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
+import com.domain.domains.member.domain.vo.OauthId;
 import com.domain.domains.member.infrastructure.MemberJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -32,5 +33,10 @@ public class MemberRepositoryImpl implements MemberRepository {
     @Override
     public boolean existsByEmail(final String email) {
         return memberJpaRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Optional<Member> findByOauthId(final OauthId oauthId) {
+        return memberJpaRepository.findByOauthId(oauthId);
     }
 }
