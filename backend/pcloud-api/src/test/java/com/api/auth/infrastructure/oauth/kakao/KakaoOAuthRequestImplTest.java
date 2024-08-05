@@ -75,7 +75,7 @@ class KakaoOAuthRequestImplTest {
             // when & then
             assertThatThrownBy(() -> kakaoOAuthRequest.getOAuthAccessToken("test-code"))
                     .isInstanceOf(AuthException.class)
-                    .hasMessageContaining(AuthExceptionType.REQUEST_FAIL_OF_OAUTH_ACCESS_TOKEN.getMessage());
+                    .hasMessageContaining(AuthExceptionType.REQUEST_FAIL_OF_OAUTH_ACCESS_TOKEN.message());
         }
     }
 

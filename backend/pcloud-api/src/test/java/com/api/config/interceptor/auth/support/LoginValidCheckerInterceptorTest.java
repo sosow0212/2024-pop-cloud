@@ -35,6 +35,6 @@ class LoginValidCheckerInterceptorTest {
         // when
         assertThatThrownBy(() -> loginValidCheckerInterceptor.preHandle(req, res, new Object()))
                 .isInstanceOf(AuthException.class)
-                .hasMessageContaining(AuthExceptionType.SIGNATURE_INVALID_EXCEPTION.getMessage());
+                .hasMessageContaining(AuthExceptionType.SIGNATURE_INVALID_EXCEPTION.message());
     }
 }

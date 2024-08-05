@@ -30,6 +30,6 @@ class OAuthPlatformTest {
         // when
         assertThatThrownBy(() -> OAuthPlatform.findPlatform(invalidPlatform))
                 .isInstanceOf(MemberException.class)
-                .hasMessageContaining(MemberExceptionType.OAUTH_PLATFORM_NOT_FOUND_EXCEPTION.getMessage());
+                .hasMessageContaining(MemberExceptionType.OAUTH_PLATFORM_NOT_FOUND_EXCEPTION.message());
     }
 }

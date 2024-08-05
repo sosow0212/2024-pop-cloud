@@ -2,9 +2,11 @@ package com.common.exception;
 
 public interface CustomExceptionType {
 
-    String getMessage();
+    String message();
 
     String name();
 
-    int getHttpStatusCode();
+    int httpStatusCode();
+
+    String customCode();
 }

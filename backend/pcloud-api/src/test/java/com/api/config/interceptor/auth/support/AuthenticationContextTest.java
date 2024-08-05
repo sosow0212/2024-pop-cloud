@@ -42,7 +42,7 @@ class AuthenticationContextTest {
         // when & then
         assertThatThrownBy(() -> authenticationContext.getPrincipal())
                 .isInstanceOf(AuthException.class)
-                .hasMessageContaining(AuthExceptionType.LOGIN_INVALID_EXCEPTION.getMessage());
+                .hasMessageContaining(AuthExceptionType.LOGIN_INVALID_EXCEPTION.message());
     }
 
     @Test
