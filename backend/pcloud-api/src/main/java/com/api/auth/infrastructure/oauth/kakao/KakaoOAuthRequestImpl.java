@@ -1,7 +1,7 @@
 package com.api.auth.infrastructure.oauth.kakao;
 
 import com.api.auth.application.oauth.OAuthRequest;
-import com.api.auth.infrastructure.oauth.kakao.request.KakaoOAuthSource;
+import com.api.auth.infrastructure.oauth.kakao.request.KakaoOAuthPropertySource;
 import com.api.auth.infrastructure.oauth.kakao.response.KakaoMemberSpecResponse;
 import com.api.auth.infrastructure.oauth.kakao.response.KakaoToken;
 import com.common.exception.AuthException;
@@ -27,7 +27,7 @@ import static com.common.exception.AuthExceptionType.REQUEST_FAIL_OF_OAUTH_MEMBE
 public class KakaoOAuthRequestImpl implements OAuthRequest {
 
     private final RestTemplate restTemplate;
-    private final KakaoOAuthSource oAuthSource;
+    private final KakaoOAuthPropertySource oAuthSource;
 
     @Override
     public OAuthPlatform isSupported() {

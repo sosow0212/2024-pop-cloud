@@ -1,6 +1,6 @@
 package com.api.auth.infrastructure.oauth.kakao;
 
-import com.api.auth.infrastructure.oauth.kakao.request.KakaoOAuthSource;
+import com.api.auth.infrastructure.oauth.kakao.request.KakaoOAuthPropertySource;
 import com.api.auth.infrastructure.oauth.kakao.response.KakaoMemberSpecResponse;
 import com.api.auth.infrastructure.oauth.kakao.response.KakaoToken;
 import com.common.exception.AuthException;
@@ -27,14 +27,14 @@ import static org.mockito.Mockito.when;
 class KakaoOAuthRequestImplTest {
 
     private RestTemplate restTemplate;
-    private KakaoOAuthSource kakaoOAuthSource;
+    private KakaoOAuthPropertySource kakaoOAuthPropertySource;
     private KakaoOAuthRequestImpl kakaoOAuthRequest;
 
     @BeforeEach
     void setup() {
         restTemplate = mock(RestTemplate.class);
-        kakaoOAuthSource = mock(KakaoOAuthSource.class);
-        kakaoOAuthRequest = new KakaoOAuthRequestImpl(restTemplate, kakaoOAuthSource);
+        kakaoOAuthPropertySource = mock(KakaoOAuthPropertySource.class);
+        kakaoOAuthRequest = new KakaoOAuthRequestImpl(restTemplate, kakaoOAuthPropertySource);
     }
 
     @Nested
@@ -44,7 +44,7 @@ class KakaoOAuthRequestImplTest {
         void 정상적인_응답의_경우_토큰을_받아온다() {
             // given
             KakaoToken kakaoToken = new KakaoToken("type", "access", "refresh", 10, "scope");
-            when(kakaoOAuthSource.tokenUri()).thenReturn("tokenUri");
+            when(kakaoOAuthPropertySource.tokenUri()).thenReturn("tokenUri");
 
             when(restTemplate.exchange(
                     any(String.class),
@@ -63,7 +63,7 @@ class KakaoOAuthRequestImplTest {
         @Test
         void 결과가_정상이_아니면_예외를_발생한다() {
             // given
-            when(kakaoOAuthSource.tokenUri()).thenReturn("tokenUri");
+            when(kakaoOAuthPropertySource.tokenUri()).thenReturn("tokenUri");
 
             when(restTemplate.exchange(
                     any(String.class),
@@ -86,7 +86,7 @@ class KakaoOAuthRequestImplTest {
         void 정상인_경우_유저의_정보를_성공적으로_받아온다() {
             // given
             KakaoMemberSpecResponse memberResponse = new KakaoMemberSpecResponse(1L, false, null, mock(KakaoMemberSpecResponse.KakaoAccount.class));
-            when(kakaoOAuthSource.userInfoUri()).thenReturn("tokenUri");
+            when(kakaoOAuthPropertySource.userInfoUri()).thenReturn("tokenUri");
 
             when(restTemplate.exchange(
                     any(String.class),
@@ -104,7 +104,7 @@ class KakaoOAuthRequestImplTest {
 
         @Test
         void 응답이_비정상적으로_넘어온_경우_예외를_발생시킨다() {
-            when(kakaoOAuthSource.userInfoUri()).thenReturn("tokenUri");
+            when(kakaoOAuthPropertySource.userInfoUri()).thenReturn("tokenUri");
 
             when(restTemplate.exchange(
                     any(String.class),

@@ -5,8 +5,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.util.ContentCachingRequestWrapper;
-import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
 
@@ -21,12 +19,6 @@ public class CorsCustomFilter extends OncePerRequestFilter {
         response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "*");
-
-        // TODO : 필터 분리
-        ContentCachingRequestWrapper contentCachingRequestWrapper = new ContentCachingRequestWrapper(request);
-        ContentCachingResponseWrapper contentCachingResponseWrapper = new ContentCachingResponseWrapper(response);
-
-        filterChain.doFilter(contentCachingRequestWrapper, contentCachingResponseWrapper);
-        contentCachingResponseWrapper.copyBodyToResponse();
+        filterChain.doFilter(request, response);
     }
 }
