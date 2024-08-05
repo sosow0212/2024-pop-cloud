@@ -75,7 +75,7 @@ public class KakaoOAuthRequestImpl implements OAuthRequest {
                     KakaoMemberSpecResponse.class
             ).getBody();
 
-            return Member.createWithOAuth(
+            return Member.createWithNormalRole(
                     String.valueOf(response.id()),
                     OAuthPlatform.KAKAO.getName(),
                     response.kakaoAccount().email()

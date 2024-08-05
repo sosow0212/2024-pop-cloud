@@ -1,12 +1,13 @@
 package com.domain.domains.member.domain;
 
 import com.domain.domains.base.BaseEntity;
+import com.domain.domains.member.domain.vo.MemberRole;
 import com.domain.domains.member.domain.vo.OauthId;
-import com.domain.domains.member.exception.MemberException;
-import com.domain.domains.member.exception.MemberExceptionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,10 +39,11 @@ public class Member extends BaseEntity {
     @Column
     private String email;
 
-    @Column(nullable = true)
-    private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, name = "member_role")
+    private MemberRole memberRole;
 
-    public static Member createWithOAuth(
+    public static Member createWithNormalRole(
             final String oauthId,
             final String oauthPlatform,
             final String email
@@ -49,12 +51,7 @@ public class Member extends BaseEntity {
         return Member.builder()
                 .oauthId(new OauthId(oauthId, oauthPlatform))
                 .email(email)
+                .memberRole(MemberRole.NORMAL)
                 .build();
-    }
-
-    public void validatePassword(final String password) {
-        if (!this.password.equals(password)) {
-            throw new MemberException(MemberExceptionType.PASSWORD_INVALID_EXCEPTION);
-        }
     }
 }

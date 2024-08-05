@@ -1,7 +1,7 @@
 package com.api.auth.presentation;
 
 import com.api.auth.application.AuthService;
-import com.api.member.presentation.response.TokenResponse;
+import com.api.auth.presentation.response.TokenResponse;
 import com.domain.domains.member.domain.vo.OAuthPlatform;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
