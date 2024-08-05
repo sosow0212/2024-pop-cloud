@@ -7,4 +7,4 @@ endif::[]
 :source-highlighter: highlightjs
 :sectlinks:
 
-include::member.adoc[]
+include::auth.adoc[]

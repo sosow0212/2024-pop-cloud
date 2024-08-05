@@ -1,0 +1,21 @@
+= Auth API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+
+== 24.08.05 현재 제공 중인 플랫폼 (kakao)
+
+== OAuth2 회원가입 혹은 로그인 진행한다 (POST /api/auth/login/oauth/{platform})
+
+=== Request
+
+include::{snippets}/auth-controller-test/oauth_login/request-headers.adoc[]
+include::{snippets}/auth-controller-test/oauth_login/path-parameters.adoc[]
+include::{snippets}/auth-controller-test/oauth_login/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/auth-controller-test/oauth_login/response-fields.adoc[]
+include::{snippets}/auth-controller-test/oauth_login/http-response.adoc[]

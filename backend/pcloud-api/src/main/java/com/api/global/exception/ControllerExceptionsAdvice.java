@@ -22,15 +22,15 @@ public class ControllerExceptionsAdvice extends ResponseEntityExceptionHandler {
         log.error("예상하지 못한 예외가 발생했습니다. uri: {} {}, ", request.getMethod(), request.getRequestURI(), exception);
 
         return ResponseEntity.internalServerError()
-                .body(new ExceptionResponse("INTERNAL_EXCEPTION", "알 수 없는 오류가 발생했습니다."));
+                .body(new ExceptionResponse("INTERNAL_EXCEPTION", "PC0000", "알 수 없는 오류가 발생했습니다."));
     }
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ExceptionResponse> handleException(final HttpServletRequest request, final CustomException exception) {
         CustomExceptionType type = exception.getExceptionType();
-        log.info("잘못된 요청이 들어왔습니다. uri: {} {},  내용: {}", request.getMethod(), request.getRequestURI(), type.getMessage());
+        log.info("잘못된 요청이 들어왔습니다. uri: {} {},  내용: {}", request.getMethod(), request.getRequestURI(), type.message());
 
-        return ResponseEntity.status(HttpStatusCode.valueOf(type.getHttpStatusCode()))
-                .body(new ExceptionResponse(type.name(), type.getMessage()));
+        return ResponseEntity.status(HttpStatusCode.valueOf(type.httpStatusCode()))
+                .body(new ExceptionResponse(type.name(), type.customCode(), type.message()));
     }
 }

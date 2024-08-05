@@ -1,4 +1,4 @@
-package com.api.member.presentation.response;
+package com.api.auth.presentation.response;
 
 public record TokenResponse(
         String accessToken

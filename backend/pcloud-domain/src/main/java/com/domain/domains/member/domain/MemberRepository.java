@@ -1,5 +1,7 @@
 package com.domain.domains.member.domain;
 
+import com.domain.domains.member.domain.vo.OauthId;
+
 import java.util.Optional;
 
 public interface MemberRepository {
@@ -11,4 +13,6 @@ public interface MemberRepository {
     Optional<Member> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    Optional<Member> findByOauthId(OauthId oAuthId);
 }

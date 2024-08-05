@@ -2,6 +2,7 @@ package member.fixture;
 
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
+import com.domain.domains.member.domain.vo.OauthId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class FakeMemberRepository implements MemberRepository {
         Member savedMember = Member.builder()
                 .id(id)
                 .email(member.getEmail())
-                .password(member.getPassword())
+                .oauthId(member.getOauthId())
                 .build();
 
         map.put(id, savedMember);
@@ -42,5 +43,12 @@ public class FakeMemberRepository implements MemberRepository {
     public boolean existsByEmail(final String email) {
         return map.values().stream()
                 .anyMatch(member -> member.getEmail().equals(email));
+    }
+
+    @Override
+    public Optional<Member> findByOauthId(final OauthId oAuthId) {
+        return map.values().stream()
+                .filter(member -> member.getOauthId().getOauthId().equals(oAuthId.getOauthId()))
+                .findAny();
     }
 }
