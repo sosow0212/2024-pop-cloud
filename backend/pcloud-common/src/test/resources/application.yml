@@ -3,5 +3,14 @@ jasypt:
     password: password
 
 jwt:
-  secret: testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
+  secret: testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
   expiration-period: 10000
+
+oauth2:
+  properties:
+    kakao:
+      client-id: client-id
+      client-secret: client-secret
+      redirect-uri: redirect-uri
+      token-uri: token-uri
+      user-info-uri: user-info-uri
