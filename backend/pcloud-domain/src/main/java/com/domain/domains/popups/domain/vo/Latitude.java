@@ -37,7 +37,7 @@ public class Latitude {
         return new Latitude(value);
     }
 
-    private void validateKoreaLatitude(BigDecimal value) {
+    private void validateKoreaLatitude(final BigDecimal value) {
         if (value.compareTo(KOREA_MIN_LATITUDE) < 0 || value.compareTo(KOREA_MAX_LATITUDE) > 0) {
             throw new PopupsException(PopupsExceptionType.INVALID_LATITUDE);
         }

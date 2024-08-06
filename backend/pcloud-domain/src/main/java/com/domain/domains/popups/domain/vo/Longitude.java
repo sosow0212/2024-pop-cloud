@@ -24,20 +24,20 @@ public class Longitude {
     @Column(name = "longitude", scale = 7, precision = 13, nullable = false)
     private BigDecimal value;
 
-    private Longitude(BigDecimal value) {
+    private Longitude(final BigDecimal value) {
         validateKoreaLongitude(value);
         this.value = value;
     }
 
-    public static Longitude from(String value) {
+    public static Longitude from(final String value) {
         return new Longitude(new BigDecimal(value));
     }
 
-    public static Longitude from(BigDecimal value) {
+    public static Longitude from(final BigDecimal value) {
         return new Longitude(value);
     }
 
-    private void validateKoreaLongitude(BigDecimal value) {
+    private void validateKoreaLongitude(final BigDecimal value) {
         if (value.compareTo(KOREA_MIN_LONGITUDE) < 0 || value.compareTo(KOREA_MAX_LONGITUDE) > 0) {
             throw new PopupsException(PopupsExceptionType.INVALID_LONGITUDE);
         }
