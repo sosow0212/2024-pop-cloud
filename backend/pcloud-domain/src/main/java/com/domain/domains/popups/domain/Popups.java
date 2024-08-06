@@ -6,7 +6,6 @@ import com.domain.domains.popups.domain.vo.AvailableTime;
 import com.domain.domains.popups.domain.vo.Latitude;
 import com.domain.domains.popups.domain.vo.Longitude;
 import com.domain.domains.popups.domain.vo.StoreDetails;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -28,7 +27,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.CascadeType.PERSIST;
+import static jakarta.persistence.CascadeType.ALL;
 
 @Getter
 @Builder
@@ -59,6 +58,15 @@ public class Popups extends BaseEntity {
     private PublicTag publicTag;
 
     @JoinColumn(name = "tag_id")
-    @OneToMany(fetch = FetchType.LAZY, cascade = {PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = ALL, orphanRemoval = true)
     private List<Tag> tags = new ArrayList<>();
+
+    public void update(final Popups popups) {
+        this.storeDetails = popups.storeDetails;
+        this.availableTime = popups.availableTime;
+        this.latitude = popups.latitude;
+        this.longitude = popups.longitude;
+        this.publicTag = popups.publicTag;
+        this.tags = popups.tags;
+    }
 }
