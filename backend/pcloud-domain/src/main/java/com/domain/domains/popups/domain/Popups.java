@@ -3,7 +3,8 @@ package com.domain.domains.popups.domain;
 import com.domain.domains.common.BaseEntity;
 import com.domain.domains.common.PublicTag;
 import com.domain.domains.popups.domain.vo.AvailableTime;
-import com.domain.domains.popups.domain.vo.Coordinate;
+import com.domain.domains.popups.domain.vo.Latitude;
+import com.domain.domains.popups.domain.vo.Longitude;
 import com.domain.domains.popups.domain.vo.StoreDetails;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -48,7 +49,10 @@ public class Popups extends BaseEntity {
     private AvailableTime availableTime;
 
     @Embedded
-    private Coordinate coordinate;
+    private Latitude latitude;
+
+    @Embedded
+    private Longitude longitude;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
