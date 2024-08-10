@@ -9,7 +9,7 @@ const Navbar = () => {
       <NavIcon title="팝업" icon="popup" href="/category/popup" />
       <NavIcon title="전시회" icon="exhibition" href="/category/exhibiton" />
       <NavIcon title="팝클라우드 홈" icon="home" href="/" />
-      <NavIcon title="좋아요" icon="like" href="/like" />
+      <NavIcon title="좋아요" icon="like" href="/favorite" />
       <NavIcon title="마이" icon="profile" href="/profile" />
     </nav>
   );

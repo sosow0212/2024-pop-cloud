@@ -2,7 +2,7 @@ import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import Navbar from "@/components/navbar/navbar";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-full flex-col">
       <Header />
@@ -13,4 +13,4 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default MainLayout;
+export default ProfileLayout;

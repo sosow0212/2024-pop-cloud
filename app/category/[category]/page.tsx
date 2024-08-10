@@ -12,7 +12,7 @@ const CategoryPage = ({
   searchParams: { page = "1" },
 }: CategoryProps) => {
   return (
-    <div>
+    <div className="h-full bg-red-500">
       {params.category}
       {page}
     </div>
