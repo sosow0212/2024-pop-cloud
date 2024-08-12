@@ -24,7 +24,6 @@ import java.util.List;
 
 import static com.domain.domains.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.domains.member.domain.vo.MemberRole.MANAGER;
-import static com.domain.domains.member.domain.vo.MemberRole.NORMAL;
 
 @RequiredArgsConstructor
 @RequestMapping("/popups")
@@ -36,13 +35,13 @@ public class PopupsController {
 
     /**
      * TODO : 추후 회의 후 Popups 생성(Create) 주체의 권한 설정 필요
-     * TODO : 이미지 회의 필요
+     * TODO : 이미지 처리 방식 회의 필요
      * TODO : 커스텀 태그 회의 필요
      */
 
     @PostMapping
     public ResponseEntity<Void> create(
-            @AuthMembers(permit = {NORMAL, MANAGER, ADMIN}) final Long memberId,
+            @AuthMembers(permit = {MANAGER, ADMIN}) final Long memberId,
             @RequestBody final PopupsCreateRequest request
     ) {
         Long createdPopupsId = popupsService.create(memberId, request);

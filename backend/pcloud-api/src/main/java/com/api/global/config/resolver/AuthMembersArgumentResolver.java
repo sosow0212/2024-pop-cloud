@@ -3,7 +3,6 @@ package com.api.global.config.resolver;
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
-import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
@@ -34,7 +33,7 @@ public class AuthMembersArgumentResolver implements HandlerMethodArgumentResolve
 
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(AuthMember.class) &&
+        return parameter.hasParameterAnnotation(AuthMembers.class) &&
                 parameter.getParameterType().equals(Long.class);
     }
 
@@ -54,7 +53,6 @@ public class AuthMembersArgumentResolver implements HandlerMethodArgumentResolve
         if (!permittedRoles.contains(member.getMemberRole())) {
             throw new AuthException(AuthExceptionType.FORBIDDEN_AUTH_LEVEL);
         }
-
 
         return memberId;
     }

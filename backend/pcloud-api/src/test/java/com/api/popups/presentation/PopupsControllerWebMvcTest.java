@@ -17,10 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static com.api.helper.RestDocsHelper.customDocument;
 import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
 import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_업데이트_요청;
+import static member.fixture.MemberFixture.어드민_멤버_생성_id_없음_kakao_oauth_가입;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
@@ -58,6 +60,7 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
     void 팝업스토어를_생성한다() throws Exception {
         // given
         PopupsCreateRequest request = 팝업스토어_생성_요청();
+        when(memberRepository.findById(any())).thenReturn(Optional.ofNullable(어드민_멤버_생성_id_없음_kakao_oauth_가입()));
         when(popupsService.create(any(), eq(request))).thenReturn(1L);
 
         // when & then

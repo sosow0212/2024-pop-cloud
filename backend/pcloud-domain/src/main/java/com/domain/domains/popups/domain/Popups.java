@@ -63,7 +63,7 @@ public class Popups extends BaseEntity {
     private PublicTag publicTag;
 
     @JoinColumn(name = "tag_id")
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
     public void update(final Popups updatedPopups) {
