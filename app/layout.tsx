@@ -28,9 +28,7 @@ export default function RootLayout({
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP}&libraries=services,clusterer&autoload=false`}
           strategy="beforeInteractive"
         />
-        <div className="relative mx-auto h-full max-w-xl border-x">
-          {children}
-        </div>
+        <div className="relative mx-auto max-w-xl border">{children}</div>
       </body>
     </html>
   );
