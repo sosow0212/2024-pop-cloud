@@ -2,7 +2,7 @@ import FooterIcon from "./footer-icon";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-start justify-between space-y-4 bg-slate-50 px-4 pb-20 pt-2">
+    <footer className="mt-2 flex flex-col items-start justify-between space-y-4 bg-slate-50 px-4 pb-20 pt-2">
       <div className="text-[0.8rem] font-medium uppercase">
         © 2024 team pop-cloud all rights reserved
       </div>

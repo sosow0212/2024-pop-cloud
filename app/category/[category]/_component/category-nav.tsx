@@ -6,7 +6,7 @@ interface CategoryNavProps {
 
 const CatagoryNav = () => {
   return (
-    <nav className="text-sm">
+    <nav className="space-y-2 text-sm">
       {/* 날짜 선택 */}
       <div className="flex items-center space-x-2">
         <label htmlFor="data-options">날짜</label>
@@ -35,9 +35,9 @@ const CatagoryNav = () => {
         </ul>
       </div>
       {/* 지역 선택 */}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2 whitespace-nowrap">
         <label htmlFor="location-options">지역</label>
-        <ul className="flex items-center justify-between space-x-4">
+        <ul className="flex items-center justify-between space-x-4 overflow-auto">
           <li>
             <button className="rounded-xl bg-black px-4 py-1 text-white">
               전체

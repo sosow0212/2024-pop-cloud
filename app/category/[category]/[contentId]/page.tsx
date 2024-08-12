@@ -1,5 +1,3 @@
-import React from "react";
-
 interface ContentPageProps {
   params: {
     contentId: string;

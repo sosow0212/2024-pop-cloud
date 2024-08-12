@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 interface CategoryPaginationProps {
@@ -46,6 +47,8 @@ interface PaginationLink {
 }
 
 const PaginationLink = ({ curPage, target }: PaginationLink) => {
+  const serachParamse = useSearchParams();
+  console.log(serachParamse);
   return (
     <li>
       <Link

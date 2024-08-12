@@ -18,14 +18,20 @@ const CategoryPage = ({
   params,
   searchParams: { page = "1" },
 }: CategoryProps) => {
-  const [startDate, setStartDate] = useState(() => Date.now());
-  const [endDate, setEndDate] = useState(() => Date.now());
+  // const [startDate, setStartDate] = useState(() => Date.now());
+  // const [endDate, setEndDate] = useState(() => Date.now());
+
+  // date와 지역을 searchParamse으로 관리할 지 state로 관리할 지 고민
 
   return (
-    <section className="flex h-full flex-col space-y-4">
-      <div>팝업 스토어/ 개인 전시회 목록 페이지 기본 값으로 page는 {page}</div>
+    <section className="flex flex-col space-y-4">
+      <div>
+        <div>{params.category} 목록 페이지</div> <div>현재 page는 {page}</div>
+      </div>
       <CatagoryNav />
-      <CategoryList />
+      <CategoryList
+        categoryType={(params.category as "popup") || "exhibition"}
+      />
       <CategoryPagination curPage={+page} lastPage={4} />
     </section>
   );
