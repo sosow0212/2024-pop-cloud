@@ -1,35 +1,94 @@
 package com.api.popups.presentation;
 
-import com.api.helper.IntegrationHelper;
-import com.common.auth.TokenProvider;
-import com.domain.domains.member.domain.Member;
-import com.domain.domains.member.domain.MemberRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.api.helper.AcceptanceBaseFixture;
+import com.api.popups.application.request.PopupsCreateRequest;
+import com.api.popups.application.request.PopupsUpdateRequest;
+import com.api.popups.fixture.request.PopupsRequestFixtures;
+import com.domain.domains.popups.domain.Popups;
+import com.domain.domains.popups.domain.PopupsRepository;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
+import org.apache.http.HttpHeaders;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 
-import static member.fixture.MemberFixture.어드민_멤버_생성_id_없음_kakao_oauth_가입;
-import static member.fixture.MemberFixture.일반_멤버_생성_id_없음;
+import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_업데이트_요청;
+import static org.assertj.core.api.Assertions.assertThat;
+import static popups.fixture.PopupsFixture.일반_팝업_스토어_생성_뷰티;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
-class PopupsControllerAcceptanceFixture extends IntegrationHelper {
+class PopupsControllerAcceptanceFixture extends AcceptanceBaseFixture {
 
     @Autowired
-    private TokenProvider tokenProvider;
+    protected PopupsRepository popupsRepository;
 
-    @Autowired
-    protected MemberRepository memberRepository;
+    protected PopupsCreateRequest 팝업스토어_생성_요청서() {
+        return PopupsRequestFixtures.팝업스토어_생성_요청();
+    }
 
-    protected String 일반_유저_토큰;
-    protected String 관리자_토큰;
+    protected ExtractableResponse<Response> 팝업스토어_생성_요청(final PopupsCreateRequest request) {
+        return RestAssured.given().log().all()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + 관리자_토큰)
+                .contentType(ContentType.JSON)
+                .body(request)
+                .post("/popups")
+                .then().log().all()
+                .extract();
+    }
 
-    @BeforeEach
-    void initMembers() {
-        Member normalMember = memberRepository.save(일반_멤버_생성_id_없음());
-        Member adminMember = memberRepository.save(어드민_멤버_생성_id_없음_kakao_oauth_가입());
-        일반_유저_토큰 = tokenProvider.create(normalMember.getId());
-        관리자_토큰 = tokenProvider.create(adminMember.getId());
+    protected void 생성_요청_결과_검증(final ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    protected Popups 팝업_스토어_생성() {
+        return popupsRepository.save(일반_팝업_스토어_생성_뷰티());
+    }
+
+    protected ExtractableResponse<Response> 팝업스토어_페이징_조회_요청() {
+        return RestAssured.given().log().all()
+                .when()
+                .get("/popups?pageSize=1")
+                .then().log().all()
+                .extract();
+    }
+
+    protected void 페이징_조회_결과_검증(final ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    protected ExtractableResponse<Response> 팝업스토어_상세_조회_요청() {
+        return RestAssured.given().log().all()
+                .when()
+                .get("/popups/1")
+                .then().log().all()
+                .extract();
+    }
+
+    protected void 팝업스토어_상세_조회_결과_검증(final ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    protected PopupsUpdateRequest 팝업스토어_업데이트_요청서() {
+        return 팝업스토어_업데이트_요청();
+    }
+
+    protected ExtractableResponse<Response> 팝업스토어_상세_조회_요청(final PopupsUpdateRequest updateRequest) {
+        return RestAssured.given().log().all()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + 일반_유저_토큰)
+                .contentType(ContentType.JSON)
+                .body(updateRequest)
+                .when()
+                .patch("/popups/1")
+                .then().log().all()
+                .extract();
+    }
+
+    protected void 팝업스토어_업데이트_결과_검증(final ExtractableResponse<Response> response) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 }
