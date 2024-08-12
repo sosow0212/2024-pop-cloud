@@ -1,13 +1,13 @@
 package com.api.global.config.resolver;
 
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
-import com.common.annotation.AuthMember;
-import com.common.annotation.AuthMembers;
-import com.common.auth.MemberRole;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
+import com.domain.annotation.AuthMember;
+import com.domain.annotation.AuthMembers;
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
+import com.domain.domains.member.domain.vo.MemberRole;
 import com.domain.domains.member.exception.MemberException;
 import com.domain.domains.member.exception.MemberExceptionType;
 import lombok.RequiredArgsConstructor;

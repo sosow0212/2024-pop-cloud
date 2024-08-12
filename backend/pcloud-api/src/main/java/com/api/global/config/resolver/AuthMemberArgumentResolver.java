@@ -1,9 +1,9 @@
 package com.api.global.config.resolver;
 
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
-import com.common.annotation.AuthMember;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
+import com.domain.annotation.AuthMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

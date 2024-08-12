@@ -10,7 +10,8 @@ public enum AuthExceptionType implements CustomExceptionType {
     UNSUPPORTED_TOKEN_EXCEPTION(400, "PC0106", "지원하지 않는 토큰 형식입니다."),
     REQUEST_FAIL_OF_OAUTH_ACCESS_TOKEN(400, "PC0107", "OAuth 인증 Access-token 발급에 실패하였습니다."),
     REQUEST_FAIL_OF_OAUTH_MEMBER_INFO(400, "PC0108", "OAuth 유저 정보 조회에 실패하였습니다."),
-    FORBIDDEN_AUTH_LEVEL(403, "PC0109", "접근 권한이 존재하지 않습니다.");
+    FORBIDDEN_AUTH_LEVEL(403, "PC0109", "접근 권한이 존재하지 않습니다."),
+    AUTH_NOT_EQUALS_EXCEPTION(401, "PC0110", "본인의 계정으로 진행하는 요청이 아닙니다.");
 
     private final int httpStatusCode;
     private final String customCode;

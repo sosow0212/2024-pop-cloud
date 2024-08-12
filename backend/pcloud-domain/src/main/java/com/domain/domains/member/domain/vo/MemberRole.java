@@ -1,4 +1,4 @@
-package com.common.auth;
+package com.domain.domains.member.domain.vo;
 
 public enum MemberRole {
 

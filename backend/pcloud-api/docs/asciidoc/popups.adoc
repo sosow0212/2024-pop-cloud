@@ -1,0 +1,78 @@
+= Auth API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+
+== Public Tag 정보 (24.08.12 업데이트)
+
+++ 서버측에서 조회 가능하나 캐싱이 성능적으로 나아서 정합성과 트레이드 오프했다고 봐주시면 됩니다.
+만약 캐싱이 불필요하다 생각하면 회의 요청주세요 :)
+
+- 브랜드
+- 패션
+- 뷰티
+- 음식
+- 홈
+- 완구류
+- 레저
+- 서적
+- 음악
+- 펫
+- 운동
+- 디지털
+- 예술
+- 캐릭터
+- 굿즈
+- 전시
+- 기타
+
+== 팝업스토어를 생성한다 (POST /api/popups)
+
+=== Request
+
+include::{snippets}/popups-controller-web-mvc-test/create_popups/request-headers.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/create_popups/request-fields.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/create_popups/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/popups-controller-web-mvc-test/create_popups/response-headers.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/create_popups/http-response.adoc[]
+
+== 팝업스토어를 페이징 조회한다 (GET /api/popups?popupsId=${value}&pageSize=${value})
+
+=== Request
+
+include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/query-parameters.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/response-fields.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/http-response.adoc[]
+
+== 팝업스토어를 상세 조회한다 (GET /api/popups/{popupsId})
+
+=== Request
+
+include::{snippets}/popups-controller-web-mvc-test/find_popups/path-parameters.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/find_popups/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/popups-controller-web-mvc-test/find_popups/response-fields.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/find_popups/http-response.adoc[]
+
+== 팝업스토어를 업데이트한다 (PATCH /api/popups/{popupsId})
+
+=== Request
+
+include::{snippets}/popups-controller-web-mvc-test/patch_popups/request-headers.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/patch_popups/request-fields.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/patch_popups/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/popups-controller-web-mvc-test/patch_popups/http-response.adoc[]

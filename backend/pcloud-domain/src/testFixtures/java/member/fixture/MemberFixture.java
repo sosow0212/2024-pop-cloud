@@ -20,4 +20,12 @@ public class MemberFixture {
                 .oauthId(new OauthId("1", "KAKAO"))
                 .build();
     }
+
+    public static Member 매니저_멤버_생성_id_없음_kakao_oauth_가입() {
+        return Member.builder()
+                .email("email@email.com")
+                .memberRole(MemberRole.MANAGER)
+                .oauthId(new OauthId("1", "KAKAO"))
+                .build();
+    }
 }
