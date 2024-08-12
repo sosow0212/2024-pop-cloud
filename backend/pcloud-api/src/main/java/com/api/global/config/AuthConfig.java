@@ -3,7 +3,7 @@ package com.api.global.config;
 import com.api.global.config.interceptor.auth.LoginValidCheckerInterceptor;
 import com.api.global.config.interceptor.auth.ParseMemberIdFromTokenInterceptor;
 import com.api.global.config.interceptor.auth.PathMatcherInterceptor;
-import com.api.global.config.resolver.AuthArgumentResolver;
+import com.api.global.config.resolver.AuthMemberArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -23,7 +23,7 @@ import static com.api.global.config.interceptor.auth.support.HttpMethod.POST;
 @Configuration
 public class AuthConfig implements WebMvcConfigurer {
 
-    private final AuthArgumentResolver authArgumentResolver;
+    private final AuthMemberArgumentResolver authMemberArgumentResolver;
     private final ParseMemberIdFromTokenInterceptor parseMemberIdFromTokenInterceptor;
     private final LoginValidCheckerInterceptor loginValidCheckerInterceptor;
 
@@ -41,11 +41,11 @@ public class AuthConfig implements WebMvcConfigurer {
     private HandlerInterceptor loginValidCheckerInterceptor() {
         return new PathMatcherInterceptor(loginValidCheckerInterceptor)
                 .excludePathPattern("/**", OPTIONS)
-                .addPathPatterns("/members/test", GET, POST, PATCH, DELETE);
+                .addPathPatterns("/popups/**", GET, POST, PATCH, DELETE);
     }
 
     @Override
     public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(authArgumentResolver);
+        resolvers.add(authMemberArgumentResolver);
     }
 }

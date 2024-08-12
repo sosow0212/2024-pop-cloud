@@ -14,7 +14,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 @RequiredArgsConstructor
 @Component
-public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
+public class AuthMemberArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final int ANONYMOUS = -1;
 
