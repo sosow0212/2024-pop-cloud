@@ -5,7 +5,7 @@ import HeaderSearch from "./header-search";
 
 const Header = () => {
   return (
-    <header className="sticky inset-x-0 top-0 z-50 flex items-center justify-between border-b bg-white p-2 shadow-sm shadow-slate-200">
+    <header className="sticky inset-x-0 top-0 z-30 flex items-center justify-between border-b bg-white p-2 shadow-sm shadow-slate-200">
       <Link href="/">
         <h1 className="font-bold">POP CLOUD</h1>
       </Link>

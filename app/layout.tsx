@@ -3,6 +3,7 @@ import Script from "next/script";
 
 import localFont from "next/font/local";
 import "./globals.css";
+import ModalProvider from "@/provider/modal-provider";
 
 const pretendart = localFont({
   src: "../public/ko-font/PretendardVariable.woff2",
@@ -28,6 +29,7 @@ export default function RootLayout({
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP}&libraries=services,clusterer&autoload=false`}
           strategy="beforeInteractive"
         />
+        <ModalProvider />
         <div className="relative mx-auto h-full max-w-xl">{children}</div>
       </body>
     </html>

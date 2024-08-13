@@ -4,7 +4,7 @@ import NavScrollUp from "./nav-scroll-up";
 
 const Navbar = () => {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 mx-auto flex h-16 max-w-xl items-center justify-between border bg-slate-50 px-4 py-2">
+    <nav className="fixed inset-x-0 bottom-0 z-30 mx-auto flex h-16 max-w-xl items-center justify-between border bg-slate-50 px-4 py-2">
       <NavScrollUp />
       <NavIcon title="팝업" icon="popup" href="/category/popup" />
       <NavIcon title="전시회" icon="exhibition" href="/category/exhibiton" />

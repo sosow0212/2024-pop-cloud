@@ -1,22 +1,17 @@
-//
+import ProfileSignIn from "./_components/profile-signIn";
+
+/**
+ *
+ * 로그인 유저라면 프로필 사진
+ * 비로그인 유저라면 로그인/회원가입
+ */
 const ProfilePage = async () => {
   // const currentUser = await getCurrentUser()
   return (
-    <section className="flex h-full flex-col">
-      <div>
-        <div>로그인 유저라면 사진 아이콘 /</div>
-        <div>
-          아니라면 로그인or 회원가입 텍스트 (Link로 로그인 페이지 or 로그인 모달
-          띄우기 - oauth만 고려한 상황이니 모달 띄우기 )
-        </div>
-      </div>
-      <div className="bg-slate-200 py-2">
-        {/* 프로필 or 로그인/회원가입 */}
-        <div className="b size-12 rounded-full bg-blue-300" />
-      </div>
+    <section className="flex h-full flex-col space-y-4 py-2">
       <div className="space-y-4 divide-y-2 divide-slate-200">
         {/* 미션 뱃지 */}
-
+        <ProfileSignIn />
         <div className="flex items-center space-x-10 py-2">
           <div className="flex flex-col items-center justify-center">
             <div>달성한 미션</div>

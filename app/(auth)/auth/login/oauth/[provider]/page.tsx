@@ -19,6 +19,7 @@ const OAuthPage = ({ params, searchParams }: OAuthPageProps) => {
   }, [searchParams]);
   return (
     <div className="flex h-full w-full items-center justify-center">
+      <div>{params.provider}</div>
       <div className="size-12 animate-spin rounded-full border-4 border-black border-b-transparent" />
     </div>
   );
