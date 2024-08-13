@@ -2,6 +2,7 @@ package com.domain.domains.popups.domain;
 
 import com.common.exception.AuthException;
 import com.domain.domains.common.BaseEntity;
+import com.domain.domains.common.Price;
 import com.domain.domains.common.PublicTag;
 import com.domain.domains.popups.domain.vo.AvailableTime;
 import com.domain.domains.popups.domain.vo.Latitude;
@@ -21,6 +22,8 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 import static com.common.exception.AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION;
 
@@ -54,6 +57,40 @@ public class Popups extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PublicTag publicTag;
+
+    public static Popups of(
+            final Long memberId,
+            final String title,
+            final String description,
+            final String location,
+            final Boolean isParkingAvailable,
+            final Integer fee,
+            final LocalDateTime startDate,
+            final LocalDateTime endDate,
+            final String openTimes,
+            final String latitude,
+            final String longitude,
+            final String publicTag
+    ) {
+        return Popups.builder()
+                .ownerId(memberId)
+                .storeDetails(StoreDetails.builder()
+                        .title(title)
+                        .description(description)
+                        .location(location)
+                        .isParkingAvailable(isParkingAvailable)
+                        .fee(Price.from(fee))
+                        .build())
+                .availableTime(AvailableTime.builder()
+                        .startDate(startDate)
+                        .endDate(endDate)
+                        .openTimes(openTimes)
+                        .build())
+                .latitude(Latitude.from(latitude))
+                .longitude(Longitude.from(longitude))
+                .publicTag(PublicTag.from(publicTag))
+                .build();
+    }
 
     public void update(final Popups updatedPopups) {
         validateOwnerEquals(updatedPopups.getOwnerId());
