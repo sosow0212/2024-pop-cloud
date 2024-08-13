@@ -1,4 +1,4 @@
-package popups.fixture;
+package popups;
 
 import com.domain.domains.popups.domain.Popups;
 import com.domain.domains.popups.domain.PopupsRepository;

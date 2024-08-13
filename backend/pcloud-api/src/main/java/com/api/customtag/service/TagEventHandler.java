@@ -1,4 +1,4 @@
-package com.api.tag.service;
+package com.api.customtag.service;
 
 import com.domain.domains.common.CustomTagType;
 import com.domain.domains.customtag.domain.CustomTag;
