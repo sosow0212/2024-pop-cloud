@@ -30,29 +30,25 @@ public class PopupsQueryRepository {
                 .leftJoin(customTag).on(
                         customTag.targetId.eq(popups.id)
                                 .and(customTag.type.eq(CustomTagType.POPUPS))
-                )
-                .transform(
-                        groupBy(popups.id)
-                                .list(constructor(PopupsSpecificResponse.class,
-                                        popups.id,
-                                        popups.ownerId,
-                                        popups.storeDetails.title,
-                                        popups.storeDetails.description,
-                                        popups.storeDetails.location,
-                                        popups.storeDetails.isParkingAvailable,
-                                        popups.storeDetails.fee.value,
-                                        popups.availableTime.startDate,
-                                        popups.availableTime.endDate,
-                                        popups.availableTime.openTimes,
-                                        popups.latitude.value,
-                                        popups.longitude.value,
-                                        popups.publicTag,
-                                        list(
-                                                constructor(CustomTagSimpleResponse.class,
-                                                        customTag.name
-                                                )
-                                        )
-                                ))
+                ).transform(groupBy(popups.id)
+                        .list(constructor(PopupsSpecificResponse.class,
+                                popups.id,
+                                popups.ownerId,
+                                popups.storeDetails.title,
+                                popups.storeDetails.description,
+                                popups.storeDetails.location,
+                                popups.storeDetails.isParkingAvailable,
+                                popups.storeDetails.fee.value,
+                                popups.availableTime.startDate,
+                                popups.availableTime.endDate,
+                                popups.availableTime.openTimes,
+                                popups.latitude.value,
+                                popups.longitude.value,
+                                popups.publicTag,
+                                list(constructor(CustomTagSimpleResponse.class,
+                                        customTag.name
+                                )))
+                        )
                 );
 
         if (result.isEmpty()) {
