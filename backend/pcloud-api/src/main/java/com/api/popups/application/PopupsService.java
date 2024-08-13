@@ -28,7 +28,11 @@ public class PopupsService {
         return popups.getId();
     }
 
-    public void patchById(final Long memberId, final Long popupsId, final PopupsUpdateRequest request) {
+    public void patchById(
+            final Long memberId,
+            final Long popupsId,
+            final PopupsUpdateRequest request
+    ) {
         Popups popups = findPopups(popupsId);
         Popups updatedPopups = request.toDomain(memberId);
         popups.update(updatedPopups);
