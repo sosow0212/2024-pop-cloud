@@ -3,14 +3,12 @@ package popups.fixture;
 import com.domain.domains.common.Price;
 import com.domain.domains.common.PublicTag;
 import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.Tag;
 import com.domain.domains.popups.domain.vo.AvailableTime;
 import com.domain.domains.popups.domain.vo.Latitude;
 import com.domain.domains.popups.domain.vo.Longitude;
 import com.domain.domains.popups.domain.vo.StoreDetails;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class PopupsFixture {
 
@@ -34,11 +32,6 @@ public class PopupsFixture {
                 ).latitude(Latitude.from("34"))
                 .longitude(Longitude.from("128"))
                 .publicTag(PublicTag.PET)
-                .tags(List.of(
-                        Tag.builder()
-                                .name("케어")
-                                .build()
-                ))
                 .build();
     }
 
@@ -62,11 +55,6 @@ public class PopupsFixture {
                 ).latitude(Latitude.from("34"))
                 .longitude(Longitude.from("128"))
                 .publicTag(PublicTag.BEAUTY)
-                .tags(List.of(
-                        Tag.builder()
-                                .name("케어")
-                                .build()
-                ))
                 .build();
     }
 
@@ -90,11 +78,6 @@ public class PopupsFixture {
                 ).latitude(Latitude.from("34"))
                 .longitude(Longitude.from("128"))
                 .publicTag(PublicTag.BEAUTY)
-                .tags(List.of(
-                        Tag.builder()
-                                .name("케어")
-                                .build()
-                ))
                 .build();
     }
 }

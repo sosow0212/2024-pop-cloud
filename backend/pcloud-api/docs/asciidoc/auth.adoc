@@ -11,11 +11,11 @@
 
 === Request
 
-include::{snippets}/auth-controller-test/oauth_login/request-headers.adoc[]
-include::{snippets}/auth-controller-test/oauth_login/path-parameters.adoc[]
-include::{snippets}/auth-controller-test/oauth_login/http-request.adoc[]
+include::{snippets}/auth-controller-web-mvc-test/oauth_login/request-headers.adoc[]
+include::{snippets}/auth-controller-web-mvc-test/oauth_login/path-parameters.adoc[]
+include::{snippets}/auth-controller-web-mvc-test/oauth_login/http-request.adoc[]
 
 === Response
 
-include::{snippets}/auth-controller-test/oauth_login/response-fields.adoc[]
-include::{snippets}/auth-controller-test/oauth_login/http-response.adoc[]
+include::{snippets}/auth-controller-web-mvc-test/oauth_login/response-fields.adoc[]
+include::{snippets}/auth-controller-web-mvc-test/oauth_login/http-response.adoc[]

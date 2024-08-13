@@ -3,7 +3,6 @@ package com.domain.domains.popups.infrastructure;
 import com.domain.domains.common.Price;
 import com.domain.domains.common.PublicTag;
 import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.Tag;
 import com.domain.domains.popups.domain.response.PopupsSimpleResponse;
 import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
 import com.domain.domains.popups.domain.vo.AvailableTime;
@@ -73,11 +72,6 @@ class PopupsQueryRepositoryTest extends IntegrationHelper {
                             ).latitude(Latitude.from("34"))
                             .longitude(Longitude.from("128"))
                             .publicTag(PublicTag.PET)
-                            .tags(List.of(
-                                    Tag.builder()
-                                            .name("케어")
-                                            .build()
-                            ))
                             .build()
             );
         }
@@ -118,11 +112,6 @@ class PopupsQueryRepositoryTest extends IntegrationHelper {
                             ).latitude(Latitude.from("34"))
                             .longitude(Longitude.from("128"))
                             .publicTag(PublicTag.PET)
-                            .tags(List.of(
-                                    Tag.builder()
-                                            .name("케어")
-                                            .build()
-                            ))
                             .build()
             );
         }

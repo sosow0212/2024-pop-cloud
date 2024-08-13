@@ -3,7 +3,6 @@ package com.api.popups.application.request;
 import com.domain.domains.common.Price;
 import com.domain.domains.common.PublicTag;
 import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.Tag;
 import com.domain.domains.popups.domain.vo.AvailableTime;
 import com.domain.domains.popups.domain.vo.Latitude;
 import com.domain.domains.popups.domain.vo.Longitude;
@@ -45,15 +44,6 @@ public record PopupsCreateRequest(
                 .latitude(Latitude.from(latitude))
                 .longitude(Longitude.from(longitude))
                 .publicTag(PublicTag.from(publicTag))
-                .tags(makeTags(tags))
                 .build();
-    }
-
-    public List<Tag> makeTags(final List<String> tags) {
-        return tags.stream()
-                .map(tag -> Tag.builder()
-                        .name(tag)
-                        .build()
-                ).toList();
     }
 }

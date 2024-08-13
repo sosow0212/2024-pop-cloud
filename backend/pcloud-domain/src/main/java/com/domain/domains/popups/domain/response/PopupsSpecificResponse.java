@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class PopupsSpecificResponse {
@@ -22,6 +23,7 @@ public class PopupsSpecificResponse {
     private final BigDecimal latitude;
     private final BigDecimal longitude;
     private final String publicTag;
+    private final List<String> tags;
 
     public PopupsSpecificResponse(
             final Long id,
@@ -36,7 +38,8 @@ public class PopupsSpecificResponse {
             final String openTimes,
             final BigDecimal latitude,
             final BigDecimal longitude,
-            final PublicTag publicTag
+            final PublicTag publicTag,
+            final List<CustomTagSimpleResponse> tags
     ) {
         this.id = id;
         this.ownerId = ownerId;
@@ -51,5 +54,8 @@ public class PopupsSpecificResponse {
         this.latitude = latitude;
         this.longitude = longitude;
         this.publicTag = publicTag.getName();
+        this.tags = tags.stream()
+                .map(CustomTagSimpleResponse::name)
+                .toList();
     }
 }

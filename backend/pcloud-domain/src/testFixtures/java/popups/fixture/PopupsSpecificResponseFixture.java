@@ -1,12 +1,14 @@
 package popups.fixture;
 
 import com.domain.domains.common.PublicTag;
+import com.domain.domains.popups.domain.response.CustomTagSimpleResponse;
 import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
 import com.domain.domains.popups.domain.vo.Latitude;
 import com.domain.domains.popups.domain.vo.Longitude;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PopupsSpecificResponseFixture {
 
@@ -24,10 +26,11 @@ public class PopupsSpecificResponseFixture {
                 """
                         평일 09:00 ~ 18:00,
                         주말 12:00 ~ 21:00 
-                         """,
+                        """,
                 Latitude.from("37.556725").getValue(),
                 Longitude.from("126.9234952").getValue(),
-                PublicTag.CHARACTER
+                PublicTag.CHARACTER,
+                List.of(new CustomTagSimpleResponse("빵빵이"))
         );
     }
 }

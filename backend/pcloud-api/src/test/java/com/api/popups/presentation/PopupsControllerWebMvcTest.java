@@ -145,7 +145,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("openTimes").description("팝업스토어 운영 시간"),
                                 fieldWithPath("latitude").description("위도"),
                                 fieldWithPath("longitude").description("경도"),
-                                fieldWithPath("publicTag").description("공용 퍼블릭 태그")
+                                fieldWithPath("publicTag").description("공용 퍼블릭 태그"),
+                                fieldWithPath("tags[]").description("커스텀 태그")
                         )
                 ));
     }

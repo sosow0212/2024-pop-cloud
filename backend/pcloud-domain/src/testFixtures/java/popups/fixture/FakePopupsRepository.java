@@ -2,6 +2,7 @@ package popups.fixture;
 
 import com.domain.domains.popups.domain.Popups;
 import com.domain.domains.popups.domain.PopupsRepository;
+import com.domain.domains.popups.domain.response.CustomTagSimpleResponse;
 import com.domain.domains.popups.domain.response.PopupsSimpleResponse;
 import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
 
@@ -33,7 +34,6 @@ public class FakePopupsRepository implements PopupsRepository {
                 .latitude(popups.getLatitude())
                 .longitude(popups.getLongitude())
                 .publicTag(popups.getPublicTag())
-                .tags(popups.getTags())
                 .build();
 
         map.put(id, savedPopups);
@@ -60,7 +60,8 @@ public class FakePopupsRepository implements PopupsRepository {
                 popups.getAvailableTime().getOpenTimes(),
                 popups.getLatitude().getValue(),
                 popups.getLongitude().getValue(),
-                popups.getPublicTag()
+                popups.getPublicTag(),
+                List.of(new CustomTagSimpleResponse("빵빵이"))
         );
 
         return Optional.of(response);
