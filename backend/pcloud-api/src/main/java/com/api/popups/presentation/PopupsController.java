@@ -34,9 +34,7 @@ public class PopupsController {
     private final PopupsQueryService popupsQueryService;
 
     /**
-     * TODO : 추후 회의 후 Popups 생성(Create) 주체의 권한 설정 필요
      * TODO : 이미지 처리 방식 회의 필요
-     * TODO : 커스텀 태그 회의 필요
      */
 
     @PostMapping
