@@ -1,9 +1,9 @@
 package com.api.global.config.resolver;
 
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
-import com.common.annotation.AuthMember;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
+import com.domain.annotation.AuthMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 @RequiredArgsConstructor
 @Component
-public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
+public class AuthMemberArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final int ANONYMOUS = -1;
 
@@ -27,10 +27,12 @@ public class AuthArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     @Override
-    public Object resolveArgument(final MethodParameter parameter,
-                                  final ModelAndViewContainer mavContainer,
-                                  final NativeWebRequest webRequest,
-                                  final WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(
+            final MethodParameter parameter,
+            final ModelAndViewContainer mavContainer,
+            final NativeWebRequest webRequest,
+            final WebDataBinderFactory binderFactory
+    ) {
         Long memberId = authenticationContext.getPrincipal();
 
         if (memberId == ANONYMOUS) {

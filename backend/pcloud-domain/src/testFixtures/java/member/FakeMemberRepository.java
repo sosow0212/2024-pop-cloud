@@ -1,4 +1,4 @@
-package member.fixture;
+package member;
 
 import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
-class PublicTagTest {
+class PublicCustomTagTest {
 
     @Test
     void 관심사를_이름으로_가져온다() {

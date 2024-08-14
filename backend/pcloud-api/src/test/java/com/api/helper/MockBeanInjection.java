@@ -2,7 +2,10 @@ package com.api.helper;
 
 import com.api.auth.application.AuthService;
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
+import com.api.popups.application.PopupsQueryService;
+import com.api.popups.application.PopupsService;
 import com.common.auth.TokenProvider;
+import com.domain.domains.member.domain.MemberRepository;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 
@@ -17,4 +20,13 @@ public class MockBeanInjection {
 
     @MockBean
     protected AuthService authService;
+
+    @MockBean
+    protected MemberRepository memberRepository;
+
+    @MockBean
+    protected PopupsService popupsService;
+
+    @MockBean
+    protected PopupsQueryService popupsQueryService;
 }

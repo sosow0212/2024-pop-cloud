@@ -7,7 +7,7 @@ import com.domain.domains.member.domain.Member;
 import com.domain.domains.member.domain.MemberRepository;
 import com.domain.domains.member.domain.vo.OAuthPlatform;
 import com.domain.domains.member.domain.vo.OauthId;
-import member.fixture.FakeMemberRepository;
+import member.FakeMemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

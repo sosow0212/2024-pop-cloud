@@ -1,4 +1,4 @@
-package com.common.annotation;
+package com.domain.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
