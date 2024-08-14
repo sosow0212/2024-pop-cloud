@@ -45,7 +45,7 @@ const OAUTH = {
   },
   naver: {
     title: "네이버",
-    oauthLink: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_AUTH_NAVER_CLIENTID}&redirect_uri=${process.env.NEXT_PUBLIC_AUTH_NAVER_REDIRECT_URI}`,
+    oauthLink: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_AUTH_NAVER_CLIENTID}&redirect_uri=${process.env.NEXT_PUBLIC_AUTH_NAVER_REDIRECT_URI}&state=test`,
     bg: "bg-green-400",
   },
 };
