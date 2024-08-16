@@ -116,7 +116,7 @@ public class Popups extends BaseEntity {
         this.statistic.addVisitedCount();
     }
 
-    public void addLikedCount() {
-        this.statistic.addLikedCount();
+    public void addLikedCount(final boolean canAdd) {
+        this.statistic.addLikedCount(canAdd);
     }
 }

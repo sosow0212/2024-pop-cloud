@@ -187,4 +187,28 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                         )
                 ));
     }
+
+    @Test
+    void 팝업스토어를_좋아요_처리한다() throws Exception {
+        // given
+        when(popupsService.likes(any(), any())).thenReturn(true);
+
+        // when & then
+        mockMvc.perform(post("/popups/{popupsId}/likes", 1)
+                        .header(AUTHORIZATION, "Bearer tokenInfo ~~")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isOk())
+                .andDo(customDocument("likes_popups",
+                        requestHeaders(
+                                headerWithName(AUTHORIZATION).description("유저 토큰 정보")
+                        ),
+                        pathParameters(
+                                parameterWithName("popupsId").description("팝업스토어 id")
+                        ),
+                        responseFields(
+                                fieldWithPath("popupsId").description("팝업스토어 id"),
+                                fieldWithPath("isStatusLiked").description("팝업스토어 좋아요 상태 (true면 좋아요 처리되고, false면 좋아요 취소 처리됨)")
+                        )
+                ));
+    }
 }

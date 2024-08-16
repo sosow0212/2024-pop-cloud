@@ -15,4 +15,10 @@ public interface PopupsRepository {
     Optional<PopupsSpecificResponse> findSpecificById(Long id);
 
     List<PopupsSimpleResponse> findAllWithPaging(Long popupsId, Integer pageSize);
+
+    boolean existsByProductIdAndMemberId(Long popupsId, Long memberId);
+
+    void deleteLikedPopupsByPopupsIdAndMemberId(Long popupsId, Long memberId);
+
+    LikedPopups saveLikedPopups(LikedPopups likedPopups);
 }

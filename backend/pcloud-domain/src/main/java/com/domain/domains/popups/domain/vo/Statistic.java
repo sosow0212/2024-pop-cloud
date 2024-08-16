@@ -34,7 +34,12 @@ public class Statistic {
         this.visitedCount++;
     }
 
-    public void addLikedCount() {
-        this.likedCount++;
+    public void addLikedCount(final boolean canAdd) {
+        if (canAdd) {
+            this.likedCount++;
+            return;
+        }
+
+        this.likedCount--;
     }
 }

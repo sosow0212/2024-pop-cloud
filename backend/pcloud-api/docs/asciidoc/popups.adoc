@@ -76,3 +76,16 @@ include::{snippets}/popups-controller-web-mvc-test/patch_popups/http-request.ado
 === Response
 
 include::{snippets}/popups-controller-web-mvc-test/patch_popups/http-response.adoc[]
+
+== 팝업스토어를 좋아요 처리 및 취소한다 (POST /api/popups/{popupsId}/likes)
+
+=== Request
+
+include::{snippets}/popups-controller-web-mvc-test/likes_popups/request-headers.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/likes_popups/path-parameters.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/likes_popups/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/popups-controller-web-mvc-test/likes_popups/response-fields.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/likes_popups/http-response.adoc[]

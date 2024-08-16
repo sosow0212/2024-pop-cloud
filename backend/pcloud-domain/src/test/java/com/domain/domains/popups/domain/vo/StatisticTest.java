@@ -2,6 +2,7 @@ package com.domain.domains.popups.domain.vo;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,16 +24,33 @@ class StatisticTest {
         assertThat(statistic.getVisitedCount()).isEqualTo(defaultCount + 1);
     }
 
-    @Test
-    void 좋아요_수를_증가한다() {
-        // given
-        Statistic statistic = Statistic.createDefault();
-        Integer defaultCount = statistic.getLikedCount();
+    @Nested
+    class 좋아요_수_테스트 {
 
-        // when
-        statistic.addLikedCount();
+        @Test
+        void 좋아요_수를_증가한다() {
+            // given
+            Statistic statistic = Statistic.createDefault();
+            Integer defaultCount = statistic.getLikedCount();
 
-        // then
-        assertThat(statistic.getLikedCount()).isEqualTo(defaultCount + 1);
+            // when
+            statistic.addLikedCount(true);
+
+            // then
+            assertThat(statistic.getLikedCount()).isEqualTo(defaultCount + 1);
+        }
+
+        @Test
+        void 좋아요_수를_감소시킨다() {
+            // given
+            Statistic statistic = Statistic.createDefault();
+            Integer defaultCount = statistic.getLikedCount();
+
+            // when
+            statistic.addLikedCount(false);
+
+            // then
+            assertThat(statistic.getLikedCount()).isEqualTo(defaultCount - 1);
+        }
     }
 }

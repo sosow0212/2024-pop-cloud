@@ -1,5 +1,6 @@
 package popups;
 
+import com.domain.domains.popups.domain.LikedPopups;
 import com.domain.domains.popups.domain.Popups;
 import com.domain.domains.popups.domain.PopupsRepository;
 import com.domain.domains.popups.domain.response.CustomTagSimpleResponse;
@@ -14,20 +15,22 @@ import java.util.Optional;
 
 public class FakePopupsRepository implements PopupsRepository {
 
-    private final Map<Long, Popups> map = new HashMap<>();
-    private Long id = 0L;
+    private final Map<Long, LikedPopups> likedPopupsDB = new HashMap<>();
+    private final Map<Long, Popups> popupsDB = new HashMap<>();
+    private Long popupsId = 0L;
+    private Long likedPopupsId = 0L;
 
     @Override
     public Optional<Popups> findById(final Long id) {
-        return Optional.ofNullable(map.get(id));
+        return Optional.ofNullable(popupsDB.get(id));
     }
 
     @Override
     public Popups save(final Popups popups) {
-        id++;
+        popupsId++;
 
         Popups savedPopups = Popups.builder()
-                .id(id)
+                .id(popupsId)
                 .ownerId(popups.getOwnerId())
                 .storeDetails(popups.getStoreDetails())
                 .availableTime(popups.getAvailableTime())
@@ -37,17 +40,17 @@ public class FakePopupsRepository implements PopupsRepository {
                 .statistic(popups.getStatistic())
                 .build();
 
-        map.put(id, savedPopups);
+        popupsDB.put(popupsId, savedPopups);
         return savedPopups;
     }
 
     @Override
     public Optional<PopupsSpecificResponse> findSpecificById(final Long id) {
-        if (!map.containsKey(id)) {
+        if (!popupsDB.containsKey(id)) {
             return Optional.empty();
         }
 
-        Popups popups = map.get(id);
+        Popups popups = popupsDB.get(id);
         PopupsSpecificResponse response = new PopupsSpecificResponse(
                 popups.getId(),
                 popups.getOwnerId(),
@@ -83,5 +86,33 @@ public class FakePopupsRepository implements PopupsRepository {
                         0
                 )
         );
+    }
+
+    @Override
+    public boolean existsByProductIdAndMemberId(final Long popupsId, final Long memberId) {
+        return likedPopupsDB.values().stream()
+                .anyMatch(likedPopups -> likedPopups.getPopupsId().equals(popupsId) && likedPopups.getMemberId().equals(memberId));
+    }
+
+    @Override
+    public void deleteLikedPopupsByPopupsIdAndMemberId(final Long popupsId, final Long memberId) {
+        likedPopupsDB.entrySet().stream()
+                .filter(entry -> entry.getValue().getPopupsId().equals(popupsId) && entry.getValue().getMemberId().equals(memberId))
+                .findAny()
+                .ifPresent(longLikedPopupsEntry -> likedPopupsDB.remove(longLikedPopupsEntry.getKey()));
+    }
+
+    @Override
+    public LikedPopups saveLikedPopups(final LikedPopups likedPopups) {
+        LikedPopups savedPopups = LikedPopups.builder()
+                .id(likedPopupsId)
+                .popupsId(likedPopups.getPopupsId())
+                .memberId(likedPopups.getMemberId())
+                .build();
+
+        likedPopupsDB.put(likedPopupsId, savedPopups);
+        likedPopupsId++;
+
+        return savedPopups;
     }
 }

@@ -56,4 +56,16 @@ class PopupsControllerAcceptanceTest extends PopupsControllerAcceptanceFixture {
         // then
         팝업스토어_업데이트_결과_검증(요청_결과);
     }
+
+    @Test
+    void 팝업스토어_좋아요_처리() {
+        // given
+        팝업_스토어_생성();
+
+        // when
+        var 요청_결과 = 팝업스토어_좋아요_요청();
+
+        // then
+        팝업스토어_좋아요_결과_검증(요청_결과);
+    }
 }

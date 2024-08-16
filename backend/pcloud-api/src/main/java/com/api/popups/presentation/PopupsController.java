@@ -4,6 +4,7 @@ import com.api.popups.application.PopupsQueryService;
 import com.api.popups.application.PopupsService;
 import com.api.popups.application.request.PopupsCreateRequest;
 import com.api.popups.application.request.PopupsUpdateRequest;
+import com.api.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.domains.popups.domain.response.PopupsSimpleResponse;
@@ -55,6 +56,9 @@ public class PopupsController {
         return ResponseEntity.ok(popupsQueryService.findAll(popupsId, pageSize));
     }
 
+    /**
+     * TODO : 조회시 방문자 수 처리하기
+     */
     @GetMapping("/{popupsId}")
     public ResponseEntity<PopupsSpecificResponse> findById(@PathVariable final Long popupsId) {
         return ResponseEntity.ok(popupsQueryService.findById(popupsId));
@@ -69,5 +73,14 @@ public class PopupsController {
         popupsService.patchById(memberId, popupsId, request);
         return ResponseEntity.noContent()
                 .build();
+    }
+
+    @PostMapping("/{popupsId}/likes")
+    public ResponseEntity<PopupLikedStatusResponse> likes(
+            @AuthMember final Long memberId,
+            @PathVariable final Long popupsId
+    ) {
+        boolean likedStatusAfterActing = popupsService.likes(memberId, popupsId);
+        return ResponseEntity.ok(new PopupLikedStatusResponse(popupsId, likedStatusAfterActing));
     }
 }
