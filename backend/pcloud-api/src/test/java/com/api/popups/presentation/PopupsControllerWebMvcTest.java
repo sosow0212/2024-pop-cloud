@@ -96,7 +96,7 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
     @Test
     void 페이징_조회를_한다() throws Exception {
         // given
-        when(popupsQueryService.findAll(any(), any())).thenReturn(List.of(new PopupsSimpleResponse(1L, "빵빵이 전시회", "서울특별시 마포구", LocalDateTime.now().minusDays(30), LocalDateTime.now())));
+        when(popupsQueryService.findAll(any(), any())).thenReturn(List.of(new PopupsSimpleResponse(1L, "빵빵이 전시회", "서울특별시 마포구", LocalDateTime.now().minusDays(30), LocalDateTime.now(), 0, 0)));
 
         // when & then
         mockMvc.perform(get("/popups")
@@ -113,7 +113,9 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("[].title").description("팝업스토어 이름"),
                                 fieldWithPath("[].location").description("팝업스토어 장소명"),
                                 fieldWithPath("[].startDate").description("팝업스토어 시작일"),
-                                fieldWithPath("[].endDate").description("팝업스토어 종료일")
+                                fieldWithPath("[].endDate").description("팝업스토어 종료일"),
+                                fieldWithPath("[].visitedCount").description("팝업스토어 게시글 방문자 수"),
+                                fieldWithPath("[].likedCount").description("팝업스토어 게시글 좋아요 수")
 
                         )
                 ));
@@ -146,6 +148,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("latitude").description("위도"),
                                 fieldWithPath("longitude").description("경도"),
                                 fieldWithPath("publicTag").description("공용 퍼블릭 태그"),
+                                fieldWithPath("visitedCount").description("팝업스토어 게시글 방문자 수"),
+                                fieldWithPath("likedCount").description("팝업스토어 게시글 좋아요 수"),
                                 fieldWithPath("tags[]").description("커스텀 태그")
                         )
                 ));

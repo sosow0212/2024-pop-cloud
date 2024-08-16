@@ -23,6 +23,8 @@ public class PopupsSpecificResponse {
     private final BigDecimal latitude;
     private final BigDecimal longitude;
     private final String publicTag;
+    private final Integer visitedCount;
+    private final Integer likedCount;
     private final List<String> tags;
 
     public PopupsSpecificResponse(
@@ -39,6 +41,8 @@ public class PopupsSpecificResponse {
             final BigDecimal latitude,
             final BigDecimal longitude,
             final PublicTag publicTag,
+            final Integer visitedCount,
+            final Integer likedCount,
             final List<CustomTagSimpleResponse> tags
     ) {
         this.id = id;
@@ -54,6 +58,8 @@ public class PopupsSpecificResponse {
         this.latitude = latitude;
         this.longitude = longitude;
         this.publicTag = publicTag.getName();
+        this.visitedCount = visitedCount;
+        this.likedCount = likedCount;
         this.tags = tags.stream()
                 .map(CustomTagSimpleResponse::name)
                 .toList();

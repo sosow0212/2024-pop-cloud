@@ -34,6 +34,7 @@ public class FakePopupsRepository implements PopupsRepository {
                 .latitude(popups.getLatitude())
                 .longitude(popups.getLongitude())
                 .publicTag(popups.getPublicTag())
+                .statistic(popups.getStatistic())
                 .build();
 
         map.put(id, savedPopups);
@@ -61,6 +62,8 @@ public class FakePopupsRepository implements PopupsRepository {
                 popups.getLatitude().getValue(),
                 popups.getLongitude().getValue(),
                 popups.getPublicTag(),
+                popups.getStatistic().getVisitedCount(),
+                popups.getStatistic().getLikedCount(),
                 List.of(new CustomTagSimpleResponse("빵빵이"))
         );
 
@@ -75,7 +78,9 @@ public class FakePopupsRepository implements PopupsRepository {
                         "빵빵이 전시회",
                         "서울시 마포구",
                         LocalDateTime.now().minusDays(100),
-                        LocalDateTime.now()
+                        LocalDateTime.now(),
+                        0,
+                        0
                 )
         );
     }

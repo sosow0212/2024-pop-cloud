@@ -30,6 +30,8 @@ public class PopupsSpecificResponseFixture {
                 Latitude.from("37.556725").getValue(),
                 Longitude.from("126.9234952").getValue(),
                 PublicTag.CHARACTER,
+                0,
+                0,
                 List.of(new CustomTagSimpleResponse("빵빵이"))
         );
     }

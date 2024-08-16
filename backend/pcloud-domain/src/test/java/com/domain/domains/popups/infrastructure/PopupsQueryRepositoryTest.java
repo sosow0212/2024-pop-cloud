@@ -8,6 +8,7 @@ import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
 import com.domain.domains.popups.domain.vo.AvailableTime;
 import com.domain.domains.popups.domain.vo.Latitude;
 import com.domain.domains.popups.domain.vo.Longitude;
+import com.domain.domains.popups.domain.vo.Statistic;
 import com.domain.domains.popups.domain.vo.StoreDetails;
 import com.domain.helper.IntegrationHelper;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -72,6 +73,7 @@ class PopupsQueryRepositoryTest extends IntegrationHelper {
                             ).latitude(Latitude.from("34"))
                             .longitude(Longitude.from("128"))
                             .publicTag(PublicTag.PET)
+                            .statistic(Statistic.createDefault())
                             .build()
             );
         }
@@ -112,6 +114,7 @@ class PopupsQueryRepositoryTest extends IntegrationHelper {
                             ).latitude(Latitude.from("34"))
                             .longitude(Longitude.from("128"))
                             .publicTag(PublicTag.PET)
+                            .statistic(Statistic.createDefault())
                             .build()
             );
         }

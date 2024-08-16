@@ -7,6 +7,8 @@ public record PopupsSimpleResponse(
         String title,
         String location,
         LocalDateTime startDate,
-        LocalDateTime endDate
+        LocalDateTime endDate,
+        Integer visitedCount,
+        Integer likedCount
 ) {
 }
