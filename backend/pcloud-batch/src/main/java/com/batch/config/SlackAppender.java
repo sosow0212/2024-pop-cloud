@@ -1,4 +1,4 @@
-package com.api.global.slack;
+package com.batch.config;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
@@ -22,9 +22,9 @@ public class SlackAppender extends AppenderBase<ILoggingEvent> {
     private Map<String, Object> createSlackErrorBody(final ILoggingEvent eventObject) {
         String message = createMessage(eventObject);
         return Map.of("channel", "#에러-발생",
-                "fallback", "API 서버에서 요청을 실패했어요 :cry:",
+                "fallback", "Batch 서버에서 요청을 실패했어요 :cry:",
                 "color", "#2eb886",
-                "pretext", "API 서버에서 에러가 발생했어요 확인해주세요 :cry:",
+                "pretext", "Batch 서버에서 에러가 발생했어요 확인해주세요 :cry:",
                 "author_name", "pop-cloud",
                 "text", message,
                 "fields",

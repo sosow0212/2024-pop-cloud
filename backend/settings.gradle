@@ -3,4 +3,5 @@ include 'pcloud-common'
 include 'pcloud-domain'
 include 'pcloud-infrastructure'
 include 'pcloud-api'
+include 'pcloud-batch'
 

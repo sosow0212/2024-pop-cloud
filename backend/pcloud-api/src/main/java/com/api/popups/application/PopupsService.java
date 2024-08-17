@@ -4,6 +4,7 @@ import com.api.popups.application.request.PopupsCreateRequest;
 import com.api.popups.application.request.PopupsUpdateRequest;
 import com.common.config.event.Events;
 import com.domain.domains.common.CustomTagType;
+import com.domain.domains.popups.domain.LikedPopups;
 import com.domain.domains.popups.domain.Popups;
 import com.domain.domains.popups.domain.PopupsRepository;
 import com.domain.domains.popups.event.PopupsTagsCreatedEvents;
@@ -42,5 +43,23 @@ public class PopupsService {
     private Popups findPopups(final Long popupsId) {
         return popupsRepository.findById(popupsId)
                 .orElseThrow(() -> new PopupsException(POPUPS_NOT_FOUND_EXCEPTION));
+    }
+
+    // TODO: 동시성 이슈 발생 추후 처리 예정 (#14 Issue 이후 작업)
+    public boolean likes(final Long memberId, final Long popupsId) {
+        Popups popups = findPopups(popupsId);
+        boolean canAddLikes = handlePopupsLikes(popupsId, memberId);
+        popups.addLikedCount(canAddLikes);
+        return canAddLikes;
+    }
+
+    private boolean handlePopupsLikes(final Long popupsId, final Long memberId) {
+        if (popupsRepository.existsByProductIdAndMemberId(memberId, popupsId)) {
+            popupsRepository.deleteLikedPopupsByPopupsIdAndMemberId(popupsId, memberId);
+            return false;
+        }
+
+        popupsRepository.saveLikedPopups(LikedPopups.of(popupsId, memberId));
+        return true;
     }
 }

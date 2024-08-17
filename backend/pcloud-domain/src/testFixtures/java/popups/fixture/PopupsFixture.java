@@ -6,6 +6,7 @@ import com.domain.domains.popups.domain.Popups;
 import com.domain.domains.popups.domain.vo.AvailableTime;
 import com.domain.domains.popups.domain.vo.Latitude;
 import com.domain.domains.popups.domain.vo.Longitude;
+import com.domain.domains.popups.domain.vo.Statistic;
 import com.domain.domains.popups.domain.vo.StoreDetails;
 
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ public class PopupsFixture {
                 ).latitude(Latitude.from("34"))
                 .longitude(Longitude.from("128"))
                 .publicTag(PublicTag.PET)
+                .statistic(Statistic.createDefault())
                 .build();
     }
 
@@ -55,6 +57,7 @@ public class PopupsFixture {
                 ).latitude(Latitude.from("34"))
                 .longitude(Longitude.from("128"))
                 .publicTag(PublicTag.BEAUTY)
+                .statistic(Statistic.createDefault())
                 .build();
     }
 
@@ -78,6 +81,7 @@ public class PopupsFixture {
                 ).latitude(Latitude.from("34"))
                 .longitude(Longitude.from("128"))
                 .publicTag(PublicTag.BEAUTY)
+                .statistic(Statistic.createDefault())
                 .build();
     }
 }

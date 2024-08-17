@@ -5,6 +5,7 @@ import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
 import com.domain.domains.popups.domain.Popups;
 import com.domain.domains.popups.domain.PopupsRepository;
+import com.domain.domains.popups.exception.PopupsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -15,6 +16,7 @@ import popups.FakePopupsRepository;
 import java.util.Optional;
 
 import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
+import static com.domain.domains.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
@@ -81,6 +83,51 @@ class PopupsServiceTest {
             assertThatThrownBy(() -> savedPopups.update(updatedPopups))
                     .isInstanceOf(AuthException.class)
                     .hasMessageContaining(AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION.message());
+        }
+    }
+
+    @Nested
+    class 팝업_좋아요_테스트 {
+
+        @Test
+        void 팝업을_찾을_수_없다면_예외를_발생시킨다() {
+            // when & then
+            assertThatThrownBy(() -> popupsService.likes(-1L, -1L))
+                    .isInstanceOf(PopupsException.class)
+                    .hasMessageContaining(POPUPS_NOT_FOUND_EXCEPTION.message());
+        }
+
+        @Test
+        void 좋아요_기록이_없다면_좋아요_처리_및_true를_반환한다() {
+            // given
+            Popups popups = popupsRepository.save(일반_팝업_스토어_생성_뷰티());
+            Integer beforeLikesCount = popups.getStatistic().getLikedCount();
+
+            // when
+            boolean result = popupsService.likes(1L, popups.getId());
+
+            // then
+            assertSoftly(softly -> {
+                softly.assertThat(result).isTrue();
+                softly.assertThat(popups.getStatistic().getLikedCount()).isEqualTo(beforeLikesCount + 1);
+            });
+        }
+
+        @Test
+        void 좋아요_기록이_있다면_좋아요_취소_처리_및_false를_반환한다() {
+            // given
+            Popups popups = popupsRepository.save(일반_팝업_스토어_생성_뷰티());
+            popupsService.likes(1L, popups.getId());
+            Integer beforeLikesCount = popups.getStatistic().getLikedCount();
+
+            // when
+            boolean result = popupsService.likes(1L, popups.getId());
+
+            // then
+            assertSoftly(softly -> {
+                softly.assertThat(result).isFalse();
+                softly.assertThat(popups.getStatistic().getLikedCount()).isEqualTo(beforeLikesCount - 1);
+            });
         }
     }
 }

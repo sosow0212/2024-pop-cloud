@@ -3,6 +3,9 @@ jar { enabled = true }
 
 dependencies {
     implementation project(':pcloud-common')
-    testImplementation(testFixtures(project(":pcloud-domain")))
+
+    // redis
+    api 'org.springframework.boot:spring-boot-starter-data-redis'
+
     testImplementation(testFixtures(project(":pcloud-common")))
 }

@@ -7,6 +7,7 @@ import com.domain.domains.common.PublicTag;
 import com.domain.domains.popups.domain.vo.AvailableTime;
 import com.domain.domains.popups.domain.vo.Latitude;
 import com.domain.domains.popups.domain.vo.Longitude;
+import com.domain.domains.popups.domain.vo.Statistic;
 import com.domain.domains.popups.domain.vo.StoreDetails;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -54,6 +55,9 @@ public class Popups extends BaseEntity {
     @Embedded
     private Longitude longitude;
 
+    @Embedded
+    private Statistic statistic;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PublicTag publicTag;
@@ -89,6 +93,7 @@ public class Popups extends BaseEntity {
                 .latitude(Latitude.from(latitude))
                 .longitude(Longitude.from(longitude))
                 .publicTag(PublicTag.from(publicTag))
+                .statistic(Statistic.createDefault())
                 .build();
     }
 
@@ -105,5 +110,13 @@ public class Popups extends BaseEntity {
         if (!this.getOwnerId().equals(ownerId)) {
             throw new AuthException(AUTH_NOT_EQUALS_EXCEPTION);
         }
+    }
+
+    public void addViewCount() {
+        this.statistic.addVisitedCount();
+    }
+
+    public void addLikedCount(final boolean canAdd) {
+        this.statistic.addLikedCount(canAdd);
     }
 }

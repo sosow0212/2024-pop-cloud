@@ -4,6 +4,7 @@ import com.api.helper.AcceptanceBaseFixture;
 import com.api.popups.application.request.PopupsCreateRequest;
 import com.api.popups.application.request.PopupsUpdateRequest;
 import com.api.popups.fixture.request.PopupsRequestFixtures;
+import com.api.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.domains.popups.domain.Popups;
 import com.domain.domains.popups.domain.PopupsRepository;
 import io.restassured.RestAssured;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 
 import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_업데이트_요청;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static popups.fixture.PopupsFixture.일반_팝업_스토어_생성_뷰티;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -90,5 +92,24 @@ class PopupsControllerAcceptanceFixture extends AcceptanceBaseFixture {
 
     protected void 팝업스토어_업데이트_결과_검증(final ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+    }
+
+    protected ExtractableResponse<Response> 팝업스토어_좋아요_요청() {
+        return RestAssured.given().log().all()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + 일반_유저_토큰)
+                .when()
+                .post("/popups/1/likes")
+                .then().log().all()
+                .extract();
+    }
+
+    protected void 팝업스토어_좋아요_결과_검증(final ExtractableResponse<Response> response) {
+        PopupLikedStatusResponse responseBody = response.as(PopupLikedStatusResponse.class);
+
+        assertSoftly(softly -> {
+            softly.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+            softly.assertThat(responseBody.popupsId()).isEqualTo(1L);
+            softly.assertThat(responseBody.isStatusLiked()).isTrue();
+        });
     }
 }

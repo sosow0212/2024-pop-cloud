@@ -1,0 +1,15 @@
+server:
+  port: 8081
+  shutdown: graceful
+
+spring:
+  profiles:
+    active: local
+
+management:
+  server:
+    port: 9001
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health

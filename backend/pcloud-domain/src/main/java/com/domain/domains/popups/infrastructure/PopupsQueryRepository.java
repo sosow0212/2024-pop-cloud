@@ -45,6 +45,8 @@ public class PopupsQueryRepository {
                                 popups.latitude.value,
                                 popups.longitude.value,
                                 popups.publicTag,
+                                popups.statistic.visitedCount,
+                                popups.statistic.likedCount,
                                 list(constructor(CustomTagSimpleResponse.class,
                                         customTag.name
                                 )))
@@ -64,7 +66,9 @@ public class PopupsQueryRepository {
                         popups.storeDetails.title,
                         popups.storeDetails.location,
                         popups.availableTime.startDate,
-                        popups.availableTime.endDate
+                        popups.availableTime.endDate,
+                        popups.statistic.visitedCount,
+                        popups.statistic.likedCount
                 )).from(popups)
                 .where(ltPopupsId(popupsId))
                 .orderBy(popups.id.desc())

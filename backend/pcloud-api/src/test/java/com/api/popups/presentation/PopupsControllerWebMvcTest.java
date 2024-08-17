@@ -96,7 +96,7 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
     @Test
     void 페이징_조회를_한다() throws Exception {
         // given
-        when(popupsQueryService.findAll(any(), any())).thenReturn(List.of(new PopupsSimpleResponse(1L, "빵빵이 전시회", "서울특별시 마포구", LocalDateTime.now().minusDays(30), LocalDateTime.now())));
+        when(popupsQueryService.findAll(any(), any())).thenReturn(List.of(new PopupsSimpleResponse(1L, "빵빵이 전시회", "서울특별시 마포구", LocalDateTime.now().minusDays(30), LocalDateTime.now(), 0, 0)));
 
         // when & then
         mockMvc.perform(get("/popups")
@@ -113,7 +113,9 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("[].title").description("팝업스토어 이름"),
                                 fieldWithPath("[].location").description("팝업스토어 장소명"),
                                 fieldWithPath("[].startDate").description("팝업스토어 시작일"),
-                                fieldWithPath("[].endDate").description("팝업스토어 종료일")
+                                fieldWithPath("[].endDate").description("팝업스토어 종료일"),
+                                fieldWithPath("[].visitedCount").description("팝업스토어 게시글 방문자 수"),
+                                fieldWithPath("[].likedCount").description("팝업스토어 게시글 좋아요 수")
 
                         )
                 ));
@@ -146,6 +148,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("latitude").description("위도"),
                                 fieldWithPath("longitude").description("경도"),
                                 fieldWithPath("publicTag").description("공용 퍼블릭 태그"),
+                                fieldWithPath("visitedCount").description("팝업스토어 게시글 방문자 수"),
+                                fieldWithPath("likedCount").description("팝업스토어 게시글 좋아요 수"),
                                 fieldWithPath("tags[]").description("커스텀 태그")
                         )
                 ));
@@ -180,6 +184,30 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("longitude").description("longitude, 경도 정보 (String)"),
                                 fieldWithPath("publicTag").description("큰 범주 안에서 퍼블릭 태그"),
                                 fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그")
+                        )
+                ));
+    }
+
+    @Test
+    void 팝업스토어를_좋아요_처리한다() throws Exception {
+        // given
+        when(popupsService.likes(any(), any())).thenReturn(true);
+
+        // when & then
+        mockMvc.perform(post("/popups/{popupsId}/likes", 1)
+                        .header(AUTHORIZATION, "Bearer tokenInfo ~~")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isOk())
+                .andDo(customDocument("likes_popups",
+                        requestHeaders(
+                                headerWithName(AUTHORIZATION).description("유저 토큰 정보")
+                        ),
+                        pathParameters(
+                                parameterWithName("popupsId").description("팝업스토어 id")
+                        ),
+                        responseFields(
+                                fieldWithPath("popupsId").description("팝업스토어 id"),
+                                fieldWithPath("isStatusLiked").description("팝업스토어 좋아요 상태 (true면 좋아요 처리되고, false면 좋아요 취소 처리됨)")
                         )
                 ));
     }
