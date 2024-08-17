@@ -1,0 +1,7 @@
+spring:
+  profiles:
+    include:
+      - domain
+      - common
+      - infrastructure
+    active: test

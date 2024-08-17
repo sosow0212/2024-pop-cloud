@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(":pcloud-common")
+    implementation project(":pcloud-domain")
+    implementation project(":pcloud-infrastructure")
+
+    // testFixtures import
+    testImplementation(testFixtures(project(":pcloud-domain")))
+    testImplementation(testFixtures(project(":pcloud-common")))
+
+    // spring web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // actuator, prometheus
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+}
+
+test {
+    useJUnitPlatform()
+}
