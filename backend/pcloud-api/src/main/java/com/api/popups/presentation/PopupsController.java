@@ -57,7 +57,7 @@ public class PopupsController {
     }
 
     /**
-     * TODO : 조회시 방문자 수 처리하기
+     * TODO : 조회시 방문자 수 처리하기 (#14 Issue 이후 작업)
      */
     @GetMapping("/{popupsId}")
     public ResponseEntity<PopupsSpecificResponse> findById(@PathVariable final Long popupsId) {

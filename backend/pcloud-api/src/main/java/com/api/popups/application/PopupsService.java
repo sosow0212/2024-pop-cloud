@@ -45,7 +45,7 @@ public class PopupsService {
                 .orElseThrow(() -> new PopupsException(POPUPS_NOT_FOUND_EXCEPTION));
     }
 
-    // TODO: 동시성 이슈 발생 추후 처리 예정
+    // TODO: 동시성 이슈 발생 추후 처리 예정 (#14 Issue 이후 작업)
     public boolean likes(final Long memberId, final Long popupsId) {
         Popups popups = findPopups(popupsId);
         boolean canAddLikes = handlePopupsLikes(popupsId, memberId);
