@@ -8,12 +8,13 @@ import { Map as KakaoMap } from "react-kakao-maps-sdk";
 import MapMarker from "./map-marker";
 import { IPosition } from ".";
 import { cn } from "zero-cnn";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 interface MapProps {
   center: IPosition;
   markers?: IPosition[];
   className?: string;
+  onChangeLevel: (map: kakao.maps.Map) => void;
 }
 
 const Spinner = () => {
@@ -24,12 +25,13 @@ const Spinner = () => {
   );
 };
 
-const Map = ({ center, markers, className }: MapProps) => {
+const Map = ({ center, markers, className, onChangeLevel }: MapProps) => {
   return (
     <Suspense fallback={<Spinner />}>
       <KakaoMap
-        className={cn("h-52 w-full", className)}
+        className={cn("h-[500px] w-full", className)}
         center={{ lat: center.lat, lng: center.lng }}
+        onZoomChanged={onChangeLevel}
       >
         {markers?.map((marker) => (
           <MapMarker

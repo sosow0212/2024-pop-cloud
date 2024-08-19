@@ -22,19 +22,6 @@ const CategoryPage = ({
   // const [endDate, setEndDate] = useState(() => Date.now());
 
   // date와 지역을 searchParamse으로 관리할 지 state로 관리할 지 고민
-  useEffect(() => {
-    const dataFetch = async () => {
-      try {
-        const res = await fetch("aaa", {
-          headers: {
-            Accept: "application/json",
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }, []);
 
   return (
     <section className="flex flex-col space-y-4 py-4">

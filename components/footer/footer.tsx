@@ -12,9 +12,9 @@ const Footer = () => {
         있으므로, 각 상품 페이지에서 구체적인 내용을 확인하시기 바랍니다.
       </div>
       <ul className="flex w-full items-center justify-start space-x-2">
-        <FooterIcon link="#" icon="github" />
-        <FooterIcon link="#" icon="instagram" />
-        <FooterIcon link="#" icon="x" />
+        <FooterIcon link="https://www.github.com" icon="github" />
+        <FooterIcon link="https://www.instagram.com" icon="instagram" />
+        <FooterIcon link="https://www.x.com" icon="x" />
       </ul>
     </footer>
   );

@@ -17,7 +17,7 @@ const HeaderSearch = ({ isShow, target, setShow }: HeaderSearchProps) => {
   };
   return (
     <>
-      <button onClick={() => setShow("search", target)}>
+      <button name="search-button" onClick={() => setShow("search", target)}>
         <Search />
       </button>
       <div

@@ -5,3 +5,4 @@ export type IPosition = {
 
 export { default as Map } from "./map";
 export { default as MapMarker } from "./map-marker";
+export { default as MapLoading } from "./map-loading";

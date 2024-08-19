@@ -12,7 +12,7 @@ interface HeaderMenuProps {
 const HeaderMenu = ({ isShow, setShow, target }: HeaderMenuProps) => {
   return (
     <>
-      <button onClick={() => setShow("menu", target)}>
+      <button name="menu-button" onClick={() => setShow("menu", target)}>
         <Menu />
       </button>
       <div

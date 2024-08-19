@@ -73,3 +73,21 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+.spinner {
+  width: 4rem;
+  height: 4rem;
+  position: relative;
+  border: 2px grey solid;
+  border-top: transparent;
+  border-radius: 50%;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+
+    border-radius: 50%;
+    border: 2px red solid;
+    border-bottom: transparent;
+  }
+}
