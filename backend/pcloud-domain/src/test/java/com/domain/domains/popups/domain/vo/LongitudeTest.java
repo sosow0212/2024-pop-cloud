@@ -1,7 +1,8 @@
 package com.domain.domains.popups.domain.vo;
 
-import com.domain.domains.popups.exception.PopupsException;
-import com.domain.domains.popups.exception.PopupsExceptionType;
+import com.domain.popups.domain.vo.Longitude;
+import com.domain.popups.exception.PopupsException;
+import com.domain.popups.exception.PopupsExceptionType;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

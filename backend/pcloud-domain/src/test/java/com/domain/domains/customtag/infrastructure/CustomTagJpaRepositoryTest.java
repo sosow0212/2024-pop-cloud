@@ -1,6 +1,7 @@
 package com.domain.domains.customtag.infrastructure;
 
-import com.domain.domains.customtag.domain.CustomTag;
+import com.domain.customtag.domain.CustomTag;
+import com.domain.customtag.infrastructure.CustomTagJpaRepository;
 import com.domain.helper.IntegrationHelper;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

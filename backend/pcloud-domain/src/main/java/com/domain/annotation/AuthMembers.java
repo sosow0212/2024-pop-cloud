@@ -1,6 +1,6 @@
 package com.domain.annotation;
 
-import com.domain.domains.member.domain.vo.MemberRole;
+import com.domain.member.domain.vo.MemberRole;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,8 +1,8 @@
 package member.fixture;
 
-import com.domain.domains.member.domain.Member;
-import com.domain.domains.member.domain.vo.MemberRole;
-import com.domain.domains.member.domain.vo.OauthId;
+import com.domain.member.domain.Member;
+import com.domain.member.domain.vo.MemberRole;
+import com.domain.member.domain.vo.OauthId;
 
 public class MemberFixture {
 

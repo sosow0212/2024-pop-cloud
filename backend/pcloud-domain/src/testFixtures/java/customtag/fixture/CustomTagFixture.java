@@ -1,7 +1,7 @@
 package customtag.fixture;
 
-import com.domain.domains.common.CustomTagType;
-import com.domain.domains.customtag.domain.CustomTag;
+import com.domain.common.CustomTagType;
+import com.domain.customtag.domain.CustomTag;
 
 public class CustomTagFixture {
 

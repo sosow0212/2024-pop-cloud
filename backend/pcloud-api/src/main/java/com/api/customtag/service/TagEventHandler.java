@@ -1,10 +1,10 @@
 package com.api.customtag.service;
 
-import com.domain.domains.common.CustomTagType;
-import com.domain.domains.customtag.domain.CustomTag;
-import com.domain.domains.customtag.domain.CustomTagRepository;
-import com.domain.domains.popups.event.PopupsTagsCreatedEvents;
-import com.domain.domains.popups.event.PopupsTagsUpdatedEvents;
+import com.domain.common.CustomTagType;
+import com.domain.customtag.domain.CustomTag;
+import com.domain.customtag.domain.CustomTagRepository;
+import com.domain.popups.event.PopupsTagsCreatedEvents;
+import com.domain.popups.event.PopupsTagsUpdatedEvents;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;

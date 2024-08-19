@@ -1,10 +1,10 @@
 package popups.fixture;
 
-import com.domain.domains.common.PublicTag;
-import com.domain.domains.popups.domain.response.CustomTagSimpleResponse;
-import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
-import com.domain.domains.popups.domain.vo.Latitude;
-import com.domain.domains.popups.domain.vo.Longitude;
+import com.domain.common.PublicTag;
+import com.domain.popups.domain.response.CustomTagSimpleResponse;
+import com.domain.popups.domain.response.PopupsSpecificResponse;
+import com.domain.popups.domain.vo.Latitude;
+import com.domain.popups.domain.vo.Longitude;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -1,7 +1,7 @@
 package com.api.auth.presentation;
 
 import com.api.helper.MockBeanInjection;
-import com.domain.domains.member.domain.vo.OAuthPlatform;
+import com.domain.member.domain.vo.OAuthPlatform;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

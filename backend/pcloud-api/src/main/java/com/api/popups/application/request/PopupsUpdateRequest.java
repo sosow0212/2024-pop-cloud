@@ -1,6 +1,6 @@
 package com.api.popups.application.request;
 
-import com.domain.domains.popups.domain.Popups;
+import com.domain.popups.domain.Popups;
 
 import java.time.LocalDateTime;
 import java.util.List;

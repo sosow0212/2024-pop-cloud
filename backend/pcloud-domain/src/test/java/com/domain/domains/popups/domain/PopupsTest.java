@@ -2,6 +2,7 @@ package com.domain.domains.popups.domain;
 
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
+import com.domain.popups.domain.Popups;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;

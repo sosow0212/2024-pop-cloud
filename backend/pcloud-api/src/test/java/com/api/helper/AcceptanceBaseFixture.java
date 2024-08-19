@@ -1,8 +1,8 @@
 package com.api.helper;
 
 import com.common.auth.TokenProvider;
-import com.domain.domains.member.domain.Member;
-import com.domain.domains.member.domain.MemberRepository;
+import com.domain.member.domain.Member;
+import com.domain.member.domain.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

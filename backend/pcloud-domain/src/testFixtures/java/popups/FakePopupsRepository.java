@@ -1,11 +1,11 @@
 package popups;
 
-import com.domain.domains.popups.domain.LikedPopups;
-import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.PopupsRepository;
-import com.domain.domains.popups.domain.response.CustomTagSimpleResponse;
-import com.domain.domains.popups.domain.response.PopupsSimpleResponse;
-import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
+import com.domain.popups.domain.LikedPopups;
+import com.domain.popups.domain.Popups;
+import com.domain.popups.domain.PopupsRepository;
+import com.domain.popups.domain.response.CustomTagSimpleResponse;
+import com.domain.popups.domain.response.PopupsSimpleResponse;
+import com.domain.popups.domain.response.PopupsSpecificResponse;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

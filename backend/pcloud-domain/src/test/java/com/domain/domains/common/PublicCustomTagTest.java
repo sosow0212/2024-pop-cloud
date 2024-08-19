@@ -1,11 +1,12 @@
 package com.domain.domains.common;
 
-import com.domain.domains.popups.exception.PopupsException;
+import com.domain.common.PublicTag;
+import com.domain.popups.exception.PopupsException;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
-import static com.domain.domains.popups.exception.PopupsExceptionType.PUBLIC_TAB_NOT_FOUNT_EXCEPTION;
+import static com.domain.popups.exception.PopupsExceptionType.PUBLIC_TAB_NOT_FOUNT_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

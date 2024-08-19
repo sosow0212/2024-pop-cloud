@@ -2,7 +2,7 @@ package com.api.popups.fixture.request;
 
 import com.api.popups.application.request.PopupsCreateRequest;
 import com.api.popups.application.request.PopupsUpdateRequest;
-import com.domain.domains.common.PublicTag;
+import com.domain.common.PublicTag;
 
 import java.time.LocalDateTime;
 import java.util.List;

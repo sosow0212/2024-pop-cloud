@@ -1,13 +1,13 @@
 package com.api.popups.infrastructure;
 
-import com.domain.domains.popups.domain.LikedPopups;
-import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.PopupsRepository;
-import com.domain.domains.popups.domain.response.PopupsSimpleResponse;
-import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
-import com.domain.domains.popups.infrastructure.LikedPopupsJpaRepository;
-import com.domain.domains.popups.infrastructure.PopupsJpaRepository;
-import com.domain.domains.popups.infrastructure.PopupsQueryRepository;
+import com.domain.popups.domain.LikedPopups;
+import com.domain.popups.domain.Popups;
+import com.domain.popups.domain.PopupsRepository;
+import com.domain.popups.domain.response.PopupsSimpleResponse;
+import com.domain.popups.domain.response.PopupsSpecificResponse;
+import com.domain.popups.infrastructure.LikedPopupsJpaRepository;
+import com.domain.popups.infrastructure.PopupsJpaRepository;
+import com.domain.popups.infrastructure.PopupsQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

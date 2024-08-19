@@ -1,6 +1,6 @@
 package popups.fixture;
 
-import com.domain.domains.popups.domain.LikedPopups;
+import com.domain.popups.domain.LikedPopups;
 
 public class LikedPopupsFixture {
 

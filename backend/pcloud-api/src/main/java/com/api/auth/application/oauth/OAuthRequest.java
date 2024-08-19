@@ -1,7 +1,7 @@
 package com.api.auth.application.oauth;
 
-import com.domain.domains.member.domain.Member;
-import com.domain.domains.member.domain.vo.OAuthPlatform;
+import com.domain.member.domain.Member;
+import com.domain.member.domain.vo.OAuthPlatform;
 
 public interface OAuthRequest {
 

@@ -2,9 +2,9 @@ package com.api.auth.application;
 
 import com.api.auth.application.oauth.OAuthManager;
 import com.common.auth.TokenProvider;
-import com.domain.domains.member.domain.Member;
-import com.domain.domains.member.domain.MemberRepository;
-import com.domain.domains.member.domain.vo.OAuthPlatform;
+import com.domain.member.domain.Member;
+import com.domain.member.domain.MemberRepository;
+import com.domain.member.domain.vo.OAuthPlatform;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

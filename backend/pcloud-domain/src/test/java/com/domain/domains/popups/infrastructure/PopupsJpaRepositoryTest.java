@@ -1,7 +1,8 @@
 package com.domain.domains.popups.infrastructure;
 
-import com.domain.domains.popups.domain.Popups;
+import com.domain.popups.domain.Popups;
 import com.domain.helper.IntegrationHelper;
+import com.domain.popups.infrastructure.PopupsJpaRepository;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
