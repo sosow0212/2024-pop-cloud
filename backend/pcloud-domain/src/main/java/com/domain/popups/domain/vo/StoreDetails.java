@@ -33,6 +33,6 @@ public class StoreDetails {
     private Boolean isParkingAvailable;
 
     @Embedded
-    @AttributeOverride(name = "price", column = @Column(name = "fee", nullable = false))
+    @AttributeOverride(name = "value", column = @Column(name = "fee", nullable = false))
     private Price fee;
 }
