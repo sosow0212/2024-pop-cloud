@@ -3,7 +3,7 @@ package com.domain.exhibition.infrastructure.dto;
 import java.time.LocalDateTime;
 
 public record ExhibitionSimpleResponse(
-        Long id,
+        Long exhibitionId,
         String title,
         String location,
         LocalDateTime startDate,
