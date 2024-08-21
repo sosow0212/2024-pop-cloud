@@ -3,7 +3,6 @@ package com.domain.exhibition.infrastructure;
 import com.domain.common.CustomTagType;
 import com.domain.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
 import com.domain.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
-import com.domain.popups.domain.response.CustomTagSimpleResponse;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
@@ -47,11 +46,10 @@ public class ExhibitionQueryRepository {
                                 exhibition.exhibitionRules.isKidsZone,
                                 exhibition.exhibitionRules.isWifiAvailable,
                                 exhibition.exhibitionRules.fee.value,
+                                exhibition.publicTag,
                                 exhibition.statistic.visitedCount,
                                 exhibition.statistic.likedCount,
-                                exhibition.publicTag,
-                                list(constructor(CustomTagSimpleResponse.class,
-                                        customTag.name))
+                                list(customTag.name)
                         ))
                 );
 
