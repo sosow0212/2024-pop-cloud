@@ -1,7 +1,7 @@
 package com.domain.popups.domain;
 
 import com.common.exception.AuthException;
-import com.domain.common.BaseEntity;
+import com.domain.global.domain.BaseEntity;
 import com.domain.common.Price;
 import com.domain.common.PublicTag;
 import com.domain.popups.domain.vo.AvailableTime;

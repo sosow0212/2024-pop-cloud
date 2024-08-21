@@ -1,4 +1,4 @@
-package com.domain.exhibition.domain.vo;
+package com.domain.common;
 
 import com.domain.popups.domain.vo.Latitude;
 import com.domain.popups.domain.vo.Longitude;

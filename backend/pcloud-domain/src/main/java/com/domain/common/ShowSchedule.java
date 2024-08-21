@@ -1,4 +1,4 @@
-package com.domain.exhibition.domain.vo;
+package com.domain.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Embeddable
-public class ExhibitionSchedule {
+public class ShowSchedule {
 
     @Column(nullable = false)
     private LocalDateTime startDate;
@@ -27,12 +27,12 @@ public class ExhibitionSchedule {
     @Column(nullable = false)
     private String openTimes;
 
-    public static ExhibitionSchedule of(
+    public static ShowSchedule of(
             final LocalDateTime startDate,
             final LocalDateTime endDate,
             final String openTimes
     ) {
-        return ExhibitionSchedule.builder()
+        return ShowSchedule.builder()
                 .startDate(startDate)
                 .endDate(endDate)
                 .openTimes(openTimes)

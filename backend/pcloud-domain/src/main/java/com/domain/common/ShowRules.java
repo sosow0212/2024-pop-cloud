@@ -1,6 +1,5 @@
-package com.domain.exhibition.domain.vo;
+package com.domain.common;
 
-import com.domain.common.Price;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -16,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Embeddable
-public class ExhibitionRules {
+public class ShowRules {
 
     @Column(nullable = false)
     private Boolean isParkingAvailable;
@@ -37,7 +36,7 @@ public class ExhibitionRules {
     @AttributeOverride(name = "value", column = @Column(name = "fee", nullable = false))
     private Price fee;
 
-    public static ExhibitionRules of(
+    public static ShowRules of(
             final boolean isParkingAvailable,
             final boolean isFoodAllowed,
             final boolean isPetAllowed,
@@ -45,7 +44,7 @@ public class ExhibitionRules {
             final boolean isWifiAvailable,
             final int fee
     ) {
-        return ExhibitionRules.builder()
+        return ShowRules.builder()
                 .isParkingAvailable(isParkingAvailable)
                 .isFoodAllowed(isFoodAllowed)
                 .isPetAllowed(isPetAllowed)

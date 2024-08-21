@@ -1,6 +1,6 @@
 package com.domain.member.domain;
 
-import com.domain.common.BaseEntity;
+import com.domain.global.domain.BaseEntity;
 import com.domain.member.domain.vo.MemberRole;
 import com.domain.member.domain.vo.OauthId;
 import jakarta.persistence.Column;

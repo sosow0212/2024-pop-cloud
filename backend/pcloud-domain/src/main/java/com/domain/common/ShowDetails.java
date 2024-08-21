@@ -1,4 +1,4 @@
-package com.domain.exhibition.domain.vo;
+package com.domain.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Embeddable
-public class ExhibitionDetails {
+public class ShowDetails {
 
     @Column(nullable = false)
     private String title;
@@ -23,8 +23,8 @@ public class ExhibitionDetails {
     @Column(nullable = false)
     private String description;
 
-    public static ExhibitionDetails of(final String title, final String description) {
-        return ExhibitionDetails.builder()
+    public static ShowDetails of(final String title, final String description) {
+        return ShowDetails.builder()
                 .title(title)
                 .description(description)
                 .build();

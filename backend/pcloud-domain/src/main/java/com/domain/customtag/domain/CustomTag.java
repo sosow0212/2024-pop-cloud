@@ -1,6 +1,6 @@
 package com.domain.customtag.domain;
 
-import com.domain.common.BaseEntity;
+import com.domain.global.domain.BaseEntity;
 import com.domain.common.CustomTagType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

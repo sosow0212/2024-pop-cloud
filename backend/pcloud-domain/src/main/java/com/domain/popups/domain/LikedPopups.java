@@ -1,6 +1,6 @@
 package com.domain.popups.domain;
 
-import com.domain.common.BaseEntity;
+import com.domain.global.domain.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

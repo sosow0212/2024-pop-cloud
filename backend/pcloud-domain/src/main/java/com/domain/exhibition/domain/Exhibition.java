@@ -1,12 +1,12 @@
 package com.domain.exhibition.domain;
 
 import com.common.exception.AuthException;
-import com.domain.common.BaseEntity;
+import com.domain.common.ShowRules;
+import com.domain.global.domain.BaseEntity;
 import com.domain.common.PublicTag;
-import com.domain.exhibition.domain.vo.ExhibitionDetails;
-import com.domain.exhibition.domain.vo.ExhibitionRules;
-import com.domain.exhibition.domain.vo.ExhibitionSchedule;
-import com.domain.exhibition.domain.vo.Position;
+import com.domain.common.ShowDetails;
+import com.domain.common.ShowSchedule;
+import com.domain.common.Position;
 import com.domain.popups.domain.vo.Statistic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -42,16 +42,16 @@ public class Exhibition extends BaseEntity {
     private Long ownerId;
 
     @Embedded
-    private ExhibitionDetails exhibitionDetails;
+    private ShowDetails showDetails;
 
     @Embedded
-    private ExhibitionSchedule exhibitionSchedule;
+    private ShowSchedule showSchedule;
 
     @Embedded
     private Position position;
 
     @Embedded
-    private ExhibitionRules exhibitionRules;
+    private ShowRules showRules;
 
     @Embedded
     private Statistic statistic;
@@ -80,8 +80,8 @@ public class Exhibition extends BaseEntity {
     ) {
         return Exhibition.builder()
                 .ownerId(ownerId)
-                .exhibitionDetails(ExhibitionDetails.of(title, description))
-                .exhibitionSchedule(ExhibitionSchedule.of(
+                .showDetails(ShowDetails.of(title, description))
+                .showSchedule(ShowSchedule.of(
                         startDate,
                         endDate,
                         openTimes
@@ -91,7 +91,7 @@ public class Exhibition extends BaseEntity {
                         latitude,
                         longitude
                 ))
-                .exhibitionRules(ExhibitionRules.of(
+                .showRules(ShowRules.of(
                         isParkingAvailable,
                         isFoodAllowed,
                         isPetAllowed,
@@ -106,10 +106,10 @@ public class Exhibition extends BaseEntity {
 
     public void update(final Exhibition updateExhibition) {
         validateOwnerEquals(updateExhibition.ownerId);
-        this.exhibitionDetails = updateExhibition.exhibitionDetails;
-        this.exhibitionSchedule = updateExhibition.exhibitionSchedule;
+        this.showDetails = updateExhibition.showDetails;
+        this.showSchedule = updateExhibition.showSchedule;
         this.position = updateExhibition.position;
-        this.exhibitionRules = updateExhibition.exhibitionRules;
+        this.showRules = updateExhibition.showRules;
         this.statistic = updateExhibition.statistic;
         this.publicTag = updateExhibition.publicTag;
     }
