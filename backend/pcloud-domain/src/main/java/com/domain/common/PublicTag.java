@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.util.Arrays;
 
-import static com.domain.popups.exception.PopupsExceptionType.PUBLIC_TAB_NOT_FOUNT_EXCEPTION;
+import static com.domain.popups.exception.PopupsExceptionType.PUBLIC_TAG_NOT_FOUND_EXCEPTION;
 
 @Getter
 @AllArgsConstructor
@@ -36,6 +36,6 @@ public enum PublicTag {
         return Arrays.stream(values())
                 .filter(tag -> tag.name.equals(name))
                 .findAny()
-                .orElseThrow(() -> new PopupsException(PUBLIC_TAB_NOT_FOUNT_EXCEPTION));
+                .orElseThrow(() -> new PopupsException(PUBLIC_TAG_NOT_FOUND_EXCEPTION));
     }
 }
