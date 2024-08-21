@@ -3,6 +3,8 @@ package com.api.customtag.service;
 import com.domain.common.CustomTagType;
 import com.domain.customtag.domain.CustomTag;
 import com.domain.customtag.domain.CustomTagRepository;
+import com.domain.exhibition.event.ExhibitionTagsCreatedEvents;
+import com.domain.exhibition.event.ExhibitionTagsUpdatedEvents;
 import com.domain.popups.event.PopupsTagsCreatedEvents;
 import com.domain.popups.event.PopupsTagsUpdatedEvents;
 import jakarta.transaction.Transactional;
@@ -21,11 +23,11 @@ public class TagEventHandler {
 
     @EventListener(PopupsTagsCreatedEvents.class)
     public void savePopupsTags(final PopupsTagsCreatedEvents event) {
-        List<CustomTag> customTags = getPopupsCustomTag(event.tags(), event.type(), event.popupsId());
+        List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.popupsId());
         customTagRepository.saveAll(customTags);
     }
 
-    private List<CustomTag> getPopupsCustomTag(
+    private List<CustomTag> getCustomTag(
             final List<String> tagNames,
             final CustomTagType type,
             final Long targetId
@@ -37,8 +39,21 @@ public class TagEventHandler {
 
     @EventListener(PopupsTagsUpdatedEvents.class)
     public void updatePopupsTags(final PopupsTagsUpdatedEvents event) {
-        List<CustomTag> customTags = getPopupsCustomTag(event.tags(), event.type(), event.popupsId());
+        List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.popupsId());
         customTagRepository.deleteAllByTypeAndTargetId(event.type(), event.popupsId());
+        customTagRepository.saveAll(customTags);
+    }
+
+    @EventListener(ExhibitionTagsCreatedEvents.class)
+    public void saveExhibitionTags(final ExhibitionTagsCreatedEvents event) {
+        List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.exhibitionId());
+        customTagRepository.saveAll(customTags);
+    }
+
+    @EventListener(ExhibitionTagsUpdatedEvents.class)
+    public void updateExhibitionTags(final ExhibitionTagsUpdatedEvents event) {
+        List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.exhibitionId());
+        customTagRepository.deleteAllByTypeAndTargetId(event.type(), event.exhibitionId());
         customTagRepository.saveAll(customTags);
     }
 }
