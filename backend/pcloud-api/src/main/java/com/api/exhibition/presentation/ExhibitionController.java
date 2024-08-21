@@ -67,7 +67,7 @@ public class ExhibitionController {
 
     @PatchMapping("/{exhibitionId}")
     public ResponseEntity<Void> patchById(
-            @AuthMember final Long memberId,
+            @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
             @PathVariable final Long exhibitionId,
             @RequestBody final ExhibitionUpdateRequest request
     ) {
@@ -82,7 +82,10 @@ public class ExhibitionController {
     }
 
     @DeleteMapping("{exhibitionId}")
-    public ResponseEntity<Void> deleteById(@AuthMember final Long memberId, @PathVariable final Long exhibitionId) {
+    public ResponseEntity<Void> deleteById(
+            @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
+            @PathVariable final Long exhibitionId
+    ) {
         exhibitionService.deleteById(memberId, exhibitionId);
         return ResponseEntity.noContent()
                 .build();
