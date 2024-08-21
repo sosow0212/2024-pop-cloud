@@ -1,6 +1,8 @@
 package com.api.helper;
 
 import com.api.auth.application.AuthService;
+import com.api.exhibition.application.ExhibitionQueryService;
+import com.api.exhibition.application.ExhibitionService;
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
 import com.api.popups.application.PopupsQueryService;
 import com.api.popups.application.PopupsService;
@@ -29,4 +31,10 @@ public class MockBeanInjection {
 
     @MockBean
     protected PopupsQueryService popupsQueryService;
+
+    @MockBean
+    protected ExhibitionService exhibitionService;
+
+    @MockBean
+    protected ExhibitionQueryService exhibitionQueryService;
 }
