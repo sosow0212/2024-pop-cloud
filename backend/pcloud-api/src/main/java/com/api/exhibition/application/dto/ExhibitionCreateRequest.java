@@ -41,7 +41,7 @@ public record ExhibitionCreateRequest(
         @NotNull(message = "개인전시회 반려 동물 출입 가능 여부를 입력해주세요.")
         Boolean isPetAllowed,
 
-        @NotNull(message = "개인전시회 키즈존 여부를 입력해주세요.")
+        @NotNull(message = "개인전시회 키즈존 유무 정보를 입력해주세요.")
         Boolean isKidsZone,
 
         @NotNull(message = "개인전시회 와이파이 사용 가능 여부를 입력해주세요.")
