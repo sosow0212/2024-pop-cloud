@@ -50,6 +50,7 @@ class PopupsQueryRepositoryTest extends IntegrationHelper {
         });
     }
 
+    // TODO: 수정
     @Test
     void no_offset_페이징_첫_조회() {
         // given

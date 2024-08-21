@@ -17,7 +17,6 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_업데이트_요청;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static popups.fixture.PopupsFixture.일반_팝업_스토어_생성_뷰티;
@@ -63,7 +62,7 @@ class PopupsControllerAcceptanceFixture extends AcceptanceBaseFixture {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
-    protected ExtractableResponse<Response> 팝업스토어_상세_조회_요청() {
+    protected ExtractableResponse<Response> 팝업스토어_업데이트_요청() {
         return RestAssured.given().log().all()
                 .when()
                 .get("/popups/1")
@@ -76,10 +75,10 @@ class PopupsControllerAcceptanceFixture extends AcceptanceBaseFixture {
     }
 
     protected PopupsUpdateRequest 팝업스토어_업데이트_요청서() {
-        return 팝업스토어_업데이트_요청();
+        return PopupsRequestFixtures.팝업스토어_업데이트_요청();
     }
 
-    protected ExtractableResponse<Response> 팝업스토어_상세_조회_요청(final PopupsUpdateRequest updateRequest) {
+    protected ExtractableResponse<Response> 팝업스토어_업데이트_요청(final PopupsUpdateRequest updateRequest) {
         return RestAssured.given().log().all()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + 일반_유저_토큰)
                 .contentType(ContentType.JSON)

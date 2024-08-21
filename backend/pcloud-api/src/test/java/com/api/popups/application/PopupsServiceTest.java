@@ -53,6 +53,7 @@ class PopupsServiceTest {
     @Nested
     class 팝업스토어_업데이트 {
 
+        // TODO: 수정
         @Test
         void 정상적으로_업데이트한다() {
             // given
