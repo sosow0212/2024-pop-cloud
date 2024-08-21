@@ -28,7 +28,11 @@ public class ControllerExceptionsAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ExceptionResponse> handleException(final HttpServletRequest request, final CustomException exception) {
         CustomExceptionType type = exception.getExceptionType();
-        log.info("잘못된 요청이 들어왔습니다. uri: {} {},  내용: {}", request.getMethod(), request.getRequestURI(), type.message());
+        log.info("잘못된 요청이 들어왔습니다. uri: {} {},  내용: {}, SPRING_LOG: {}",
+                request.getMethod(),
+                request.getRequestURI(),
+                type.message(),
+                exception.getMessage());
 
         return ResponseEntity.status(HttpStatusCode.valueOf(type.httpStatusCode()))
                 .body(new ExceptionResponse(type.name(), type.customCode(), type.message()));
