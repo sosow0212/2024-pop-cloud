@@ -71,7 +71,7 @@ class ExhibitionControllerWebMvcTest extends MockBeanInjection {
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request))
                 ).andExpect(status().isCreated())
-                .andDo(customDocument("create_popups",
+                .andDo(customDocument("create_exhibitions",
                         requestHeaders(
                                 headerWithName(AUTHORIZATION).description("유저 토큰 정보")
                         ),
