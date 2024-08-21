@@ -99,6 +99,7 @@ public class Exhibition extends BaseEntity {
                         isWifiAvailable,
                         fee
                 ))
+                .statistic(Statistic.createDefault())
                 .publicTag(PublicTag.from(publicTag))
                 .build();
     }
