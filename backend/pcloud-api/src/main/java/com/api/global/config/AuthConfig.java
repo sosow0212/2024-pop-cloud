@@ -42,7 +42,8 @@ public class AuthConfig implements WebMvcConfigurer {
     private HandlerInterceptor loginValidCheckerInterceptor() {
         return new PathMatcherInterceptor(loginValidCheckerInterceptor)
                 .excludePathPattern("/**", OPTIONS)
-                .addPathPatterns("/popups/**", POST, PATCH, DELETE);
+                .addPathPatterns("/popups/**", POST, PATCH, DELETE)
+                .addPathPatterns("/exhibitions/**", POST, PATCH, DELETE);
     }
 
     @Override
