@@ -1,4 +1,4 @@
-package com.domain.domains.customtag.infrastructure;
+package com.domain.infrastructure;
 
 import com.domain.customtag.domain.CustomTag;
 import com.domain.customtag.infrastructure.CustomTagJpaRepository;

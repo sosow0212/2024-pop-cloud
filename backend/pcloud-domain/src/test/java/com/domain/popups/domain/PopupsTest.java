@@ -1,4 +1,4 @@
-package com.domain.domains.popups.domain;
+package com.domain.popups.domain;
 
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;

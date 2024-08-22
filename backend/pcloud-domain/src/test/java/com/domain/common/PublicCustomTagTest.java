@@ -1,4 +1,4 @@
-package com.domain.domains.common;
+package com.domain.common;
 
 import com.domain.common.PublicTag;
 import com.domain.popups.exception.PopupsException;

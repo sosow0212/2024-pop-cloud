@@ -1,4 +1,4 @@
-package com.domain.domains.popups.infrastructure;
+package com.domain.popups.infrastructure;
 
 import com.domain.popups.domain.Popups;
 import com.domain.helper.IntegrationHelper;

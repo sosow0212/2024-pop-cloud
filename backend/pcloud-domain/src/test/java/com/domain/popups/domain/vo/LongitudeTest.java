@@ -1,6 +1,6 @@
-package com.domain.domains.popups.domain.vo;
+package com.domain.popups.domain.vo;
 
-import com.domain.popups.domain.vo.Latitude;
+import com.domain.popups.domain.vo.Longitude;
 import com.domain.popups.exception.PopupsException;
 import com.domain.popups.exception.PopupsExceptionType;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -16,26 +16,26 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
-class LatitudeTest {
+class LongitudeTest {
 
     @Test
-    void 위도를_생성한다() {
+    void 경도를_생성한다() {
         // given
-        BigDecimal value = BigDecimal.valueOf(35);
+        BigDecimal value = BigDecimal.valueOf(130);
 
         // when
-        Latitude result = Latitude.from(value);
+        Longitude result = Longitude.from(value);
 
         // then
         assertThat(result.getValue()).isEqualTo(value);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"32", "40"})
-    void 한국_범위가_벗어난_위도는_예외를_발생시킨다(final String value) {
+    @ValueSource(strings = {"124", "133"})
+    void 한국_범위가_벗어난_경도는_예외를_발생시킨다(final String value) {
         // when & then
-        assertThatThrownBy(() -> Latitude.from(value))
+        assertThatThrownBy(() -> Longitude.from(value))
                 .isInstanceOf(PopupsException.class)
-                .hasMessageContaining(PopupsExceptionType.INVALID_LATITUDE.message());
+                .hasMessageContaining(PopupsExceptionType.INVALID_LONGITUDE.message());
     }
 }

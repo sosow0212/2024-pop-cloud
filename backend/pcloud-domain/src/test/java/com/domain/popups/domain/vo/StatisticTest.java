@@ -1,4 +1,4 @@
-package com.domain.domains.popups.domain.vo;
+package com.domain.popups.domain.vo;
 
 import com.domain.popups.domain.vo.Statistic;
 import org.junit.jupiter.api.DisplayNameGeneration;

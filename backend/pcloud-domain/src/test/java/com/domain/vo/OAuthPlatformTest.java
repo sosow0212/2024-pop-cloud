@@ -1,4 +1,4 @@
-package com.domain.domains.member.domain.vo;
+package com.domain.vo;
 
 import com.domain.member.domain.vo.OAuthPlatform;
 import com.domain.member.exception.MemberException;

@@ -1,4 +1,4 @@
-package com.domain.domains.popups.infrastructure;
+package com.domain.popups.infrastructure;
 
 import com.domain.common.Price;
 import com.domain.common.PublicTag;
