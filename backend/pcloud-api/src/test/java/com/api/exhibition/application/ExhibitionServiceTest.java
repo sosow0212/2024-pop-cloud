@@ -2,6 +2,8 @@ package com.api.exhibition.application;
 
 import com.api.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
+import com.common.exception.AuthException;
+import com.common.exception.AuthExceptionType;
 import com.domain.exhibition.domain.Exhibition;
 import com.domain.exhibition.domain.ExhibitionRepository;
 import com.domain.exhibition.exception.ExhibitionException;
@@ -54,8 +56,8 @@ class ExhibitionServiceTest {
         @Test
         void 개인전시회를_업데이트한다() {
             // given
-            Long memberId = 1L;
             Exhibition savedExhibition = exhibitionRepository.save(개인전시회_생성_사진_개인전());
+            Long memberId = savedExhibition.getOwnerId();
             Long exhibitionId = savedExhibition.getId();
             ExhibitionUpdateRequest request = 개인전시회_업데이트_요청_생성();
 
@@ -85,25 +87,56 @@ class ExhibitionServiceTest {
                     .isInstanceOf(ExhibitionException.class)
                     .hasMessageContaining(ExhibitionExceptionType.EXHIBITION_NOT_FOUND_EXCEPTION.message());
         }
+
+        @Test
+        void 개인전시회_작성자가_업데이트_요청을_보낸_수정자와_다를_경우_예외가_발생한다() {
+            // given
+            Exhibition savedExhibition = exhibitionRepository.save(개인전시회_생성_사진_개인전());
+            Long invalidMemberId = -1L;
+            Long exhibitionId = savedExhibition.getId();
+            ExhibitionUpdateRequest request = 개인전시회_업데이트_요청_생성();
+
+            // when & then
+            assertThatThrownBy(() -> exhibitionService.patchById(invalidMemberId, exhibitionId, request))
+                    .isInstanceOf(AuthException.class)
+                    .hasMessageContaining(AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION.message());
+        }
     }
 
-    @Test
-    void 개인전시회를_삭제한다() {
-        // given
-        Long memberId = 1L;
-        Exhibition savedExhibition = exhibitionRepository.save(개인전시회_생성_사진_개인전());
-        Long exhibitionId = savedExhibition.getId();
-        Optional<Exhibition> foundExhibitionBeforeDelete = exhibitionRepository.findById(exhibitionId);
+    @Nested
+    class 개인전시회_삭제 {
 
-        // when
-        exhibitionService.deleteById(memberId, exhibitionId);
+        @Test
+        void 개인전시회를_삭제한다() {
+            // given
+            Long memberId = 1L;
+            Exhibition savedExhibition = exhibitionRepository.save(개인전시회_생성_사진_개인전());
+            Long exhibitionId = savedExhibition.getId();
+            Optional<Exhibition> foundExhibitionBeforeDelete = exhibitionRepository.findById(exhibitionId);
 
-        // then
-        Optional<Exhibition> foundExhibitionAfterDeleted = exhibitionRepository.findById(exhibitionId);
-        assertSoftly(softly -> {
-            softly.assertThat(foundExhibitionBeforeDelete).isPresent();
-            softly.assertThat(foundExhibitionAfterDeleted).isEmpty();
-        });
+            // when
+            exhibitionService.deleteById(memberId, exhibitionId);
+
+            // then
+            Optional<Exhibition> foundExhibitionAfterDeleted = exhibitionRepository.findById(exhibitionId);
+            assertSoftly(softly -> {
+                softly.assertThat(foundExhibitionBeforeDelete).isPresent();
+                softly.assertThat(foundExhibitionAfterDeleted).isEmpty();
+            });
+        }
+
+        @Test
+        void 개인전시회_작성자가_삭제_요청을_보낸_요청자와_다를_경우_예외가_발생한다() {
+            // given
+            Exhibition savedExhibition = exhibitionRepository.save(개인전시회_생성_사진_개인전());
+            Long invalidMemberId = -1L;
+            Long exhibitionId = savedExhibition.getId();
+
+            // when & then
+            assertThatThrownBy(() -> exhibitionService.deleteById(invalidMemberId, exhibitionId))
+                    .isInstanceOf(AuthException.class)
+                    .hasMessageContaining(AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION.message());
+        }
     }
 
     @Nested
