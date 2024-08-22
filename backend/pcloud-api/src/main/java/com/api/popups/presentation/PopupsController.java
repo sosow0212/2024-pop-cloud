@@ -7,8 +7,8 @@ import com.api.popups.application.request.PopupsUpdateRequest;
 import com.api.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
-import com.domain.domains.popups.domain.response.PopupsSimpleResponse;
-import com.domain.domains.popups.domain.response.PopupsSpecificResponse;
+import com.domain.popups.domain.response.PopupsSimpleResponse;
+import com.domain.popups.domain.response.PopupsSpecificResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 import java.util.List;
 
-import static com.domain.domains.member.domain.vo.MemberRole.ADMIN;
-import static com.domain.domains.member.domain.vo.MemberRole.MANAGER;
+import static com.domain.member.domain.vo.MemberRole.ADMIN;
+import static com.domain.member.domain.vo.MemberRole.MANAGER;
 
 @RequiredArgsConstructor
 @RequestMapping("/popups")

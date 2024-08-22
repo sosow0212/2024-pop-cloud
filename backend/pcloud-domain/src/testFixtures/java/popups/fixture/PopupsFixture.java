@@ -1,13 +1,13 @@
 package popups.fixture;
 
-import com.domain.domains.common.Price;
-import com.domain.domains.common.PublicTag;
-import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.vo.AvailableTime;
-import com.domain.domains.popups.domain.vo.Latitude;
-import com.domain.domains.popups.domain.vo.Longitude;
-import com.domain.domains.popups.domain.vo.Statistic;
-import com.domain.domains.popups.domain.vo.StoreDetails;
+import com.domain.common.Price;
+import com.domain.common.PublicTag;
+import com.domain.popups.domain.Popups;
+import com.domain.popups.domain.vo.AvailableTime;
+import com.domain.popups.domain.vo.Latitude;
+import com.domain.popups.domain.vo.Longitude;
+import com.domain.popups.domain.vo.Statistic;
+import com.domain.popups.domain.vo.StoreDetails;
 
 import java.time.LocalDateTime;
 

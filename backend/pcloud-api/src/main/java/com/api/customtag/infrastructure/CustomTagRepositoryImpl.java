@@ -1,9 +1,9 @@
 package com.api.customtag.infrastructure;
 
-import com.domain.domains.common.CustomTagType;
-import com.domain.domains.customtag.domain.CustomTag;
-import com.domain.domains.customtag.domain.CustomTagRepository;
-import com.domain.domains.customtag.infrastructure.CustomTagJpaRepository;
+import com.domain.common.CustomTagType;
+import com.domain.customtag.domain.CustomTag;
+import com.domain.customtag.domain.CustomTagRepository;
+import com.domain.customtag.infrastructure.CustomTagJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

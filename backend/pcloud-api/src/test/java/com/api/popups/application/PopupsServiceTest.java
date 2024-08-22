@@ -3,9 +3,9 @@ package com.api.popups.application;
 import com.api.popups.application.request.PopupsCreateRequest;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
-import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.PopupsRepository;
-import com.domain.domains.popups.exception.PopupsException;
+import com.domain.popups.domain.Popups;
+import com.domain.popups.domain.PopupsRepository;
+import com.domain.popups.exception.PopupsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -16,7 +16,7 @@ import popups.FakePopupsRepository;
 import java.util.Optional;
 
 import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
-import static com.domain.domains.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
+import static com.domain.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
@@ -53,6 +53,7 @@ class PopupsServiceTest {
     @Nested
     class 팝업스토어_업데이트 {
 
+        // TODO: 수정
         @Test
         void 정상적으로_업데이트한다() {
             // given

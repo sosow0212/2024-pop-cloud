@@ -5,7 +5,7 @@ import com.api.auth.infrastructure.oauth.kakao.response.KakaoMemberSpecResponse;
 import com.api.auth.infrastructure.oauth.kakao.response.KakaoToken;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
-import com.domain.domains.member.domain.Member;
+import com.domain.member.domain.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

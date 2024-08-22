@@ -1,8 +1,8 @@
 package member;
 
-import com.domain.domains.member.domain.Member;
-import com.domain.domains.member.domain.MemberRepository;
-import com.domain.domains.member.domain.vo.OauthId;
+import com.domain.member.domain.Member;
+import com.domain.member.domain.MemberRepository;
+import com.domain.member.domain.vo.OauthId;
 
 import java.util.HashMap;
 import java.util.Map;

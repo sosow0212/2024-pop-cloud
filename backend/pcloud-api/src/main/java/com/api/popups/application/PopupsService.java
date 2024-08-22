@@ -3,18 +3,18 @@ package com.api.popups.application;
 import com.api.popups.application.request.PopupsCreateRequest;
 import com.api.popups.application.request.PopupsUpdateRequest;
 import com.common.config.event.Events;
-import com.domain.domains.common.CustomTagType;
-import com.domain.domains.popups.domain.LikedPopups;
-import com.domain.domains.popups.domain.Popups;
-import com.domain.domains.popups.domain.PopupsRepository;
-import com.domain.domains.popups.event.PopupsTagsCreatedEvents;
-import com.domain.domains.popups.event.PopupsTagsUpdatedEvents;
-import com.domain.domains.popups.exception.PopupsException;
+import com.domain.common.CustomTagType;
+import com.domain.popups.domain.LikedPopups;
+import com.domain.popups.domain.Popups;
+import com.domain.popups.domain.PopupsRepository;
+import com.domain.popups.event.PopupsTagsCreatedEvents;
+import com.domain.popups.event.PopupsTagsUpdatedEvents;
+import com.domain.popups.exception.PopupsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.domain.domains.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
+import static com.domain.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 
 @RequiredArgsConstructor
 @Transactional
