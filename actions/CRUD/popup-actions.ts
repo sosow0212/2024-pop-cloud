@@ -67,7 +67,26 @@ const getPopupList = async (
   }
 };
 
-const postPopupInfo = async (popupData: IPopupFormData) => {};
+const postPopupInfo = async (popupData: IPopupFormData) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/popup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        params: popupData,
+      }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.id;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const patchPopup = async (id: string, data: FormData) => {
   try {
@@ -88,4 +107,4 @@ const patchPopup = async (id: string, data: FormData) => {
   }
 };
 
-export { getPopupInfo, getPopupList };
+export { getPopupInfo, getPopupList, postPopupInfo, patchPopup };

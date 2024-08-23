@@ -1,38 +1,52 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import CatagoryNav from "./_component/category-nav";
 import CategoryList from "./_component/category-list";
-import CategoryPagination from "./_component/category-pagination";
+import { useState } from "react";
 
 interface CategoryProps {
   params: {
     category: string;
   };
-  searchParams: {
-    page: string;
-  };
 }
 
-const CategoryPage = ({
-  params,
-  searchParams: { page = "1" },
-}: CategoryProps) => {
-  // const [startDate, setStartDate] = useState(() => Date.now());
-  // const [endDate, setEndDate] = useState(() => Date.now());
+const CategoryPage = ({ params }: CategoryProps) => {
+  const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>([]);
+  const [searchTags, setSearchTags] = useState<IPublicTag[]>([]);
+  const [searchDate, setSearchDate] = useState<ISearchDate>({
+    startDate: new Date(),
+    endDate: new Date(),
+  });
 
-  // date와 지역을 searchParamse으로 관리할 지 state로 관리할 지 고민
+  const handleDate = (start: Date, end: Date) => {
+    setSearchDate({
+      startDate: start,
+      endDate: end,
+    });
+  };
+  const handleRegions = (value: ISearchRegion, isAdd: boolean) => {
+    if (isAdd) setSearchRegions((p) => [...p, value]);
+    else setSearchRegions((p) => p.filter((r) => r !== value));
+  };
+  const handleTags = (value: IPublicTag, isAdd: boolean) => {
+    if (isAdd) setSearchTags((p) => [...p, value]);
+    else setSearchTags((p) => p.filter((r) => r !== value));
+  };
 
   return (
     <section className="flex flex-col space-y-4 py-4">
-      <CatagoryNav />
-      <div>
-        <div>{params.category} 페이지</div> <div>현재 page는 {page}</div>
-      </div>
+      <CatagoryNav
+        searchDate={searchDate}
+        searchRegions={searchRegions}
+        searchTags={searchTags}
+        handleDate={handleDate}
+        handleRegions={handleRegions}
+        handleTags={handleTags}
+      />
+
       <CategoryList
         categoryType={(params.category as "popup") || "exhibition"}
       />
-      <CategoryPagination curPage={+page} lastPage={4} />
     </section>
   );
 };
