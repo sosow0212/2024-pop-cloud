@@ -4,8 +4,8 @@ import com.api.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.api.exhibition.presentation.dto.ExhibitionLikedStatusResponse;
 import com.api.helper.AcceptanceBaseFixture;
-import com.domain.exhibition.domain.Exhibition;
-import com.domain.exhibition.domain.ExhibitionRepository;
+import com.domain.show.exhibition.domain.Exhibition;
+import com.domain.show.exhibition.domain.ExhibitionRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import static exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전_작성자아이디;
+import static show.exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전_작성자아이디;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 

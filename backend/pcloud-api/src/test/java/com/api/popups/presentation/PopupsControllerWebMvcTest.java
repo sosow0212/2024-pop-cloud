@@ -3,8 +3,8 @@ package com.api.popups.presentation;
 import com.api.helper.MockBeanInjection;
 import com.api.popups.application.request.PopupsCreateRequest;
 import com.api.popups.application.request.PopupsUpdateRequest;
-import com.domain.popups.domain.response.PopupsSimpleResponse;
-import com.domain.popups.domain.response.PopupsSpecificResponse;
+import com.domain.show.popups.domain.response.PopupsSimpleResponse;
+import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -42,7 +42,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static popups.fixture.PopupsSpecificResponseFixture.팝업_스토어_상세조회_결과;
+import static show.popups.domain.PopupsSpecificResponseFixture.팝업_스토어_상세조회_결과;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")

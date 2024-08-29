@@ -5,8 +5,8 @@ import com.api.popups.application.request.PopupsCreateRequest;
 import com.api.popups.application.request.PopupsUpdateRequest;
 import com.api.popups.fixture.request.PopupsRequestFixtures;
 import com.api.popups.presentation.response.PopupLikedStatusResponse;
-import com.domain.popups.domain.Popups;
-import com.domain.popups.domain.PopupsRepository;
+import com.domain.show.popups.domain.Popups;
+import com.domain.show.popups.domain.PopupsRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
-import static popups.fixture.PopupsFixture.일반_팝업_스토어_생성_뷰티;
+import static show.popups.domain.PopupsFixture.일반_팝업_스토어_생성_뷰티;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")

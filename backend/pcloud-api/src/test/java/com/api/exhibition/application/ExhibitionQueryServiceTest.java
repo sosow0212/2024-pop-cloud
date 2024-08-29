@@ -1,10 +1,10 @@
 package com.api.exhibition.application;
 
-import com.domain.exhibition.domain.Exhibition;
-import com.domain.exhibition.domain.ExhibitionRepository;
-import com.domain.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
-import com.domain.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
-import exhibition.infrasturcture.ExhibitionFakeRepository;
+import com.domain.show.exhibition.domain.Exhibition;
+import com.domain.show.exhibition.domain.ExhibitionRepository;
+import com.domain.show.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
+import com.domain.show.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
+import show.exhibition.infrasturcture.ExhibitionFakeRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -14,10 +14,10 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Test;
 
-import static exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전;
-import static exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전_작성자아이디;
-import static exhibition.infrasturcture.ExhibitionSimpleResponseFixture.개인전시회_간단_조회_응답_생성_개인전시회;
-import static exhibition.infrasturcture.ExhibitionSpecificResponseFixture.개인전시회_상세_조회_응답_생성_개인전시회;
+import static show.exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전;
+import static show.exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전_작성자아이디;
+import static show.exhibition.domain.ExhibitionSimpleResponseFixture.개인전시회_간단_조회_응답_생성_개인전시회;
+import static show.exhibition.domain.ExhibitionSpecificResponseFixture.개인전시회_상세_조회_응답_생성_개인전시회;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
