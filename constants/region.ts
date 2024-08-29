@@ -1,4 +1,4 @@
-export const REGIONS = [
+export const REGIONS: ISearchRegion[] = [
   "전체",
   "서울특별시",
   "경기도",

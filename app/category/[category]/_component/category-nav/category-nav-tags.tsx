@@ -11,9 +11,9 @@ const CategoryNavTags = ({
       <label className="font-semibold" htmlFor="location-options">
         태그
       </label>
-      <ul className="scrollbar-hide flex items-center justify-between space-x-4 overflow-auto py-2">
-        {PUBLIC_TAGS.map((tag) => (
-          <CategoryLi key={tag} title={tag} />
+      <ul className="flex items-center justify-between space-x-4 overflow-auto py-2 scrollbar-hide">
+        {PUBLIC_TAGS.map((tag: IPublicTag) => (
+          <CategoryLi handleClick={handleTags} key={tag} title={tag} />
         ))}
       </ul>
     </div>

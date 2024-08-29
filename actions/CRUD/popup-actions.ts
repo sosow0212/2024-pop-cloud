@@ -11,7 +11,7 @@ type IPopupDetailInfo = {
   openTimes: string;
   latitude: number;
   longitude: number;
-  publicTag: string;
+  publicTag: IPublicTag;
 };
 
 type IPopupFormData = {

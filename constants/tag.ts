@@ -1,4 +1,4 @@
-export const PUBLIC_TAGS = [
+export const PUBLIC_TAGS: IPublicTag[] = [
   "브랜드",
   "패션",
   "뷰티",

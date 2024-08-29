@@ -2,7 +2,7 @@
 
 import CatagoryNav from "./_component/category-nav";
 import CategoryList from "./_component/category-list";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface CategoryProps {
   params: {
@@ -33,6 +33,10 @@ const CategoryPage = ({ params }: CategoryProps) => {
     if (isAdd) setSearchTags((p) => [...p, value]);
     else setSearchTags((p) => p.filter((r) => r !== value));
   };
+
+  useEffect(() => {
+    console.log(searchTags);
+  }, [searchTags]);
 
   return (
     <section className="flex flex-col space-y-4 py-4">

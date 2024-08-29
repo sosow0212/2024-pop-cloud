@@ -1,9 +1,17 @@
-const CategoryLi = ({ title }: { title: string }) => {
+interface CategoryLiProps<T> {
+  title: T;
+  handleClick: (value: T, isAdd: boolean) => void;
+}
+
+const CategoryLi = <T extends ISearchRegion | IPublicTag>({
+  title,
+  handleClick,
+}: CategoryLiProps<T>) => {
   return (
     <li key={title}>
       <input
         onChange={(v) => {
-          console.log(v.target.checked);
+          handleClick(title, v.target.checked);
         }}
         className="peer hidden"
         type="checkbox"

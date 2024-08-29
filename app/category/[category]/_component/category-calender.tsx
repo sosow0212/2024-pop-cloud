@@ -1,24 +1,38 @@
 import { Calendar } from "@/components/ui/calendar";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { DateRange } from "react-day-picker";
 
 import { cn } from "zero-cnn";
 
 interface CategoryCalendarProps {
   className: string;
   isOpen: boolean;
-  // handleSelect: (start: Date, end: Date) => void;
+  handleDate: (s: Date, e: Date) => void;
 }
+const defaultRange: DateRange = {
+  from: new Date(),
+  to: new Date(),
+};
+
 export function CategoryCalendar({
   className,
-  // handleSelect,
+  handleDate,
   isOpen,
 }: CategoryCalendarProps) {
+  const [range, setRange] = useState<DateRange | undefined>(defaultRange);
+  const handleSelect = useCallback(() => {
+    if (range && range.from && range.to) handleDate(range.from, range.to);
+  }, [range]);
+
+  useEffect(() => {
+    handleSelect();
+  }, [handleSelect]);
   if (!isOpen) return;
   return (
     <Calendar
       mode="range"
-      onSelect={(v) => {
-        console.log(v);
-      }}
+      onSelect={setRange}
+      selected={range}
       className={cn("rounded-md border bg-white", className)}
     />
   );
