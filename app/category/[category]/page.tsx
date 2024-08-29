@@ -11,13 +11,14 @@ interface CategoryProps {
 }
 
 const CategoryPage = ({ params }: CategoryProps) => {
-  const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>([]);
-  const [searchTags, setSearchTags] = useState<IPublicTag[]>([]);
   const [searchDate, setSearchDate] = useState<ISearchDate>({
     startDate: new Date(),
     endDate: new Date(),
   });
 
+  const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>([]);
+  const [searchTags, setSearchTags] = useState<IPublicTag[]>([]);
+  // no date-> 오늘~오늘 , no regions -> 전체, no tags-> no
   const handleDate = (start: Date, end: Date) => {
     setSearchDate({
       startDate: start,
@@ -36,9 +37,6 @@ const CategoryPage = ({ params }: CategoryProps) => {
   return (
     <section className="flex flex-col space-y-4 py-4">
       <CatagoryNav
-        searchDate={searchDate}
-        searchRegions={searchRegions}
-        searchTags={searchTags}
         handleDate={handleDate}
         handleRegions={handleRegions}
         handleTags={handleTags}

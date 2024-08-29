@@ -27,7 +27,7 @@ const MainReviews = () => {
 
       <button
         onClick={handleClick}
-        className="w-full rounded-lg bg-red-300 py-2"
+        className="w-full rounded-md bg-blue-400 py-1 text-center text-white transition-colors hover:bg-blue-600"
       >
         더보기
       </button>

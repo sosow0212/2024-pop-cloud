@@ -11,7 +11,7 @@ const ContentCard = ({ cardId, categoryType = "popup" }: ContentCardProps) => {
       href={`/category/${categoryType}/${cardId}`}
       className="flex flex-col"
     >
-      <div className="h-40 w-full bg-black" />
+      <div className="h-40 w-full rounded-md bg-black" />
       <div className="flex flex-col items-start justify-center">
         <div className="flex w-full items-center justify-between">
           <h3>제목</h3>

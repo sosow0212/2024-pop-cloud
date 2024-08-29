@@ -23,10 +23,10 @@ const MapsMap = () => {
   }, [bound]);
 
   if (loading || centerPosition === undefined) return <MapLoading />;
+  // if (true) return <MapLoading />;
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h4>현재 위치 근방 핫플</h4>
       <Map
         center={centerPosition}
         markers={[centerPosition]}

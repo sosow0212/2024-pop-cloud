@@ -30,7 +30,9 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <ModalProvider />
-        <div className="relative mx-auto h-full max-w-xl">{children}</div>
+        <div className="relative mx-auto h-full max-w-xl md:max-w-2xl">
+          {children}
+        </div>
       </body>
     </html>
   );

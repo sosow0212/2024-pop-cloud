@@ -16,10 +16,9 @@ export function CategoryCalendar({
   return (
     <Calendar
       mode="range"
-      // selected={}
-      // onSelect={(v) => {
-      //   console.log(v);
-      // }}
+      onSelect={(v) => {
+        console.log(v);
+      }}
       className={cn("rounded-md border bg-white", className)}
     />
   );

@@ -1,4 +1,4 @@
-import { MainBillboard, MainPopular } from "./_component";
+import { MainBillboard, MainContentByTag, MainPopular } from "./_component";
 import MainReviews from "./_component/main-reviews";
 
 const MainPage = () => {
@@ -7,6 +7,7 @@ const MainPage = () => {
       <MainBillboard />
       <MainPopular content="popup" />
       <MainPopular content="exhibition" />
+      <MainContentByTag />
       <MainReviews />
     </section>
   );

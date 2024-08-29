@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header className="sticky inset-x-0 top-0 z-30 shadow-sm">
-      <div className="relative flex h-full w-full items-center justify-between bg-white p-2 shadow-slate-200">
+      <div className="relative flex h-10 w-full items-center justify-between bg-white p-2 shadow-slate-200">
         <Link href="/">
           <h1 className="font-bold">POP CLOUD</h1>
         </Link>
