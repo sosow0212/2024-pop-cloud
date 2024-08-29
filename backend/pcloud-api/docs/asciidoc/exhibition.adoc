@@ -1,4 +1,4 @@
-= Auth API 문서
+= exhibition API 문서
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
