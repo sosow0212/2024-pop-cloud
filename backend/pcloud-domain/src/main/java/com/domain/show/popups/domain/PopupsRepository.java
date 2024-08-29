@@ -1,7 +1,7 @@
-package com.domain.popups.domain;
+package com.domain.show.popups.domain;
 
-import com.domain.popups.domain.response.PopupsSimpleResponse;
-import com.domain.popups.domain.response.PopupsSpecificResponse;
+import com.domain.show.popups.domain.response.PopupsSimpleResponse;
+import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 
 import java.util.List;
 import java.util.Optional;

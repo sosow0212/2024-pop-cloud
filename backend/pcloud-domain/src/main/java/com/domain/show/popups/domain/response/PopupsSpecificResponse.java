@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record PopupsSpecificResponse(
-        Long popupsId,
+        Long id,
         Long ownerId,
         String title,
         String description,
@@ -29,7 +29,7 @@ public record PopupsSpecificResponse(
 ) {
 
     public PopupsSpecificResponse(
-            Long popupsId,
+            Long id,
             Long ownerId,
             String title,
             String description,
@@ -51,7 +51,7 @@ public record PopupsSpecificResponse(
             List<String> tags
     ) {
         this(
-                popupsId,
+                id,
                 ownerId,
                 title,
                 description,

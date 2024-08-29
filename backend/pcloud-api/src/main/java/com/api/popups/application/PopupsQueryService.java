@@ -1,16 +1,16 @@
 package com.api.popups.application;
 
-import com.domain.popups.domain.PopupsRepository;
-import com.domain.popups.domain.response.PopupsSimpleResponse;
-import com.domain.popups.domain.response.PopupsSpecificResponse;
-import com.domain.popups.exception.PopupsException;
+import com.domain.show.popups.domain.PopupsRepository;
+import com.domain.show.popups.domain.response.PopupsSimpleResponse;
+import com.domain.show.popups.domain.response.PopupsSpecificResponse;
+import com.domain.show.popups.exception.PopupsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.domain.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
+import static com.domain.show.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
