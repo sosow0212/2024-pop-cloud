@@ -1,11 +1,14 @@
-package com.api.popups.presentation;
+package com.api.show.popups.presentation;
 
 import com.api.helper.MockBeanInjection;
-import com.api.popups.application.request.PopupsCreateRequest;
-import com.api.popups.application.request.PopupsUpdateRequest;
+import com.api.show.popups.application.request.PopupsCreateRequest;
+import com.api.show.popups.application.request.PopupsUpdateRequest;
 import com.domain.show.popups.domain.response.PopupsSimpleResponse;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -15,13 +18,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
 import static com.api.helper.RestDocsHelper.customDocument;
-import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
-import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_업데이트_요청;
+import static com.api.show.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
+import static com.api.show.popups.fixture.request.PopupsRequestFixtures.팝업스토어_업데이트_요청;
 import static member.fixture.MemberFixture.어드민_멤버_생성_id_없음_kakao_oauth_가입;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -42,7 +41,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static show.popups.domain.PopupsSpecificResponseFixture.팝업_스토어_상세조회_결과;
+import static show.popups.domain.PopupsSpecificResponseFixture.팝업스토어_상세_조회_응답_생성;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
@@ -78,6 +77,10 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("description").description("팝업스토어 내용"),
                                 fieldWithPath("location").description("팝업스토어 열리는 장소"),
                                 fieldWithPath("isParkingAvailable").description("주차 가능 여부"),
+                                fieldWithPath("isFoodAllowed").description("식음료 반입 여부"),
+                                fieldWithPath("isPetAllowed").description("반려 동물 출입 가능 여부"),
+                                fieldWithPath("isKidsZone").description("키즈존 유무"),
+                                fieldWithPath("isWifiAvailable").description("와이파이 사용가능 여부"),
                                 fieldWithPath("fee").description("입장 요금 (없다면 0)"),
                                 fieldWithPath("startDate").description("팝업스토어 시작 날짜"),
                                 fieldWithPath("endDate").description("팝업스토어 종료 날짜"),
@@ -124,7 +127,7 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
     @Test
     void 팝업스토어_상세조회를_한다() throws Exception {
         // given
-        PopupsSpecificResponse response = 팝업_스토어_상세조회_결과();
+        PopupsSpecificResponse response = 팝업스토어_상세_조회_응답_생성();
         when(popupsQueryService.findById(anyLong())).thenReturn(response);
 
         // when
@@ -141,6 +144,10 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("description").description("팝업스토어 설명"),
                                 fieldWithPath("location").description("팝업스토어 장소명"),
                                 fieldWithPath("isParkingAvailable").description("주차 가능 여부"),
+                                fieldWithPath("isFoodAllowed").description("식음료 반입 여부"),
+                                fieldWithPath("isPetAllowed").description("반려 동물 출입 가능 여부"),
+                                fieldWithPath("isKidsZone").description("키즈존 유무"),
+                                fieldWithPath("isWifiAvailable").description("와이파이 사용가능 여부"),
                                 fieldWithPath("fee").description("팝업스토어 입장요금"),
                                 fieldWithPath("startDate").description("팝업스토어 시작일"),
                                 fieldWithPath("endDate").description("팝업스토어 종료일"),
@@ -176,6 +183,10 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("description").description("팝업스토어 내용"),
                                 fieldWithPath("location").description("팝업스토어 열리는 장소"),
                                 fieldWithPath("isParkingAvailable").description("주차 가능 여부"),
+                                fieldWithPath("isFoodAllowed").description("식음료 반입 여부"),
+                                fieldWithPath("isPetAllowed").description("반려 동물 출입 가능 여부"),
+                                fieldWithPath("isKidsZone").description("키즈존 유무"),
+                                fieldWithPath("isWifiAvailable").description("와이파이 사용가능 여부"),
                                 fieldWithPath("fee").description("입장 요금 (없다면 0)"),
                                 fieldWithPath("startDate").description("팝업스토어 시작 날짜"),
                                 fieldWithPath("endDate").description("팝업스토어 종료 날짜"),

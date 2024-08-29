@@ -1,5 +1,6 @@
-package com.domain.show.common;
+package com.domain.common;
 
+import com.domain.show.common.PublicTag;
 import com.domain.show.popups.exception.PopupsException;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

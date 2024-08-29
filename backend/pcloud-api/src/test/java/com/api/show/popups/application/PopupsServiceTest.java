@@ -1,6 +1,6 @@
-package com.api.popups.application;
+package com.api.show.popups.application;
 
-import com.api.popups.application.request.PopupsCreateRequest;
+import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
 import com.domain.show.popups.domain.Popups;
@@ -15,7 +15,7 @@ import show.popups.infrastructure.FakePopupsRepository;
 
 import java.util.Optional;
 
-import static com.api.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
+import static com.api.show.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
 import static com.domain.show.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -53,7 +53,6 @@ class PopupsServiceTest {
     @Nested
     class 팝업스토어_업데이트 {
 
-        // TODO: 수정
         @Test
         void 정상적으로_업데이트한다() {
             // given

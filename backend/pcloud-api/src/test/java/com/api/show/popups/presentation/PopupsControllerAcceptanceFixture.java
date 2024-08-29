@@ -1,10 +1,10 @@
-package com.api.popups.presentation;
+package com.api.show.popups.presentation;
 
 import com.api.helper.AcceptanceBaseFixture;
-import com.api.popups.application.request.PopupsCreateRequest;
-import com.api.popups.application.request.PopupsUpdateRequest;
-import com.api.popups.fixture.request.PopupsRequestFixtures;
-import com.api.popups.presentation.response.PopupLikedStatusResponse;
+import com.api.show.popups.application.request.PopupsCreateRequest;
+import com.api.show.popups.application.request.PopupsUpdateRequest;
+import com.api.show.popups.fixture.request.PopupsRequestFixtures;
+import com.api.show.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
 import io.restassured.RestAssured;

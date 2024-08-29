@@ -1,11 +1,11 @@
-package com.api.exhibition.presentation;
+package com.api.show.exhibition.presentation;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Test;
 
-import static com.api.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
-import static com.api.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
+import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
+import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
 
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")

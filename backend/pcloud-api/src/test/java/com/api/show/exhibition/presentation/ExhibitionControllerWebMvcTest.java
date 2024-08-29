@@ -1,7 +1,7 @@
-package com.api.exhibition.presentation;
+package com.api.show.exhibition.presentation;
 
-import com.api.exhibition.application.dto.ExhibitionCreateRequest;
-import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.api.helper.MockBeanInjection;
 import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
@@ -16,8 +16,8 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.api.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
-import static com.api.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
+import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
+import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
 import static show.exhibition.domain.ExhibitionSimpleResponseFixture.개인전시회_간단_조회_응답_생성;
 import static show.exhibition.domain.ExhibitionSpecificResponseFixture.개인전시회_상세_조회_응답_생성;
 import static com.api.helper.RestDocsHelper.customDocument;

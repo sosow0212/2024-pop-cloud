@@ -1,7 +1,7 @@
-package com.api.exhibition.application;
+package com.api.show.exhibition.application;
 
-import com.api.exhibition.application.dto.ExhibitionCreateRequest;
-import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
 import com.domain.show.exhibition.domain.Exhibition;
@@ -16,8 +16,8 @@ import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static com.api.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
-import static com.api.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
+import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
+import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
 import static show.exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전;
 import static show.exhibition.domain.LikedExhibitionFixture.개인_전시회_좋아요_생성_개인전시회아이디_회원아이디;
 import static org.assertj.core.api.Assertions.assertThat;

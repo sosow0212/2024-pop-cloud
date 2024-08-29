@@ -1,7 +1,7 @@
-package com.api.exhibition.fixture;
+package com.api.show.exhibition.fixture;
 
-import com.api.exhibition.application.dto.ExhibitionCreateRequest;
-import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.domain.show.common.PublicTag;
 import java.time.LocalDateTime;
 import java.util.List;
