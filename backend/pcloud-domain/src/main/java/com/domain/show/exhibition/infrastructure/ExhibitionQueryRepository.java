@@ -5,10 +5,11 @@ import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 import static com.domain.customtag.domain.QCustomTag.customTag;
 import static com.domain.show.exhibition.domain.QExhibition.exhibition;
@@ -83,5 +84,4 @@ public class ExhibitionQueryRepository {
 
         return exhibition.id.lt(exhibitionId);
     }
-
 }

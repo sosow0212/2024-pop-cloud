@@ -1,0 +1,18 @@
+= recommends API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+
+== 특정 기간에 해당하는 인기 쇼케이스를 구한다 (GET /api/recommends/popularity?startDate={value}&endDate={value}&limit={value}&target={arrValue})
+
+=== Request
+
+include::{snippets}/recommend-controller-test/find_popularity_shows/query-parameters.adoc[]
+include::{snippets}/recommend-controller-test/find_popularity_shows/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/recommend-controller-test/find_popularity_shows/response-fields.adoc[]
+include::{snippets}/recommend-controller-test/find_popularity_shows/http-response.adoc[]
