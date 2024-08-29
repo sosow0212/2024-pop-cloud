@@ -1,6 +1,6 @@
 package com.api.exhibition.application.dto;
 
-import com.domain.exhibition.domain.Exhibition;
+import com.domain.show.exhibition.domain.Exhibition;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;

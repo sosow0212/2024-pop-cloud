@@ -4,17 +4,17 @@ import com.api.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.common.config.event.Events;
 import com.domain.common.CustomTagType;
-import com.domain.exhibition.domain.Exhibition;
-import com.domain.exhibition.domain.ExhibitionRepository;
-import com.domain.exhibition.domain.LikedExhibition;
-import com.domain.exhibition.event.ExhibitionTagsCreatedEvents;
-import com.domain.exhibition.event.ExhibitionTagsUpdatedEvents;
-import com.domain.exhibition.exception.ExhibitionException;
+import com.domain.show.exhibition.domain.Exhibition;
+import com.domain.show.exhibition.domain.ExhibitionRepository;
+import com.domain.show.exhibition.domain.LikedExhibition;
+import com.domain.show.exhibition.event.ExhibitionTagsCreatedEvents;
+import com.domain.show.exhibition.event.ExhibitionTagsUpdatedEvents;
+import com.domain.show.exhibition.exception.ExhibitionException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.domain.exhibition.exception.ExhibitionExceptionType.EXHIBITION_NOT_FOUND_EXCEPTION;
+import static com.domain.show.exhibition.exception.ExhibitionExceptionType.EXHIBITION_NOT_FOUND_EXCEPTION;
 
 @RequiredArgsConstructor
 @Transactional
