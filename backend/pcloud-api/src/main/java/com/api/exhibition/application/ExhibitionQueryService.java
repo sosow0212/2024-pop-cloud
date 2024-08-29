@@ -2,8 +2,8 @@ package com.api.exhibition.application;
 
 import com.domain.show.exhibition.domain.ExhibitionRepository;
 import com.domain.show.exhibition.exception.ExhibitionException;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

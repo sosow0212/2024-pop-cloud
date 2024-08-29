@@ -1,7 +1,7 @@
 package com.domain.show.exhibition.domain;
 
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import java.util.List;
 import java.util.Optional;
 

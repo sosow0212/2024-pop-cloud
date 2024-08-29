@@ -1,4 +1,4 @@
-package com.domain.show.exhibition.infrastructure.dto;
+package com.domain.show.exhibition.domain.dto;
 
 import com.domain.show.common.PublicTag;
 import java.math.BigDecimal;

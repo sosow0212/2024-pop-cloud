@@ -1,7 +1,7 @@
 package show.exhibition.domain;
 
 import com.domain.show.exhibition.domain.Exhibition;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import java.time.LocalDateTime;
 
 @SuppressWarnings("NonAsciiCharacters")

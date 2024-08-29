@@ -2,8 +2,8 @@ package com.api.exhibition.application;
 
 import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.ExhibitionRepository;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import show.exhibition.infrasturcture.ExhibitionFakeRepository;
 import java.util.ArrayList;
 import java.util.Comparator;

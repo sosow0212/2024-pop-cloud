@@ -1,8 +1,8 @@
 package com.domain.show.exhibition.infrastructure;
 
 import com.domain.common.CustomTagType;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;

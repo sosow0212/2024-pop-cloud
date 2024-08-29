@@ -2,7 +2,7 @@ package show.exhibition.domain;
 
 import com.domain.show.common.PublicTag;
 import com.domain.show.exhibition.domain.Exhibition;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import com.domain.show.common.Latitude;
 import com.domain.show.common.Longitude;
 import java.math.BigDecimal;

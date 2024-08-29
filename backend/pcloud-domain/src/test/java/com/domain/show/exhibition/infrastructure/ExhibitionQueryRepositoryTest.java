@@ -1,8 +1,8 @@
 package com.domain.show.exhibition.infrastructure;
 
 import com.domain.show.exhibition.domain.Exhibition;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSimpleResponse;
-import com.domain.show.exhibition.infrastructure.dto.ExhibitionSpecificResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
+import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import com.domain.helper.IntegrationHelper;
 import show.exhibition.domain.ExhibitionSimpleResponseFixture;
 import java.math.BigDecimal;
