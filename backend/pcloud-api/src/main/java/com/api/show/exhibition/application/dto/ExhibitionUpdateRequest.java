@@ -1,4 +1,4 @@
-package com.api.exhibition.application.dto;
+package com.api.show.exhibition.application.dto;
 
 import com.domain.show.exhibition.domain.Exhibition;
 import jakarta.validation.constraints.NotBlank;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record ExhibitionCreateRequest(
+public record ExhibitionUpdateRequest(
 
         @NotBlank(message = "개인전시회 제목을 입력해주세요.")
         String title,
@@ -55,6 +55,7 @@ public record ExhibitionCreateRequest(
 
         List<String> tags
 ) {
+
     public Exhibition toDomain(final Long memberId) {
         return Exhibition.of(
                 memberId,

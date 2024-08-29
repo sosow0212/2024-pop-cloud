@@ -1,4 +1,4 @@
-package com.api.exhibition.application;
+package com.api.show.exhibition.application;
 
 import com.domain.show.exhibition.domain.ExhibitionRepository;
 import com.domain.show.exhibition.exception.ExhibitionException;

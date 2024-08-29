@@ -1,10 +1,10 @@
-package com.api.popups.presentation;
+package com.api.show.popups.presentation;
 
-import com.api.popups.application.PopupsQueryService;
-import com.api.popups.application.PopupsService;
-import com.api.popups.application.request.PopupsCreateRequest;
-import com.api.popups.application.request.PopupsUpdateRequest;
-import com.api.popups.presentation.response.PopupLikedStatusResponse;
+import com.api.show.popups.application.PopupsQueryService;
+import com.api.show.popups.application.PopupsService;
+import com.api.show.popups.application.request.PopupsCreateRequest;
+import com.api.show.popups.application.request.PopupsUpdateRequest;
+import com.api.show.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.popups.domain.response.PopupsSimpleResponse;

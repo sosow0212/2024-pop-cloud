@@ -1,4 +1,4 @@
-package com.api.exhibition.presentation.dto;
+package com.api.show.exhibition.presentation.dto;
 
 public record ExhibitionLikedStatusResponse(
         Long exhibitionId,

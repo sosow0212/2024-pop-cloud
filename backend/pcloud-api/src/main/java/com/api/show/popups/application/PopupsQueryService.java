@@ -1,4 +1,4 @@
-package com.api.popups.application;
+package com.api.show.popups.application;
 
 import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.popups.domain.response.PopupsSimpleResponse;

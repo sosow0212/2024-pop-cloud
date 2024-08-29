@@ -1,21 +1,24 @@
-package com.api.popups.application.request;
+package com.api.show.popups.application.request;
 
 import com.domain.show.popups.domain.Popups;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record PopupsUpdateRequest(
+public record PopupsCreateRequest(
         String title,
         String description,
-        String location,
-        Boolean isParkingAvailable,
-        int fee,
         LocalDateTime startDate,
         LocalDateTime endDate,
         String openTimes,
+        String location,
         String latitude,
         String longitude,
+        Boolean isParkingAvailable,
+        Boolean isFoodAllowed,
+        Boolean isPetAllowed,
+        Boolean isKidsZone,
+        Boolean isWifiAvailable,
+        Integer fee,
         String publicTag,
         List<String> tags
 ) {
@@ -25,14 +28,18 @@ public record PopupsUpdateRequest(
                 memberId,
                 title,
                 description,
-                location,
-                isParkingAvailable,
-                fee,
                 startDate,
                 endDate,
                 openTimes,
+                location,
                 latitude,
                 longitude,
+                isParkingAvailable,
+                isFoodAllowed,
+                isPetAllowed,
+                isKidsZone,
+                isWifiAvailable,
+                fee,
                 publicTag
         );
     }

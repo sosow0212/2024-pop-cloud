@@ -1,7 +1,7 @@
-package com.api.popups.application;
+package com.api.show.popups.application;
 
-import com.api.popups.application.request.PopupsCreateRequest;
-import com.api.popups.application.request.PopupsUpdateRequest;
+import com.api.show.popups.application.request.PopupsCreateRequest;
+import com.api.show.popups.application.request.PopupsUpdateRequest;
 import com.common.config.event.Events;
 import com.domain.common.CustomTagType;
 import com.domain.show.popups.domain.LikedPopups;

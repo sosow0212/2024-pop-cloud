@@ -1,10 +1,10 @@
-package com.api.exhibition.presentation;
+package com.api.show.exhibition.presentation;
 
-import com.api.exhibition.application.ExhibitionQueryService;
-import com.api.exhibition.application.ExhibitionService;
-import com.api.exhibition.application.dto.ExhibitionCreateRequest;
-import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
-import com.api.exhibition.presentation.dto.ExhibitionLikedStatusResponse;
+import com.api.show.exhibition.application.ExhibitionQueryService;
+import com.api.show.exhibition.application.ExhibitionService;
+import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
+import com.api.show.exhibition.presentation.dto.ExhibitionLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;

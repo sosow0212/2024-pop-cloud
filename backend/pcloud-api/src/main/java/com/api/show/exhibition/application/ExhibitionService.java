@@ -1,7 +1,7 @@
-package com.api.exhibition.application;
+package com.api.show.exhibition.application;
 
-import com.api.exhibition.application.dto.ExhibitionCreateRequest;
-import com.api.exhibition.application.dto.ExhibitionUpdateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
+import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.common.config.event.Events;
 import com.domain.common.CustomTagType;
 import com.domain.show.exhibition.domain.Exhibition;

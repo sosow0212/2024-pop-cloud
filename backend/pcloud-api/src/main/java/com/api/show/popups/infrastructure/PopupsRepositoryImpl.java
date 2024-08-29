@@ -1,4 +1,4 @@
-package com.api.popups.infrastructure;
+package com.api.show.popups.infrastructure;
 
 import com.domain.show.popups.domain.LikedPopups;
 import com.domain.show.popups.domain.Popups;
