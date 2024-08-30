@@ -16,9 +16,11 @@ const CategoryPage = ({ params }: CategoryProps) => {
     endDate: new Date(),
   });
 
-  const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>([]);
-  const [searchTags, setSearchTags] = useState<IPublicTag[]>([]);
-  // no date-> 오늘~오늘 , no regions -> 전체, no tags-> no
+  const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>([
+    "서울특별시",
+  ]);
+  const [searchTags, setSearchTags] = useState<IPublicTag[]>(["브랜드"]);
+
   const handleDate = (start: Date, end: Date) => {
     setSearchDate({
       startDate: start,
@@ -35,8 +37,11 @@ const CategoryPage = ({ params }: CategoryProps) => {
   };
 
   useEffect(() => {
-    console.log(searchTags);
-  }, [searchTags]);
+    console.group("선택된 검색 요소들");
+    console.log("날짜", searchDate);
+    console.log("태그", searchTags);
+    console.log("지역", searchRegions);
+  }, [searchTags, searchRegions, searchDate]);
 
   return (
     <section className="flex flex-col space-y-4 py-4">

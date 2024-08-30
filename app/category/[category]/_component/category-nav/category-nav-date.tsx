@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CategoryCalendar } from "../category-calender";
 
 const CategoryNavDate = ({
@@ -14,12 +14,14 @@ const CategoryNavDate = ({
     const targetDay = new Date(today.getTime() + 1000 * 60 * 60 * 24 * day);
     handleDate(today, targetDay);
     setSelectedBtn(btnIdx);
+    setOpenCalender(false);
   };
 
   const handleOpenCalender = () => {
     setOpenCalender((p) => !p);
     setSelectedBtn(3);
   };
+
   return (
     <div className="flex items-center space-x-2">
       <label className="font-semibold" htmlFor="data-options ">

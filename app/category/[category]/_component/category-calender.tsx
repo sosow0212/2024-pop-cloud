@@ -1,5 +1,5 @@
 import { Calendar } from "@/components/ui/calendar";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { DateRange } from "react-day-picker";
 
 import { cn } from "zero-cnn";
@@ -20,6 +20,7 @@ export function CategoryCalendar({
   isOpen,
 }: CategoryCalendarProps) {
   const [range, setRange] = useState<DateRange | undefined>(defaultRange);
+
   const handleSelect = useCallback(() => {
     if (range && range.from && range.to) handleDate(range.from, range.to);
   }, [range]);

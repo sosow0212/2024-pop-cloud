@@ -39,7 +39,6 @@ type IPublicTag =
   | "기타";
 
 type ISearchRegion =
-  | "전체"
   | "서울특별시"
   | "경기도"
   | "인천광역시"

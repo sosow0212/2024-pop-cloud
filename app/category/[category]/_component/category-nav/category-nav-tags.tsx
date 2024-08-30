@@ -12,8 +12,13 @@ const CategoryNavTags = ({
         태그
       </label>
       <ul className="flex items-center justify-between space-x-4 overflow-auto py-2 scrollbar-hide">
-        {PUBLIC_TAGS.map((tag: IPublicTag) => (
-          <CategoryLi handleClick={handleTags} key={tag} title={tag} />
+        {PUBLIC_TAGS.map((tag: IPublicTag, idx) => (
+          <CategoryLi
+            isFirst={idx === 0}
+            handleClick={handleTags}
+            key={tag}
+            title={tag}
+          />
         ))}
       </ul>
     </div>

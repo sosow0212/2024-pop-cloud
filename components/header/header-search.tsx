@@ -22,7 +22,7 @@ const HeaderSearch = ({ isShow, target, setShow }: HeaderSearchProps) => {
       </button>
       <div
         className={cn(
-          "fixed inset-0 z-50 mx-auto h-[100vh] max-w-xl overflow-hidden bg-yellow-300 object-right-top transition-all",
+          "fixed inset-0 z-50 mx-auto h-[100vh] max-w-xl overflow-hidden bg-yellow-300 object-right-top transition-all md:max-w-2xl",
           isShow && target === "search" ? "block" : "hidden",
         )}
       >
