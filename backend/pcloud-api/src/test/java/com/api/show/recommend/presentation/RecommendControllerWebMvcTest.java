@@ -1,6 +1,8 @@
 package com.api.show.recommend.presentation;
 
 import com.api.helper.MockBeanInjection;
+import com.api.show.popups.application.request.DateSearchRequest;
+import com.domain.show.common.ShowType;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.api.helper.RestDocsHelper.customDocument;
@@ -27,7 +30,7 @@ import static show.recommend.RecommendFixture.추천_생성_팝업타입_조회�
 @SuppressWarnings("NonAsciiCharacters")
 @AutoConfigureRestDocs
 @WebMvcTest(RecommendController.class)
-class RecommendControllerTest extends MockBeanInjection {
+class RecommendControllerWebMvcTest extends MockBeanInjection {
 
     @Autowired
     private MockMvc mockMvc;
@@ -35,6 +38,9 @@ class RecommendControllerTest extends MockBeanInjection {
     @Test
     void 기간_범위안에_인기_쇼케이스를_구한다() throws Exception {
         // given
+        DateSearchRequest mockRequest = new DateSearchRequest(1, LocalDateTime.now(), LocalDateTime.now(), List.of(ShowType.ALL));
+        when(popularShowRequestArgumentResolver.supportsParameter(any())).thenReturn(true);
+        when(popularShowRequestArgumentResolver.resolveArgument(any(), any(), any(), any())).thenReturn(mockRequest);
         when(recommendService.findPopularShowsWithinDateRange(any())).thenReturn(
                 List.of(
                         추천_생성_전시회타입_조회수_좋아요_사용(29, 55),
@@ -46,11 +52,11 @@ class RecommendControllerTest extends MockBeanInjection {
         );
 
         // when & then
-        mockMvc.perform(get("/recommends/popularity", 1)
+        mockMvc.perform(get("/recommends/popularity")
                         .param("startDate", "2024-01-01")
                         .param("endDate", "2024-12-01")
                         .param("limit", "5")
-                        .param("target", "all #(popups, exhibition, all)")
+                        .param("target", "all")
                 ).andExpect(status().isOk())
                 .andDo(customDocument("find_popularity_shows",
                         queryParameters(
