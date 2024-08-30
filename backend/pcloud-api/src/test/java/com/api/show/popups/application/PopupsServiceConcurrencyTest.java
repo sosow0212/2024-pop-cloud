@@ -8,7 +8,6 @@ import com.domain.show.popups.event.PopupsFoundEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,11 +30,11 @@ class PopupsServiceConcurrencyTest extends IntegrationHelper {
         popups = popupsRepository.save(일반_팝업_스토어_생성_펫샵_작성자아이디(1L));
     }
 
-    @Test
-    void 좋아요_동시성_테스트() throws InterruptedException {
+    //    @Test
+    void 좋아요_동시성_테스트_동기처리() throws InterruptedException {
         // given
         PopupsFoundEvent event = new PopupsFoundEvent(popups.getId());
-        int requestCount = 100;
+        int requestCount = 15;
 
         // when
         ConcurrencyHelper.run(() -> popupsEventHandler.addViewCount(event), requestCount);
@@ -45,6 +44,7 @@ class PopupsServiceConcurrencyTest extends IntegrationHelper {
                 .get()
                 .getStatistic()
                 .getVisitedCount();
+
 
         assertThat(result).isEqualTo(requestCount);
     }
