@@ -1,4 +1,4 @@
-import { REGIONS } from "@/constants/region";
+import { REGIONS } from "@/constants";
 import CategoryLi from "./category-li";
 
 const CategoryNavRegion = ({
