@@ -1,12 +1,12 @@
 package com.domain.show.popups.domain;
 
 import com.common.exception.AuthException;
+import com.domain.global.domain.BaseEntity;
 import com.domain.show.common.Position;
 import com.domain.show.common.PublicTag;
 import com.domain.show.common.ShowDetails;
 import com.domain.show.common.ShowRules;
 import com.domain.show.common.ShowSchedule;
-import com.domain.global.domain.BaseEntity;
 import com.domain.show.common.Statistic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -16,13 +16,15 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.time.LocalDateTime;
+import jakarta.persistence.Version;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 import static com.common.exception.AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION;
 
@@ -59,6 +61,9 @@ public class Popups extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PublicTag publicTag;
+
+    @Version
+    private Long version;
 
     public static Popups of(
             final long memberId,

@@ -28,6 +28,11 @@ public class PopupsRepositoryImpl implements PopupsRepository {
     }
 
     @Override
+    public Optional<Popups> findByIdWithOptimisticLock(final Long id) {
+        return popupsJpaRepository.findByIdWithOptimisticLock(id);
+    }
+
+    @Override
     public Popups save(final Popups popups) {
         return popupsJpaRepository.save(popups);
     }
