@@ -4,7 +4,7 @@ import com.domain.common.CustomTagType;
 
 import java.util.List;
 
-public record PopupsTagsCreatedEvents(
+public record PopupsTagsUpdatedEvent(
         Long popupsId,
         List<String> tags,
         CustomTagType type

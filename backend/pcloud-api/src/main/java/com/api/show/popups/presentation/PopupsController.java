@@ -37,7 +37,6 @@ public class PopupsController {
     /**
      * TODO : 이미지 처리 방식 회의 필요
      */
-
     @PostMapping
     public ResponseEntity<Void> create(
             @AuthMembers(permit = {MANAGER, ADMIN}) final Long memberId,
