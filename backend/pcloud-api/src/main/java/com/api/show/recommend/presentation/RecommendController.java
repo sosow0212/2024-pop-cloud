@@ -21,8 +21,8 @@ public class RecommendController {
     private final RecommendService recommendService;
 
     @GetMapping("/popularity")
-    public ResponseEntity<List<RecommendSimpleResponse>> findPopularityShows(@RequestForDateSearch final DateSearchRequest dateSearchRequest) {
-        List<Recommend> recommends = recommendService.findPopularityShows(dateSearchRequest);
+    public ResponseEntity<List<RecommendSimpleResponse>> findPopularShowsWithinDateRange(@RequestForDateSearch final DateSearchRequest dateSearchRequest) {
+        List<Recommend> recommends = recommendService.findPopularShowsWithinDateRange(dateSearchRequest);
         return ResponseEntity.ok(RecommendSimpleResponse.from(recommends));
     }
 }

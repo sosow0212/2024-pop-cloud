@@ -19,7 +19,7 @@ public class RecommendService {
     private final PopularityCalculator popularityCalculator;
 
     @Transactional(readOnly = true)
-    public List<Recommend> findPopularityShows(final DateSearchRequest dateSearchRequest) {
+    public List<Recommend> findPopularShowsWithinDateRange(final DateSearchRequest dateSearchRequest) {
         List<Recommend> foundRecommend = recommendRepository.findAllFromStartDateToEndDateWithLimitByShowTypes(
                 dateSearchRequest.startDate(),
                 dateSearchRequest.endDate(),

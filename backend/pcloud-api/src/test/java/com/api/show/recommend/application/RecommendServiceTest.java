@@ -50,7 +50,7 @@ class RecommendServiceTest {
                 .thenReturn(expect);
 
         // when
-        List<Recommend> response = recommendService.findPopularityShows(request);
+        List<Recommend> response = recommendService.findPopularShowsWithinDateRange(request);
 
         // then
         assertSoftly(softly -> {

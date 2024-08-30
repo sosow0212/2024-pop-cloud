@@ -49,11 +49,11 @@ class RecommendQueryRepositoryTest extends IntegrationHelper {
     }
 
     @Test
-    void 날짜를_기준으로_단건_조회한다() {
+    void 날짜를_기준으로_진행중인_쇼케이스를_단건_조회한다() {
         // when
         List<Recommend> response = recommendQueryRepository.findAllFromStartDateToEndDateWithLimitByShowTypes(
-                popups.getCreatedAt(),
-                popups.getCreatedAt(),
+                popups.getShowSchedule().getEndDate(),
+                popups.getShowSchedule().getEndDate().plusDays(10),
                 List.of(ShowType.POPUPS)
         );
 
@@ -64,11 +64,11 @@ class RecommendQueryRepositoryTest extends IntegrationHelper {
     }
 
     @Test
-    void 날짜를_기준으로_모두_조회한다() {
+    void 날짜를_기준으로_진행중인_쇼케이스를_모두_조회한다() {
         // when
         List<Recommend> response = recommendQueryRepository.findAllFromStartDateToEndDateWithLimitByShowTypes(
-                popups.getCreatedAt(),
-                popups.getCreatedAt(),
+                popups.getShowSchedule().getEndDate(),
+                popups.getShowSchedule().getEndDate().plusDays(10),
                 List.of(ShowType.ALL)
         );
 

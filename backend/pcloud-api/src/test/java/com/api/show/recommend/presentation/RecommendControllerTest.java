@@ -35,7 +35,7 @@ class RecommendControllerTest extends MockBeanInjection {
     @Test
     void 기간_범위안에_인기_쇼케이스를_구한다() throws Exception {
         // given
-        when(recommendService.findPopularityShows(any())).thenReturn(
+        when(recommendService.findPopularShowsWithinDateRange(any())).thenReturn(
                 List.of(
                         추천_생성_전시회타입_조회수_좋아요_사용(29, 55),
                         추천_생성_팝업타입_조회수_좋아요_사용(21, 40),

@@ -55,7 +55,7 @@ public class RecommendQueryRepository {
                         popups.showSchedule,
                         popups.statistic
                 )).from(popups)
-                .where(popups.createdAt.between(startDate, endDate))
+                .where(popups.showSchedule.endDate.between(startDate, endDate))
                 .fetch();
     }
 
@@ -67,7 +67,7 @@ public class RecommendQueryRepository {
                         exhibition.showSchedule,
                         exhibition.statistic
                 )).from(exhibition)
-                .where(exhibition.createdAt.between(startDate, endDate))
+                .where(exhibition.showSchedule.endDate.between(startDate, endDate))
                 .fetch();
     }
 }
