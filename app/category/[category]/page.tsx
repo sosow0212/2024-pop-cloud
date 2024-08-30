@@ -2,7 +2,7 @@
 
 import CatagoryNav from "./_component/category-nav";
 import CategoryList from "./_component/category-list";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface CategoryProps {
   params: {
@@ -21,12 +21,12 @@ const CategoryPage = ({ params }: CategoryProps) => {
   ]);
   const [searchTags, setSearchTags] = useState<IPublicTag[]>(["브랜드"]);
 
-  const handleDate = (start: Date, end: Date) => {
+  const handleDate = useCallback((start: Date, end: Date) => {
     setSearchDate({
       startDate: start,
       endDate: end,
     });
-  };
+  }, []);
   const handleRegions = (value: ISearchRegion, isAdd: boolean) => {
     if (isAdd) setSearchRegions((p) => [...p, value]);
     else setSearchRegions((p) => p.filter((r) => r !== value));

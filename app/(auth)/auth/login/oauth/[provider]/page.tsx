@@ -21,7 +21,7 @@ const OAuthPage = async ({ params, searchParams }: OAuthPageProps) => {
   if (!data.accessToken) {
     console.log("잘못된 접근");
     redirect("/error");
-    // 에러 처리
+    // 에러 처리 필요
   } else {
     cookies().set("token", data.accessToken, {
       httpOnly: true,

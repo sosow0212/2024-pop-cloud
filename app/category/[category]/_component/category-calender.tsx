@@ -21,14 +21,16 @@ export function CategoryCalendar({
 }: CategoryCalendarProps) {
   const [range, setRange] = useState<DateRange | undefined>(defaultRange);
 
-  const handleSelect = useCallback(() => {
-    if (range && range.from && range.to) handleDate(range.from, range.to);
-  }, [range]);
+  // const handleSelect = useCallback(() => {
+  //   if (range && range.from && range.to) handleDate(range.from, range.to);
+  // }, [range]);
 
   useEffect(() => {
-    handleSelect();
-  }, [handleSelect]);
+    if (range && range.from && range.to) handleDate(range.from, range.to);
+  }, [range, handleDate]);
+
   if (!isOpen) return;
+
   return (
     <Calendar
       mode="range"
@@ -38,5 +40,3 @@ export function CategoryCalendar({
     />
   );
 }
-
-// 1 3 4 5 2 11 10 5 12 777 unde
