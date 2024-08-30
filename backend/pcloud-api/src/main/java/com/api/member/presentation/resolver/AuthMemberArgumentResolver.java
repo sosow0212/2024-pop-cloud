@@ -1,4 +1,4 @@
-package com.api.global.config.resolver;
+package com.api.member.presentation.resolver;
 
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
 import com.common.exception.AuthException;

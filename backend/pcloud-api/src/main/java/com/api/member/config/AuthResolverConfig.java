@@ -1,8 +1,7 @@
-package com.api.global.config;
+package com.api.member.config;
 
-import com.api.global.config.resolver.AuthMemberArgumentResolver;
-import com.api.global.config.resolver.AuthMembersArgumentResolver;
-import com.api.global.config.resolver.RequestForDateSearchArgumentResolver;
+import com.api.member.presentation.resolver.AuthMemberArgumentResolver;
+import com.api.member.presentation.resolver.AuthMembersArgumentResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -12,16 +11,14 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Configuration
-public class HandlerMethodArgumentResolverConfig implements WebMvcConfigurer {
+public class AuthResolverConfig implements WebMvcConfigurer {
 
     private final AuthMemberArgumentResolver authMemberArgumentResolver;
     private final AuthMembersArgumentResolver authMembersArgumentResolver;
-    private final RequestForDateSearchArgumentResolver requestForDateSearchArgumentResolver;
 
     @Override
     public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(authMemberArgumentResolver);
         resolvers.add(authMembersArgumentResolver);
-        resolvers.add(requestForDateSearchArgumentResolver);
     }
 }

@@ -1,4 +1,4 @@
-package com.api.show.annotation;
+package com.api.show.recommend.presentation.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequestForDateSearch {
+public @interface PopularShowRequest {
 
     String pattern() default "yyyy-MM-dd";
 }
