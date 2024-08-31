@@ -1,14 +1,12 @@
 package com.api.show.popups.presentation;
 
 import com.api.helper.MockBeanInjection;
+import com.api.show.common.resolver.ClientIpFinderResolver;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
 import com.domain.show.popups.domain.response.PopupsSimpleResponse;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -18,12 +16,17 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 import static com.api.helper.RestDocsHelper.customDocument;
 import static com.api.show.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
 import static com.api.show.popups.fixture.request.PopupsRequestFixtures.팝업스토어_업데이트_요청;
 import static member.fixture.MemberFixture.어드민_멤버_생성_id_없음_kakao_oauth_가입;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -54,6 +57,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
 
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private ClientIpFinderResolver clientIpFinderResolver;
 
     @Test
     void 팝업스토어를_생성한다() throws Exception {
@@ -128,7 +133,9 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
     void 팝업스토어_상세조회를_한다() throws Exception {
         // given
         PopupsSpecificResponse response = 팝업스토어_상세_조회_응답_생성();
-        when(popupsQueryService.findById(anyLong())).thenReturn(response);
+        when(popupsQueryService.findById(anyLong(), anyString())).thenReturn(response);
+        when(clientIpFinderResolver.supportsParameter(any())).thenReturn(true);
+        when(clientIpFinderResolver.resolveArgument(any(), any(), any(), any())).thenReturn("123.11.1.1");
 
         // when
         mockMvc.perform(get("/popups/{popupsId}", 1)
@@ -142,18 +149,18 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("ownerId").description("팝업스토어 게시글 작성자 id"),
                                 fieldWithPath("title").description("팝업스토어 이름"),
                                 fieldWithPath("description").description("팝업스토어 설명"),
+                                fieldWithPath("startDate").description("팝업스토어 시작일"),
+                                fieldWithPath("endDate").description("팝업스토어 종료일"),
+                                fieldWithPath("openTimes").description("팝업스토어 운영 시간"),
                                 fieldWithPath("location").description("팝업스토어 장소명"),
+                                fieldWithPath("latitude").description("위도"),
+                                fieldWithPath("longitude").description("경도"),
                                 fieldWithPath("isParkingAvailable").description("주차 가능 여부"),
                                 fieldWithPath("isFoodAllowed").description("식음료 반입 여부"),
                                 fieldWithPath("isPetAllowed").description("반려 동물 출입 가능 여부"),
                                 fieldWithPath("isKidsZone").description("키즈존 유무"),
                                 fieldWithPath("isWifiAvailable").description("와이파이 사용가능 여부"),
                                 fieldWithPath("fee").description("팝업스토어 입장요금"),
-                                fieldWithPath("startDate").description("팝업스토어 시작일"),
-                                fieldWithPath("endDate").description("팝업스토어 종료일"),
-                                fieldWithPath("openTimes").description("팝업스토어 운영 시간"),
-                                fieldWithPath("latitude").description("위도"),
-                                fieldWithPath("longitude").description("경도"),
                                 fieldWithPath("publicTag").description("공용 퍼블릭 태그"),
                                 fieldWithPath("visitedCount").description("팝업스토어 게시글 방문자 수"),
                                 fieldWithPath("likedCount").description("팝업스토어 게시글 좋아요 수"),

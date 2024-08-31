@@ -3,6 +3,7 @@ package com.api.helper;
 import com.api.auth.application.AuthService;
 import com.api.global.aop.OptimisticLockRetryAspect;
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
+import com.api.show.common.resolver.ClientIpFinderResolver;
 import com.api.show.exhibition.application.ExhibitionQueryService;
 import com.api.show.exhibition.application.ExhibitionService;
 import com.api.show.popups.application.PopupsQueryService;
@@ -22,6 +23,9 @@ public class MockBeanInjection {
 
     @MockBean
     protected AuthenticationContext authenticationContext;
+
+    @MockBean
+    protected ClientIpFinderResolver clientIpFinderResolver;
 
     @MockBean
     protected OptimisticLockRetryAspect optimisticLockRetryAspect;
