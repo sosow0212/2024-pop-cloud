@@ -5,8 +5,8 @@ import com.domain.customtag.domain.CustomTag;
 import com.domain.customtag.domain.CustomTagRepository;
 import com.domain.show.exhibition.event.ExhibitionTagsCreatedEvents;
 import com.domain.show.exhibition.event.ExhibitionTagsUpdatedEvents;
-import com.domain.show.popups.event.PopupsTagsCreatedEvents;
-import com.domain.show.popups.event.PopupsTagsUpdatedEvents;
+import com.domain.show.popups.event.PopupsTagsCreatedEvent;
+import com.domain.show.popups.event.PopupsTagsUpdatedEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
@@ -21,8 +21,8 @@ public class TagEventHandler {
 
     private final CustomTagRepository customTagRepository;
 
-    @EventListener(PopupsTagsCreatedEvents.class)
-    public void savePopupsTags(final PopupsTagsCreatedEvents event) {
+    @EventListener(PopupsTagsCreatedEvent.class)
+    public void savePopupsTags(final PopupsTagsCreatedEvent event) {
         List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.popupsId());
         customTagRepository.saveAll(customTags);
     }
@@ -37,8 +37,8 @@ public class TagEventHandler {
                 .toList();
     }
 
-    @EventListener(PopupsTagsUpdatedEvents.class)
-    public void updatePopupsTags(final PopupsTagsUpdatedEvents event) {
+    @EventListener(PopupsTagsUpdatedEvent.class)
+    public void updatePopupsTags(final PopupsTagsUpdatedEvent event) {
         List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.popupsId());
         customTagRepository.deleteAllByTypeAndTargetId(event.type(), event.popupsId());
         customTagRepository.saveAll(customTags);

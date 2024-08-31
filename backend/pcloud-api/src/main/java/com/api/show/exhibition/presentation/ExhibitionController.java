@@ -9,8 +9,6 @@ import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
-import java.net.URI;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
+import java.util.List;
 
 import static com.domain.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.member.domain.vo.MemberRole.MANAGER;
@@ -81,7 +82,7 @@ public class ExhibitionController {
                 .build();
     }
 
-    @DeleteMapping("{exhibitionId}")
+    @DeleteMapping("/{exhibitionId}")
     public ResponseEntity<Void> deleteById(
             @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
             @PathVariable final Long exhibitionId

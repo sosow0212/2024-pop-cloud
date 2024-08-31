@@ -1,5 +1,6 @@
 package com.domain.show.common;
 
+import com.domain.show.popups.domain.service.PopularityCalculator;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
@@ -41,5 +42,9 @@ public class Statistic {
         }
 
         this.likedCount--;
+    }
+
+    public double calculatePopularScore(final PopularityCalculator popularityCalculator) {
+        return popularityCalculator.calculatePopularity(this.visitedCount, this.likedCount);
     }
 }

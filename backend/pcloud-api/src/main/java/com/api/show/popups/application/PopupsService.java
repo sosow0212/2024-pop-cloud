@@ -7,8 +7,8 @@ import com.domain.common.CustomTagType;
 import com.domain.show.popups.domain.LikedPopups;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
-import com.domain.show.popups.event.PopupsTagsCreatedEvents;
-import com.domain.show.popups.event.PopupsTagsUpdatedEvents;
+import com.domain.show.popups.event.PopupsTagsCreatedEvent;
+import com.domain.show.popups.event.PopupsTagsUpdatedEvent;
 import com.domain.show.popups.exception.PopupsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class PopupsService {
 
     public Long create(final Long memberId, final PopupsCreateRequest request) {
         Popups popups = popupsRepository.save(request.toDomain(memberId));
-        Events.raise(new PopupsTagsCreatedEvents(popups.getId(), request.tags(), CustomTagType.POPUPS));
+        Events.raise(new PopupsTagsCreatedEvent(popups.getId(), request.tags(), CustomTagType.POPUPS));
         return popups.getId();
     }
 
@@ -37,7 +37,7 @@ public class PopupsService {
         Popups popups = findPopups(popupsId);
         Popups updatedPopups = request.toDomain(memberId);
         popups.update(updatedPopups);
-        Events.raise(new PopupsTagsUpdatedEvents(popups.getId(), request.tags(), CustomTagType.POPUPS));
+        Events.raise(new PopupsTagsUpdatedEvent(popups.getId(), request.tags(), CustomTagType.POPUPS));
     }
 
     private Popups findPopups(final Long popupsId) {

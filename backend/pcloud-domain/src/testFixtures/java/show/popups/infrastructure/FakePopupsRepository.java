@@ -5,6 +5,7 @@ import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.popups.domain.response.PopupsSimpleResponse;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,11 @@ public class FakePopupsRepository implements PopupsRepository {
 
     @Override
     public Optional<Popups> findById(final Long id) {
+        return Optional.ofNullable(popupsDB.get(id));
+    }
+
+    @Override
+    public Optional<Popups> findByIdWithOptimisticLock(final Long id) {
         return Optional.ofNullable(popupsDB.get(id));
     }
 

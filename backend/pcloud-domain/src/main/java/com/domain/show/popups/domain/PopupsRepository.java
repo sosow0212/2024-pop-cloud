@@ -10,6 +10,8 @@ public interface PopupsRepository {
 
     Optional<Popups> findById(Long id);
 
+    Optional<Popups> findByIdWithOptimisticLock(Long id);
+
     Popups save(Popups popups);
 
     Optional<PopupsSpecificResponse> findSpecificById(Long id);
