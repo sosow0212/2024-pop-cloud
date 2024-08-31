@@ -66,13 +66,12 @@ class RecommendControllerWebMvcTest extends MockBeanInjection {
                                 parameterWithName("target").description("쇼케이스 타입 (all, popups, exhibition) updated 24.08.29")
                         ),
                         responseFields(
-                                fieldWithPath("[].id").description("팝업스토어 id"),
-                                fieldWithPath("[].title").description("팝업스토어 이름"),
-                                fieldWithPath("[].location").description("팝업스토어 장소명"),
-                                fieldWithPath("[].startDate").description("팝업스토어 시작일"),
-                                fieldWithPath("[].endDate").description("팝업스토어 종료일"),
-                                fieldWithPath("[].visitedCount").description("팝업스토어 게시글 방문자 수"),
-                                fieldWithPath("[].likedCount").description("팝업스토어 게시글 좋아요 수")
+                                fieldWithPath("[].id").description("특정 쇼케이스 id"),
+                                fieldWithPath("[].showType").description("쇼케이스 종류"),
+                                fieldWithPath("[].title").description("쇼케이스 이름"),
+                                fieldWithPath("[].location").description("쇼케이스 장소명"),
+                                fieldWithPath("[].startDate").description("쇼케이스 시작일"),
+                                fieldWithPath("[].endDate").description("쇼케이스 종료일")
                         )
                 ));
     }

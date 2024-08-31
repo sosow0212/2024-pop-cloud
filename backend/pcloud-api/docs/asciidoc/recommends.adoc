@@ -9,10 +9,10 @@
 
 === Request
 
-include::{snippets}/recommend-controller-test/find_popularity_shows/query-parameters.adoc[]
-include::{snippets}/recommend-controller-test/find_popularity_shows/http-request.adoc[]
+include::{snippets}/recommend-controller-web-mvc-test/find_popularity_shows/query-parameters.adoc[]
+include::{snippets}/recommend-controller-web-mvc-test/find_popularity_shows/http-request.adoc[]
 
 === Response
 
-include::{snippets}/recommend-controller-test/find_popularity_shows/response-fields.adoc[]
-include::{snippets}/recommend-controller-test/find_popularity_shows/http-response.adoc[]
+include::{snippets}/recommend-controller-web-mvc-test/find_popularity_shows/response-fields.adoc[]
+include::{snippets}/recommend-controller-web-mvc-test/find_popularity_shows/http-response.adoc[]
