@@ -26,7 +26,7 @@ public class RecommendService {
                 dateSearchRequest.target()
         );
 
-        Recommends recommends = new Recommends(foundRecommend);
+        Recommends recommends = Recommends.from(foundRecommend);
         return recommends.findPopularityShows(popularityCalculator, dateSearchRequest.limit());
     }
 }

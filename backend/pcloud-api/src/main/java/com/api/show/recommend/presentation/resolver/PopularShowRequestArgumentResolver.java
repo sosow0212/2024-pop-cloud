@@ -26,8 +26,6 @@ public class PopularShowRequestArgumentResolver implements HandlerMethodArgument
     private static final String END_DATE_PARAMETER = "endDate";
     private static final String TARGET = "target";
 
-    private final PopularShowRequestHelper popularShowRequestHelper;
-
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
         return parameter.hasParameterAnnotation(PopularShowRequest.class) &&
@@ -48,14 +46,14 @@ public class PopularShowRequestArgumentResolver implements HandlerMethodArgument
         String startDateParam = webRequest.getParameter(START_DATE_PARAMETER);
         String endDateParam = webRequest.getParameter(END_DATE_PARAMETER);
         String targetParam = webRequest.getParameter(TARGET);
-        popularShowRequestHelper.validateParameterRequirement(startDateParam);
+        PopularShowRequestHelper.validateParameterRequirement(startDateParam);
 
-        int limit = popularShowRequestHelper.parseLimit(limitParam);
-        List<ShowType> showTypes = popularShowRequestHelper.findShowTypes(targetParam);
+        int limit = PopularShowRequestHelper.parseLimit(limitParam);
+        List<ShowType> showTypes = PopularShowRequestHelper.findShowTypes(targetParam);
 
-        LocalDateTime startDate = popularShowRequestHelper.parseLocalDateTime(startDateParam, formatter);
-        LocalDateTime endDate = popularShowRequestHelper.parseLocalDateTime(endDateParam, formatter);
-        popularShowRequestHelper.validateDateRange(startDate, endDate);
+        LocalDateTime startDate = PopularShowRequestHelper.parseLocalDateTime(startDateParam, formatter);
+        LocalDateTime endDate = PopularShowRequestHelper.parseLocalDateTime(endDateParam, formatter);
+        PopularShowRequestHelper.validateDateRange(startDate, endDate);
 
         return new DateSearchRequest(limit, startDate, endDate, showTypes);
     }

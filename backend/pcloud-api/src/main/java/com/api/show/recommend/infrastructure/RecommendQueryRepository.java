@@ -22,25 +22,29 @@ public class RecommendQueryRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    public List<Recommend> findAllFromStartDateToEndDateWithLimitByShowTypes(LocalDateTime startDate, LocalDateTime endDate, final List<ShowType> showTypes) {
+    public List<Recommend> findAllFromStartDateToEndDateWithLimitByShowTypes(
+            final LocalDateTime startDate,
+            final LocalDateTime endDate,
+            final List<ShowType> showTypes
+    ) {
         List<Recommend> result = new ArrayList<>();
 
-        startDate = startDate.toLocalDate().atTime(LocalTime.MIN);
-        endDate = endDate.toLocalDate().atTime(LocalTime.MAX);
+        LocalDateTime startDateMinTime = startDate.toLocalDate().atTime(LocalTime.MIN);
+        LocalDateTime endDateMaxTime = endDate.toLocalDate().atTime(LocalTime.MAX);
 
         if (showTypes.contains(ShowType.ALL)) {
-            result.addAll(getPopups(startDate, endDate));
-            result.addAll(getExhibition(startDate, endDate));
+            result.addAll(getPopups(startDateMinTime, endDateMaxTime));
+            result.addAll(getExhibition(startDateMinTime, endDateMaxTime));
             return result;
         }
 
         for (ShowType showType : showTypes) {
             if (showType.equals(ShowType.POPUPS)) {
-                result.addAll(getPopups(startDate, endDate));
+                result.addAll(getPopups(startDateMinTime, endDateMaxTime));
             }
 
             if (showType.equals(ShowType.EXHIBITION)) {
-                result.addAll(getExhibition(startDate, endDate));
+                result.addAll(getExhibition(startDateMinTime, endDateMaxTime));
             }
         }
 

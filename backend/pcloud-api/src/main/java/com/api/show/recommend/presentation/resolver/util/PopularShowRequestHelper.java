@@ -2,7 +2,6 @@ package com.api.show.recommend.presentation.resolver.util;
 
 import com.domain.show.common.ShowType;
 import com.domain.show.recommend.exception.RecommendException;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,25 +16,24 @@ import static com.domain.show.recommend.exception.RecommendExceptionType.LIMIT_P
 import static com.domain.show.recommend.exception.RecommendExceptionType.START_DATE_AFTER_END_DATE_EXCEPTION;
 import static com.domain.show.recommend.exception.RecommendExceptionType.START_PARAM_DATE_NULL_EXCEPTION;
 
-@Component
 public class PopularShowRequestHelper {
 
     private static final String DELIMITER = ",";
     private static final int DEFAULT_LIMIT_SIZE = 5;
 
-    public void validateParameterRequirement(final String startDateParam) {
+    public static void validateParameterRequirement(final String startDateParam) {
         if (startDateParam == null || startDateParam.isBlank()) {
             throw new RecommendException(START_PARAM_DATE_NULL_EXCEPTION);
         }
     }
 
-    public void validateDateRange(final LocalDateTime startDate, final LocalDateTime endDate) {
+    public static void validateDateRange(final LocalDateTime startDate, final LocalDateTime endDate) {
         if (startDate.isAfter(endDate)) {
             throw new RecommendException(START_DATE_AFTER_END_DATE_EXCEPTION);
         }
     }
 
-    public List<ShowType> findShowTypes(final String targetParam) {
+    public static List<ShowType> findShowTypes(final String targetParam) {
         if (targetParam == null) {
             return List.of(ShowType.ALL);
         }
@@ -43,7 +41,7 @@ public class PopularShowRequestHelper {
         return findNotDuplicatedTargetFromParam(targetParam);
     }
 
-    private List<ShowType> findNotDuplicatedTargetFromParam(final String targetParam) {
+    private static List<ShowType> findNotDuplicatedTargetFromParam(final String targetParam) {
         Set<ShowType> notDuplicatedShowTypes = new HashSet<>();
 
         for (String target : targetParam.split(DELIMITER)) {
@@ -60,17 +58,17 @@ public class PopularShowRequestHelper {
         return new ArrayList<>(notDuplicatedShowTypes);
     }
 
-    public int parseLimit(final String limit) {
+    public static int parseLimit(final String limit) {
         if (limit == null || limit.isBlank()) {
             return DEFAULT_LIMIT_SIZE;
         }
 
-        validateLimitConsistNumber(limit);
+        validateNumeric(limit);
 
         return Integer.parseInt(limit);
     }
 
-    private void validateLimitConsistNumber(final String limit) {
+    private static void validateNumeric(final String limit) {
         boolean containsAllDigit = limit.chars()
                 .allMatch(Character::isDigit);
 
@@ -79,7 +77,7 @@ public class PopularShowRequestHelper {
         }
     }
 
-    public LocalDateTime parseLocalDateTime(final String date, final DateTimeFormatter formatter) {
+    public static LocalDateTime parseLocalDateTime(final String date, final DateTimeFormatter formatter) {
         if (date == null || date.isBlank()) {
             return LocalDateTime.now();
         }

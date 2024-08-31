@@ -27,7 +27,7 @@ class RecommendsTest {
         Recommend popupRecommend3 = 추천_생성_팝업타입_조회수_좋아요_사용(10, 50);
         Recommend popupRecommend4 = 추천_생성_팝업타입_조회수_좋아요_사용(10, 70);
         Recommend popupRecommend5 = 추천_생성_전시회타입_조회수_좋아요_사용(10, 90);
-        Recommends recommends = new Recommends(List.of(popupRecommend1, popupRecommend2, popupRecommend3, popupRecommend4, popupRecommend5));
+        Recommends recommends = Recommends.from(List.of(popupRecommend1, popupRecommend2, popupRecommend3, popupRecommend4, popupRecommend5));
 
         // when
         List<Recommend> result = recommends.findPopularityShows(fakePopularityCalculator, limit);
