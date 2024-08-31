@@ -1,6 +1,7 @@
 package com.api.show.popups.application;
 
 import com.domain.annotation.RetryOptimisticLock;
+import com.domain.show.popups.cache.PopupsCacheRepository;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.popups.event.PopupsFoundEvent;
@@ -22,13 +23,21 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 public class PopupsEventHandler {
 
     private final PopupsRepository popupsRepository;
+    private final PopupsCacheRepository popupsCacheRepository;
 
     @Async
     @RetryOptimisticLock
     @TransactionalEventListener(value = PopupsFoundEvent.class, phase = TransactionPhase.AFTER_COMMIT)
     @Transactional(propagation = REQUIRES_NEW)
     public void addViewCount(final PopupsFoundEvent event) {
+        String ip = event.clientIp();
+
+        if (popupsCacheRepository.isPopupsIdAlreadyCachedWithIp(event.popupsId(), ip)) {
+            return;
+        }
+
         Popups popups = findPopupsWithOptimisticLock(event);
+        popupsCacheRepository.cachePopupsIdWithIp(popups.getId(), ip);
         popups.addViewCount();
     }
 
