@@ -1,4 +1,4 @@
-package com.infra.study.redis;
+package com.infrastructure.study.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.infra.config;
+package com.infrastructure.config;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;

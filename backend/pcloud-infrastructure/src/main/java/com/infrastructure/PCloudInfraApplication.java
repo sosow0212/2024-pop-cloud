@@ -1,4 +1,4 @@
-package com.infra;
+package com.infrastructure;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
