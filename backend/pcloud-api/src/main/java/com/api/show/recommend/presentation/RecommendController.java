@@ -3,7 +3,7 @@ package com.api.show.recommend.presentation;
 import com.api.show.popups.application.request.DateSearchRequest;
 import com.api.show.recommend.application.RecommendService;
 import com.api.show.recommend.presentation.annotation.PopularShowRequest;
-import com.domain.show.recommend.domain.Recommend;
+import com.domain.show.recommend.domain.Recommends;
 import com.domain.show.recommend.domain.dto.RecommendSimpleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class RecommendController {
 
     @GetMapping("/popularity")
     public ResponseEntity<List<RecommendSimpleResponse>> findPopularShowsWithinDateRange(@PopularShowRequest final DateSearchRequest dateSearchRequest) {
-        List<Recommend> recommends = recommendService.findPopularShowsWithinDateRange(dateSearchRequest);
+        Recommends recommends = recommendService.findPopularShowsWithinDateRange(dateSearchRequest);
         return ResponseEntity.ok(RecommendSimpleResponse.from(recommends));
     }
 }

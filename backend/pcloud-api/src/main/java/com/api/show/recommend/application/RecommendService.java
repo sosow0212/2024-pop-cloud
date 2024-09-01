@@ -6,6 +6,7 @@ import com.domain.show.recommend.domain.Recommend;
 import com.domain.show.recommend.domain.RecommendRepository;
 import com.domain.show.recommend.domain.Recommends;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,8 @@ public class RecommendService {
     private final PopularityCalculator popularityCalculator;
 
     @Transactional(readOnly = true)
-    public List<Recommend> findPopularShowsWithinDateRange(final DateSearchRequest dateSearchRequest) {
+    @Cacheable(cacheNames = "popularShowsCache", key = "#dateSearchRequest.toString()", cacheManager = "contentCacheManager")
+    public Recommends findPopularShowsWithinDateRange(final DateSearchRequest dateSearchRequest) {
         List<Recommend> foundRecommend = recommendRepository.findAllFromStartDateToEndDateWithLimitByShowTypes(
                 dateSearchRequest.startDate(),
                 dateSearchRequest.endDate(),

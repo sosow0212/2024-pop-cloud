@@ -3,6 +3,7 @@ package com.api.show.recommend.presentation;
 import com.api.helper.MockBeanInjection;
 import com.api.show.popups.application.request.DateSearchRequest;
 import com.domain.show.common.ShowType;
+import com.domain.show.recommend.domain.Recommends;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -42,13 +43,13 @@ class RecommendControllerWebMvcTest extends MockBeanInjection {
         when(popularShowRequestArgumentResolver.supportsParameter(any())).thenReturn(true);
         when(popularShowRequestArgumentResolver.resolveArgument(any(), any(), any(), any())).thenReturn(mockRequest);
         when(recommendService.findPopularShowsWithinDateRange(any())).thenReturn(
-                List.of(
+                Recommends.from(List.of(
                         추천_생성_전시회타입_조회수_좋아요_사용(29, 55),
                         추천_생성_팝업타입_조회수_좋아요_사용(21, 40),
                         추천_생성_팝업타입_조회수_좋아요_사용(19, 30),
                         추천_생성_팝업타입_조회수_좋아요_사용(15, 20),
                         추천_생성_팝업타입_조회수_좋아요_사용(10, 10)
-                )
+                ))
         );
 
         // when & then

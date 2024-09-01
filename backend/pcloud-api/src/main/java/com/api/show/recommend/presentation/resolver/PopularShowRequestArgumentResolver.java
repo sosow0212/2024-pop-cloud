@@ -13,6 +13,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -51,8 +52,10 @@ public class PopularShowRequestArgumentResolver implements HandlerMethodArgument
         int limit = PopularShowRequestHelper.parseLimit(limitParam);
         List<ShowType> showTypes = PopularShowRequestHelper.findShowTypes(targetParam);
 
-        LocalDateTime startDate = PopularShowRequestHelper.parseLocalDateTime(startDateParam, formatter);
-        LocalDateTime endDate = PopularShowRequestHelper.parseLocalDateTime(endDateParam, formatter);
+        LocalDateTime startDate = PopularShowRequestHelper.parseLocalDateTime(startDateParam, formatter)
+                .toLocalDate().atTime(LocalTime.MIN);
+        LocalDateTime endDate = PopularShowRequestHelper.parseLocalDateTime(endDateParam, formatter)
+                .toLocalDate().atTime(LocalTime.MAX);
         PopularShowRequestHelper.validateDateRange(startDate, endDate);
 
         return new DateSearchRequest(limit, startDate, endDate, showTypes);
