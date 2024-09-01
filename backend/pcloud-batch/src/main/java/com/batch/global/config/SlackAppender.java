@@ -1,4 +1,4 @@
-package com.batch.config;
+package com.batch.global.config;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;

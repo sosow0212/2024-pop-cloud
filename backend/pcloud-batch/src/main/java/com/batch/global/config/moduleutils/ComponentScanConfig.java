@@ -1,4 +1,4 @@
-package com.batch.config.moduleutils;
+package com.batch.global.config.moduleutils;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
