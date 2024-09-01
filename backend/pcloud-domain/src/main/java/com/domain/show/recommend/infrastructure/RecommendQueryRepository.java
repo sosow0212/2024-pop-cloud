@@ -1,4 +1,4 @@
-package com.api.show.recommend.infrastructure;
+package com.domain.show.recommend.infrastructure;
 
 import com.domain.show.common.ShowType;
 import com.domain.show.recommend.domain.Recommend;

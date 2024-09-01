@@ -7,6 +7,7 @@ import com.domain.show.exhibition.domain.ExhibitionRepository;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.recommend.domain.Recommend;
+import com.domain.show.recommend.infrastructure.RecommendQueryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
