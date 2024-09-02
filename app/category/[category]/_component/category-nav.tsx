@@ -1,12 +1,12 @@
 import CategoryNavTags from "./category-nav/category-nav-tags";
 import CategoryNavRegion from "./category-nav/category-nav-Region";
 import CategoryNavDate from "./category-nav/category-nav-date";
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 interface CategoryNavProps {
   handleDate: (s: Date, e: Date) => void;
-  setSearchRegions: Dispatch<ISearchRegion[]>;
-  setSearchTags: Dispatch<IPublicTag[]>;
+  setSearchRegions: Dispatch<SetStateAction<ISearchRegion[]>>;
+  setSearchTags: Dispatch<SetStateAction<IPublicTag[]>>;
   searchRegions: ISearchRegion[];
   searchTags: IPublicTag[];
 }
