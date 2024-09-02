@@ -11,7 +11,7 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <appender name="SLACK_APPENDER" class="com.batch.config.SlackAppender">
+    <appender name="SLACK_APPENDER" class="com.batch.global.config.SlackAppender">
     </appender>
 
     <appender name="ASYNC_SLACK_APPENDER" class="ch.qos.logback.classic.AsyncAppender">

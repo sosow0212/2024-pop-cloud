@@ -1,4 +1,4 @@
-package com.batch.config.moduleutils;
+package com.batch.global.config.moduleutils;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;

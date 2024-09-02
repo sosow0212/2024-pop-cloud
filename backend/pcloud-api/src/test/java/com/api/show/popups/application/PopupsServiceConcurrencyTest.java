@@ -33,7 +33,7 @@ class PopupsServiceConcurrencyTest extends IntegrationHelper {
     //    @Test
     void 좋아요_동시성_테스트_동기처리() throws InterruptedException {
         // given
-        PopupsFoundEvent event = new PopupsFoundEvent(popups.getId());
+        PopupsFoundEvent event = new PopupsFoundEvent(popups.getId(), "");
         int requestCount = 15;
 
         // when

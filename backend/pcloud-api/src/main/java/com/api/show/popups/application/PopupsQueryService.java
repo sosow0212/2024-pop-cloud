@@ -21,8 +21,8 @@ public class PopupsQueryService {
 
     private final PopupsRepository popupsRepository;
 
-    public PopupsSpecificResponse findById(final Long popupsId) {
-        Events.raise(new PopupsFoundEvent(popupsId));
+    public PopupsSpecificResponse findById(final Long popupsId, final String clientIp) {
+        Events.raise(new PopupsFoundEvent(popupsId, clientIp));
         return popupsRepository.findSpecificById(popupsId)
                 .orElseThrow(() -> new PopupsException(POPUPS_NOT_FOUND_EXCEPTION));
     }

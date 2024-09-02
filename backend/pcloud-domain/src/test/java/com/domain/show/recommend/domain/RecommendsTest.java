@@ -30,7 +30,7 @@ class RecommendsTest {
         Recommends recommends = Recommends.from(List.of(popupRecommend1, popupRecommend2, popupRecommend3, popupRecommend4, popupRecommend5));
 
         // when
-        List<Recommend> result = recommends.findPopularityShows(fakePopularityCalculator, limit);
+        List<Recommend> result = recommends.findPopularityShows(fakePopularityCalculator, limit).getRecommends();
 
         // then
         assertSoftly(softly -> {

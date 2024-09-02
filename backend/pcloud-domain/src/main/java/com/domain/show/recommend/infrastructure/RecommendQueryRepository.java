@@ -1,4 +1,4 @@
-package com.api.show.recommend.infrastructure;
+package com.domain.show.recommend.infrastructure;
 
 import com.domain.show.common.ShowType;
 import com.domain.show.recommend.domain.Recommend;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,28 +22,25 @@ public class RecommendQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     public List<Recommend> findAllFromStartDateToEndDateWithLimitByShowTypes(
-            final LocalDateTime startDate,
-            final LocalDateTime endDate,
+            final LocalDateTime startTime,
+            final LocalDateTime endTime,
             final List<ShowType> showTypes
     ) {
         List<Recommend> result = new ArrayList<>();
 
-        LocalDateTime startDateMinTime = startDate.toLocalDate().atTime(LocalTime.MIN);
-        LocalDateTime endDateMaxTime = endDate.toLocalDate().atTime(LocalTime.MAX);
-
         if (showTypes.contains(ShowType.ALL)) {
-            result.addAll(getPopups(startDateMinTime, endDateMaxTime));
-            result.addAll(getExhibition(startDateMinTime, endDateMaxTime));
+            result.addAll(getPopups(startTime, endTime));
+            result.addAll(getExhibition(startTime, endTime));
             return result;
         }
 
         for (ShowType showType : showTypes) {
             if (showType.equals(ShowType.POPUPS)) {
-                result.addAll(getPopups(startDateMinTime, endDateMaxTime));
+                result.addAll(getPopups(startTime, endTime));
             }
 
             if (showType.equals(ShowType.EXHIBITION)) {
-                result.addAll(getExhibition(startDateMinTime, endDateMaxTime));
+                result.addAll(getExhibition(startTime, endTime));
             }
         }
 

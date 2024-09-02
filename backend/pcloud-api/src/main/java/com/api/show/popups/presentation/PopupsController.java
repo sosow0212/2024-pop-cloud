@@ -1,5 +1,6 @@
 package com.api.show.popups.presentation;
 
+import com.api.show.common.annotation.ClientIpFinder;
 import com.api.show.popups.application.PopupsQueryService;
 import com.api.show.popups.application.PopupsService;
 import com.api.show.popups.application.request.PopupsCreateRequest;
@@ -55,12 +56,12 @@ public class PopupsController {
         return ResponseEntity.ok(popupsQueryService.findAll(popupsId, pageSize));
     }
 
-    /**
-     * TODO : 조회시 방문자 수 처리하기 (#14 Issue 이후 작업)
-     */
     @GetMapping("/{popupsId}")
-    public ResponseEntity<PopupsSpecificResponse> findById(@PathVariable final Long popupsId) {
-        return ResponseEntity.ok(popupsQueryService.findById(popupsId));
+    public ResponseEntity<PopupsSpecificResponse> findById(
+            @PathVariable final Long popupsId,
+            @ClientIpFinder final String clientIp
+    ) {
+        return ResponseEntity.ok(popupsQueryService.findById(popupsId, clientIp));
     }
 
     @PatchMapping("/{popupsId}")
