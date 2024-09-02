@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public class PopupsCacheRepositoryImpl implements PopupsCacheRepository {
 
     private static final String CACHE_PREFIX = "popups:";
+    private static final String IP_PREFIX = ":ip";
 
     private final RedisTemplate<String, String> redisTemplate;
 
@@ -20,7 +21,7 @@ public class PopupsCacheRepositoryImpl implements PopupsCacheRepository {
     }
 
     private String makePopupsIdWithIpKeyName(final Long popupsId) {
-        return CACHE_PREFIX + popupsId + ":ip";
+        return CACHE_PREFIX + popupsId + IP_PREFIX;
     }
 
     @Override
