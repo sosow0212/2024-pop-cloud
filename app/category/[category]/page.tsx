@@ -3,6 +3,10 @@
 import CatagoryNav from "./_component/category-nav";
 import CategoryList from "./_component/category-list";
 import { useCallback, useEffect, useState } from "react";
+import { PUBLIC_TAGS, REGIONS } from "@/constants";
+
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { getPopupList } from "@/actions/api-action/popup-actions";
 
 interface CategoryProps {
   params: {
@@ -10,16 +14,29 @@ interface CategoryProps {
   };
 }
 
+const TODAY = {
+  startDate: new Date(),
+  endDate: new Date(),
+};
 const CategoryPage = ({ params }: CategoryProps) => {
-  const [searchDate, setSearchDate] = useState<ISearchDate>({
-    startDate: new Date(),
-    endDate: new Date(),
-  });
+  // const {
+  //   data,
+  //   error,
+  //   fetchNextPage,
+  //   hasNextPage,
+  //   isFetching,
+  //   isFetchingNextPage,
+  //   status,
+  // } = useInfiniteQuery({
+  //   queryKey: ['projects'],
+  //   queryFn: getPopupList,
+  //   initialPageParam: 0,
+  //   getNextPageParam: (lastPage, pages) => lastPage.nextCursor,
+  // })
 
-  const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>([
-    "서울특별시",
-  ]);
-  const [searchTags, setSearchTags] = useState<IPublicTag[]>(["브랜드"]);
+  const [searchDate, setSearchDate] = useState<ISearchDate>(TODAY);
+  const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>(REGIONS);
+  const [searchTags, setSearchTags] = useState<IPublicTag[]>(PUBLIC_TAGS);
 
   const handleDate = useCallback((start: Date, end: Date) => {
     setSearchDate({
@@ -27,28 +44,15 @@ const CategoryPage = ({ params }: CategoryProps) => {
       endDate: end,
     });
   }, []);
-  const handleRegions = (value: ISearchRegion, isAdd: boolean) => {
-    if (isAdd) setSearchRegions((p) => [...p, value]);
-    else setSearchRegions((p) => p.filter((r) => r !== value));
-  };
-  const handleTags = (value: IPublicTag, isAdd: boolean) => {
-    if (isAdd) setSearchTags((p) => [...p, value]);
-    else setSearchTags((p) => p.filter((r) => r !== value));
-  };
-
-  useEffect(() => {
-    console.group("선택된 검색 요소들");
-    console.log("날짜", searchDate);
-    console.log("태그", searchTags);
-    console.log("지역", searchRegions);
-  }, [searchTags, searchRegions, searchDate]);
 
   return (
     <section className="flex flex-col space-y-4 py-4">
       <CatagoryNav
+        searchRegions={searchRegions}
+        searchTags={searchTags}
         handleDate={handleDate}
-        handleRegions={handleRegions}
-        handleTags={handleTags}
+        setSearchRegions={setSearchRegions}
+        setSearchTags={setSearchTags}
       />
 
       <CategoryList

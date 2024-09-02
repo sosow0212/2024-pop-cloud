@@ -1,4 +1,4 @@
-import getToken from "@/actions/get-token";
+import fetchOAuthAccessToken from "@/actions/auth-action/fetch-oauth-accessToken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -17,13 +17,13 @@ const OAuthPage = async ({ params, searchParams }: OAuthPageProps) => {
   const { provider } = params;
   const { code } = searchParams;
   if (provider !== "kakao") redirect("/");
-  const data = await getToken(code, provider);
+  const data = await fetchOAuthAccessToken(code, provider);
   if (!data.accessToken) {
     console.log("잘못된 접근");
     redirect("/error");
     // 에러 처리 필요
   } else {
-    cookies().set("token", data.accessToken, {
+    cookies().set("accessToken", data.accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",

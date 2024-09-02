@@ -1,5 +1,9 @@
-const getToken = async (OAuthPermittedCode: string, platform: "kakao") => {
+const fetchOAuthAccessToken = async (
+  OAuthPermittedCode: string,
+  platform: "kakao",
+) => {
   try {
+    // 백엔드 url 로 수정해야함
     const url = `/auth/login/oauth/${platform}`;
 
     const res = await fetch(url, {
@@ -20,4 +24,4 @@ const getToken = async (OAuthPermittedCode: string, platform: "kakao") => {
   }
 };
 
-export default getToken;
+export default fetchOAuthAccessToken;

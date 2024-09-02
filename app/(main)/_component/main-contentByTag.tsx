@@ -21,7 +21,7 @@ const MainContentByTag = () => {
   return (
     <section>
       <nav className="mb-4">
-        <ul className="scrollbar-hide flex w-full space-x-2 overflow-auto">
+        <ul className="flex flex-wrap gap-2">
           {PUBLIC_TAGS.map((tag) => (
             <li
               className="whitespace-nowrap rounded-md bg-blue-600 px-2 py-1 text-sm text-white"

@@ -21,10 +21,6 @@ export function CategoryCalendar({
 }: CategoryCalendarProps) {
   const [range, setRange] = useState<DateRange | undefined>(defaultRange);
 
-  // const handleSelect = useCallback(() => {
-  //   if (range && range.from && range.to) handleDate(range.from, range.to);
-  // }, [range]);
-
   useEffect(() => {
     if (range && range.from && range.to) handleDate(range.from, range.to);
   }, [range, handleDate]);
