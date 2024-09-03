@@ -35,6 +35,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Link from "next/link";
 
 export type Payment = {
   id: string;
@@ -182,6 +183,11 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ];
 
+/**
+ *
+ * @props Contents : POPup \\ exhibition => 컴포넌트 두개 두고 따로 따로 받을지 고민
+ */
+
 export function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -248,9 +254,11 @@ export function DataTableDemo() {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button className="ml-4" variant="outline">
-          등록하기
-        </Button>
+        <Link href="/admin/post">
+          <Button className="ml-4" variant="outline">
+            등록하기
+          </Button>
+        </Link>
       </div>
       <div className="rounded-md border">
         <Table>

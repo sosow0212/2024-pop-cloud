@@ -16,8 +16,6 @@ const TODAY = {
   endDate: new Date(),
 };
 const CategoryMain = ({ category }: CategoryMainProps) => {
-  const bottomRef = useRef<HTMLInputElement>(null);
-
   const [searchDate, setSearchDate] = useState<ISearchDate>(TODAY);
   const [searchRegions, setSearchRegions] = useState<ISearchRegion[]>(REGIONS);
   const [searchTags, setSearchTags] = useState<IPublicTag[]>(PUBLIC_TAGS);
@@ -30,9 +28,8 @@ const CategoryMain = ({ category }: CategoryMainProps) => {
       searchTags,
     });
 
-  useInfiniteScroll({
-    bottomRef,
-    loadMoreFunC: () => {},
+  const { inView, bottomRef } = useInfiniteScroll({
+    loadMoreFunC: fetchNextPage,
     shouldMore: hasNextPage,
   });
 
@@ -49,6 +46,7 @@ const CategoryMain = ({ category }: CategoryMainProps) => {
   //       잠시 후 다시 시도해주세요.
   //     </section>
   //   );
+
   if (status === "pending") <CategoryList.skeleton />;
 
   return (
@@ -62,15 +60,16 @@ const CategoryMain = ({ category }: CategoryMainProps) => {
       />
 
       <CategoryList
-        bottomRef={bottomRef}
+        inView={inView}
         categoryType={(category as "popup") || "exhibition"}
       />
 
-      {/* <div>
-        {status === "pending" && !isFetchingNextPage ? (
-          <CategoryList.skeleton />
-        ) : null}
-      </div> */}
+      <div ref={bottomRef} className="h-1" />
+      {isFetchingNextPage && (
+        <div className="flex items-center justify-center">
+          <div className="loader" />
+        </div>
+      )}
     </section>
   );
 };

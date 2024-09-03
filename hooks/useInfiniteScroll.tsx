@@ -1,26 +1,36 @@
-"use client";
-import { useInView } from "framer-motion";
-import { RefObject, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type IUseInfiniteScroll = {
   loadMoreFunC: () => void;
   shouldMore: boolean;
-  bottomRef: RefObject<HTMLInputElement>;
 };
 const useInfiniteScroll = ({
-  bottomRef,
   shouldMore,
   loadMoreFunC,
 }: IUseInfiniteScroll) => {
-  const isInView = useInView(bottomRef, {
-    amount: 0.5,
-    // once: true,
-  });
+  const bottomRef = useRef<HTMLInputElement>(null);
+  const [inView, setInView] = useState(false);
+
+  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
+    const target = entries[0];
+    setInView(target.isIntersecting);
+  }, []);
+
   useEffect(() => {
-    if (isInView && shouldMore) {
-      console.log("asd");
+    const ob = new IntersectionObserver(handleObserver, { threshold: 1 });
+    if (bottomRef.current) ob.observe(bottomRef.current);
+    return () => {
+      if (bottomRef.current) ob.unobserve(bottomRef.current);
+    };
+    // obRef.current.
+  }, [bottomRef]);
+
+  useEffect(() => {
+    if (inView && shouldMore) {
+      loadMoreFunC();
     }
-  }, [isInView]);
+  }, [inView, shouldMore]);
+  return { inView, bottomRef };
 };
 
 export default useInfiniteScroll;

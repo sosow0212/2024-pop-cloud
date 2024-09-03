@@ -3,21 +3,16 @@ import { RefObject, useEffect, useState } from "react";
 
 interface ContentCardProps {
   categoryType: "popup" | "exhibition";
-  cardId: string;
-  isLastCard?: boolean;
-  bottomRef?: RefObject<HTMLInputElement>;
+  cardId: number | string;
 }
 
-const ContentCard = ({
-  bottomRef,
-  isLastCard,
-  cardId,
-  categoryType = "popup",
-}: ContentCardProps) => {
+const ContentCard = ({ cardId, categoryType = "popup" }: ContentCardProps) => {
   return (
-    <div ref={isLastCard ? bottomRef : null} className="flex flex-col">
+    <div className="flex flex-col">
       <Link href={`/category/${categoryType}/${cardId}`}>
-        <div className="h-40 w-full rounded-md bg-black" />
+        <div className="h-40 w-full rounded-md bg-black text-white">
+          {cardId}
+        </div>
       </Link>
       <div className="flex flex-col items-start justify-center">
         {/* 이미지 hover 시 description 표시 */}
