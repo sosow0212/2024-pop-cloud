@@ -1,23 +1,8 @@
-const getPopupInfo = async (id: string): Promise<IPopupDetailInfo | Error> => {
+import qs from "query-string";
+
+const getPopupInfo = async (id: string) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/popup/${id}`);
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    }
-    throw new Error("internall error");
-  } catch (error) {
-    return error as Error;
-  }
-};
-
-const getPopupList = async (
-  lastPopupId: string,
-): Promise<IPopupListResponse[] | Error> => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/popup/${lastPopupId}`,
-    );
     if (res.ok) {
       const data = await res.json();
       return data;
@@ -68,4 +53,4 @@ const patchPopup = async (id: string, data: FormData) => {
   }
 };
 
-export { getPopupInfo, getPopupList, postPopupInfo, patchPopup };
+export { getPopupInfo, postPopupInfo, patchPopup };

@@ -4,6 +4,7 @@ import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
 import ModalProvider from "@/provider/modal-provider";
+import { QueryProvider } from "@/provider/query-provider";
 
 const pretendart = localFont({
   src: "../public/ko-font/PretendardVariable.woff2",
@@ -31,7 +32,7 @@ export default function RootLayout({
         />
         <ModalProvider />
         <div className="relative mx-auto h-full max-w-xl md:max-w-2xl">
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </div>
       </body>
     </html>

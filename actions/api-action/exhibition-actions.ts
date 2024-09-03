@@ -1,26 +1,7 @@
-const getExhibitionInfo = async (
-  id: string,
-): Promise<IExhibitionDetailInfo | Error> => {
+const getExhibitionInfo = async (id: string) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/exhibition/${id}`,
-    );
-    if (res.ok) {
-      const data = await res.json();
-      return data;
-    }
-    throw new Error("internall error");
-  } catch (error) {
-    return error as Error;
-  }
-};
-
-const getExhibitionList = async (
-  lastExhibitionId: string,
-): Promise<IExhibitionListResponse[] | Error> => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_ENDPOINT}/exhibition/${lastExhibitionId}`,
     );
     if (res.ok) {
       const data = await res.json();
@@ -75,9 +56,4 @@ const patchExhibition = async (id: string, data: FormData) => {
   }
 };
 
-export {
-  getExhibitionInfo,
-  getExhibitionList,
-  postExhibitionInfo,
-  patchExhibition,
-};
+export { getExhibitionInfo, postExhibitionInfo, patchExhibition };

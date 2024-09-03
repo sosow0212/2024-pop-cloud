@@ -44,7 +44,7 @@ const Total = ({
     searchRegions.length === REGIONS.length
       ? setIsChecked(true)
       : setIsChecked(false);
-  }, [searchRegions.length]);
+  }, [searchRegions]);
 
   const handleClick = (inputCheck: boolean) => {
     inputCheck ? setSearchRegions(REGIONS) : setSearchRegions([]);

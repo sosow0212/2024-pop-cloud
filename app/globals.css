@@ -141,3 +141,22 @@ body,
     margin-top: 0;
   }
 }
+
+@keyframes skeleton-gradient {
+  /* 0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  } */
+
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}
+
+/*해당되는 컴포넌트에 적용*/
+.skeleton-card {
+  animation: skeleton-gradient 1.8s infinite linear;
+}

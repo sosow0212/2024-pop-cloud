@@ -41,7 +41,7 @@ const Total = ({
     searchTags.length === PUBLIC_TAGS.length
       ? setIsChecked(true)
       : setIsChecked(false);
-  }, [searchTags.length]);
+  }, [searchTags]);
 
   const handleClick = (inputCheck: boolean) => {
     inputCheck ? setSearchTags(PUBLIC_TAGS) : setSearchTags([]);
