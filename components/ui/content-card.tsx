@@ -2,10 +2,10 @@ import Link from "next/link";
 import { RefObject, useEffect, useState } from "react";
 
 interface ContentCardProps {
-  categoryType?: "popup" | "exhibition";
+  categoryType: "popup" | "exhibition";
   cardId: string;
   isLastCard?: boolean;
-  bottomRef: RefObject<HTMLInputElement>;
+  bottomRef?: RefObject<HTMLInputElement>;
 }
 
 const ContentCard = ({
