@@ -10,7 +10,7 @@ const Navbar = () => {
       <NavIcon
         title="전시회"
         icon="exhibition.svg"
-        href="/category/exhibiton"
+        href="/category/exhibition"
       />
       <NavIcon title="플레이스" icon="hotplace.png" href="/maps" />
       <NavIcon title="좋아요" icon="like.svg" href="/favorite" />

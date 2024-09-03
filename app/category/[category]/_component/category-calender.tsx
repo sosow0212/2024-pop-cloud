@@ -32,7 +32,7 @@ export function CategoryCalendar({
       mode="range"
       onSelect={setRange}
       selected={range}
-      className={cn("rounded-md border bg-white", className)}
+      className={cn("relative z-50 rounded-md border bg-white", className)}
     />
   );
 }

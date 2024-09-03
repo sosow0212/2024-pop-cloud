@@ -3,6 +3,7 @@ import ContentCard from "@/components/ui/content-card";
 // 무한 스크롤?
 const FavoritePage = async () => {
   // const user = getCurrentProfile()
+
   return (
     <section className="h-full">
       FavoritePage

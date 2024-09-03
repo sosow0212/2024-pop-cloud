@@ -3,19 +3,23 @@ import { RefObject, useEffect, useState } from "react";
 
 interface ContentCardProps {
   categoryType: "popup" | "exhibition";
-  cardId: number | string;
+  cardId: number | string; // string으로 변경해야함
 }
 
 const ContentCard = ({ cardId, categoryType = "popup" }: ContentCardProps) => {
   return (
     <div className="flex flex-col">
       <Link href={`/category/${categoryType}/${cardId}`}>
-        <div className="h-40 w-full rounded-md bg-black text-white">
-          {cardId}
+        <div className="group relative flex h-40 w-full items-end justify-start overflow-hidden rounded-md p-10 text-white">
+          <div className="relative z-50 translate-y-10 overflow-hidden opacity-0 duration-700 group-hover:translate-y-0 group-hover:opacity-100">
+            {cardId}
+            {/* description 들어갈 자리 */}
+          </div>
+          <div className="absolute inset-0 bg-violet-400 transition-all group-hover:brightness-75" />
+          {/* 썸네일 들어갈 자리 */}
         </div>
       </Link>
       <div className="flex flex-col items-start justify-center">
-        {/* 이미지 hover 시 description 표시 */}
         <div className="flex w-full items-center justify-between">
           <Link href={`/category/${categoryType}/${cardId}`}>
             <h3>제목</h3>
