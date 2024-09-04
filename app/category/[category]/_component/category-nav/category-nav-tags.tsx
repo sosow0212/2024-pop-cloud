@@ -1,5 +1,11 @@
 import { PUBLIC_TAGS } from "@/constants";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+
+/**
+ *
+ * @will swiper slider -> drag scroll + button
+ */
 
 const CategoryNavTags = ({
   searchTags,
@@ -8,22 +14,47 @@ const CategoryNavTags = ({
   searchTags: IPublicTag[];
   setSearchTags: Dispatch<SetStateAction<IPublicTag[]>>;
 }) => {
+  const ulRef = useRef<HTMLUListElement>(null);
+  const handleArrow = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    direction: "right" | "left",
+  ) => {
+    e.preventDefault();
+    console.log(ulRef.current?.clientWidth);
+  };
   return (
     <div className="flex items-center space-x-2 whitespace-nowrap">
       <label className="font-semibold" htmlFor="location-options">
         태그
       </label>
-      <ul className="flex items-center justify-between space-x-4 overflow-auto py-2 scrollbar-hide">
-        <Total searchTags={searchTags} setSearchTags={setSearchTags} />
-        {PUBLIC_TAGS.map((tag: IPublicTag) => (
-          <Li
-            key={tag}
-            title={tag}
-            searchTags={searchTags}
-            setSearchTags={setSearchTags}
-          />
-        ))}
-      </ul>
+      <Total searchTags={searchTags} setSearchTags={setSearchTags} />
+      <div className="group relative w-full overflow-hidden">
+        <button
+          onClick={(e) => handleArrow(e, "left")}
+          className="absolute -left-1 top-1/2 -translate-y-1/2 font-extrabold text-blue-400 transition-all group-hover:block"
+        >
+          <ChevronLeft />
+        </button>
+        <button
+          onClick={(e) => handleArrow(e, "right")}
+          className="absolute right-0 top-1/2 -translate-y-1/2 font-extrabold text-blue-400 transition-all group-hover:block"
+        >
+          <ChevronRight />
+        </button>
+        <ul
+          ref={ulRef}
+          className="flex select-none items-center justify-start gap-x-2 overflow-auto py-2 scrollbar-hide"
+        >
+          {PUBLIC_TAGS.map((tag: IPublicTag) => (
+            <Li
+              key={tag}
+              title={tag}
+              searchTags={searchTags}
+              setSearchTags={setSearchTags}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
@@ -48,7 +79,11 @@ const Total = ({
   };
 
   return (
-    <li>
+    <li
+      style={{
+        listStyle: "none",
+      }}
+    >
       <input
         onChange={(e) => handleClick(e.target.checked)}
         className="peer hidden"

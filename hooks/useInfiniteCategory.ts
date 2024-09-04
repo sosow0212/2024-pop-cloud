@@ -49,7 +49,7 @@ const useInfiniteCategory = ({
         },
       );
 
-      const res = await fetch(url);
+      const res = await fetch("/api/aaa");
       if (res.ok) {
         const data = await res.json();
         return data;

@@ -1,4 +1,5 @@
 import { REGIONS } from "@/constants";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 const CategoryNavRegion = ({
@@ -13,20 +14,29 @@ const CategoryNavRegion = ({
       <label className="font-semibold" htmlFor="location-options">
         지역
       </label>
-      <ul className="flex items-center justify-between space-x-2 overflow-auto py-2 scrollbar-hide">
-        <Total
-          searchRegions={searchRegions}
-          setSearchRegions={setSearchRegions}
-        />
-        {REGIONS.map((region: ISearchRegion) => (
-          <Li
-            searchRegions={searchRegions}
-            key={region}
-            title={region}
-            setSearchRegions={setSearchRegions}
-          />
-        ))}
-      </ul>
+      <Total
+        searchRegions={searchRegions}
+        setSearchRegions={setSearchRegions}
+      />
+
+      <div className="group relative w-full overflow-hidden">
+        <button className="absolute -left-1 top-1/2 -translate-y-1/2 font-extrabold text-blue-400 transition-all group-hover:block">
+          <ChevronLeft />
+        </button>
+        <button className="absolute right-0 top-1/2 -translate-y-1/2 font-extrabold text-blue-400 transition-all group-hover:block">
+          <ChevronRight />
+        </button>
+        <ul className="flex select-none items-center justify-start gap-x-2 overflow-auto py-2 scrollbar-hide">
+          {REGIONS.map((region: ISearchRegion) => (
+            <Li
+              searchRegions={searchRegions}
+              key={region}
+              title={region}
+              setSearchRegions={setSearchRegions}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
@@ -51,7 +61,11 @@ const Total = ({
   };
 
   return (
-    <li>
+    <li
+      style={{
+        listStyle: "none",
+      }}
+    >
       <input
         onChange={(e) => handleClick(e.target.checked)}
         className="peer hidden"
