@@ -30,7 +30,15 @@ export function CategoryCalendar({
   return (
     <Calendar
       mode="range"
-      onSelect={setRange}
+      onSelect={(r) => {
+        if (r) {
+          const { from, to } = r;
+          setRange({
+            from: from,
+            to: to || from,
+          });
+        }
+      }}
       selected={range}
       className={cn("relative z-50 rounded-md border bg-white", className)}
     />
