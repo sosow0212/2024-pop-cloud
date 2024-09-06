@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
@@ -15,17 +16,20 @@ import { useRouter } from "next/navigation";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldErrors, FieldValues, useForm } from "react-hook-form";
-import { DateRange } from "react-day-picker";
+
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { CircleX, Divide, ImageUp } from "lucide-react";
+import { CircleX, ImageUp } from "lucide-react";
+import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
+import { cn } from "zero-cnn";
 
 const zodSchema = z.object({
   category: z.string(),
   title: z.string().min(2, "두 글자 이상"),
   description: z.string().min(5, "다섯 글자 이상"),
   publicTag: z.string().min(1),
-  img: z.string().array().min(1),
+  images: z.string().array().min(1),
   startDate: z.date(),
   endDate: z.date(),
   startTime: z.string().time(),
@@ -49,7 +53,7 @@ const defaultValues = {
   title: "",
   description: "",
   publicTag: "",
-  img: "",
+  images: [] as string[],
   startDate: new Date(),
   endDate: new Date(),
   startTime: "00:00:00",
@@ -61,8 +65,10 @@ const defaultValues = {
 };
 
 const AdminPostPage = () => {
+  const { toast } = useToast();
   const router = useRouter();
-  const [images, setImages] = useState([3, 4]);
+  const [images, setImages] = useState<string[]>([]);
+  const [imagePending, setImagePending] = useState(false);
   const {
     setValue,
     getValues,
@@ -79,24 +85,82 @@ const AdminPostPage = () => {
     to: new Date(),
   });
 
+  useEffect(() => {
+    if (selectedDate) {
+      const { from, to } = selectedDate;
+
+      if (from) setValue("startDate", from);
+      if (to) setValue("endDate", to);
+    }
+  }, [selectedDate, setValue]);
+
   const onValid = async (v: FieldValues) => {
     console.log(v);
   };
 
   const onInvalid = (e: FieldErrors<FieldValues>) => {
     console.log(e);
+    console.log(getValues("images"));
   };
 
-  useEffect(() => {
-    if (selectedDate) {
-      const { from, to } = selectedDate;
-      if (from) setValue("startDate", from);
-      if (to) setValue("endDate", to);
+  const handleUploadImage = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setImagePending(true);
+    try {
+      const files = event.target.files;
+
+      if (!files) throw new Error("something error on Upload");
+      if (files.length + images.length > 5) {
+        throw new Error("이미지 파일은 5개 이하로 만들어주세요");
+      }
+      const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
+      const formData = new FormData();
+      formData.append(
+        "upload_preset",
+        process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_PRESET!,
+      );
+      formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!);
+      const fetchResults = Array.from(files).map(async (file) => {
+        formData.append("file", file);
+        const res = await fetch(url, {
+          method: "POST",
+          body: formData,
+        });
+        if (!res.ok) throw new Error("something is wrong");
+        const data = await res.json();
+        const formImages = getValues("images") as string[];
+
+        setValue("images", formImages.concat(data.url));
+        return data.url;
+      });
+      const uploadUrls = await Promise.all(fetchResults);
+      setImages((p) => [...p, ...uploadUrls]);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({
+          variant: "destructive",
+          title: "이미지 업로드 에러",
+          description: error.message,
+        });
+      }
+      console.log(error);
+    } finally {
+      setImagePending(false);
     }
-  }, [selectedDate, setValue]);
+  };
 
   return (
     <section className="mt-10 h-full">
+      {imagePending && (
+        <div
+          style={{ zIndex: 9999 }}
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+        >
+          <div className="loader" />
+        </div>
+      )}
+
       <form
         className="flex flex-col space-y-6"
         onSubmit={handleSubmit(onValid, onInvalid)}
@@ -159,38 +223,60 @@ const AdminPostPage = () => {
           {...register("description")}
         />
         {/* image 등록 -> 첫 사진 썸넬 */}
-        <div className="grid h-[20vh] grid-cols-5 gap-x-3">
-          {images?.map((image, idx) => (
-            <div
-              key={image}
-              className="relative col-span-1 rounded-md bg-blue-300"
-            >
-              {idx === 0 && (
-                <div className="absolute left-1 top-1 rounded-md bg-black px-2 py-1 text-[0.7rem] text-white">
-                  대표 이미지
-                </div>
-              )}
-              <CircleX className="absolute right-0 top-0 z-20 size-6 -translate-y-1/2 translate-x-1/2 cursor-pointer rounded-full bg-white" />
-            </div>
-          ))}
-          <input
-            style={{ display: "none" }}
-            type="file"
-            name="img"
-            id="img-upload"
-            onChange={(e) => console.log(e.target.value)}
-          />
+        <div>
+          <div className="grid h-[20vh] grid-cols-5 gap-x-3">
+            {images?.map((image, idx) => (
+              <div
+                key={image}
+                className="relative col-span-1 rounded-md bg-slate-200"
+              >
+                <Image
+                  fill
+                  alt="이미지"
+                  src={image}
+                  className="rounded-md object-cover"
+                />
+                {idx === 0 && (
+                  <div className="absolute left-1 top-1 rounded-md bg-black px-2 py-1 text-[0.7rem] text-white">
+                    대표 이미지
+                  </div>
+                )}
+                <CircleX
+                  onClick={() =>
+                    setImages((p) => p.filter((iUrl) => iUrl !== image))
+                  }
+                  className="absolute right-0 top-0 z-20 size-6 -translate-y-1/2 translate-x-1/2 cursor-pointer rounded-full bg-white"
+                />
+              </div>
+            ))}
+            <input
+              style={{ display: "none" }}
+              type="file"
+              name="img"
+              id="img-upload"
+              onChange={handleUploadImage}
+              multiple
+              accept="image/*"
+            />
 
-          <label
-            htmlFor="img-upload"
-            className="group col-span-1 flex cursor-pointer flex-col items-center justify-center space-y-2 rounded-md border hover:border-black"
-          >
-            <ImageUp className="size-10 stroke-slate-400 stroke-1 group-hover:stroke-black" />
-            <div className="text-[0.8rem] font-medium text-slate-400 group-hover:text-black">
-              이미지 업로드
-            </div>
-          </label>
+            {/* length 5이상이면 안보이게 */}
+            {/* multiple 수정 */}
+            <label
+              htmlFor="img-upload"
+              className={cn(
+                `group flex cursor-pointer flex-col items-center justify-center space-y-2 rounded-md border hover:border-black`,
+                images.length >= 5 ? "hidden" : "col-span-1",
+              )}
+            >
+              <ImageUp className="size-10 stroke-slate-400 stroke-1 group-hover:stroke-black" />
+              <div className="text-center text-[0.8rem] font-medium text-slate-400 group-hover:text-black">
+                <div>이미지 업로드</div>
+                <div>({images.length}/5)</div>
+              </div>
+            </label>
+          </div>
         </div>
+
         {/* 오픈-종료 날자 + 시간*/}
         <div className="flex">
           <Calendar

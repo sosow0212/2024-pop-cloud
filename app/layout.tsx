@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ModalProvider from "@/provider/modal-provider";
 import { QueryProvider } from "@/provider/query-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const pretendart = localFont({
   src: "../public/ko-font/PretendardVariable.woff2",
@@ -30,6 +31,7 @@ export default function RootLayout({
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP}&libraries=services,clusterer&autoload=false`}
           strategy="beforeInteractive"
         />
+        <Toaster />
         <ModalProvider />
         <div className="relative mx-auto h-full max-w-xl md:max-w-2xl">
           <QueryProvider>{children}</QueryProvider>
