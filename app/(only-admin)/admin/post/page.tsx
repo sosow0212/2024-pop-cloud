@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldErrors, FieldValues, useForm } from "react-hook-form";
 
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CircleX, ImageUp } from "lucide-react";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
@@ -71,7 +71,18 @@ const AdminPostPage = () => {
   const { toast } = useToast();
   const router = useRouter();
   const { onOpen, isOpen } = useModalStore();
-  const [images, setImages] = useState<string[]>([]);
+
+  const draggingRef = useRef(-1);
+  const dragOverREf = useRef(-1);
+
+  const [images, setImages] = useState<string[]>([
+    "https://res.cloudinary.com/dukird6g5/image/upload/v1725692264/jnupqjsb3ejm1djdz2dh.jpg",
+
+    "https://res.cloudinary.com/dukird6g5/image/upload/v1725692263/gr0j9sewwp98fu7ouefc.jpg",
+    "https://res.cloudinary.com/dukird6g5/image/upload/v1725692263/jhrrdneucguadbmzoykh.jpg",
+    "https://res.cloudinary.com/dukird6g5/image/upload/v1725691502/yfdl0yr0pqgf1g8e42t7.jpg",
+    "https://res.cloudinary.com/dukird6g5/image/upload/v1725691502/lvee5itij7jhxxudomig.jpg",
+  ]);
   const [imagePending, setImagePending] = useState(false);
   const [addressValue, setAddressValue] = useState<string>();
   const {
@@ -125,8 +136,6 @@ const AdminPostPage = () => {
 
   const onInvalid = (e: FieldErrors<FieldValues>) => {
     console.log(e);
-
-    sessionStorage.removeItem(process.env.NEXT_PUBLIC_POST_ADDRESS!);
   };
 
   const handleUploadImage = async (
@@ -273,6 +282,29 @@ const AdminPostPage = () => {
             <div
               key={image}
               className="relative col-span-1 rounded-md bg-slate-200"
+              draggable
+              onDragStart={(e) => {
+                draggingRef.current = idx;
+              }}
+              onDragOver={(e) => {
+                e.preventDefault();
+                dragOverREf.current = idx;
+              }}
+              onDragEnd={() => {
+                const draggingIndex = draggingRef.current;
+                const targetIndex = dragOverREf.current;
+
+                if (draggingIndex === targetIndex) {
+                  return;
+                }
+
+                setImages((prevImages) => {
+                  const newImages = [...prevImages];
+                  const [removed] = newImages.splice(draggingIndex, 1);
+                  newImages.splice(targetIndex, 0, removed);
+                  return newImages;
+                });
+              }}
             >
               <Image
                 fill
@@ -304,8 +336,6 @@ const AdminPostPage = () => {
             accept="image/*"
           />
 
-          {/* length 5이상이면 안보이게 */}
-          {/* multiple 수정 */}
           <label
             htmlFor="img-upload"
             className={cn(
