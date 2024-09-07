@@ -1,6 +1,6 @@
 import { create, createStore } from "zustand";
 
-type IModal = null | "auth";
+type IModal = null | "auth" | "map";
 
 interface ModalStoreProps {
   modal: IModal;

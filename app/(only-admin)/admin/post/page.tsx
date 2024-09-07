@@ -23,6 +23,7 @@ import { CircleX, ImageUp } from "lucide-react";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "zero-cnn";
+import { useModalStore } from "@/lib/store";
 
 const zodSchema = z.object({
   category: z.string(),
@@ -35,9 +36,10 @@ const zodSchema = z.object({
   startTime: z.string().time(),
   closeTime: z.string().time(),
   parking: z.boolean(),
-  location: z.string().min(1),
-  latitude: z.number(),
-  longitude: z.number(),
+  address: z.string().min(1),
+  zonecode: z.string().min(1),
+  latitude: z.string(),
+  longitude: z.string(),
 });
 
 const TIME = Array.from({ length: 25 })
@@ -56,10 +58,11 @@ const defaultValues = {
   images: [] as string[],
   startDate: new Date(),
   endDate: new Date(),
-  startTime: "00:00:00",
-  closeTime: "00:00:00",
+  startTime: "",
+  closeTime: "",
   parking: false,
-  location: null,
+  address: "",
+  zonecode: "",
   latitude: null,
   longitude: null,
 };
@@ -67,18 +70,22 @@ const defaultValues = {
 const AdminPostPage = () => {
   const { toast } = useToast();
   const router = useRouter();
+  const { onOpen, isOpen } = useModalStore();
   const [images, setImages] = useState<string[]>([]);
   const [imagePending, setImagePending] = useState(false);
+  const [addressValue, setAddressValue] = useState<string>();
   const {
     setValue,
     getValues,
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: zodResolver(zodSchema),
     defaultValues,
   });
+
   const [startTimeIdx, setStartTimeIdx] = useState(-1);
   const [selectedDate, setSelectedDate] = useState({
     from: new Date(),
@@ -94,13 +101,32 @@ const AdminPostPage = () => {
     }
   }, [selectedDate, setValue]);
 
+  useEffect(() => {
+    if (isOpen === false) {
+      const sessionAddress = sessionStorage.getItem(
+        process.env.NEXT_PUBLIC_POST_ADDRESS!,
+      );
+      if (sessionAddress) {
+        const { address, zonecode, latitude, longitude } =
+          JSON.parse(sessionAddress);
+        setValue("address", address);
+        setValue("zonecode", zonecode);
+        setValue("latitude", latitude);
+        setValue("longitude", longitude);
+        setAddressValue(`(${zonecode}) ${address}`);
+      }
+    }
+  }, [isOpen, setValue]);
+
   const onValid = async (v: FieldValues) => {
     console.log(v);
+    sessionStorage.removeItem(process.env.NEXT_PUBLIC_POST_ADDRESS!);
   };
 
   const onInvalid = (e: FieldErrors<FieldValues>) => {
     console.log(e);
-    console.log(getValues("images"));
+
+    sessionStorage.removeItem(process.env.NEXT_PUBLIC_POST_ADDRESS!);
   };
 
   const handleUploadImage = async (
@@ -164,6 +190,7 @@ const AdminPostPage = () => {
       <form
         className="flex flex-col space-y-6"
         onSubmit={handleSubmit(onValid, onInvalid)}
+        noValidate
       >
         <div className="flex items-center space-x-2">
           <div>
@@ -203,9 +230,23 @@ const AdminPostPage = () => {
 
         {/* 제목 및 해시태그 선택 */}
         <div className="flex space-x-2">
-          <Input type="text" placeholder="title" {...register("title")} />
-          <Select onValueChange={(v) => setValue("publicTag", v)}>
-            <SelectTrigger>
+          <Input
+            className={
+              errors.title && "border-red-500 focus-visible:ring-red-400"
+            }
+            type="text"
+            required
+            placeholder="title"
+            {...register("title")}
+          />
+          <Select required onValueChange={(v) => setValue("publicTag", v)}>
+            <SelectTrigger
+              className={cn(
+                errors.publicTag &&
+                  watch("publicTag").length === 0 &&
+                  "border-red-500 focus:ring-red-400",
+              )}
+            >
               <SelectValue placeholder="대표 해시태그" />
             </SelectTrigger>
             <SelectContent>
@@ -220,61 +261,67 @@ const AdminPostPage = () => {
         <Input
           type="text"
           placeholder="description"
+          className={
+            errors.description && "border-red-500 focus-visible:ring-red-400"
+          }
+          required
           {...register("description")}
         />
-        {/* image 등록 -> 첫 사진 썸넬 */}
-        <div>
-          <div className="grid h-[20vh] grid-cols-5 gap-x-3">
-            {images?.map((image, idx) => (
-              <div
-                key={image}
-                className="relative col-span-1 rounded-md bg-slate-200"
-              >
-                <Image
-                  fill
-                  alt="이미지"
-                  src={image}
-                  className="rounded-md object-cover"
-                />
-                {idx === 0 && (
-                  <div className="absolute left-1 top-1 rounded-md bg-black px-2 py-1 text-[0.7rem] text-white">
-                    대표 이미지
-                  </div>
-                )}
-                <CircleX
-                  onClick={() =>
-                    setImages((p) => p.filter((iUrl) => iUrl !== image))
-                  }
-                  className="absolute right-0 top-0 z-20 size-6 -translate-y-1/2 translate-x-1/2 cursor-pointer rounded-full bg-white"
-                />
-              </div>
-            ))}
-            <input
-              style={{ display: "none" }}
-              type="file"
-              name="img"
-              id="img-upload"
-              onChange={handleUploadImage}
-              multiple
-              accept="image/*"
-            />
-
-            {/* length 5이상이면 안보이게 */}
-            {/* multiple 수정 */}
-            <label
-              htmlFor="img-upload"
-              className={cn(
-                `group flex cursor-pointer flex-col items-center justify-center space-y-2 rounded-md border hover:border-black`,
-                images.length >= 5 ? "hidden" : "col-span-1",
-              )}
+        {/* image 등록*/}
+        <div className="grid h-[20vh] grid-cols-5 gap-x-3">
+          {images?.map((image, idx) => (
+            <div
+              key={image}
+              className="relative col-span-1 rounded-md bg-slate-200"
             >
-              <ImageUp className="size-10 stroke-slate-400 stroke-1 group-hover:stroke-black" />
-              <div className="text-center text-[0.8rem] font-medium text-slate-400 group-hover:text-black">
-                <div>이미지 업로드</div>
-                <div>({images.length}/5)</div>
-              </div>
-            </label>
-          </div>
+              <Image
+                fill
+                alt="이미지"
+                src={image}
+                className="rounded-md object-cover"
+              />
+              {idx === 0 && (
+                <div className="absolute left-1 top-1 rounded-md bg-black px-2 py-1 text-[0.7rem] text-white">
+                  대표 이미지
+                </div>
+              )}
+              <CircleX
+                onClick={() =>
+                  setImages((p) => p.filter((iUrl) => iUrl !== image))
+                }
+                className="absolute right-0 top-0 z-20 size-6 -translate-y-1/2 translate-x-1/2 cursor-pointer rounded-full bg-white"
+              />
+            </div>
+          ))}
+          <input
+            required
+            style={{ display: "none" }}
+            type="file"
+            name="img"
+            id="img-upload"
+            onChange={handleUploadImage}
+            multiple
+            accept="image/*"
+          />
+
+          {/* length 5이상이면 안보이게 */}
+          {/* multiple 수정 */}
+          <label
+            htmlFor="img-upload"
+            className={cn(
+              `group flex cursor-pointer flex-col items-center justify-center space-y-2 rounded-md border hover:border-black`,
+              images.length >= 5 ? "hidden" : "col-span-1",
+              errors.images &&
+                watch("images").length === 0 &&
+                "border-red-500 focus-visible:ring-red-400",
+            )}
+          >
+            <ImageUp className="size-10 stroke-slate-400 stroke-1 group-hover:stroke-black" />
+            <div className="text-center text-[0.8rem] font-medium text-slate-400 group-hover:text-black">
+              <div>이미지 업로드</div>
+              <div>({images.length}/5)</div>
+            </div>
+          </label>
         </div>
 
         {/* 오픈-종료 날자 + 시간*/}
@@ -295,27 +342,42 @@ const AdminPostPage = () => {
           />
           <div className="flex w-full flex-col items-start justify-start space-y-4 py-4 *:w-2/3">
             <Input
+              required
               type="date"
               placeholder="시작 날짜"
               // value={selectedDate?.from}
               value={format(selectedDate.from, "yyyy-MM-dd")}
               readOnly
+              className={
+                errors.startDate && "border-red-500 focus-visible:ring-red-400"
+              }
             />
             <Input
+              required
               type="date"
               placeholder="종료 날짜"
               value={format(selectedDate.to, "yyyy-MM-dd")}
               readOnly
+              className={
+                errors.endDate && "border-red-500 focus-visible:ring-red-400"
+              }
             />
             {/* 오픈 시간 */}
             <Select
+              required
               onValueChange={(v) => {
                 const [value, idx] = v.split(" ");
                 setValue("startTime", value);
                 setStartTimeIdx(+idx);
               }}
             >
-              <SelectTrigger>
+              <SelectTrigger
+                className={cn(
+                  errors.startTime &&
+                    watch("startTime").length === 0 &&
+                    "border-red-500 focus:ring-red-400",
+                )}
+              >
                 <SelectValue placeholder="오픈 시간" />
               </SelectTrigger>
               <SelectContent>
@@ -327,8 +389,14 @@ const AdminPostPage = () => {
               </SelectContent>
             </Select>
             {/* 마감 시간 */}
-            <Select onValueChange={(v) => setValue("closeTime", v)}>
-              <SelectTrigger>
+            <Select required onValueChange={(v) => setValue("closeTime", v)}>
+              <SelectTrigger
+                className={cn(
+                  errors.closeTime &&
+                    watch("closeTime").length === 0 &&
+                    "border-red-500 focus:ring-red-400",
+                )}
+              >
                 <SelectValue placeholder="마감 시간" />
               </SelectTrigger>
               <SelectContent>
@@ -342,6 +410,7 @@ const AdminPostPage = () => {
           </div>
         </div>
 
+        {/* 주차 가능 불가능 */}
         <div className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -362,20 +431,25 @@ const AdminPostPage = () => {
             주차 불가능
           </label>
         </div>
+        {/* 주소 + 위도 경도 */}
         <div className="relative w-full">
           {/* 쥬소 레지스터 해야함 */}
-          <Input
-            type="text"
-            readOnly
-            placeholder="주소 입력"
-            className="py-5"
-          />
-          <Button
-            className="absolute right-1 top-1/2 -translate-y-1/2 bg-slate-300 text-black hover:bg-slate-400"
-            size="sm"
+          <div
+            className={cn(
+              "rounded-md border px-2 py-3",
+              errors.address &&
+                watch("address").length === 0 &&
+                "border-red-500 ring-1 ring-red-400 ring-offset-2",
+            )}
+          >
+            {addressValue ? addressValue : "주소를 입력해주세요."}
+          </div>
+          <div
+            onClick={() => onOpen("map")}
+            className="absolute right-1 top-1/2 -translate-y-1/2 cursor-pointer rounded-md bg-slate-300 px-2 py-1 text-black transition-all hover:bg-blue-500 hover:text-white"
           >
             주소 검색
-          </Button>
+          </div>
           {/* 주소 && <Map /> */}
         </div>
         <Button variant="outline">등록하기</Button>

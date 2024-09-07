@@ -31,6 +31,8 @@ export default function RootLayout({
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP}&libraries=services,clusterer&autoload=false`}
           strategy="beforeInteractive"
         />
+        <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" />
+
         <Toaster />
         <ModalProvider />
         <div className="relative mx-auto h-full max-w-xl md:max-w-2xl">

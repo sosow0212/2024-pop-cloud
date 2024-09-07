@@ -19,6 +19,7 @@ const MainReviews = () => {
   };
 
   return (
+    // carousel 로 꾸미기
     <div className="flex flex-col gap-y-2">
       <h3>최근 등록 된 리뷰 </h3>
       {Array.from({ length: n }).map((aa, idx) => (

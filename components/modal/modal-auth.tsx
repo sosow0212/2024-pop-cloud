@@ -10,26 +10,27 @@ import Image from "next/image";
 
 const ModalAuth = () => {
   const { isOpen, modal, onClose } = useModalStore();
-  if (!isOpen && modal !== "auth") return;
+  if (isOpen && modal === "auth")
+    return (
+      <Dialog open={isOpen} onOpenChange={onClose}>
+        <DialogContent className="min-h-[50vh] max-w-lg">
+          <DialogHeader className="">
+            <DialogTitle className="text-[1.75rem]">
+              POP CLOUD 로그인
+            </DialogTitle>
+            <DialogDescription>
+              sns 계정으로 빠르게 로그인/회원가입을 해보세요!
+            </DialogDescription>
+          </DialogHeader>
 
-  return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="min-h-[50vh] max-w-lg">
-        <DialogHeader className="">
-          <DialogTitle className="text-[1.75rem]">POP CLOUD 로그인</DialogTitle>
-          <DialogDescription>
-            sns 계정으로 빠르게 로그인/회원가입을 해보세요!
-          </DialogDescription>
-        </DialogHeader>
-
-        <ul className="flex flex-col items-center space-y-4">
-          <OAuthBtn provider="kakao" />
-          <OAuthBtn provider="google" />
-          <OAuthBtn provider="naver" />
-        </ul>
-      </DialogContent>
-    </Dialog>
-  );
+          <ul className="flex flex-col items-center space-y-4">
+            <OAuthBtn provider="kakao" />
+            <OAuthBtn provider="google" />
+            <OAuthBtn provider="naver" />
+          </ul>
+        </DialogContent>
+      </Dialog>
+    );
 };
 
 const OAUTH = {
