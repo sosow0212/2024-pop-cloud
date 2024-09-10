@@ -1,0 +1,24 @@
+<!-- https://www.svgrepo.com -->
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  width="800px" height="800px"
+	 viewBox="0 0 64 45" enable-background="new 0 0 64 45" xml:space="preserve">
+<title>Picture</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1" sketch:type="MSPage">
+	<g id="Picture" transform="translate(1.000000, 1.000000)" sketch:type="MSLayerGroup">
+		<path id="Shape_4_" sketch:type="MSShapeGroup" fill="none" stroke="#6B6C6E" stroke-width="3" d="M62,41.8c0,0.7-0.5,1.2-1.1,1.2
+			H1.2c-0.6,0-1.1-0.5-1.1-1.2V1.2C0.1,0.5,0.6,0,1.2,0h59.7C61.5,0,62,0.5,62,1.2V41.8L62,41.8z"/>
+		<path id="Shape_2_" sketch:type="MSShapeGroup" fill="none" stroke="#6B6C6E" stroke-width="3" d="M58,38c0,0.6-0.4,1-1,1H5.1
+			c-0.6,0-1-0.4-1-1V5c0-0.6,0.4-1,1-1H57c0.6,0,1,0.4,1,1V38L58,38z"/>
+		<path id="Shape" sketch:type="MSShapeGroup" fill="none" stroke="#6B6C6E" stroke-width="3" d="M4.6,38.8C12.9,30,20.1,27,20.1,27
+			s8.4,2.7,16.5,11.9"/>
+		<path id="Shape_1_" sketch:type="MSShapeGroup" fill="none" stroke="#6B6C6E" stroke-width="3" d="M26.8,30c5.4-4.9,15.3-9,15.3-9
+			s9.9,4.2,16,11"/>
+		<circle id="Oval" sketch:type="MSShapeGroup" fill="none" stroke="#6B6C6E" stroke-width="3" cx="18.5" cy="15.5" r="4.5">
+		</circle>
+	</g>
+</g>
+</svg>

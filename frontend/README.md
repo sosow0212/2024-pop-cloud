@@ -1,0 +1,36 @@
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+https://apis.map.kakao.com/web/guide/
+
+```plaintext
+NEXT_PUBLIC_ENDPOINT =
+
+NEXT_PUBLIC_KAKAOMAP =
+
+NEXT_PUBLIC_AUTH_KAKAO_CLIENTID =
+NEXT_PUBLIC_AUTH_KAKAO_CLIENTSECRET =
+NEXT_PUBLIC_AUTH_KAKAO_REDIRECT_URI =
+
+
+<!-- NEXT_PUBLIC_AUTH_GOOGLE_CLIENTID =
+NEXT_PUBLIC_AUTH_GOOGLE_CLIENTSECRET =
+NEXT_PUBLIC_AUTH_GOOGLE_REDIRECT_URI =
+
+NEXT_PUBLIC_AUTH_NAVER_CLIENTID =
+NEXT_PUBLIC_AUTH_NAVER_CLIENTSECRET =
+NEXT_PUBLIC_AUTH_NAVER_REDIRECT_URI = -->
+
+
+```
