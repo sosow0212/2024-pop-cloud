@@ -1,39 +1,45 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const MainReviews = () => {
   //  react query 이용해서 리뷰 받아오기
   const router = useRouter();
-  const [isFirstClick, setIsFirstClick] = useState(false);
-  const [n, setN] = useState(2); // 버튼 클릭 이벤트 모션을 위해 선언한 임시 state
-  const handleClick = () => {
-    if (!isFirstClick) {
-      setIsFirstClick(true);
-      // 쿼리 패치 이용해서 한 번 더 리뷰 데이터 받아오기
-      setN(4);
-    } else {
-      router.push("review");
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const ulRef = useRef<HTMLUListElement>(null);
+  const animationId = useRef();
+
+  useEffect(() => {
+    if (!wrapperRef.current || !ulRef.current) return;
+    const wrapper = wrapperRef.current;
+    const ul = ulRef.current;
+
+    const fullWidth = ul.clientWidth;
+    const left = ul.getBoundingClientRect().x;
+    if (-left > fullWidth) {
     }
-  };
+  }, []);
 
   return (
     // carousel 로 꾸미기
-    <div className="flex flex-col gap-y-2">
+    <article className="flex flex-col gap-y-2">
       <h3>최근 등록 된 리뷰 </h3>
-      {Array.from({ length: n }).map((aa, idx) => (
-        <Review key={idx} />
-      ))}
-
-      <button
-        onClick={handleClick}
-        className="w-full rounded-md bg-blue-400 py-1 text-center text-white transition-colors hover:bg-blue-600"
-      >
-        더보기
-      </button>
-      {/* 첫 클릭 시 리뷰 두개 더 보여주고 두 번째 클릭 시 리뷰 페이지로 이동 */}
-    </div>
+      <div ref={wrapperRef} className="flex w-full items-center">
+        <ul ref={ulRef}>
+          {Array.from({ length: 10 }).map((aa, idx) => (
+            <li key={idx} className="flex items-center gap-x-2">
+              <MainReviews.review />
+            </li>
+          ))}
+          {Array.from({ length: 10 }).map((aa, idx) => (
+            <li key={idx} className="flex items-center gap-x-2">
+              <MainReviews.review />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
   );
 };
 
@@ -44,7 +50,7 @@ interface ReviewProps {
   date: Date;
 }
 
-const Review = () => {
+MainReviews.review = () => {
   return (
     <div className="flex items-center space-x-2">
       {/* 등록자의  프로필 이미지 */}

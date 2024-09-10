@@ -67,6 +67,11 @@ const defaultValues = {
   longitude: null,
 };
 
+interface ImageFile {
+  file: File;
+  preview: string;
+}
+
 const AdminPostPage = () => {
   const { toast } = useToast();
   const router = useRouter();
@@ -75,14 +80,9 @@ const AdminPostPage = () => {
   const draggingRef = useRef(-1);
   const dragOverREf = useRef(-1);
 
-  const [images, setImages] = useState<string[]>([
-    "https://res.cloudinary.com/dukird6g5/image/upload/v1725692264/jnupqjsb3ejm1djdz2dh.jpg",
+  const [images, setImages] = useState<string[]>([]);
+  const [imageFiles, setImageFiles] = useState<ImageFile[]>([]);
 
-    "https://res.cloudinary.com/dukird6g5/image/upload/v1725692263/gr0j9sewwp98fu7ouefc.jpg",
-    "https://res.cloudinary.com/dukird6g5/image/upload/v1725692263/jhrrdneucguadbmzoykh.jpg",
-    "https://res.cloudinary.com/dukird6g5/image/upload/v1725691502/yfdl0yr0pqgf1g8e42t7.jpg",
-    "https://res.cloudinary.com/dukird6g5/image/upload/v1725691502/lvee5itij7jhxxudomig.jpg",
-  ]);
   const [imagePending, setImagePending] = useState(false);
   const [addressValue, setAddressValue] = useState<string>();
   const {
@@ -130,6 +130,7 @@ const AdminPostPage = () => {
   }, [isOpen, setValue]);
 
   const onValid = async (v: FieldValues) => {
+    // 서버로 images 대신 imageFiles을 보내줘야 함
     console.log(v);
     sessionStorage.removeItem(process.env.NEXT_PUBLIC_POST_ADDRESS!);
   };
@@ -149,28 +150,16 @@ const AdminPostPage = () => {
       if (files.length + images.length > 5) {
         throw new Error("이미지 파일은 5개 이하로 만들어주세요");
       }
-      const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
-      const formData = new FormData();
-      formData.append(
-        "upload_preset",
-        process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_PRESET!,
-      );
-      formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!);
-      const fetchResults = Array.from(files).map(async (file) => {
-        formData.append("file", file);
-        const res = await fetch(url, {
-          method: "POST",
-          body: formData,
-        });
-        if (!res.ok) throw new Error("something is wrong");
-        const data = await res.json();
-        const formImages = getValues("images") as string[];
 
-        setValue("images", formImages.concat(data.url));
-        return data.url;
-      });
-      const uploadUrls = await Promise.all(fetchResults);
-      setImages((p) => [...p, ...uploadUrls]);
+      const newImageFiles: ImageFile[] = Array.from(files).map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+      }));
+      setImageFiles((prevFiles) => [...prevFiles, ...newImageFiles]);
+      setImages((prevImages) => [
+        ...prevImages,
+        ...newImageFiles.map((img) => img.preview),
+      ]);
     } catch (error) {
       if (error instanceof Error) {
         toast({
@@ -184,6 +173,12 @@ const AdminPostPage = () => {
       setImagePending(false);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      imageFiles.forEach((imageFile) => URL.revokeObjectURL(imageFile.preview));
+    };
+  }, [imageFiles]);
 
   return (
     <section className="mt-10 h-full">
