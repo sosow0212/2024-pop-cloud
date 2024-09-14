@@ -1,5 +1,6 @@
 package com.api.show.exhibition.presentation;
 
+import com.api.show.common.resolver.ClientIpFinderResolver;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.api.helper.MockBeanInjection;
@@ -18,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
 import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static show.exhibition.domain.ExhibitionSimpleResponseFixture.개인전시회_간단_조회_응답_생성;
 import static show.exhibition.domain.ExhibitionSpecificResponseFixture.개인전시회_상세_조회_응답_생성;
 import static com.api.helper.RestDocsHelper.customDocument;
@@ -51,6 +54,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ExhibitionControllerWebMvcTest extends MockBeanInjection {
 
     private static final String BEARER_TOKEN = "Bearer tokenInfo ~~";
+
+    @Autowired
+    private ClientIpFinderResolver clientIpFinderResolver;
 
     @Autowired
     private MockMvc mockMvc;
@@ -103,7 +109,9 @@ class ExhibitionControllerWebMvcTest extends MockBeanInjection {
     void 개인전시회를_상세_조회한다() throws Exception {
         // given
         ExhibitionSpecificResponse response = 개인전시회_상세_조회_응답_생성();
-        when(exhibitionQueryService.findById(anyLong())).thenReturn(response);
+        when(exhibitionQueryService.findById(anyLong(), anyString())).thenReturn(response);
+        when(clientIpFinderResolver.supportsParameter(any())).thenReturn(true);
+        when(clientIpFinderResolver.resolveArgument(any(), any(), any(), any())).thenReturn("123.11.1.1");
 
         // when & then
         mockMvc.perform(get("/exhibitions/{exhibitionId}", 1L)

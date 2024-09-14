@@ -57,6 +57,11 @@ public class ExhibitionFakeRepository implements ExhibitionRepository {
     }
 
     @Override
+    public Optional<Exhibition> findByIdWithOptimisticLock(final Long exhibitionId) {
+        return Optional.ofNullable(exhibitionDB.get(exhibitionId));
+    }
+
+    @Override
     public Optional<ExhibitionSpecificResponse> findSpecificById(final Long exhibitionId) {
         if (!exhibitionDB.containsKey(exhibitionId)) {
             return Optional.empty();
