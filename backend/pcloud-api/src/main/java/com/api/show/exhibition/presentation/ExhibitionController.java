@@ -1,5 +1,6 @@
 package com.api.show.exhibition.presentation;
 
+import com.api.show.common.annotation.ClientIpFinder;
 import com.api.show.exhibition.application.ExhibitionQueryService;
 import com.api.show.exhibition.application.ExhibitionService;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
@@ -54,8 +55,10 @@ public class ExhibitionController {
      * TODO: 조회 시 방문자 수 처리 (추후에 유스케이스 적용)
      */
     @GetMapping("/{exhibitionId}")
-    public ResponseEntity<ExhibitionSpecificResponse> findById(@PathVariable final Long exhibitionId) {
-        return ResponseEntity.ok(exhibitionQueryService.findById(exhibitionId));
+    public ResponseEntity<ExhibitionSpecificResponse> findById(
+            @PathVariable final Long exhibitionId,
+            @ClientIpFinder final String clientIp) {
+        return ResponseEntity.ok(exhibitionQueryService.findById(exhibitionId, clientIp));
     }
 
     @GetMapping

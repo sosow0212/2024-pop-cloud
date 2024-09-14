@@ -13,6 +13,8 @@ public interface ExhibitionRepository {
 
     Optional<Exhibition> findById(Long exhibitionId);
 
+    Optional<Exhibition> findByIdWithOptimisticLock(Long exhibitionId);
+
     Optional<ExhibitionSpecificResponse> findSpecificById(Long exhibitionId);
 
     List<ExhibitionSimpleResponse> findAllWithPaging(Long exhibitionId, Integer pageSize);
