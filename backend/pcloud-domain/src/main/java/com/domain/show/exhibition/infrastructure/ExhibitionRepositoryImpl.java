@@ -34,6 +34,11 @@ public class ExhibitionRepositoryImpl implements ExhibitionRepository {
     }
 
     @Override
+    public Optional<Exhibition> findByIdWithOptimisticLock(final Long exhibitionId) {
+        return exhibitionJpaRepository.findByIdWithOptimisticLock(exhibitionId);
+    }
+
+    @Override
     public Optional<ExhibitionSpecificResponse> findSpecificById(final Long exhibitionId) {
         return exhibitionQueryRepository.findSpecificById(exhibitionId);
     }

@@ -39,9 +39,10 @@ class ExhibitionQueryServiceTest {
         // given
         Exhibition savedExhibition = exhibitionRepository.save(개인전시회_생성_사진_개인전());
         Long exhibitionId = savedExhibition.getId();
+        String clientIp = "clientIp";
 
         // when
-        ExhibitionSpecificResponse response = exhibitionQueryService.findById(exhibitionId);
+        ExhibitionSpecificResponse response = exhibitionQueryService.findById(exhibitionId, clientIp);
 
         // then
         ExhibitionSpecificResponse expectedResponse = 개인전시회_상세_조회_응답_생성_개인전시회(savedExhibition);

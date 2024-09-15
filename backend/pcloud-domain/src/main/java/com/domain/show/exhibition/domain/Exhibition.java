@@ -16,6 +16,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -59,6 +60,9 @@ public class Exhibition extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PublicTag publicTag;
+
+    @Version
+    private Long version;
 
     public static Exhibition of(
             final long memberId,
