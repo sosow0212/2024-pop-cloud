@@ -14,7 +14,6 @@ public class ExhibitionCacheRepositoryImpl implements ExhibitionCacheRepository 
 
     private final RedisTemplate<String, String> redisTemplate;
 
-
     @Override
     public void cacheExhibitionIdWithIp(final Long exhibitionId, final String ip) {
         String key = makeExhibitionIdWithIpKeyName(exhibitionId);
