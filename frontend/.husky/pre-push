@@ -1,0 +1,13 @@
+#!/bin/sh
+
+yarn lint
+
+current_branch=$(git branch --show-current)
+
+restricted_branches="^(main|develop)$"
+
+if [[ $current_branch =~ $restricted_branches ]]; then
+  echo "❌ You are on a restricted branch: $current_branch.. ❌"
+  echo "❌ Commits to this branch are not allowed via pre-commit hook.. ❌"
+  exit 1
+fi
