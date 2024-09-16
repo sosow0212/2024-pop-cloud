@@ -1,5 +1,5 @@
 #!/bin/sh
-cd frontend
+
 
 yarn lint
 
