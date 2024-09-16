@@ -48,7 +48,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
     "chromatic": "^11.10.2",
-    "eslint": "^9.10.0",
+    "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-next": "^14.2.11",
@@ -63,8 +63,5 @@
     "storybook": "^8.3.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  },
-  "husky": {
-    "gitDir": "../.git"
   }
 }
