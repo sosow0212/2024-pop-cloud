@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postinstall": "husky install",
     "format": "prettier --cache --write .",
     "lint": "eslint --cache .",
     "storybook": "storybook dev -p 6006",
