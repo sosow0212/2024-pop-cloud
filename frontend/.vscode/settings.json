@@ -1,0 +1,23 @@
+{
+  "editor.formatOnSave": true, //저장 시 format
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // prettier를 기본 값으로 format
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always", //저장 시 모든 자동 수정 작업 실행
+    "source.fixAll.eslint": "explicit" //ESLint 관련 모든 자동 수정 작업 실행
+  },
+  "cSpell.words": [
+    //에러는 아니지만 철자가 틀렸다고 나와서 없애려고 임시로 추가했습니다.
+    "autodocs",
+    "chpt",
+    "classname",
+    "clsx",
+    "commitlint",
+    "hookform",
+    "nextjs",
+    "Parens",
+    "Pretendard",
+    "tailwindcss"
+  ]
+  //아래에는 일괄처리 하는 코드입니다.
+  // "cSpell.enabled": false
+}

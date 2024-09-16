@@ -16,5 +16,3 @@ if [[ $current_branch =~ $restricted_branches ]]; then
   echo "❌ Commits to this branch are not allowed via pre-commit hook.. ❌"
   exit 1
 fi
-
-cd frontend && yarn lint-staged
