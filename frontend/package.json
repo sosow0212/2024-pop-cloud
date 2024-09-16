@@ -11,7 +11,7 @@
     "lint": "eslint --cache .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "cd .. && husky ./frontend/.husky"
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
