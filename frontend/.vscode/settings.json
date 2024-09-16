@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true, //저장 시 format
+  "editor.formatOnSave": true, //저장 시 format 돌아가게
   "editor.defaultFormatter": "esbenp.prettier-vscode", // prettier를 기본 값으로 format
   "editor.codeActionsOnSave": {
     "source.fixAll": "always", //저장 시 모든 자동 수정 작업 실행
