@@ -53,6 +53,6 @@
     }
   },
   "parserOptions": {
-    "project": ["./tsconfig.json"]
+    "project": ["./tsconfig.json", "./frontend/tsconfig.json"]
   }
 }
