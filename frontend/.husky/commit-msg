@@ -1,0 +1,3 @@
+#!/bin/sh
+cd ./frontend
+npx --no-install commitlint --edit "$1"
