@@ -7,19 +7,14 @@ on:
       - "frontend/**"
 
 permissions:
-  contents: write
+  contents: read
   pages: write
-  deployments: write
   id-token: write
-  issues: write
   pull-requests: write
 
 jobs:
   storybook-preview:
     runs-on: ubuntu-20.04
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v3
@@ -35,10 +30,9 @@ jobs:
 
       - name: 종속성 설치
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
-
-      - name: Storybook 빌드
-        run: yarn build-storybook
+        run: |
+          cd frontend
+          yarn install
 
       - name: Chromatic에 게시
         id: chromatic
@@ -46,8 +40,6 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          onlyChanged: true
-          autoAcceptChanges: true
           workingDir: frontend
 
       - name: 현재 시간 가져오기
