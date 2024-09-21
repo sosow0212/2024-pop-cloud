@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
+import ModalProvider from "@/provider/modal-provider";
 
 export const metadata: Metadata = {
   title: "POP ClOUD",
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <ModalProvider />
+        {children}
+      </body>
     </html>
   );
 }
