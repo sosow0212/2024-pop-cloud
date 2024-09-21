@@ -17,6 +17,9 @@ permissions:
 jobs:
   storybook-preview:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v3
@@ -34,6 +37,9 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install
 
+      - name: Storybook 빌드
+        run: yarn build-storybook
+
       - name: Chromatic에 게시
         id: chromatic
         uses: chromaui/action@v1
@@ -42,7 +48,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           onlyChanged: true
           autoAcceptChanges: true
-          workingDir: frontend # frontend 디렉토리에서 작업하도록 설정
+          workingDir: frontend
 
       - name: 현재 시간 가져오기
         uses: josStorer/get-current-time@v2
