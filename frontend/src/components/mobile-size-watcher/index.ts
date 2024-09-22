@@ -2,6 +2,13 @@
 
 import { useIsMobileStore } from "@/store";
 import { useEffect } from "react";
+/**
+ * 현재 화면 크기가 모바일인지 주시하는 컴포넌트입니다.
+ *
+ * 최상단 레이아웃에 박았습니다.
+ *
+ * @author ☯️채종민
+ */
 
 export default function MobileSizeWatcher() {
   useEffect(() => {
