@@ -7,8 +7,10 @@ import BottomNav from "./bottom-nav";
 
 export default function NavBar() {
   const isMobile = useIsMobileStore();
-  if (isMobile) {
-    return <BottomNav />;
+
+  if (isMobile === null) {
+    return null;
   }
-  return <SideNav />;
+
+  return isMobile ? <BottomNav /> : <SideNav />;
 }

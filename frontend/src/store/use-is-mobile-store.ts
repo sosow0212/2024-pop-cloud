@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
-type UseIsMobileStore = boolean;
+type UseIsMobileStore = boolean | null;
 
 const useIsMobileStore = create<UseIsMobileStore>(
-  () => false, // isMobile의 초기값
+  () => null, // isMobile의 초기값
 );
 
 export default useIsMobileStore;
