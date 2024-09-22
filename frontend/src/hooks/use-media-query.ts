@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useMediaQuery = (pivotWidth: number) => {
+const useMediaQuery = (pivotWidth: number = 768) => {
   const [isDesktop, setIsDesktop] = useState<boolean | undefined>();
 
   useEffect(() => {
