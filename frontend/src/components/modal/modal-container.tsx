@@ -53,7 +53,7 @@ function DrawerContainer({
 }: ContainerProps) {
   return (
     <Drawer open={isOpen} onOpenChange={onClose}>
-      <DrawerContent className={cn("bg-white", className)}>
+      <DrawerContent className={cn("bg-white pb-20", className)}>
         <VisuallyHidden.Root asChild>
           <DrawerTitle />
         </VisuallyHidden.Root>
