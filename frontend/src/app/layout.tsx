@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/nav-bar";
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
+import NavBar from "@/components/nav-bar";
 
 export const metadata: Metadata = {
   title: "POP ClOUD",
@@ -17,8 +17,6 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <MobileSizeWatcher />
-        <NavBar />
-        <NavBar />
         <NavBar />
         {children}
       </body>

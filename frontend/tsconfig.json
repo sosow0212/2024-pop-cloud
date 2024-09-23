@@ -19,15 +19,15 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@components/": ["./src/components/"],
-      "@hooks/": ["./src/hooks/"],
-      "@store/": ["./src/store/"],
-      "@api/": ["./src/api/"],
-      "@styles/": ["./src/styles/"],
-      "@images/": ["./public/images/"],
-      "@icons/": ["./public/icons/"],
-      "@utils/": ["./src/utils/"],
-      "@constants/": ["./src/constants/"]
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/api/*": ["./src/api/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/images/*": ["./public/images/*"],
+      "@/icons/*": ["./public/icons/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/constants/*": ["./src/constants/*"]
     }
   },
   "include": [
