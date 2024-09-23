@@ -27,11 +27,13 @@
       "@images/": ["./public/images/"],
       "@icons/": ["./public/icons/"],
       "@utils/": ["./src/utils/"],
-      "@constants/": ["./src/constants/"]
+      "@constants/": ["./src/constants/"],
+      "@public/*": ["./public/*"]
     }
   },
   "include": [
     //    "svgr.d.ts",
+    "global.d.ts",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
