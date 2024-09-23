@@ -55,7 +55,7 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
             />
           </div>
         </figure>
-        <div className="flex grow flex-col justify-between p-8">
+        <div className="flex grow flex-col justify-between p-14">
           <div className="flex flex-col space-y-2">
             <div className="flex items-start justify-between">
               <h2
