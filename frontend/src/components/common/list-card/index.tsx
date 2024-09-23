@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-console */
+import React from "react";
 import Image from "next/image";
-import { FaRegHeart, FaHeart, FaMapMarkerAlt } from "react-icons/fa";
+import Link from "next/link";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import LikeButton from "../like-button/index";
 
 interface EventData {
   id: number;
@@ -11,6 +14,11 @@ interface EventData {
   image: string;
 }
 
+interface EventCardProps {
+  event: EventData;
+  onLikeChange?: (isLiked: boolean) => void;
+}
+
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const year = date.getFullYear().toString().slice(2);
@@ -19,67 +27,60 @@ const formatDate = (dateString: string) => {
   return `${year}.${month}.${day}`;
 };
 
-export default function EventCard() {
-  const [event, setEvent] = useState<EventData>();
-  const [isLiked, setIsLiked] = useState(false);
-
-  useEffect(() => {
-    const dummyEvent: EventData = {
-      id: 1,
-      title: "아보디저트 팝업스토어",
-      location: "서울특별시 송파구",
-      startDate: "2024-09-02T00:00:00",
-      endDate: "2024-09-24T00:00:00",
-      image: "/images/luffi.jpg",
-    };
-    setEvent(dummyEvent);
-  }, []);
-
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
+export default function EventCard({ event, onLikeChange }: EventCardProps) {
+  const handleLikeChange = (isLiked: boolean) => {
+    console.log(
+      `이벤트 ${event.id}가 ${isLiked ? "좋아요" : "좋아요 취소"}되었습니다.`,
+    );
+    if (onLikeChange) {
+      onLikeChange(isLiked);
+    }
   };
 
-  if (!event) {
-    return <div>Loading...</div>;
-  }
+  const handleLikeButtonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   return (
-    <div className="flex h-145 w-full max-w-800 gap-10 overflow-hidden rounded-lg bg-white text-black">
-      <div className="relative size-142 shrink-0">
-        <div className="absolute inset-8 overflow-hidden rounded-lg">
-          <Image
-            src={event.image}
-            alt={`${event.title} 이미지`}
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
-      </div>
-      <div className="flex grow flex-col justify-between p-8">
-        <div>
-          <div className="mb-1 flex items-start justify-between">
-            <h2 className="mb-5 truncate text-16-700">{event.title}</h2>
-            <button
-              type="button"
-              onClick={handleLikeClick}
-              className="focus:outline-none"
-            >
-              {isLiked ? (
-                <FaHeart className="shrink-0 text-red-500" size={20} />
-              ) : (
-                <FaRegHeart className="shrink-0 text-black" size={20} />
-              )}
-            </button>
+    <Link href={`/events/${event.id}`} passHref>
+      <article className="flex h-145 w-full max-w-800 gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
+        <figure className="relative size-142 shrink-0">
+          <div className="absolute inset-8 overflow-hidden rounded-lg">
+            <Image
+              src={event.image}
+              alt={`${event.title} 이미지`}
+              layout="fill"
+              objectFit="cover"
+            />
           </div>
-          <p className="flex items-center text-12-600 text-gray-500">
-            <FaMapMarkerAlt className="mr-1" size={12} />
-            {event.location}
-          </p>
+        </figure>
+        <div className="flex grow flex-col justify-between p-8">
+          <div>
+            <div className="mb-1 flex items-start justify-between">
+              <h2 className="mb-5 truncate text-16-700">{event.title}</h2>
+              <button
+                type="button"
+                onClick={handleLikeButtonClick}
+                aria-label={`이벤트 ${event.title} 좋아요`}
+              >
+                <LikeButton onChange={handleLikeChange} />
+              </button>
+            </div>
+            <address className="flex items-center text-12-600 not-italic text-gray-500">
+              <FaMapMarkerAlt className="mr-1" size={12} />
+              {event.location}
+            </address>
+          </div>
+          <div className="text-right text-14-700 text-black">
+            <time dateTime={event.startDate}>
+              {formatDate(event.startDate)}
+            </time>
+            {" - "}
+            <time dateTime={event.endDate}>{formatDate(event.endDate)}</time>
+          </div>
         </div>
-        <div className="text-right text-14-700 text-black">
-          {formatDate(event.startDate)} - {formatDate(event.endDate)}
-        </div>
-      </div>
-    </div>
+      </article>
+    </Link>
   );
 }
