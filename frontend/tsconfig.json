@@ -12,22 +12,24 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@components/": ["./src/components/"],
-      "@hooks/": ["./src/hooks/"],
-      "@store/": ["./src/store/"],
-      "@api/": ["./src/api/"],
-      "@styles/": ["./src/styles/"],
-      "@images/": ["./public/images/"],
-      "@icons/": ["./public/icons/"],
-      "@utils/": ["./src/utils/"],
-      "@constants/": ["./src/constants/"]
+      "@/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/store/*": ["src/store/*"],
+      "@/api/*": ["src/api/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/images/*": ["public/images/*"],
+      "@/icons/*": ["public/icons/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/constants/*": ["src/constants/*"],
+      "@/public/*": ["public/*"]
     }
   },
   "include": [
