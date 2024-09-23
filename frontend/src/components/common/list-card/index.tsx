@@ -43,7 +43,7 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
   };
 
   return (
-    <Link href={`/events/${event.id}`} passHref>
+    <Link href={`/events/${event.id}`}>
       <article className="flex h-145 w-full max-w-800 gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
         <figure className="relative size-142 shrink-0">
           <div className="absolute inset-8 overflow-hidden rounded-lg">
@@ -56,23 +56,29 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
           </div>
         </figure>
         <div className="flex grow flex-col justify-between p-8">
-          <div>
-            <div className="mb-1 flex items-start justify-between">
-              <h2 className="mb-5 truncate text-16-700">{event.title}</h2>
+          <div className="flex flex-col space-y-2">
+            <div className="flex items-start justify-between">
+              <h2
+                className="mr-4 line-clamp-2 grow text-16-700"
+                title={event.title}
+              >
+                {event.title}
+              </h2>
               <button
                 type="button"
                 onClick={handleLikeButtonClick}
                 aria-label={`이벤트 ${event.title} 좋아요`}
+                className="shrink-0"
               >
                 <LikeButton onChange={handleLikeChange} />
               </button>
             </div>
             <address className="flex items-center text-12-600 not-italic text-gray-500">
-              <FaMapMarkerAlt className="mr-1" size={12} />
-              {event.location}
+              <FaMapMarkerAlt className="mr-1 shrink-0" size={12} />
+              <span className="truncate">{event.location}</span>
             </address>
           </div>
-          <div className="text-right text-14-700 text-black">
+          <div className="mt-2 text-right text-14-700 text-black">
             <time dateTime={event.startDate}>
               {formatDate(event.startDate)}
             </time>
