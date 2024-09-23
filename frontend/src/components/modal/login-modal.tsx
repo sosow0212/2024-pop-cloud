@@ -1,4 +1,4 @@
-import { useModalStore } from "@/store/modal-store";
+import { useModalStore } from "@/store";
 import { DrawerDialogContiner } from "./modal-container";
 import Button from "../common/button";
 

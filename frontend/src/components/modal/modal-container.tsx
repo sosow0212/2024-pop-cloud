@@ -15,8 +15,19 @@ import {
 } from "@/components/ui/drawer";
 
 import cn from "@/utils/cn";
-import useMediaQuery from "@/hooks/use-media-query";
+import { useIsMobileStore } from "@/store";
 
+/**
+ * dialog와 drawer container 입니다. 
+ * 
+ * 담고 싶은 내용을 children 형식으로 담아주시면 됩니다.
+ * 
+ * @example 
+ *  <DrawerDialogContiner isOpen={isModalOpen} onClose={onClose}>
+      <ProfileForm />
+    </DrawerDialogContiner>
+ * @author 위영진
+ */
 interface ContainerProps {
   isOpen: boolean;
   onClose: () => void;
@@ -33,6 +44,7 @@ function DialogContainer({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={cn("bg-white pt-10", className)}>
+        {/* Title과 Description을 설정하지 않을 시 경고창이 떠서 이를 막기 위해 선언하였습니다  */}
         <VisuallyHidden.Root asChild>
           <DialogTitle />
         </VisuallyHidden.Root>
@@ -54,6 +66,7 @@ function DrawerContainer({
   return (
     <Drawer open={isOpen} onOpenChange={onClose}>
       <DrawerContent className={cn("bg-white pb-20", className)}>
+        {/* Title과 Description을 설정하지 않을 시 경고창이 떠서 이를 막기 위해 선언하였습니다  */}
         <VisuallyHidden.Root asChild>
           <DrawerTitle />
         </VisuallyHidden.Root>
@@ -66,25 +79,31 @@ function DrawerContainer({
   );
 }
 
+/**
+ *  모바일 환경일시 - drawer,데스크탑 환경일시 - dialog 가 노출되는 반응형입니다
+ *  모바일/데스크탑의 기준이 max-width 480px이라 화면에 출력되는 요소는 tailwind sm(480px) 기준으로 작성해주시면 될 것 같습니다
+ *
+ *  @author 위영진
+ */
 function DrawerDialogContiner({
   children,
   isOpen,
   onClose,
   className,
 }: ContainerProps) {
-  const isDektop = useMediaQuery();
+  const isMobile = useIsMobileStore();
 
-  if (isDektop) {
+  if (isMobile) {
     return (
-      <DialogContainer isOpen={isOpen} onClose={onClose} className={className}>
+      <DrawerContainer isOpen={isOpen} onClose={onClose} className={className}>
         {children}
-      </DialogContainer>
+      </DrawerContainer>
     );
   }
   return (
-    <DrawerContainer isOpen={isOpen} onClose={onClose} className={className}>
+    <DialogContainer isOpen={isOpen} onClose={onClose} className={className}>
       {children}
-    </DrawerContainer>
+    </DialogContainer>
   );
 }
 

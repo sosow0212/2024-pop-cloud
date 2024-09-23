@@ -3,7 +3,7 @@ import { create } from "zustand";
 export type ModalType = "login" | "alert";
 
 type ModalDataType = {
-  headerTitle?: string;
+  isCheck?: boolean;
 };
 
 interface ModalStore {
@@ -14,7 +14,7 @@ interface ModalStore {
   data: ModalDataType;
 }
 
-export const useModalStore = create<ModalStore>((set) => ({
+const useModalStore = create<ModalStore>((set) => ({
   type: null,
   isOpen: false,
   data: {},
@@ -31,3 +31,5 @@ export const useModalStore = create<ModalStore>((set) => ({
       data: {},
     }),
 }));
+
+export default useModalStore;

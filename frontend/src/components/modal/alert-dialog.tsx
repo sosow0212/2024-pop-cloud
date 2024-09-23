@@ -1,4 +1,4 @@
-import { useModalStore } from "@/store/modal-store";
+import { useModalStore } from "@/store";
 import { DialogContainer } from "./modal-container";
 
 export default function AlertDialog() {
