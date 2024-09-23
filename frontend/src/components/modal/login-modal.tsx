@@ -14,7 +14,7 @@ function ProfileForm() {
         variant="primary"
         type="button"
         onClick={handleLogin}
-        className="bg-yellow-500 text-white rounded-md w-3/4 py-10  lg:w-full"
+        className="w-3/4 rounded-md bg-yellow-500 py-10 text-white  lg:w-full"
       >
         <div>카카오 로그인</div>
       </Button>

@@ -32,7 +32,7 @@ function DialogContainer({
 }: ContainerProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={cn("bg-white", className)}>
+      <DialogContent className={cn("bg-white pt-10", className)}>
         <VisuallyHidden.Root asChild>
           <DialogTitle />
         </VisuallyHidden.Root>
