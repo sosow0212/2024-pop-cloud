@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable*/
 import type { Config } from "tailwindcss";
 
 const pxToRem = require("tailwindcss-preset-px-to-rem");

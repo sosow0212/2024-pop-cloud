@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/nav-bar";
+
+import type { Metadata } from "next";
+import { useEffect } from "react";
+
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
+import NavBar from "@/components/nav-bar";
 
 export const metadata: Metadata = {
   title: "POP ClOUD",
@@ -13,6 +16,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const initMocks = async () => {
+        if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+          const { worker } = await import("../mocks/browser");
+          await worker.start({ onUnhandledRequest: "bypass" });
+        }
+      };
+
+      initMocks();
+    }
+  }, []);
+
   return (
     <html lang="ko">
       <body>
