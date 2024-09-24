@@ -37,14 +37,14 @@ export default function CarouselUI({
     <Carousel autoplay={autoPlay} className={`${className} m-auto`}>
       <CarouselContent>
         {data.map((carouselItem, index) => (
-          <CarouselItem key={carouselItem} className={`${className}`}>
+          <CarouselItem key={carouselItem} className={`${className} relative`}>
             {link ? (
               <Link href="/" className="block size-full">
                 <Image
                   src={carouselItem}
                   alt={`사진 ${index + 1}`}
                   fill
-                  className="!relative size-full object-cover"
+                  className="size-full object-cover"
                 />
               </Link>
             ) : (
@@ -52,7 +52,7 @@ export default function CarouselUI({
                 src={carouselItem}
                 alt={`사진 ${index + 1}`}
                 fill
-                className="!relative size-full object-cover"
+                className="size-full object-cover"
               />
             )}
           </CarouselItem>
