@@ -136,7 +136,7 @@ const Carousel = React.forwardRef<
       };
     }, [api, onSelect]);
 
-    // Autoplay functionality
+    // Autoplay 함수
     React.useEffect(() => {
       if (autoplay && api) {
         const intervalId = setInterval(() => {

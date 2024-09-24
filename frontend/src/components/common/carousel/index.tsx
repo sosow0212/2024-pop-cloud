@@ -9,13 +9,12 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const mock = ["/images/mock.jpeg", "/images/mock2.jpeg", "/images/mock3.jpeg"];
-
 interface CarouselProps {
   link?: boolean;
   autoPlay?: boolean;
   indicators?: boolean;
   className?: string;
+  data: string[];
 }
 
 /**
@@ -24,6 +23,7 @@ interface CarouselProps {
  * @param autoPlay 자동 재생을 사용하고 싶을 때
  * @param indicators 인디케이터를 추가하고 싶을 때
  * @param className 캐러셀 컨테이너에 적용할 추가 클래스 (크기를 지정해주세요)
+ * @param data 이미지 데이터입니다.
  */
 
 export default function CarouselUI({
@@ -31,11 +31,12 @@ export default function CarouselUI({
   autoPlay = false,
   indicators = false,
   className = "w-full h-300",
+  data,
 }: CarouselProps) {
   return (
     <Carousel autoplay={autoPlay} className={`${className} m-auto`}>
       <CarouselContent>
-        {mock.map((carouselItem, index) => (
+        {data.map((carouselItem, index) => (
           <CarouselItem key={carouselItem} className={`${className}`}>
             {link ? (
               <Link href="/" className="block size-full">
