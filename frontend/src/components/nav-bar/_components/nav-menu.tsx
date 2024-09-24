@@ -1,23 +1,22 @@
 "use client";
 
 import { FiHome, FiSearch, FiMapPin, FiUser, FiHeart } from "react-icons/fi";
-import { GiFluffyCloud } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import Link from "next/link";
 import NavIconButton from "./nav-icon-button";
+import NavLogo from "./nav-logo";
 
 const NAV_ITEMS = [
   { href: "/", name: "홈", icon: FiHome },
-  { href: "/search", name: "검색", icon: FiSearch },
+  { href: "/popups", name: "검색", icon: FiSearch },
   { href: "/map", name: "지도", icon: FiMapPin },
-  { href: "/favorite", name: "찜 목록", icon: FiHeart },
-  { href: "/profile", name: "프로필", icon: FiUser },
+  { href: "/likes", name: "찜 목록", icon: FiHeart },
 ];
 
-export default function NavMenu() {
+export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
-  const isSearchPage = pathname === "/search";
+  const isSearchPage = pathname === "/popups";
+  const profileUrl = loggedIn ? "/profile" : "/login";
 
   return (
     <menu
@@ -26,24 +25,7 @@ export default function NavMenu() {
         isSearchPage && "lg:w-70",
       )}
     >
-      <Link href="/">
-        <header className="mb-25 hidden md:block">
-          <GiFluffyCloud
-            className={clsx(
-              "size-40 text-purple-400 md:block",
-              isSearchPage ? "lg:block" : "lg:hidden",
-            )}
-          />
-          <h1
-            className={clsx(
-              "hidden font-[TTSamlipCreamyWhiteR] text-25 font-bold text-purple-400",
-              isSearchPage ? "lg:hidden" : "lg:block",
-            )}
-          >
-            POP Cloud
-          </h1>
-        </header>
-      </Link>
+      <NavLogo isSearchPage={isSearchPage} />
       {NAV_ITEMS.map(({ href, name, icon }) => {
         const isActive = pathname === href;
 
@@ -58,6 +40,13 @@ export default function NavMenu() {
           />
         );
       })}
+      <NavIconButton
+        href={profileUrl}
+        name={loggedIn ? "프로필" : "로그인"}
+        icon={FiUser}
+        isActive={pathname === profileUrl}
+        isSearchPage={isSearchPage}
+      />
     </menu>
   );
 }
