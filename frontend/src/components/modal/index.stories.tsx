@@ -1,8 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { useModalStore } from "@/store";
-import { LoginModal } from ".";
+
 import Button from "../common/button";
+import { LoginModal } from ".";
+
 
 const meta: Meta<typeof LoginModal> = {
   title: "Components/LoginModal",

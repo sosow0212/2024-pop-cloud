@@ -1,7 +1,8 @@
 "use client";
 
-import { useIsMobileStore } from "@/store";
 import { useEffect } from "react";
+
+import { useIsMobileStore } from "@/store";
 /**
  * 현재 화면 크기가 모바일인지 주시하는 컴포넌트입니다.
  *

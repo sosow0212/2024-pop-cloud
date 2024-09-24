@@ -18,7 +18,8 @@
     "@typescript-eslint",
     "jsx-a11y",
     "import",
-    "prettier"
+    "prettier",
+    "simple-import-sort"
   ],
   "rules": {
     "prettier/prettier": [
@@ -27,6 +28,7 @@
         "endOfLine": "auto"
       }
     ],
+    "@typescript-eslint/lines-between-class-members": "off",
     "jsx-a11y/label-has-associated-control": [
       "error",
       {
@@ -35,14 +37,17 @@
         }
       }
     ],
+
     "react/react-in-jsx-scope": "off",
-    // 'import/prefer-default-export': 'off',
-    // '@typescript-eslint/explicit-module-boundary-types': 'off',
     "react/prop-types": "off",
     "no-console": "error",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
-    "tailwindcss/no-custom-classname": "off"
+    "tailwindcss/no-custom-classname": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/dot-notation": "off",
+    "@typescript-eslint/no-throw-literal": "off",
+    "simple-import-sort/imports": "error"
   },
   "settings": {
     "react": {
@@ -54,5 +59,30 @@
   },
   "parserOptions": {
     "project": ["./tsconfig.json", "./frontend/tsconfig.json"]
-  }
-}
+  },
+  "parser": "@typescript-eslint/parser",
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx", "*.mjs"],
+      "extends": ["plugin:@typescript-eslint/disable-type-checked"],
+      "parser": "espree",
+      "parserOptions": {
+        "ecmaVersion": 2020
+      },
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-implied-eval": "off",
+        "@typescript-eslint/no-throw-literal": "off",
+        "@typescript-eslint/return-await": "off"
+      }
+    },
+    {
+      "files": ["next.config.mjs", "postcss.config.mjs"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ]
+} // js파일에 관한 ts 린트 적용 끄기

@@ -1,20 +1,19 @@
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
+import cn from "@/components/ui/cn";
 import {
   Dialog,
   DialogContent,
-  DialogTitle,
   DialogDescription,
+  DialogTitle,
 } from "@/components/ui/dialog";
-
 import {
   Drawer,
   DrawerContent,
-  DrawerTitle,
   DrawerDescription,
+  DrawerTitle,
 } from "@/components/ui/drawer";
 
-import cn from "@/components/ui/cn";
 import { useIsMobileStore } from "@/store";
 
 /**
