@@ -18,7 +18,7 @@ interface CarouselProps {
 }
 
 /**
- * 기본적으로 모두 false 처리 했습니다. 사용하고 싶을 때 true로 변경해주세요.
+ * 기본적으로 모두 true 처리 했습니다. 사용하고 싶을 때 true로 변경해주세요.
  * @param link 링크를 사용하고 싶을 때
  * @param autoPlay 자동 재생을 사용하고 싶을 때
  * @param indicators 인디케이터를 추가하고 싶을 때
@@ -27,9 +27,9 @@ interface CarouselProps {
  */
 
 export default function CarouselUI({
-  link = false,
-  autoPlay = false,
-  indicators = false,
+  link = true,
+  autoPlay = true,
+  indicators = true,
   className = "w-full h-300",
   data,
 }: CarouselProps) {
