@@ -58,9 +58,24 @@
   "overrides": [
     {
       "files": ["*.js", "*.jsx", "*.mjs"],
+      "extends": ["plugin:@typescript-eslint/disable-type-checked"],
+      "parser": "espree",
+      "parserOptions": {
+        "ecmaVersion": 2020
+      },
       "rules": {
         "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/dot-notation": "off"
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-implied-eval": "off",
+        "@typescript-eslint/no-throw-literal": "off",
+        "@typescript-eslint/return-await": "off"
+      }
+    },
+    {
+      "files": ["next.config.mjs", "postcss.config.mjs"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "import/no-extraneous-dependencies": "off"
       }
     }
   ]
