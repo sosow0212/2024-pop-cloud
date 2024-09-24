@@ -23,8 +23,8 @@ function NavIconButton({
       key={href}
       href={href}
       className={clsx(
-        "flex size-48 items-center justify-center rounded-5 text-center hover:bg-gray-100 lg:w-220 lg:pl-12",
-        isSearchPage && "lg:w-48 lg:pl-0",
+        "flex size-48 items-center justify-center rounded-5 text-center hover:bg-gray-100",
+        isSearchPage ? "lg:w-48 lg:pl-0" : "lg:w-220 lg:pl-12",
       )}
     >
       <div

@@ -1,8 +1,10 @@
 "use client";
 
 import { FiHome, FiSearch, FiMapPin, FiUser, FiHeart } from "react-icons/fi";
+import { GiFluffyCloud } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import Link from "next/link";
 import NavIconButton from "./nav-icon-button";
 
 const NAV_ITEMS = [
@@ -20,10 +22,28 @@ export default function NavMenu() {
   return (
     <menu
       className={clsx(
-        "flex size-full items-center justify-around md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 lg:w-245",
+        "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
         isSearchPage && "lg:w-70",
       )}
     >
+      <Link href="/">
+        <header className="mb-25 hidden md:block">
+          <GiFluffyCloud
+            className={clsx(
+              "size-40 text-purple-400 md:block",
+              isSearchPage ? "lg:block" : "lg:hidden",
+            )}
+          />
+          <h1
+            className={clsx(
+              "hidden font-[TTSamlipCreamyWhiteR] text-25 font-bold text-purple-400",
+              isSearchPage ? "lg:hidden" : "lg:block",
+            )}
+          >
+            POP Cloud
+          </h1>
+        </header>
+      </Link>
       {NAV_ITEMS.map(({ href, name, icon }) => {
         const isActive = pathname === href;
 
