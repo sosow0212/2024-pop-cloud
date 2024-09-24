@@ -8,13 +8,13 @@ function ProfileForm() {
   };
 
   return (
-    <section className="flex flex-col   items-center justify-center gap-y-10 ">
+    <section className="flex flex-col items-center justify-center gap-y-10">
       <header>소셜 계정을 통해 로그인 해주세요 </header>
       <Button
         variant="primary"
         type="button"
         onClick={handleLogin}
-        className="w-3/4 rounded-md bg-yellow-500 py-10 text-white  lg:w-full"
+        className="w-3/4 rounded-md bg-yellow-500 py-10 text-white lg:w-full"
       >
         <div>카카오 로그인</div>
       </Button>

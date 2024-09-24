@@ -9,11 +9,11 @@ export default function AlertDialog() {
   return (
     <DialogContainer isOpen={isModalOpen} onClose={onClose}>
       <div className="flex justify-center gap-x-2">
-        <button className="rounded-md border px-20 py-4  " type="button">
+        <button className="rounded-md border px-20 py-4" type="button">
           확인
         </button>
         <button
-          className="rounded-md  border bg-red-400  px-20 py-4  "
+          className="rounded-md border bg-red-400 px-20 py-4"
           type="button"
         >
           취소

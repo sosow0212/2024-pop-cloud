@@ -14,7 +14,7 @@ import {
   DrawerDescription,
 } from "@/components/ui/drawer";
 
-import cn from "@/utils/cn";
+import cn from "@/components/ui/cn";
 import { useIsMobileStore } from "@/store";
 
 /**
