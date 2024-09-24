@@ -4,23 +4,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import cn from "./cn";
 
 const buttonVariants = cva(
-  "text-sm focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
+  "text-sm focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
+        none: "",
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 shadow",
+          "bg-primary text-primary-foreground hover:bg-primary/90 rounded-md shadow",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-md shadow-sm",
         outline:
-          "border-input bg-background hover:bg-accent hover:text-accent-foreground border shadow-sm",
+          "border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md border shadow-sm",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md shadow-sm",
+        ghost: "hover:bg-accent hover:text-accent-foreground rounded-md",
+        link: "text-primary rounded-md underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 py-2",
+        default: "size-50",
         sm: "text-xs h-8 rounded-md px-3",
         lg: "h-10 rounded-md px-8",
         icon: "size-9",

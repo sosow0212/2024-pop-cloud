@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
+import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 import { Button } from "@/components/ui/button";
 import cn from "./cn";
@@ -19,6 +19,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin;
   orientation?: "horizontal" | "vertical";
   setApi?: (api: CarouselApi) => void;
+  autoplay?: boolean;
 };
 
 type CarouselContextProps = {
@@ -26,8 +27,11 @@ type CarouselContextProps = {
   api: ReturnType<typeof useEmblaCarousel>[1];
   scrollPrev: () => void;
   scrollNext: () => void;
+  scrollTo: (index: number) => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
+  selectedIndex: number;
+  slideCount: number;
 } & CarouselProps;
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
@@ -54,6 +58,7 @@ const Carousel = React.forwardRef<
       plugins,
       className,
       children,
+      autoplay = false,
       ...props
     },
     ref,
@@ -62,11 +67,14 @@ const Carousel = React.forwardRef<
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
+        loop: true,
       },
       plugins,
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [slideCount, setSlideCount] = React.useState(0);
 
     const onSelect = React.useCallback((carouselApi: CarouselApi) => {
       if (!carouselApi) {
@@ -75,6 +83,8 @@ const Carousel = React.forwardRef<
 
       setCanScrollPrev(carouselApi.canScrollPrev());
       setCanScrollNext(carouselApi.canScrollNext());
+      setSelectedIndex(carouselApi.selectedScrollSnap());
+      setSlideCount(carouselApi.scrollSnapList().length);
     }, []);
 
     const scrollPrev = React.useCallback(() => {
@@ -84,6 +94,13 @@ const Carousel = React.forwardRef<
     const scrollNext = React.useCallback(() => {
       api?.scrollNext();
     }, [api]);
+
+    const scrollTo = React.useCallback(
+      (index: number) => {
+        api?.scrollTo(index);
+      },
+      [api],
+    );
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -119,6 +136,18 @@ const Carousel = React.forwardRef<
       };
     }, [api, onSelect]);
 
+    // Autoplay functionality
+    React.useEffect(() => {
+      if (autoplay && api) {
+        const intervalId = setInterval(() => {
+          api.scrollNext();
+        }, 5000);
+
+        return () => clearInterval(intervalId);
+      }
+      return undefined;
+    }, [api, autoplay]);
+
     const contextValue = React.useMemo(
       () => ({
         carouselRef,
@@ -128,8 +157,11 @@ const Carousel = React.forwardRef<
           orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
         scrollPrev,
         scrollNext,
+        scrollTo,
         canScrollPrev,
         canScrollNext,
+        selectedIndex,
+        slideCount,
       }),
       [
         carouselRef,
@@ -138,8 +170,11 @@ const Carousel = React.forwardRef<
         orientation,
         scrollPrev,
         scrollNext,
+        scrollTo,
         canScrollPrev,
         canScrollNext,
+        selectedIndex,
+        slideCount,
       ],
     );
 
@@ -208,7 +243,7 @@ CarouselItem.displayName = "CarouselItem";
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, variant = "none", size = "default", ...props }, ref) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
@@ -217,7 +252,7 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -227,7 +262,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeftIcon className="size-10" />
+      <IoIosArrowBack className="text-gray-100/70 sm:hidden md:size-40" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -237,7 +272,7 @@ CarouselPrevious.displayName = "CarouselPrevious";
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
+>(({ className, variant = "none", size = "default", ...props }, ref) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
@@ -246,7 +281,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -256,12 +291,42 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRightIcon className="size-4" />
+      <IoIosArrowForward className="text-gray-100/70 sm:hidden md:size-40" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
 });
 CarouselNext.displayName = "CarouselNext";
+
+const CarouselIndicators = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { selectedIndex, slideCount, scrollTo } = useCarousel();
+
+  return (
+    <div
+      ref={ref}
+      className={cn("flex justify-center relative bottom-10", className)}
+      {...props}
+    >
+      {Array.from({ length: slideCount }).map((_, index) => (
+        <Button
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+          variant="none"
+          size="default"
+          className={cn(
+            "w-30 h-2 md:w-40 lg:w-50",
+            index === selectedIndex ? "bg-white" : "bg-white/30",
+          )}
+          onClick={() => scrollTo(index)}
+        />
+      ))}
+    </div>
+  );
+});
+CarouselIndicators.displayName = "CarouselIndicators";
 
 export {
   type CarouselApi,
@@ -270,4 +335,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselIndicators,
 };
