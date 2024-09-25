@@ -20,7 +20,7 @@ export default function PopupCard() {
         <div className="min-w-140">
           <p>Title</p>
           <p>Date</p>
-          <p className="w-full truncate overflow-hidden text-ellipsis whitespace-nowrap">
+          <p className="w-full truncate overflow-hidden whitespace-nowrap">
             Very long description
           </p>
         </div>
@@ -38,7 +38,7 @@ export default function PopupCard() {
               fill="currentColor"
               fill-rule="evenodd"
               clip-rule="evenodd"
-            ></path>
+            />
           </svg>
         </button>
       </div>
