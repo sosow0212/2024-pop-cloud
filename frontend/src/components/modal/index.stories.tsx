@@ -6,6 +6,7 @@ import { useModalStore } from "@/store";
 import Button from "../common/button";
 import { LoginModal } from ".";
 
+
 const meta: Meta<typeof LoginModal> = {
   title: "Components/LoginModal",
   component: LoginModal,
