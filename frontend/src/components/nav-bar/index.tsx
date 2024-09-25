@@ -1,9 +1,11 @@
 "use client";
 
 import React from "react";
+
 import { useIsMobileStore } from "@/store";
-import SideNav from "./side-nav";
+
 import BottomNav from "./bottom-nav";
+import SideNav from "./side-nav";
 
 export default function NavBar() {
   const isMobile = useIsMobileStore();

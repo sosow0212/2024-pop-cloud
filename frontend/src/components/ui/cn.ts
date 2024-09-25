@@ -6,6 +6,6 @@ import { twMerge } from "tailwind-merge";
  * @param {...ClassValue[]} inputs - 클래스 이름 문자열 또는 객체들을 배열로 전달합니다.
  * @returns {string} 병합된 클래스 이름 문자열을 반환합니다.
  */
-export default function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
+
+export default cn;

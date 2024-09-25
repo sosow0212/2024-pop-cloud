@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
+
 import LikeButton from "../like-button/index";
 
 interface EventData {
