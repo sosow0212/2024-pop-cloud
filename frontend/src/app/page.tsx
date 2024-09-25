@@ -4,7 +4,9 @@ export default function Home() {
   return (
     <>
       <div>HOME</div>
-      <PopupCard />
+      <div className="flex justify-center">
+        <PopupCard />
+      </div>
     </>
   );
 }
