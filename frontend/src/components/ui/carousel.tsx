@@ -253,7 +253,7 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute",
+        "absolute sm:hidden",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -263,7 +263,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <IoIosArrowBack className="text-gray-100/70 sm:hidden md:size-40" />
+      <IoIosArrowBack className="transition-animation text-gray-100/70 hover:text-white md:size-40" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -282,7 +282,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute",
+        "absolute sm:hidden",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -292,7 +292,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <IoIosArrowForward className="text-gray-100/70 sm:hidden md:size-40" />
+      <IoIosArrowForward className="transition-animation text-gray-100/70 hover:text-white sm:hidden md:size-40" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
