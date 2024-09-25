@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import Carousel from ".";
 
 const mock = ["/images/mock.jpeg", "/images/mock2.jpeg", "/images/mock3.jpeg"];
