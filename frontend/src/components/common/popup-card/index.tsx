@@ -1,10 +1,11 @@
 import Image from "next/image";
+
 import Rhino from "@/../public/images/rhino.webp";
 
 export default function PopupCard() {
   return (
-    <div className="max-w-350 w-full h-400 shadow-lg">
-      <div className="relative w-full h-240 bg-gray-200 flex justify-center items-center">
+    <div className="h-400 w-full max-w-350 shadow-lg">
+      <div className="relative flex h-240 w-full items-center justify-center bg-gray-200">
         <Image
           src={Rhino}
           alt="팝업스토어 이미지"
@@ -12,18 +13,18 @@ export default function PopupCard() {
           objectFit="contain"
         />
         {/* 태그 */}
-        <div className="w-full h-20 absolute bottom-5 left-0 flex items-center px-5">
-          <div className="bg-gray-400 px-5 text-white rounded-3">Art</div>
+        <div className="absolute bottom-5 left-0 flex h-20 w-full items-center px-5">
+          <div className="rounded-3 bg-gray-400 px-5 text-white">Art</div>
         </div>
       </div>
-      <div className="p-10 flex justify-between items-start gap-10">
-        <div className="min-w-140 flex flex-col gap-5">
-          <h2 className="text-21 font-extrabold line-clamp-2">
+      <div className="flex items-start justify-between gap-10 p-10">
+        <div className="flex min-w-140 flex-col gap-5">
+          <h2 className="line-clamp-2 text-21 font-extrabold">
             코뿔소와 함께하는 잠수교 러닝중 아이스크림이 얼마나 빨리 녹는지
             테스트 하기
           </h2>
           <p className="text-14 text-gray-500">2024-09-02 ~ 2024-09-02</p>
-          <p className="text-16 w-full line-clamp-2">
+          <p className="line-clamp-2 w-full text-16">
             국립현대미술관 과천 <br />
             &lt;아메리카노: 빨리 잠들기 대회&gt;
           </p>
