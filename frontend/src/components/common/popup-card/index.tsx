@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 import Rhino from "@/../public/images/rhino.webp";
@@ -22,9 +25,15 @@ type PopupCardProps = {
   popup: Popup;
 };
 
+<motion.div />;
+
 export default function PopupCard({ popup }: PopupCardProps) {
   return (
-    <div className="h-400 w-full max-w-350 shadow-lg">
+    <motion.div
+      className="h-400 w-full max-w-350 shadow-lg hover:cursor-pointer hover:shadow-2xl"
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "tween", duration: "0.2" }}
+    >
       <div className="relative flex h-240 w-full items-center justify-center bg-gray-200">
         <Image
           src={Rhino}
@@ -67,6 +76,6 @@ export default function PopupCard({ popup }: PopupCardProps) {
           </svg>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
