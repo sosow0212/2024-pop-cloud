@@ -8,6 +8,7 @@ export interface PopupBasic {
   endDate: string;
   visitedCount: number;
   likedCount: number;
+  image: any;
 }
 
 export interface PopupDetail extends PopupBasic {
@@ -34,6 +35,7 @@ export const createDummyPopups = (count: number): PopupDetail[] => {
     description: `팝업이와 함께하는 팝업스토어 ${index + 1}`,
     startDate: "2024-09-01T18:55:36.052679",
     endDate: "2024-09-01T19:55:36.052725",
+    image: "/images/luffi.jpg",
     openTimes: "월 09:00 - 18:00,\n화 12:00 - 21:00\n",
     location: `서울 마포구 월드컵북로 ${155 + index}`,
     latitude: 37.556725 + (Math.random() - 0.5) * 0.01,

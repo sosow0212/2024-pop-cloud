@@ -1,4 +1,7 @@
-/* eslint-disable no-console */
+/*eslint-disable*/
+
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -30,12 +33,7 @@ const formatDate = (dateString: string) => {
 
 export default function EventCard({ event, onLikeChange }: EventCardProps) {
   const handleLikeChange = (isLiked: boolean) => {
-    console.log(
-      `이벤트 ${event.id}가 ${isLiked ? "좋아요" : "좋아요 취소"}되었습니다.`,
-    );
-    if (onLikeChange) {
-      onLikeChange(isLiked);
-    }
+    onLikeChange?.(isLiked);
   };
 
   const handleLikeButtonClick = (e: React.MouseEvent) => {
@@ -44,7 +42,7 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
   };
 
   return (
-    <Link href={`/events/${event.id}`}>
+    <Link href={`/events/${event.id}`} className="block">
       <article className="flex h-145 w-full max-w-800 gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
         <figure className="relative size-142 shrink-0">
           <div className="absolute inset-8 overflow-hidden rounded-lg">
@@ -65,14 +63,9 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
               >
                 {event.title}
               </h2>
-              <button
-                type="button"
-                onClick={handleLikeButtonClick}
-                aria-label={`이벤트 ${event.title} 좋아요`}
-                className="shrink-0"
-              >
+              <div onClick={handleLikeButtonClick}>
                 <LikeButton onChange={handleLikeChange} />
-              </button>
+              </div>
             </div>
             <address className="flex items-center text-12-600 not-italic text-gray-500">
               <FaMapMarkerAlt className="mr-1 shrink-0" size={12} />
