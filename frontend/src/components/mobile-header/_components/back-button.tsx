@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function BackButton() {

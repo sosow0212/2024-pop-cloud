@@ -1,7 +1,6 @@
-import { GiFluffyCloud } from "react-icons/gi";
-
 import clsx from "clsx";
 import Link from "next/link";
+import { GiFluffyCloud } from "react-icons/gi";
 
 export default function NavLogo({ isSearchPage }: { isSearchPage: boolean }) {
   return (

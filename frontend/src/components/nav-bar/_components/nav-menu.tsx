@@ -1,8 +1,9 @@
 "use client";
 
-import { FiHome, FiSearch, FiMapPin, FiUser, FiHeart } from "react-icons/fi";
-import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import { FiHeart, FiHome, FiMapPin, FiSearch, FiUser } from "react-icons/fi";
+
 import NavIconButton from "./nav-icon-button";
 import NavLogo from "./nav-logo";
 

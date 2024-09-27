@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { IconType } from "react-icons";
 import clsx from "clsx";
+import Link from "next/link";
 import { memo } from "react";
+import { IconType } from "react-icons";
 
 interface NavIconButtonProps {
   href: string;

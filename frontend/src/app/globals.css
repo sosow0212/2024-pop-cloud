@@ -20,3 +20,7 @@
   font-family: "Pretendard-Regular", Arial, sans-serif, "PyeongChangPeace-Bold";
   box-sizing: border-box;
 }
+
+.transition-animation {
+  @apply transition-colors duration-300 ease-in-out;
+}

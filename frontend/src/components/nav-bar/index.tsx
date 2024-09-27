@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+
 import NavMenu from "./_components/nav-menu";
 
 export default function NavBar() {

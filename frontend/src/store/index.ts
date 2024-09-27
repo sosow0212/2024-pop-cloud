@@ -1,3 +1,2 @@
 export { default as useIsMobileStore } from "./use-is-mobile-store";
-export const tempForLint =
-  "린트가 하나면 default export하라고 귀찮게 해서 임시로 넣었어요. 나중에 훅 하나 더 생기면 지워주세요";
+export { default as useModalStore } from "./use-modal-store";
