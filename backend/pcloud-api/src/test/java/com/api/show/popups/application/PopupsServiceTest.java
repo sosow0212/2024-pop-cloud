@@ -3,6 +3,7 @@ package com.api.show.popups.application;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.common.exception.AuthException;
 import com.common.exception.AuthExceptionType;
+import com.domain.show.popups.cache.PopupsCacheRepository;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.popups.exception.PopupsException;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import show.popups.infrastructure.FakePopupsCacheRepository;
 import show.popups.infrastructure.FakePopupsRepository;
 
 import java.util.Optional;
@@ -30,11 +32,13 @@ class PopupsServiceTest {
 
     private PopupsService popupsService;
     private PopupsRepository popupsRepository;
+    private PopupsCacheRepository popupsCacheRepository;
 
     @BeforeEach
     void setup() {
         popupsRepository = new FakePopupsRepository();
-        popupsService = new PopupsService(popupsRepository);
+        popupsCacheRepository = new FakePopupsCacheRepository();
+        popupsService = new PopupsService(popupsRepository, popupsCacheRepository);
     }
 
     @Test

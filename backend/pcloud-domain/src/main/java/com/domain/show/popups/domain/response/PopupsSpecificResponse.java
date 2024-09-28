@@ -1,6 +1,8 @@
 package com.domain.show.popups.domain.response;
 
 import com.domain.show.common.PublicTag;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +28,7 @@ public record PopupsSpecificResponse(
         Integer visitedCount,
         Integer likedCount,
         List<String> tags
-) {
+) implements Serializable {
 
     public PopupsSpecificResponse(
             Long id,
