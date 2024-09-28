@@ -50,7 +50,7 @@ public class PopupsQueryService {
         }
     }
 
-    private static boolean canCacheWithoutConcurrency(final LocalDateTime cacheEvictTime, final LocalDateTime startFindTime) {
+    private boolean canCacheWithoutConcurrency(final LocalDateTime cacheEvictTime, final LocalDateTime startFindTime) {
         return cacheEvictTime == null ||
                 cacheEvictTime.isBefore(startFindTime);
     }
