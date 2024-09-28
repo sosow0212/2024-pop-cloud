@@ -8,6 +8,14 @@
     format("woff");
 }
 
+@font-face {
+  font-family: "TTSamlipCreamyWhiteR";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-4@1.0/TTSamlipCreamyWhiteR.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   font-family: "Pretendard-Regular", Arial, sans-serif, "PyeongChangPeace-Bold";
   box-sizing: border-box;

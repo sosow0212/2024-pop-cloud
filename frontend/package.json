@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 8080",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "format": "prettier --cache --write .",
@@ -11,7 +11,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "postinstall": "cd .. && husky ./frontend/.husky",
-    "chromatic": "npx chromatic --project-token=chpt_b8f6446447a64d6"
+    "chromatic": "npx chromatic --project-token=chpt_b8f6446447a64d6",
+    "mock": "npx tsx watch ./src/mocks/http.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

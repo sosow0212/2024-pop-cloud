@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 
@@ -18,7 +20,7 @@ export default function LikeButton({
 }: LikeButtonProps) {
   const [isLiked, setIsLiked] = useState(initialLiked);
 
-  const handleClick = () => {
+  const handleToggle = () => {
     const newLikedState = !isLiked;
     setIsLiked(newLikedState);
     onChange?.(newLikedState);
@@ -27,8 +29,8 @@ export default function LikeButton({
   return (
     <button
       type="button"
-      onClick={handleClick}
-      className={`${className} focus:outline-none`}
+      onClick={handleToggle}
+      className={`focus:outline-none ${className}`}
       aria-label={isLiked ? "좋아요 취소" : "좋아요"}
     >
       {isLiked ? (
