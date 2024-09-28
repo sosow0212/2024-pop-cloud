@@ -1,24 +1,33 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import { kakaoTalkIcon } from "@/icons/index";
 import { useModalStore } from "@/store";
 
-import Button from "../common/button";
-import { DrawerDialogContiner } from "./modal-container";
+import { DrawerDialogContainer } from "./modal-container";
+
+const LOGIN_OPTION = [
+  {
+    href: `https://kauth.kakao.com/oauth/authorize?response_type=code&${process.env.NEXT_PUBLIC_KAKAO_CLIENTID}&redirect_uri=http://localhost:8080/api/auth/login/oauth/kakao&scope=profile_nickname,account_email`,
+    icon: kakaoTalkIcon,
+    alt: "카카오톡 로고",
+  },
+];
 
 function ProfileForm() {
-  const handleLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&${process.env.NEXT_PUBLIC_KAKAO_CLIENTID}&redirect_uri=http://localhost:8080/api/auth/login/oauth/kakao&scope=profile_nickname,account_email`;
-  };
-
   return (
-    <section className="flex flex-col items-center justify-center gap-y-10">
-      <header>소셜 계정을 통해 로그인 해주세요 </header>
-      <Button
-        variant="primary"
-        type="button"
-        onClick={handleLogin}
-        className="w-3/4 rounded-md bg-yellow-500 py-10 text-white lg:w-full"
-      >
-        <div>카카오 로그인</div>
-      </Button>
+    <section className="flex flex-col items-center justify-center gap-20">
+      <header className="mb-6 text-center">
+        <h2 className="text-2xl mb-2 font-bold">로그인</h2>
+        <p className="text-gray-600">소셜 계정을 통해 로그인 해주세요</p>
+      </header>
+      <div className="flex ">
+        {LOGIN_OPTION.map(({ href, icon, alt }) => (
+          <Link key={href} href={href} className="size-50">
+            <Image src={icon} alt={alt} />
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
@@ -28,8 +37,12 @@ export default function LoginModal() {
   const isModalOpen = isOpen && type === "login";
 
   return (
-    <DrawerDialogContiner isOpen={isModalOpen} onClose={onClose}>
+    <DrawerDialogContainer
+      isOpen={isModalOpen}
+      onClose={onClose}
+      className="rounded-lg bg-white p-8 shadow-lg"
+    >
       <ProfileForm />
-    </DrawerDialogContiner>
+    </DrawerDialogContainer>
   );
 }

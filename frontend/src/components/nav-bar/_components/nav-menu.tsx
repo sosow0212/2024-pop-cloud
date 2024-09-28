@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { FiHeart, FiHome, FiMapPin, FiSearch, FiUser } from "react-icons/fi";
 
 import NavIconButton from "./nav-icon-button";
+import NavLoginButton from "./nav-login-button";
 import NavLogo from "./nav-logo";
 
 const NAV_ITEMS = [
@@ -41,13 +42,17 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
           />
         );
       })}
-      <NavIconButton
-        href={profileUrl}
-        name={loggedIn ? "프로필" : "로그인"}
-        icon={FiUser}
-        isActive={pathname === profileUrl}
-        isSearchPage={isSearchPage}
-      />
+      {loggedIn ? (
+        <NavIconButton
+          href={profileUrl}
+          name={loggedIn ? "프로필" : "로그인"}
+          icon={FiUser}
+          isActive={pathname === profileUrl}
+          isSearchPage={isSearchPage}
+        />
+      ) : (
+        <NavLoginButton isSearchPage={isSearchPage} />
+      )}
     </menu>
   );
 }
