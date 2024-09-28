@@ -42,12 +42,17 @@ public class PopupsQueryService {
     }
 
     private void cachePopupsIfExpiredEvictTtl(final Long popupsId, PopupsSpecificResponse foundPopups) {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime evictTime = popupsCacheRepository.findCacheEvictedTimeById(popupsId);
+        LocalDateTime startFindTime = LocalDateTime.now();
+        LocalDateTime cacheEvictTime = popupsCacheRepository.findCacheEvictedTimeById(popupsId);
 
-        if (evictTime == null || evictTime.isBefore(now)) {
+        if (canCacheWithoutConcurrency(cacheEvictTime, startFindTime)) {
             popupsCacheRepository.cachePopups(popupsId, foundPopups);
         }
+    }
+
+    private static boolean canCacheWithoutConcurrency(final LocalDateTime cacheEvictTime, final LocalDateTime startFindTime) {
+        return cacheEvictTime == null ||
+                cacheEvictTime.isBefore(startFindTime);
     }
 
     public List<PopupsSimpleResponse> findAll(final Long popupsId, final Integer pageSize) {
