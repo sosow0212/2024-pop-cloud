@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
+import Script from "next/script";
 import { useEffect } from "react";
 
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
@@ -33,6 +34,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
+        <Script
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP}&libraries=services,clusterer&autoload=false`}
+          strategy="beforeInteractive"
+        />
         <ModalProvider />
         <MobileSizeWatcher />
         <NavBar />
