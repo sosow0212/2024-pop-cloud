@@ -1,12 +1,13 @@
 import "./globals.css";
 
-import type { Metadata } from "next";
-import { useEffect } from "react";
+import { Metadata } from "next";
 
 import MobileHeader from "@/components/mobile-header";
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
 import NavBar from "@/components/nav-bar";
 import ModalProvider from "@/provider/modal-provider";
+
+import { MSWComponent } from "../mocks/msw-Initializer";
 
 export const metadata: Metadata = {
   title: "POP CLOUD",
@@ -18,22 +19,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const initMocks = async () => {
-        if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-          const { worker } = await import("../mocks/browser");
-          await worker.start({ onUnhandledRequest: "bypass" });
-        }
-      };
-
-      initMocks();
-    }
-  }, []);
-
   return (
     <html lang="ko">
       <body>
+        <MSWComponent />
         <ModalProvider />
         <MobileSizeWatcher />
         <MobileHeader />
