@@ -50,6 +50,11 @@ export default function Map({ className }: MapProps) {
     }));
   };
 
+  // useEffect(() => {
+  // mapInfo의 레빌과 바운드 변화를 감지하여 marker를 서버로부터 받아옴
+  // 정적 지도일 경우 노노
+  // }, [mapInfo]);
+
   return (
     <MapContainer
       level={mapInfo.mapLevel}
