@@ -1,7 +1,8 @@
 #!/bin/sh
 cd ./frontend
 
-yarn lint
+yarn lint --fix
+git add .
 
 echo "🚚 finished linting.."
 

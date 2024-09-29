@@ -1,6 +1,16 @@
-import PopupCard, { Popup } from "@/components/common/popup-card";
+import type { Meta, StoryObj } from "@storybook/react";
 
-const popupMock: Popup = {
+import PopupCard from ".";
+
+const meta: Meta<typeof PopupCard> = {
+  component: PopupCard,
+  title: "popup-card",
+};
+export default meta;
+
+type Story = StoryObj<typeof PopupCard>;
+
+const popupMock = {
   id: 9,
   ownerId: 9,
   title:
@@ -17,13 +27,10 @@ const popupMock: Popup = {
   publicTag: "예술",
 };
 
-export default function Home() {
-  return (
-    <>
-      <div>HOME</div>
-      <div className="flex justify-center">
-        <PopupCard popup={popupMock} />
-      </div>
-    </>
-  );
-}
+export const Primary: Story = {
+  args: {
+    popup: {
+      ...popupMock,
+    },
+  },
+};
