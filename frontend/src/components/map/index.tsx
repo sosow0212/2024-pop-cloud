@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { MarkerClusterer } from "react-kakao-maps-sdk";
 
 import { useInitMapCenter } from "@/hooks";
 
@@ -62,12 +63,14 @@ export default function Map({ className }: MapProps) {
       className={className}
       handleChange={handleChagnge}
     >
-      {mapInfo.markers?.map((marker) => (
-        <MapMarker
-          key={`${marker.position.lat}=${marker.position.lng}`}
-          {...marker}
-        />
-      ))}
+      <MarkerClusterer averageCenter minLevel={10}>
+        {mapInfo.markers?.map((marker) => (
+          <MapMarker
+            key={`${marker.position.lat}=${marker.position.lng}`}
+            {...marker}
+          />
+        ))}
+      </MarkerClusterer>
     </MapContainer>
   );
 }
