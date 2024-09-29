@@ -33,12 +33,12 @@ export default function RootLayout({
 
   return (
     <html lang="ko">
-      <body>
+      <body className="md:flex">
         <ModalProvider />
         <MobileSizeWatcher />
         <MobileHeader />
         <NavBar />
-        <main className="mb-50 md:mb-0 md:ml-70 lg:ml-245">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );

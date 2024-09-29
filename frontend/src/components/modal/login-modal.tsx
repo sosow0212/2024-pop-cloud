@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { kakaoTalkIcon } from "@/icons/index";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { googleIcon, kakaoTalkIcon, naverIcon } from "@/icons/index";
 import { useModalStore } from "@/store";
 
 import { DrawerDialogContainer } from "./modal-container";
@@ -12,21 +18,46 @@ const LOGIN_OPTION = [
     icon: kakaoTalkIcon,
     alt: "카카오톡 로고",
   },
+  {
+    href: "",
+    icon: googleIcon,
+    alt: "구글 로고",
+  },
+  {
+    href: "",
+    icon: naverIcon,
+    alt: "네이버 로고",
+  },
 ];
 
 function ProfileForm() {
   return (
-    <section className="flex flex-col items-center justify-center gap-20">
+    <section className="flex flex-col items-center justify-center gap-25">
       <header className="mb-6 text-center">
-        <h2 className="text-2xl mb-2 font-bold">로그인</h2>
+        <h2 className="mb-2 text-24-700 ">로그인</h2>
         <p className="text-gray-600">소셜 계정을 통해 로그인 해주세요</p>
       </header>
-      <div className="flex ">
-        {LOGIN_OPTION.map(({ href, icon, alt }) => (
-          <Link key={href} href={href} className="size-50">
-            <Image src={icon} alt={alt} />
-          </Link>
-        ))}
+      <div className="flex items-center gap-25">
+        {LOGIN_OPTION.map(({ href, icon, alt }) =>
+          href ? (
+            <Link key={alt} href={href} className="size-45">
+              <Image src={icon} alt={alt} />
+            </Link>
+          ) : (
+            <TooltipProvider key={alt}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="size-35">
+                    <Image src={icon} alt={alt} />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>준비 중이에요!</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          ),
+        )}
       </div>
     </section>
   );
@@ -40,7 +71,7 @@ export default function LoginModal() {
     <DrawerDialogContainer
       isOpen={isModalOpen}
       onClose={onClose}
-      className="rounded-lg bg-white p-8 shadow-lg"
+      className="rounded-lg bg-white p-15 shadow-lg"
     >
       <ProfileForm />
     </DrawerDialogContainer>

@@ -7,7 +7,6 @@ const nextConfig = {
   },
   reactStrictMode: true,
   webpack: (config) => {
-    config.resolve.extensions.push(".ts", ".tsx", ".js", ".jsx");
     config.resolve.fallback = { fs: false, net: false, tls: false };
     return config;
   },
