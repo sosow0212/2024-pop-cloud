@@ -23,7 +23,12 @@ export default function MapContainer({
         }}
         center={center}
       >
-        <MapMarker title="현재 위치" type="bookmark" position={center} />
+        <MapMarker
+          title="현재 위치"
+          type="current"
+          position={center}
+          infoUrl=""
+        />
         {children}
       </KakaoMap>
     </section>

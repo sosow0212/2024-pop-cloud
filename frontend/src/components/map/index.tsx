@@ -7,6 +7,10 @@ import { useInitMapCenter } from "@/hooks";
 import MapContainer from "./map-container";
 import MapMarker from "./map-marker";
 
+interface MapProps {
+  className?: string;
+}
+
 const initState: MapInfoType = {
   center: {
     lat: 37.544882695287725,
@@ -15,12 +19,12 @@ const initState: MapInfoType = {
   markers: [],
 };
 
-export default function Map() {
+export default function Map({ className }: MapProps) {
   const [mapInfo, setMapInfo] = useState<MapInfoType>(initState);
   useInitMapCenter(setMapInfo);
 
   return (
-    <MapContainer center={mapInfo.center}>
+    <MapContainer center={mapInfo.center} className={className}>
       {mapInfo.markers?.map((marker) => (
         <MapMarker
           key={`${marker.position.lat}=${marker.position.lng}`}
