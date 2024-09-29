@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * @TODO 지도의 레벨 또는 중심 좌표 변화 시 state값이 변화 됩니다. 변화 감지시 서버로부터 해당 바운더리 안에 있는 장소들을 받아오도록 작성해야합니다.
+ * marker는 현재 위치, 북마크인 장소인지, 장소로 나눠져 해당하는 이미지와 라벨이 지도에 표시됩니다.
+ */
+
 import { useState } from "react";
 import { MarkerClusterer } from "react-kakao-maps-sdk";
 
@@ -50,12 +55,6 @@ export default function Map({ className }: MapProps) {
       },
     }));
   };
-
-  // useEffect(() => {
-  // mapInfo의 레빌과 바운드 변화를 감지하여 marker를 서버로부터 받아옴
-  // 정적 지도일 경우 노노
-  // }, [mapInfo]);
-
   return (
     <MapContainer
       level={mapInfo.mapLevel}
