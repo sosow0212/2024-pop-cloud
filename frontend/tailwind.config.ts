@@ -13,12 +13,10 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      sm: {
-        max: "480px",
-      },
-      md: "481px",
-      lg: "769px",
-      xl: "1280px",
+      sm: { max: "375px" },
+      md: { min: "744px" },
+      lg: { min: "1200px" },
+      xl: { min: "1280px" },
     },
     extend: {
       colors: {},

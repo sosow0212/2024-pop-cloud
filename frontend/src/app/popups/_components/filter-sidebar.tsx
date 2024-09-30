@@ -1,8 +1,7 @@
 import React from "react";
-import { BsBuilding } from "react-icons/bs";
-import { IoLocationOutline } from "react-icons/io5";
-import { MdOutlineToday } from "react-icons/md";
-import { TbFilterSearch, TbRefresh } from "react-icons/tb";
+import { BsFilterLeft } from "react-icons/bs";
+import { FiMapPin, FiRefreshCw, FiTag } from "react-icons/fi";
+import { LuCalendarDays } from "react-icons/lu";
 
 import CheckboxList from "./check-list";
 import DateFilter from "./date-ficker";
@@ -31,34 +30,31 @@ const placeTypes = [
 
 export default function FilterSidebar() {
   return (
-    <aside className="w-300 bg-white">
+    <aside className="flex h-screen w-300 flex-col border-r border-gray-200 bg-white px-12 pt-30">
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
-        <div className="mb-8 flex items-center gap-5">
-          <TbFilterSearch className="size-20" />
+        <div className="mb-8 flex items-center gap-9">
+          <BsFilterLeft className="size-20" />
           <h2 className="text-18-400">필터</h2>
         </div>
-        <button type="button" className="mb-8 size-18 text-gray-400">
-          <TbRefresh className="size-20" />
+        <button
+          type="button"
+          className="mb-8 size-18 text-gray-400 transition-colors hover:text-gray-600"
+        >
+          <FiRefreshCw className="size-20" />
         </button>
       </div>
-      <div>
-        <FilterAccordion
-          title="장소 유형"
-          icon={<BsBuilding className="size-20" />}
-        >
+      <div className="flex-1 overflow-y-auto">
+        <FilterAccordion title="태그" icon={<FiTag className="size-20" />}>
           <CheckboxList items={placeTypes} />
         </FilterAccordion>
 
-        <FilterAccordion
-          title="지역"
-          icon={<IoLocationOutline className="size-20" />}
-        >
+        <FilterAccordion title="지역" icon={<FiMapPin className="size-22" />}>
           <RegionSelector />
         </FilterAccordion>
 
         <FilterAccordion
           title="날짜"
-          icon={<MdOutlineToday className="size-20" />}
+          icon={<LuCalendarDays className="size-20" />}
         >
           <DateFilter />
         </FilterAccordion>

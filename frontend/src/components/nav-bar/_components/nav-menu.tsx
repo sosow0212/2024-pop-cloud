@@ -2,7 +2,18 @@
 
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { FiHeart, FiHome, FiMapPin, FiSearch, FiUser } from "react-icons/fi";
+import React, { useState } from "react";
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiHeart,
+  FiHome,
+  FiMapPin,
+  FiSearch,
+  FiUser,
+} from "react-icons/fi";
+
+import FilterSidebar from "@/app/popups/_components/filter-sidebar";
 
 import NavIconButton from "./nav-icon-button";
 import NavLogo from "./nav-logo";
@@ -18,36 +29,71 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
   const isSearchPage = pathname === "/popups";
   const profileUrl = loggedIn ? "/profile" : "/login";
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
 
   return (
-    <menu
-      className={clsx(
-        "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
-        isSearchPage && "lg:w-70",
-      )}
-    >
-      <NavLogo isSearchPage={isSearchPage} />
-      {NAV_ITEMS.map(({ href, name, icon }) => {
-        const isActive = pathname === href;
+    <div className="relative flex h-full">
+      <menu
+        className={clsx(
+          "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
+          isSearchPage && "lg:w-70",
+        )}
+      >
+        <NavLogo isSearchPage={isSearchPage} />
+        {NAV_ITEMS.map(({ href, name, icon }) => {
+          const isActive = pathname === href;
 
-        return (
-          <NavIconButton
-            key={href}
-            href={href}
-            name={name}
-            icon={icon}
-            isActive={isActive}
-            isSearchPage={isSearchPage}
-          />
-        );
-      })}
-      <NavIconButton
-        href={profileUrl}
-        name={loggedIn ? "프로필" : "로그인"}
-        icon={FiUser}
-        isActive={pathname === profileUrl}
-        isSearchPage={isSearchPage}
-      />
-    </menu>
+          return (
+            <NavIconButton
+              key={href}
+              href={href}
+              name={name}
+              icon={icon}
+              isActive={isActive}
+              isSearchPage={isSearchPage}
+            />
+          );
+        })}
+        <NavIconButton
+          href={profileUrl}
+          name={loggedIn ? "프로필" : "로그인"}
+          icon={FiUser}
+          isActive={pathname === profileUrl}
+          isSearchPage={isSearchPage}
+        />
+      </menu>
+      {isSearchPage && (
+        <>
+          <div
+            className={clsx(
+              "transition-all duration-300 ease-in-out",
+              isFilterOpen ? "w-300" : "w-0 overflow-hidden",
+            )}
+          >
+            <FilterSidebar />
+          </div>
+          <button
+            type="button"
+            onClick={toggleFilter}
+            className={clsx(
+              "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out",
+              isFilterOpen ? "left-[calc(100%)]" : "left-full",
+              "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
+            )}
+            aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
+          >
+            {isFilterOpen ? (
+              <FiChevronLeft className="size-50 text-gray-600" />
+            ) : (
+              <FiChevronRight className="size-50 text-gray-600" />
+            )}
+          </button>
+        </>
+      )}
+    </div>
   );
 }

@@ -14,7 +14,7 @@ function FilterAccordion({ title, icon, children }: FilterAccordionProps) {
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value={title} className="border-b border-gray-200">
         <AccordionTrigger className="text-base flex size-40 justify-between p-4">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-9">
             {icon}
             {title}
           </div>
