@@ -8,6 +8,7 @@ dependencies {
 
     // redis
     api 'org.springframework.boot:spring-boot-starter-data-redis'
+
     // redisson
     implementation("org.redisson:redisson:3.36.0")
 
