@@ -17,7 +17,7 @@ interface Props {
 export default function DetailsHeader({ publicTag, title }: Props) {
   return (
     <section className="w-full text-center">
-      <span className="mb-14 block w-full font-extrabold text-blue-5">
+      <span className="text-blue-5 mb-14 block w-full font-extrabold">
         {publicTag}
       </span>
       <h2 className="text-24-600 md:text-32-600 lg:text-32-600">{title}</h2>

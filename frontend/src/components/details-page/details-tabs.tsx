@@ -96,8 +96,8 @@ export default function DetailsTabs({ data }: Popup) {
 
           {DETAIL_INFO.map(({ title, info }) => (
             <dl key={title}>
-              <dt className="mt-20 text-16-600 text-gray-700">{title}</dt>
-              <dd className="mt-8 text-15 text-gray-500">{info}</dd>
+              <dt className="text-16-600 mt-20 text-gray-700">{title}</dt>
+              <dd className="text-15 mt-8 text-gray-500">{info}</dd>
             </dl>
           ))}
         </section>
@@ -106,18 +106,18 @@ export default function DetailsTabs({ data }: Popup) {
 
         <section className="flex justify-evenly">
           {DETAIL_INFO_BOOLEAN.map(({ able, disable, info, icon }) => (
-            <dl className="flex w-53 flex-col items-center pt-10" key={able}>
-              <dd className="mb-16 text-16">
+            <dl className="w-53 flex flex-col items-center pt-10" key={able}>
+              <dd className="text-16 mb-16">
                 {info ? (
                   icon
                 ) : (
                   <span className="relative">
                     {icon}
-                    <CiNoWaitingSign className="absolute -left-12 -top-11 size-43 text-gray-600 md:-left-10 md:-top-10 md:size-46" />
+                    <CiNoWaitingSign className="size-43 md:size-46 absolute -left-12 -top-11 text-gray-600 md:-left-10 md:-top-10" />
                   </span>
                 )}
               </dd>
-              <dt className="text-center text-12-600 text-gray-600">
+              <dt className="text-12-600 text-center text-gray-600">
                 {info ? able : disable}
               </dt>
             </dl>

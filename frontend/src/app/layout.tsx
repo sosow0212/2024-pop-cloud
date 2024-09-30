@@ -1,3 +1,5 @@
+"use client";
+
 import "./globals.css";
 
 import { Metadata } from "next";
@@ -27,7 +29,7 @@ export default function RootLayout({
         <MobileSizeWatcher />
         <MobileHeader />
         <NavBar />
-        <main className="my-40 md:mb-0 md:ml-70 lg:ml-245">{children}</main>
+        <main className="md:ml-70 lg:ml-245 my-40 md:mb-0">{children}</main>
       </body>
     </html>
   );
