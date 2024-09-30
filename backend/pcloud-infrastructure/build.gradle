@@ -4,8 +4,13 @@ jar { enabled = true }
 dependencies {
     implementation project(':pcloud-common')
 
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
     // redis
     api 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // redisson
+    implementation("org.redisson:redisson:3.36.0")
 
     // jackson
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
