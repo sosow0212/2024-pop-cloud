@@ -30,11 +30,11 @@ type PopupCardProps = {
 export default function PopupCard({ popup }: PopupCardProps) {
   return (
     <motion.div
-      className="h-400 max-w-350 w-full shadow-lg hover:cursor-pointer hover:shadow-2xl"
+      className="h-400 w-full max-w-350 shadow-lg hover:cursor-pointer hover:shadow-2xl"
       whileHover={{ scale: 1.02 }}
       transition={{ type: "tween", duration: "0.2" }}
     >
-      <div className="h-240 relative flex w-full items-center justify-center bg-gray-200">
+      <div className="relative flex h-240 w-full items-center justify-center bg-gray-200">
         <Image
           src={Rhino}
           alt="팝업스토어 이미지"
@@ -43,18 +43,18 @@ export default function PopupCard({ popup }: PopupCardProps) {
         />
         {/* 태그 */}
         <div className="absolute bottom-5 left-0 flex h-20 w-full items-center px-5">
-          <div className="rounded-3 text-14 bg-gray-400 px-5 text-white">
+          <div className="rounded-3 bg-gray-400 px-5 text-14 text-white">
             {popup.publicTag}
           </div>
         </div>
       </div>
       <div className="flex items-start justify-between gap-10 p-10">
-        <div className="min-w-140 flex flex-col gap-5">
-          <h2 className="text-21 line-clamp-2 font-extrabold">{popup.title}</h2>
+        <div className="flex min-w-140 flex-col gap-5">
+          <h2 className="line-clamp-2 text-21 font-extrabold">{popup.title}</h2>
           {/* todo: date util 만들어서 수정하기 */}
           <p className="text-14 text-gray-500">2024-09-02 ~ 2024-09-02</p>
           <p className="text-14 text-gray-500">{popup.location}</p>
-          <p className="text-16 line-clamp-2 w-full">
+          <p className="line-clamp-2 w-full text-16">
             &lt;{popup.description}&gt;
           </p>
         </div>

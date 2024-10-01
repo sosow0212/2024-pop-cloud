@@ -49,7 +49,7 @@ export default async function PopupDetails({
       <hr className="mb-40 h-1 w-full bg-gray-200" />
       <CarouselUI
         data={data.images}
-        className="h-300 md:h-460 md:w-700 lg:h-500 w-full"
+        className="h-300 w-full md:h-460 md:w-700 lg:h-500"
       />
       <DetailsTabs data={data} />
       <hr className="my-30 h-1 w-full bg-gray-200" />
