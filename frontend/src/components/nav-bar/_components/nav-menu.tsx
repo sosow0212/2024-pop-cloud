@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { FiHeart, FiHome, FiMapPin, FiSearch, FiUser } from "react-icons/fi";
 
 import NavIconButton from "./nav-icon-button";
+import NavLoginButton from "./nav-login-button";
 import NavLogo from "./nav-logo";
 
 const NAV_ITEMS = [
@@ -22,7 +23,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   return (
     <menu
       className={clsx(
-        "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
+        "md:w-70 md:pt-30 lg:w-245 flex size-full items-center justify-evenly md:flex-col md:items-center md:justify-start md:gap-14",
         isSearchPage && "lg:w-70",
       )}
     >
@@ -41,13 +42,17 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
           />
         );
       })}
-      <NavIconButton
-        href={profileUrl}
-        name={loggedIn ? "프로필" : "로그인"}
-        icon={FiUser}
-        isActive={pathname === profileUrl}
-        isSearchPage={isSearchPage}
-      />
+      {loggedIn ? (
+        <NavIconButton
+          href={profileUrl}
+          name={loggedIn ? "프로필" : "로그인"}
+          icon={FiUser}
+          isActive={pathname === profileUrl}
+          isSearchPage={isSearchPage}
+        />
+      ) : (
+        <NavLoginButton isSearchPage={isSearchPage} />
+      )}
     </menu>
   );
 }

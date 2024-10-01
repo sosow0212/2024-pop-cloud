@@ -1,5 +1,3 @@
-"use client";
-
 import "./globals.css";
 
 import { Metadata } from "next";
@@ -23,13 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="md:flex">
         <MSWComponent />
         <ModalProvider />
         <MobileSizeWatcher />
         <MobileHeader />
         <NavBar />
-        <main className="mb-50 md:mb-0 md:ml-70 lg:ml-245">{children}</main>
+        <main className="grow overflow-auto">{children}</main>
       </body>
     </html>
   );
