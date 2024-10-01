@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { Metadata } from "next";
 
+import MainContainer from "@/components/main-container";
 import MobileHeader from "@/components/mobile-header";
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
 import NavBar from "@/components/nav-bar";
@@ -27,7 +28,7 @@ export default function RootLayout({
         <MobileSizeWatcher />
         <MobileHeader />
         <NavBar />
-        <main className="grow overflow-auto">{children}</main>
+        <MainContainer>{children}</MainContainer>
       </body>
     </html>
   );

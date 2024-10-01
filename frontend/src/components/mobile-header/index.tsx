@@ -8,7 +8,7 @@ export default function MobileHeader() {
     <header className="sticky top-0 z-10 flex h-60 items-center border-b border-gray-300 bg-white  md:hidden">
       <BackButton />
       <Link href="/">
-        <h1 className="text-15 pl-16 font-[TTSamlipCreamyWhiteR] font-bold text-purple-400">
+        <h1 className="pl-16 font-[TTSamlipCreamyWhiteR] text-15 font-bold text-purple-400">
           POP CLOUD
         </h1>
       </Link>

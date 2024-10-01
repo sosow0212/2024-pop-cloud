@@ -14,7 +14,7 @@ export default function NavLogo({ isSearchPage }: { isSearchPage: boolean }) {
         />
         <h1
           className={clsx(
-            "text-25 hidden font-[TTSamlipCreamyWhiteR] font-bold text-purple-400",
+            "hidden font-[TTSamlipCreamyWhiteR] text-25 font-bold text-blue-400",
             isSearchPage ? "lg:hidden" : "lg:block",
           )}
         >
