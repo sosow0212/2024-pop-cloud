@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function PopupListpage() {
   return (
     <div className="grow p-4">

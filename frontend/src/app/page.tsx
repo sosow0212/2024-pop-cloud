@@ -1,46 +1,29 @@
-import React from "react";
+import PopupCard, { Popup } from "@/components/common/popup-card";
 
-import EventCard from "@/components/common/list-card";
-import { PopupBasic } from "@/mocks/dummy"; // 더미 데이터 타입을 임포트합니다
+const popupMock: Popup = {
+  id: 9,
+  ownerId: 9,
+  title:
+    "코뿔소와 함께하는 잠수교 러닝중 아이스크림이 얼마나 빨리 녹는지 테스트 하기",
+  description: "아메리카노: 빨리 잠들기 대회",
+  location: "강원도 태백시",
+  isParkingAvailable: true,
+  fee: 89000,
+  startDate: "2024-08-02T19:32:19.379718",
+  endDate: "2024-08-02T19:32:19.379718",
+  openTimes: "평일 09:00 ~ 18:00,\n주말 12:00 ~ 21:00\n",
+  latitude: 37.556725,
+  longitude: 126.9234952,
+  publicTag: "예술",
+};
 
-async function getPopups(pageSize: number = 10): Promise<PopupBasic[]> {
-  const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/popups`);
-  url.searchParams.append("pageSize", pageSize.toString());
-
-  const res = await fetch(url, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch popups");
-  }
-
-  return res.json();
-}
-
-export default async function PopupListPage() {
-  try {
-    const popups = await getPopups();
-
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl mb-6 font-bold">팝업 스토어 목록</h1>
-        <div className="space-y-4">
-          {popups.map((popup) => (
-            <EventCard key={popup.id} event={popup} />
-          ))}
-        </div>
+export default function Home() {
+  return (
+    <>
+      <div>HOME</div>
+      <div className="flex justify-center">
+        <PopupCard popup={popupMock} />
       </div>
-    );
-  } catch (error) {
-    console.error("Error fetching popups:", error); //eslint-disable-line
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl mb-6 font-bold">팝업 스토어 목록</h1>
-        <p className="text-red-500">
-          팝업 스토어 정보를 불러오는데 실패했습니다.
-        </p>
-      </div>
-    );
-  }
+    </>
+  );
 }

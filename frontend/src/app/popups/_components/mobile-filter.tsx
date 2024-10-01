@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FiX } from "react-icons/fi";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 
-import { DrawerDialogContiner } from "@/components/modal/modal-container";
+import { DrawerDialogContainer } from "@/components/modal/modal-container";
 
 import FilterSidebar from "./filter-sidebar";
 
@@ -17,7 +17,7 @@ function MobileFilterSidebar() {
 
   return (
     <>
-      <DrawerDialogContiner
+      <DrawerDialogContainer
         isOpen={isOpen}
         onClose={toggleSidebar}
         className="h-[80vh] overflow-hidden rounded-t-[10px]"
@@ -37,7 +37,7 @@ function MobileFilterSidebar() {
             <FilterSidebar />
           </div>
         </div>
-      </DrawerDialogContiner>
+      </DrawerDialogContainer>
 
       {!isOpen && (
         <div className="z-35 fixed inset-x-0 bottom-[60px] flex justify-center">

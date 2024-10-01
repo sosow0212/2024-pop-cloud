@@ -2,6 +2,7 @@ package com.batch.job.show.popups.application;
 
 import com.batch.annotation.BatchPublisher;
 import com.batch.job.show.popups.application.event.ClearedIpEvent;
+import com.common.annotation.BatchJob;
 import com.common.config.event.Events;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -14,6 +15,7 @@ public class PopupsBatchPublisher {
 
     private static final String EVERY_FIVE_AM = "0 0 5 * * *";
 
+    @BatchJob(keyName = "clearPopupIpCache")
     @Scheduled(cron = EVERY_FIVE_AM)
     public void clearPopupIpCache() {
         Events.raise(new ClearedIpEvent(LocalDateTime.now()));
