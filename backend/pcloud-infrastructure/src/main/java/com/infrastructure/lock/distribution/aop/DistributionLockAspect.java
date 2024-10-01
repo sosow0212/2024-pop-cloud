@@ -1,4 +1,4 @@
-package com.infrastructure.aop;
+package com.infrastructure.lock.distribution.aop;
 
 import com.common.annotation.DistributionLock;
 import lombok.RequiredArgsConstructor;
