@@ -21,13 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="flex">
+      <body className="md:flex">
         <MSWComponent />
         <ModalProvider />
         <MobileSizeWatcher />
         <MobileHeader />
         <NavBar />
-        <main>{children}</main>
+        <main className="grow overflow-auto">{children}</main>
       </body>
     </html>
   );

@@ -14,6 +14,7 @@ import {
 } from "react-icons/fi";
 
 import FilterSidebar from "@/app/popups/_components/filter-sidebar";
+import MobileFilterSidebar from "@/app/popups/_components/mobile-filter";
 
 import NavIconButton from "./nav-icon-button";
 import NavLogo from "./nav-logo";
@@ -68,30 +69,35 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
       </menu>
       {isSearchPage && (
         <>
-          <div
-            className={clsx(
-              "transition-all duration-300 ease-in-out",
-              isFilterOpen ? "w-300" : "w-0 overflow-hidden",
-            )}
-          >
-            <FilterSidebar />
+          <div className="hidden md:block">
+            <div
+              className={clsx(
+                "transition-all duration-300 ease-in-out",
+                isFilterOpen ? "w-300" : "w-0 overflow-hidden",
+              )}
+            >
+              <FilterSidebar />
+            </div>
+            <button
+              type="button"
+              onClick={toggleFilter}
+              className={clsx(
+                "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out",
+                isFilterOpen ? "left-[calc(100%)]" : "left-full",
+                "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
+              )}
+              aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
+            >
+              {isFilterOpen ? (
+                <FiChevronLeft className="size-50 text-gray-600" />
+              ) : (
+                <FiChevronRight className="size-50 text-gray-600" />
+              )}
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={toggleFilter}
-            className={clsx(
-              "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out",
-              isFilterOpen ? "left-[calc(100%)]" : "left-full",
-              "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
-            )}
-            aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
-          >
-            {isFilterOpen ? (
-              <FiChevronLeft className="size-50 text-gray-600" />
-            ) : (
-              <FiChevronRight className="size-50 text-gray-600" />
-            )}
-          </button>
+          <div className="md:hidden">
+            <MobileFilterSidebar />
+          </div>
         </>
       )}
     </div>

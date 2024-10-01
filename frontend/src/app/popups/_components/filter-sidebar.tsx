@@ -30,8 +30,8 @@ const placeTypes = [
 
 export default function FilterSidebar() {
   return (
-    <aside className="flex h-screen w-300 flex-col border-r border-gray-200 bg-white px-12 pt-30">
-      <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+    <aside className="flex h-screen w-full flex-col border-r border-gray-200 bg-white px-12 pt-40 ">
+      <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 md:px-5">
         <div className="mb-8 flex items-center gap-9">
           <BsFilterLeft className="size-20" />
           <h2 className="text-18-400">필터</h2>
