@@ -1,6 +1,6 @@
 package com.infrastructure.lock.batch.aop;
 
-import com.common.annotation.BatchLock;
+import com.common.annotation.BatchJob;
 import com.infrastructure.lock.batch.util.IdempotentManager;
 import com.infrastructure.lock.batch.util.RetryHandler;
 import lombok.RequiredArgsConstructor;
@@ -27,21 +27,21 @@ public class BatchLockAspect {
     private final IdempotentManager idEmpotentManager;
     private final RetryHandler retryHandler;
 
-    @Around("@annotation(com.common.annotation.BatchLock)")
+    @Around("@annotation(com.common.annotation.BatchJob)")
     public Object lock(final ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        BatchLock batchLock = method.getAnnotation(BatchLock.class);
+        BatchJob batchJob = method.getAnnotation(BatchJob.class);
 
         String keyName = LOCK_PREFIX + method.getName();
 
-        if (!idEmpotentManager.tryIdempotent(keyName, batchLock.lockUsingTimeout(), batchLock.timeUnit())) {
+        if (!idEmpotentManager.tryIdempotent(keyName, batchJob.ttlTime(), batchJob.timeUnit())) {
             log.info("다른 스레드에서 Batch-lock을 획득했습니다. method: {}", method.getName());
             return false;
         }
 
         try {
-            executeWithRetry(joinPoint, keyName, batchLock);
+            executeWithRetry(joinPoint, keyName, batchJob);
             return true;
         } finally {
             releaseLockSafely(keyName, method.getName());
@@ -51,13 +51,13 @@ public class BatchLockAspect {
     private void executeWithRetry(
             final ProceedingJoinPoint joinPoint,
             final String keyName,
-            final BatchLock batchLock
+            final BatchJob batchJob
     ) throws Throwable {
         try {
             joinPoint.proceed();
         } catch (Exception e) {
             log.warn("[1.job fail] Batch Server method: {}에서 작업을 실패했습니다. 재처리 시도합니다. 예외: {}", keyName, e.getMessage());
-            retryHandler.retryWithIdempotentLock(joinPoint, keyName, batchLock.lockUsingTimeout(), batchLock.timeUnit());
+            retryHandler.retryWithIdempotentLock(joinPoint, keyName, batchJob.ttlTime(), batchJob.timeUnit());
         }
     }
 
