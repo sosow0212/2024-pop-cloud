@@ -52,7 +52,7 @@ function ProfileForm() {
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>준비 중이에요!</p>
+                  <p>아직 준비 중이에요</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
