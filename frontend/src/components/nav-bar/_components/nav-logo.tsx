@@ -8,13 +8,13 @@ export default function NavLogo({ isSearchPage }: { isSearchPage: boolean }) {
       <header>
         <GiFluffyCloud
           className={clsx(
-            "size-40 text-purple-400 md:block",
+            "size-40 text-blue-5 md:block",
             isSearchPage ? "lg:block" : "lg:hidden",
           )}
         />
         <h1
           className={clsx(
-            "hidden font-[TTSamlipCreamyWhiteR] text-25 font-bold text-blue-400",
+            "hidden font-[TTSamlipCreamyWhiteR] text-25 font-bold text-blue-5",
             isSearchPage ? "lg:hidden" : "lg:block",
           )}
         >
