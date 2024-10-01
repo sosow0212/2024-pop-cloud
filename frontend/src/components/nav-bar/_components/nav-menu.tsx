@@ -23,7 +23,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   return (
     <menu
       className={clsx(
-        "md:w-70 md:pt-30 lg:w-245 flex size-full items-center justify-evenly md:flex-col md:items-center md:justify-start md:gap-14",
+        "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
         isSearchPage && "lg:w-70",
       )}
     >

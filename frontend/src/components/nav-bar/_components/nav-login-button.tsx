@@ -18,7 +18,7 @@ function NavLoginButton({ isSearchPage }: NavLoginButtonProps) {
     <button
       type="button"
       className={clsx(
-        "rounded-5 flex size-48 items-center justify-center text-center hover:bg-gray-100",
+        "flex size-48 items-center justify-center rounded-5 text-center hover:bg-gray-100",
         isSearchPage ? "lg:w-48 lg:pl-0" : "lg:w-220 lg:pl-12",
       )}
       onClick={handleClick}
