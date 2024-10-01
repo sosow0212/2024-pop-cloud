@@ -32,12 +32,12 @@ const LOGIN_OPTION = [
 
 function ProfileForm() {
   return (
-    <section className="flex flex-col items-center justify-center gap-25">
+    <section className="gap-25 flex flex-col items-center justify-center">
       <header className="mb-6 text-center">
-        <h2 className="mb-2 text-24-700 ">로그인</h2>
+        <h2 className="text-24-700 mb-2 ">로그인</h2>
         <p className="text-gray-600">소셜 계정을 통해 로그인 해주세요</p>
       </header>
-      <div className="flex items-center gap-25">
+      <div className="gap-25 flex items-center">
         {LOGIN_OPTION.map(({ href, icon, alt }) =>
           href ? (
             <Link key={alt} href={href} className="size-45">
@@ -71,7 +71,7 @@ export default function LoginModal() {
     <DrawerDialogContainer
       isOpen={isModalOpen}
       onClose={onClose}
-      className="rounded-lg bg-white p-15 shadow-lg"
+      className="p-15 rounded-lg bg-white shadow-lg"
     >
       <ProfileForm />
     </DrawerDialogContainer>

@@ -1,10 +1,13 @@
 ifndef::snippets[]
 :snippets: ./build/generated-snippets
 endif::[]
-= e-market
+= pop-cloud
 :doctype: book
 :toc: left
 :source-highlighter: highlightjs
 :sectlinks:
 
 include::auth.adoc[]
+include::exhibition.adoc[]
+include::popups.adoc[]
+include::recommends.adoc[]

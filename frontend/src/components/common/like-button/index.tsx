@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
@@ -14,7 +16,7 @@ export default function LikeButton({
 }: LikeButtonProps) {
   const [isLiked, setIsLiked] = useState(initialLiked);
 
-  const handleClick = () => {
+  const handleToggle = () => {
     const newLikedState = !isLiked;
     setIsLiked(newLikedState);
     onChange?.(newLikedState);
@@ -23,7 +25,7 @@ export default function LikeButton({
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={handleToggle}
       className="focus:outline-none"
       aria-label={isLiked ? "좋아요 취소" : "좋아요"}
     >

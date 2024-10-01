@@ -72,6 +72,6 @@ const config: Config = {
       "12-400": ["12px", { lineHeight: "14px", fontWeight: "400" }],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
 export default config;
