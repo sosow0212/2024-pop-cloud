@@ -10,6 +10,7 @@
 === Request
 
 include::{snippets}/show-controller-web-mvc-test/find_all_show_with_paging/query-parameters.adoc[]
+include::{snippets}/show-controller-web-mvc-test/find_all_show_with_paging/curl-request.adoc[]
 include::{snippets}/show-controller-web-mvc-test/find_all_show_with_paging/http-request.adoc[]
 
 === Response
