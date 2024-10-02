@@ -123,8 +123,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("[].startDate").description("팝업스토어 시작일"),
                                 fieldWithPath("[].endDate").description("팝업스토어 종료일"),
                                 fieldWithPath("[].visitedCount").description("팝업스토어 게시글 방문자 수"),
-                                fieldWithPath("[].likedCount").description("팝업스토어 게시글 좋아요 수")
-
+                                fieldWithPath("[].likedCount").description("팝업스토어 게시글 좋아요 수"),
+                                fieldWithPath("[].showType").description("쇼 타입 (POPUPS or EXHIBITION)")
                         )
                 ));
     }
