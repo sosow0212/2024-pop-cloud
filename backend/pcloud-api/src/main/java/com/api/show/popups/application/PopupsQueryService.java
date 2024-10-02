@@ -3,7 +3,6 @@ package com.api.show.popups.application;
 import com.common.config.event.Events;
 import com.domain.show.popups.cache.PopupsCacheRepository;
 import com.domain.show.popups.domain.PopupsRepository;
-import com.domain.show.popups.domain.response.PopupsSimpleResponse;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import com.domain.show.popups.event.PopupsFoundEvent;
 import com.domain.show.popups.exception.PopupsException;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static com.domain.show.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 
@@ -53,9 +51,5 @@ public class PopupsQueryService {
     private boolean canCacheWithoutConcurrency(final LocalDateTime cacheEvictTime, final LocalDateTime startFindTime) {
         return cacheEvictTime == null ||
                 cacheEvictTime.isBefore(startFindTime);
-    }
-
-    public List<PopupsSimpleResponse> findAll(final Long popupsId, final Integer pageSize) {
-        return popupsRepository.findAllWithPaging(popupsId, pageSize);
     }
 }

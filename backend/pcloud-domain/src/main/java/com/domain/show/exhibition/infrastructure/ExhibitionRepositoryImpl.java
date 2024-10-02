@@ -3,12 +3,11 @@ package com.domain.show.exhibition.infrastructure;
 import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.ExhibitionRepository;
 import com.domain.show.exhibition.domain.LikedExhibition;
-import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
-import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -41,11 +40,6 @@ public class ExhibitionRepositoryImpl implements ExhibitionRepository {
     @Override
     public Optional<ExhibitionSpecificResponse> findSpecificById(final Long exhibitionId) {
         return exhibitionQueryRepository.findSpecificById(exhibitionId);
-    }
-
-    @Override
-    public List<ExhibitionSimpleResponse> findAllWithPaging(final Long exhibitionId, final Integer pageSize) {
-        return exhibitionQueryRepository.findAllWithPaging(exhibitionId, pageSize);
     }
 
     @Override

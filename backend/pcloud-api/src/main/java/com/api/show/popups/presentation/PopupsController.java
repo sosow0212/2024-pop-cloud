@@ -8,7 +8,6 @@ import com.api.show.popups.application.request.PopupsUpdateRequest;
 import com.api.show.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
-import com.domain.show.popups.domain.response.PopupsSimpleResponse;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
-import java.util.List;
 
 import static com.domain.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.member.domain.vo.MemberRole.MANAGER;
@@ -46,14 +43,6 @@ public class PopupsController {
         Long createdPopupsId = popupsService.create(memberId, request);
         return ResponseEntity.created(URI.create("/popups/" + createdPopupsId))
                 .build();
-    }
-
-    @GetMapping
-    public ResponseEntity<List<PopupsSimpleResponse>> findAll(
-            @RequestParam(name = "popupsId", required = false) final Long popupsId,
-            @RequestParam(name = "pageSize") final Integer pageSize
-    ) {
-        return ResponseEntity.ok(popupsQueryService.findAll(popupsId, pageSize));
     }
 
     @GetMapping("/{popupsId}")

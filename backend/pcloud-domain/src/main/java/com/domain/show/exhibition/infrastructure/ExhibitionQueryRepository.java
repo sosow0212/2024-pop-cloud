@@ -1,9 +1,7 @@
 package com.domain.show.exhibition.infrastructure;
 
 import com.domain.common.CustomTagType;
-import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -59,29 +57,5 @@ public class ExhibitionQueryRepository {
         }
 
         return Optional.of(result.get(0));
-    }
-
-    public List<ExhibitionSimpleResponse> findAllWithPaging(final Long exhibitionId, final Integer pageSize) {
-        return jpaQueryFactory.select(constructor(ExhibitionSimpleResponse.class,
-                        exhibition.id,
-                        exhibition.showDetails.title,
-                        exhibition.position.location,
-                        exhibition.showSchedule.startDate,
-                        exhibition.showSchedule.endDate,
-                        exhibition.statistic.visitedCount,
-                        exhibition.statistic.likedCount
-                )).from(exhibition)
-                .where(ltExhibitionId(exhibitionId))
-                .orderBy(exhibition.id.desc())
-                .limit(pageSize)
-                .fetch();
-    }
-
-    private BooleanExpression ltExhibitionId(final Long exhibitionId) {
-        if (exhibitionId == null) {
-            return null;
-        }
-
-        return exhibition.id.lt(exhibitionId);
     }
 }
