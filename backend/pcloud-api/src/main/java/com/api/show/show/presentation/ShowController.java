@@ -27,8 +27,8 @@ public class ShowController {
             @RequestParam(required = false, defaultValue = "") final List<String> publicTags,
             @RequestParam(required = false, defaultValue = "") final String city,
             @RequestParam(required = false, defaultValue = "") final List<String> country,
-            @RequestParam(required = false, defaultValue = "") final String startDate,
-            @RequestParam(required = false, defaultValue = "") final String endDate
+            @RequestParam(required = true) final String startDate,
+            @RequestParam(required = true) final String endDate
     ) {
         ShowPagingFilterRequest request = ShowPagingFilterRequest.of(showId, pageSize, showType, publicTags, city, country, startDate, endDate);
         return ResponseEntity.ok(showQueryService.findAll(request));

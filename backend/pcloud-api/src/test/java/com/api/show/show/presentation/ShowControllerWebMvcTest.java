@@ -53,12 +53,12 @@ class ShowControllerWebMvcTest extends MockBeanInjection {
                         queryParameters(
                                 parameterWithName("showId").description("마지막으로 받은 show id, 처음 조회 시 null"),
                                 parameterWithName("pageSize").description("한 페이지에 조회되는 데이터 수"),
-                                parameterWithName("showType").description("쇼케이스 타입 (영문 소문자 popups or exhibition)"),
+                                parameterWithName("showType").description("[기본 값 : popups] 쇼케이스 타입 (영문 소문자 popups or exhibition)"),
                                 parameterWithName("publicTags").description("퍼블릭 태그 (한글 값) -> 배열"),
                                 parameterWithName("city").description("도시 이름 (ex. 서울, 경기도 ...)"),
                                 parameterWithName("country").description("상세 위치 (ex. 동작구, 마포구 ...) -> 배열"),
-                                parameterWithName("startDate").description("쇼케이스 시작 날짜"),
-                                parameterWithName("endDate").description("쇼케이스 종료 날짜")
+                                parameterWithName("startDate").description("[필수 값] 쇼케이스 시작 날짜"),
+                                parameterWithName("endDate").description("[필수 값] 쇼케이스 종료 날짜")
                         ),
                         responseFields(
                                 fieldWithPath("[].showId").description("show id"),
