@@ -51,9 +51,6 @@ public class ExhibitionController {
                 .build();
     }
 
-    /**
-     * TODO: 조회 시 방문자 수 처리 (추후에 유스케이스 적용)
-     */
     @GetMapping("/{exhibitionId}")
     public ResponseEntity<ExhibitionSpecificResponse> findById(
             @PathVariable final Long exhibitionId,
