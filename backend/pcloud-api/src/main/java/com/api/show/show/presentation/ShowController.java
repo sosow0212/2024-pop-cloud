@@ -1,7 +1,7 @@
 package com.api.show.show.presentation;
 
 import com.api.show.show.application.ShowQueryService;
-import com.api.show.show.application.dto.ShowPagingQueryRequest;
+import com.api.show.show.application.dto.ShowPagingFilterRequest;
 import com.domain.show.show.domain.dto.ShowSimpleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +26,11 @@ public class ShowController {
             @RequestParam(required = false, defaultValue = "popups") final String showType,
             @RequestParam(required = false, defaultValue = "") final List<String> publicTags,
             @RequestParam(required = false, defaultValue = "") final String city,
-            @RequestParam(required = false, defaultValue = "") final List<String> country
+            @RequestParam(required = false, defaultValue = "") final List<String> country,
+            @RequestParam(required = false, defaultValue = "") final String startDate,
+            @RequestParam(required = false, defaultValue = "") final String endDate
     ) {
-        ShowPagingQueryRequest request = ShowPagingQueryRequest.of(showId, pageSize, showType, publicTags, city, country);
+        ShowPagingFilterRequest request = ShowPagingFilterRequest.of(showId, pageSize, showType, publicTags, city, country, startDate, endDate);
         return ResponseEntity.ok(showQueryService.findAll(request));
     }
 }

@@ -3,33 +3,43 @@ package com.api.show.show.application.dto;
 import com.domain.show.common.PublicTag;
 import com.domain.show.common.ShowType;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
-public record ShowPagingQueryRequest(
+public record ShowPagingFilterRequest(
         Long showId,
         Integer pageSize,
         ShowType showType,
         List<PublicTag> publicTags,
-        List<String> cities
+        List<String> cities,
+        LocalDateTime startDate,
+        LocalDateTime endDate
 ) {
 
-    public static ShowPagingQueryRequest of(
+    public static ShowPagingFilterRequest of(
             final Long showId,
             final Integer pageSize,
             String showType,
             final List<String> publicTags,
             final String city,
-            final List<String> country
+            final List<String> country,
+            String startDate,
+            String endDate
     ) {
         showType = showType.toLowerCase();
         validateNotSupportedTag(showType);
-        return new ShowPagingQueryRequest(
+        return new ShowPagingFilterRequest(
                 showId,
                 pageSize,
                 ShowType.from(showType),
                 convertPublicTags(publicTags),
-                convertCities(city, country)
+                convertCities(city, country),
+                parseDate(startDate).toLocalDate().atTime(LocalTime.MIN),
+                parseDate(endDate).toLocalDate().atTime(LocalTime.MAX)
         );
     }
 
@@ -45,7 +55,7 @@ public record ShowPagingQueryRequest(
         }
 
         return country.stream()
-                .filter(ShowPagingQueryRequest::validateStringType)
+                .filter(ShowPagingFilterRequest::validateStringType)
                 .map(it -> String.format("%s %s", city, it))
                 .toList();
     }
@@ -58,5 +68,17 @@ public record ShowPagingQueryRequest(
         return publicTags.stream()
                 .map(PublicTag::from)
                 .toList();
+    }
+
+    private static LocalDateTime parseDate(final String date) {
+        String type = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(type);
+
+        if (date == null || date.isBlank()) {
+            return LocalDateTime.now();
+        }
+
+        LocalDate localDate = LocalDate.parse(date, formatter);
+        return localDate.atStartOfDay();
     }
 }

@@ -1,6 +1,6 @@
 package com.api.show.show.application;
 
-import com.api.show.show.application.dto.ShowPagingQueryRequest;
+import com.api.show.show.application.dto.ShowPagingFilterRequest;
 import com.domain.show.show.domain.ShowRepository;
 import com.domain.show.show.domain.dto.ShowSimpleResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.domain.show.common.PublicTag.ARTIST;
@@ -33,9 +34,9 @@ class ShowQueryServiceTest {
     @Test
     void 페이징_조회를_한다() {
         // given
-        ShowPagingQueryRequest request = new ShowPagingQueryRequest(1L, 10, null, null, null);
+        ShowPagingFilterRequest request = new ShowPagingFilterRequest(1L, 10, null, null, null, LocalDateTime.of(2024, 1, 1, 0, 0), LocalDateTime.of(2025, 1, 1, 0, 0));
         ShowSimpleResponse response = new ShowSimpleResponse(1L, EXHIBITION, ARTIST, "title", "location", null, null, 1, 1);
-        when(showRepository.findAll(any(), any(), any(), any(), any()))
+        when(showRepository.findAll(any(), any(), any(), any(), any(), any(), any()))
                 .thenReturn(List.of(response));
 
         // when

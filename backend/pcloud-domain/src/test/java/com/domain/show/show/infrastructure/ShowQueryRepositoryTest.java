@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.LongStream;
 
@@ -36,7 +37,7 @@ class ShowQueryRepositoryTest extends IntegrationHelper {
             int pageSize = 10;
 
             // when
-            List<ShowSimpleResponse> responses = showQueryRepository.findAllWithPaging(null, pageSize, ShowType.EXHIBITION, List.of(), List.of());
+            List<ShowSimpleResponse> responses = showQueryRepository.findAllWithPaging(null, pageSize, ShowType.EXHIBITION, List.of(), List.of(), LocalDateTime.of(2024, 1, 1, 0, 0), LocalDateTime.of(2025, 1, 1, 0, 0));
 
             // then
             assertThat(responses).hasSize(pageSize);
@@ -50,7 +51,7 @@ class ShowQueryRepositoryTest extends IntegrationHelper {
             int pageSize = 3;
 
             // when
-            List<ShowSimpleResponse> responses = showQueryRepository.findAllWithPaging(exhibitionId, pageSize, ShowType.EXHIBITION, List.of(), List.of());
+            List<ShowSimpleResponse> responses = showQueryRepository.findAllWithPaging(exhibitionId, pageSize, ShowType.EXHIBITION, List.of(), List.of(), LocalDateTime.of(2024, 1, 1, 0, 0), LocalDateTime.of(2025, 1, 1, 0, 0));
 
             // then
             assertThat(responses).hasSize(pageSize);

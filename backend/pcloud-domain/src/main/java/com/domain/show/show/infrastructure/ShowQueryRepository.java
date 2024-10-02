@@ -9,6 +9,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.domain.show.exhibition.domain.QExhibition.exhibition;
@@ -26,16 +27,18 @@ public class ShowQueryRepository {
             final Integer pageSize,
             final ShowType showType,
             final List<PublicTag> publicTags,
-            final List<String> cities
+            final List<String> cities,
+            final LocalDateTime startDate,
+            final LocalDateTime endDate
     ) {
         if (showType.equals(ShowType.EXHIBITION)) {
-            return fetchExhibition(showId, pageSize, publicTags, cities);
+            return fetchExhibition(showId, pageSize, publicTags, cities, startDate, endDate);
         }
 
-        return fetchPopups(showId, pageSize, publicTags, cities);
+        return fetchPopups(showId, pageSize, publicTags, cities, startDate, endDate);
     }
 
-    private List<ShowSimpleResponse> fetchExhibition(final Long showId, final Integer pageSize, final List<PublicTag> publicTags, final List<String> cities) {
+    private List<ShowSimpleResponse> fetchExhibition(final Long showId, final Integer pageSize, final List<PublicTag> publicTags, final List<String> cities, final LocalDateTime startDate, final LocalDateTime endDate) {
         return jpaQueryFactory.select(constructor(ShowSimpleResponse.class,
                         exhibition.id,
                         Expressions.constant(ShowType.EXHIBITION),
@@ -50,7 +53,8 @@ public class ShowQueryRepository {
                 .where(
                         ltExhibitionId(showId),
                         eqPublicTags(publicTags),
-                        eqCities(cities)
+                        eqCities(cities),
+                        exhibition.showSchedule.endDate.between(startDate, endDate)
                 )
                 .orderBy(exhibition.id.desc())
                 .limit(pageSize)
@@ -84,7 +88,7 @@ public class ShowQueryRepository {
                 .orElse(null);
     }
 
-    private List<ShowSimpleResponse> fetchPopups(final Long showId, final Integer pageSize, final List<PublicTag> publicTags, final List<String> cities) {
+    private List<ShowSimpleResponse> fetchPopups(final Long showId, final Integer pageSize, final List<PublicTag> publicTags, final List<String> cities, final LocalDateTime startDate, final LocalDateTime endDate) {
         return jpaQueryFactory.select(constructor(ShowSimpleResponse.class,
                         popups.id,
                         Expressions.constant(ShowType.POPUPS),
@@ -99,7 +103,8 @@ public class ShowQueryRepository {
                 .where(
                         ltPopupsId(showId),
                         eqPublicTagsWithPopups(publicTags),
-                        eqCitiesWithPopups(cities)
+                        eqCitiesWithPopups(cities),
+                        popups.showSchedule.endDate.between(startDate, endDate)
                 )
                 .orderBy(popups.id.desc())
                 .limit(pageSize)
