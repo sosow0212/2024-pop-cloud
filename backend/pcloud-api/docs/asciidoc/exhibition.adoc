@@ -10,67 +10,62 @@
 == 개인전시회를 생성한다 (POST /api/exhibitions)
 
 === Request
+
 include::{snippets}/exhibition-controller-web-mvc-test/create_exhibitions/http-request.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/create_exhibitions/request-headers.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/create_exhibitions/request-fields.adoc[]
 
 === Response
+
 include::{snippets}/exhibition-controller-web-mvc-test/create_exhibitions/http-response.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/create_exhibitions/response-headers.adoc[]
-
 
 == 개인전시회를 상세 조회한다 (GET /api/exhibitions/{exhibitionId})
 
 === Request
+
 include::{snippets}/exhibition-controller-web-mvc-test/find_exhibition/http-request.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/find_exhibition/path-parameters.adoc[]
 
 === Response
+
 include::{snippets}/exhibition-controller-web-mvc-test/find_exhibition/http-response.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/find_exhibition/response-fields.adoc[]
-
-
-== 개인전시회를 페이징 조회한다 (GET /api/exhibitions)
-
-=== Request
-include::{snippets}/exhibition-controller-web-mvc-test/find_all_exhibition_with_paging/http-request.adoc[]
-include::{snippets}/exhibition-controller-web-mvc-test/find_all_exhibition_with_paging/query-parameters.adoc[]
-
-=== Response
-include::{snippets}/exhibition-controller-web-mvc-test/find_all_exhibition_with_paging/http-response.adoc[]
-include::{snippets}/exhibition-controller-web-mvc-test/find_all_exhibition_with_paging/response-fields.adoc[]
-
 
 == 개인전시회를 업데이트 한다 (PATCH /api/exhibitions/{exhibitionId})
 
 === Request
+
 include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/http-request.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/path-parameters.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/request-headers.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/request-fields.adoc[]
 
 === Response
-include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/http-response.adoc[]
 
+include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/http-response.adoc[]
 
 == 개인전시회를 삭제한다 (DELETE /api/exhibitions)
 
 === Request
+
 include::{snippets}/exhibition-controller-web-mvc-test/delete_exhibition/http-request.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/delete_exhibition/path-parameters.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/delete_exhibition/request-headers.adoc[]
 
 === Response
-include::{snippets}/exhibition-controller-web-mvc-test/delete_exhibition/http-response.adoc[]
 
+include::{snippets}/exhibition-controller-web-mvc-test/delete_exhibition/http-response.adoc[]
 
 == 개인전시회 좋아요를 처리한다 (POST /api/exhibitions/{exhibitionId}/likes)
 
 === Request
+
 include::{snippets}/exhibition-controller-web-mvc-test/toggle_exhibition_like/http-request.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/toggle_exhibition_like/path-parameters.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/toggle_exhibition_like/request-headers.adoc[]
 
 === Response
+
 include::{snippets}/exhibition-controller-web-mvc-test/toggle_exhibition_like/http-response.adoc[]
 include::{snippets}/exhibition-controller-web-mvc-test/toggle_exhibition_like/response-fields.adoc[]
