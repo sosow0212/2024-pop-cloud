@@ -28,7 +28,7 @@ public class ShowControllerAcceptanceFixture extends AcceptanceBaseFixture {
     protected ExtractableResponse<Response> 페이징_조회_요청() {
         return RestAssured.given().log().all()
                 .when()
-                .get("/shows?pageSize=1&showType=exhibition")
+                .get("/shows?pageSize=1&showType=exhibition&startDate=2020-01-01&endDate=2025-12-31")
                 .then().log().all()
                 .extract();
     }
