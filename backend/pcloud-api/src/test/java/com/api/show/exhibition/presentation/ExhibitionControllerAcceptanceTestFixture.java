@@ -1,9 +1,9 @@
 package com.api.show.exhibition.presentation;
 
+import com.api.helper.AcceptanceBaseFixture;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.api.show.exhibition.presentation.dto.ExhibitionLikedStatusResponse;
-import com.api.helper.AcceptanceBaseFixture;
 import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.ExhibitionRepository;
 import io.restassured.RestAssured;
@@ -16,9 +16,9 @@ import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import static show.exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전_작성자아이디;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
+import static show.exhibition.domain.ExhibitionFixture.개인전시회_생성_사진_개인전_작성자아이디;
 
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
@@ -58,18 +58,6 @@ class ExhibitionControllerAcceptanceTestFixture extends AcceptanceBaseFixture {
     }
 
     protected void 개인전시회_상세_조회_요청_검증(final ExtractableResponse<Response> response) {
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-    }
-
-    protected ExtractableResponse<Response> 개인전시회_페이징_조회_요청() {
-        return RestAssured.given().log().all()
-                .when()
-                .get("/exhibitions?pageSize=1")
-                .then().log().all()
-                .extract();
-    }
-
-    protected void 개인전시회_페이징_조회_요청_검증(final ExtractableResponse<Response> response) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 

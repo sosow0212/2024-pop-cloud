@@ -50,18 +50,6 @@ class PopupsControllerAcceptanceFixture extends AcceptanceBaseFixture {
         return popupsRepository.save(일반_팝업_스토어_생성_뷰티());
     }
 
-    protected ExtractableResponse<Response> 팝업스토어_페이징_조회_요청() {
-        return RestAssured.given().log().all()
-                .when()
-                .get("/popups?pageSize=1")
-                .then().log().all()
-                .extract();
-    }
-
-    protected void 페이징_조회_결과_검증(final ExtractableResponse<Response> response) {
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-    }
-
     protected ExtractableResponse<Response> 팝업스토어_업데이트_요청() {
         return RestAssured.given().log().all()
                 .when()

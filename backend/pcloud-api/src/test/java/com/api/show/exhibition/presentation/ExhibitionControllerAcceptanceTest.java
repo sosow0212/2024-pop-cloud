@@ -36,18 +36,6 @@ class ExhibitionControllerAcceptanceTest extends ExhibitionControllerAcceptanceT
     }
 
     @Test
-    void 개인전시회를_페이징_조회한다() {
-        // given
-        개인전시회_생성();
-
-        // when
-        var 개인전시회_페이징_조회_요청_결과 = 개인전시회_페이징_조회_요청();
-
-        // then
-        개인전시회_페이징_조회_요청_검증(개인전시회_페이징_조회_요청_결과);
-    }
-
-    @Test
     void 개인전시회를_업데이트한다() {
         // given
         개인전시회_생성();

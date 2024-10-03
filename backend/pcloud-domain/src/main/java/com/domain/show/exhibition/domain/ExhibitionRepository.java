@@ -1,8 +1,7 @@
 package com.domain.show.exhibition.domain;
 
-import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
-import java.util.List;
+
 import java.util.Optional;
 
 public interface ExhibitionRepository {
@@ -16,8 +15,6 @@ public interface ExhibitionRepository {
     Optional<Exhibition> findByIdWithOptimisticLock(Long exhibitionId);
 
     Optional<ExhibitionSpecificResponse> findSpecificById(Long exhibitionId);
-
-    List<ExhibitionSimpleResponse> findAllWithPaging(Long exhibitionId, Integer pageSize);
 
     boolean existsByExhibitionIdAndMemberId(Long exhibitionId, Long memberId);
 

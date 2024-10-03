@@ -3,12 +3,9 @@ package show.popups.infrastructure;
 import com.domain.show.popups.domain.LikedPopups;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
-import com.domain.show.popups.domain.response.PopupsSimpleResponse;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -59,21 +56,6 @@ public class FakePopupsRepository implements PopupsRepository {
         PopupsSpecificResponse response = 팝업스토어_상세_조회_응답_생성_팝업스토어(popups);
 
         return Optional.of(response);
-    }
-
-    @Override
-    public List<PopupsSimpleResponse> findAllWithPaging(final Long popupsId, final Integer pageSize) {
-        return List.of(
-                new PopupsSimpleResponse(
-                        1L,
-                        "빵빵이 전시회",
-                        "서울시 마포구",
-                        LocalDateTime.now().minusDays(100),
-                        LocalDateTime.now(),
-                        0,
-                        0
-                )
-        );
     }
 
     @Override

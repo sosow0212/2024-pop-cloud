@@ -61,11 +61,16 @@ public class ExhibitionService {
     }
 
     public boolean toggleLike(final Long memberId, final Long exhibitionId) {
-        Exhibition foundExhibition = findExhibition(exhibitionId);
+        Exhibition foundExhibition = findWithOptimisticLock(exhibitionId);
         boolean canAddLikes = toggleExhibitionLike(memberId, exhibitionId);
         foundExhibition.addLikedCount(canAddLikes);
 
         return canAddLikes;
+    }
+
+    private Exhibition findWithOptimisticLock(final Long exhibitionId) {
+        return exhibitionRepository.findByIdWithOptimisticLock(exhibitionId)
+                .orElseThrow(() -> new ExhibitionException(EXHIBITION_NOT_FOUND_EXCEPTION));
     }
 
     private boolean toggleExhibitionLike(final Long memberId, final Long exhibitionId) {
