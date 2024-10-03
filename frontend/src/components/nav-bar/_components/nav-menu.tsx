@@ -13,8 +13,8 @@ import {
   FiUser,
 } from "react-icons/fi";
 
-import FilterSidebar from "@/app/popups/_components/filter-sidebar";
-import MobileFilterSidebar from "@/app/popups/_components/mobile-filter";
+import FilterSidebar from "@/app/shows/_components/filter-sidebar";
+import MobileFilterSidebar from "@/app/shows/_components/mobile-filter";
 
 import NavIconButton from "./nav-icon-button";
 import NavLoginButton from "./nav-login-button";
@@ -22,14 +22,14 @@ import NavLogo from "./nav-logo";
 
 const NAV_ITEMS = [
   { href: "/", name: "홈", icon: FiHome },
-  { href: "/popups", name: "검색", icon: FiSearch },
+  { href: "/shows", name: "검색", icon: FiSearch },
   { href: "/map", name: "지도", icon: FiMapPin },
   { href: "/likes", name: "찜 목록", icon: FiHeart },
 ];
 
 export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
-  const isSearchPage = pathname === "/popups";
+  const isSearchPage = pathname === "/shows";
   const profileUrl = loggedIn ? "/profile" : "/login";
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -38,7 +38,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   };
 
   return (
-    <div className="relative flex h-full">
+    <div className="relative flex md:h-full lg:h-screen">
       <menu
         className={clsx(
           "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",

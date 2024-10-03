@@ -1,7 +1,8 @@
 /*eslint-disable*/
-
-export interface PopupBasic {
-  id: number;
+export interface ShowBasic {
+  showId: number;
+  showType: "POPUPS" | "EXHIBITION";
+  publicTag: string;
   title: string;
   location: string;
   startDate: string;
@@ -11,7 +12,7 @@ export interface PopupBasic {
   images: string[];
 }
 
-export interface PopupDetail extends PopupBasic {
+export interface ShowDetail extends ShowBasic {
   ownerId: number;
   description: string;
   openTimes: string;
@@ -23,30 +24,29 @@ export interface PopupDetail extends PopupBasic {
   isKidsZone: boolean;
   isWifiAvailable: boolean;
   fee: number;
-  publicTag: string;
   tags: string[];
 }
 
-export const createDummyPopups = (count: number): PopupDetail[] => {
+export const createDummyShows = (count: number): ShowDetail[] => {
   return Array.from({ length: count }, (_, index) => ({
-    id: index + 1,
+    showId: index + 1,
+    showType: Math.random() > 0.5 ? "POPUPS" : "EXHIBITION",
     ownerId: Math.floor(Math.random() * 100) + 1,
-    title: `팝업이 팝업스토어 ${index + 1}`,
-    description: `팝업이와 함께하는 팝업스토어 ${index + 1}`,
-    startDate: "2024-09-01T18:55:36.052679",
-    endDate: "2024-09-01T19:55:36.052725",
-    image: "/images/luffi.jpg",
-    openTimes: "월 09:00 - 18:00,\n화 12:00 - 21:00\n",
-    location: `서울 마포구 월드컵북로 ${155 + index}`,
+    title: `쇼케이스 ${index + 1}`,
+    description: `멋진 쇼케이스 ${index + 1}입니다`,
+    startDate: "2024-10-03T15:42:11.561806",
+    endDate: "2024-12-30T15:52:11.561824",
+    openTimes: "평일 09:00 ~ 18:00,\n주말 12:00 ~ 21:00\n",
+    location: `서울 마포구 동교동 ${155 + index}`,
     latitude: 37.556725 + (Math.random() - 0.5) * 0.01,
-    longitude: 126.923495 + (Math.random() - 0.5) * 0.01,
+    longitude: 126.9234952 + (Math.random() - 0.5) * 0.01,
     isParkingAvailable: Math.random() > 0.5,
     isFoodAllowed: Math.random() > 0.5,
     isPetAllowed: Math.random() > 0.5,
     isKidsZone: Math.random() > 0.5,
     isWifiAvailable: Math.random() > 0.5,
     fee: Math.floor(Math.random() * 10000),
-    publicTag: ["인기", "신규", "추천"][Math.floor(Math.random() * 3)],
+    publicTag: ["전시", "팝업", "행사"][Math.floor(Math.random() * 3)],
     visitedCount: Math.floor(Math.random() * 1000),
     likedCount: Math.floor(Math.random() * 500),
     tags: ["가족", "데이트", "문화", "예술"]
