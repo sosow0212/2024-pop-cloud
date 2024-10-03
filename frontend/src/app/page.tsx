@@ -1,4 +1,4 @@
-// const popupMock: Popup = {
+// const POPUP_MOCK: Popup = {
 //   id: 9,
 //   ownerId: 9,
 //   title:
@@ -15,6 +15,20 @@
 //   publicTag: "예술",
 // };
 
+import CarouselUI from "@/components/common/carousel";
+
+const MOCK = ["/images/rhino.webp", "/images/cat.webp", "/images/dog.webp"];
+
 export default function Home() {
-  return <div>HOME</div>;
+  return (
+    <>
+      <CarouselUI data={MOCK} />
+      <div>큐레이션: 인기 팝업</div>
+      <div>큐레이션: 추천 팝업</div>
+      <div>테마별 팝업 캐러셀</div>
+      <div>테마별 팝업 캐러셀</div>
+      <div>테마별 팝업 캐러셀</div>
+      <div>테마별 팝업 캐러셀</div>
+    </>
+  );
 }
