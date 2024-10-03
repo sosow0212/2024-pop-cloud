@@ -32,9 +32,11 @@ const LOGIN_OPTION = [
 
 function ProfileForm() {
   return (
-    <section className="flex flex-col items-center justify-center gap-25">
-      <header className="mb-6 text-center">
-        <h2 className="mb-2 text-24-700 ">로그인</h2>
+    <section className="flex h-200 flex-col items-center justify-center gap-25">
+      <header className="mb-6 flex flex-col gap-15 text-center">
+        <h2 className="pl-16 font-[TTSamlipCreamyWhiteR] text-32-700 font-bold text-blue-5">
+          POP CLOUD
+        </h2>
         <p className="text-gray-600">소셜 계정을 통해 로그인 해주세요</p>
       </header>
       <div className="flex items-center gap-25">
@@ -71,7 +73,7 @@ export default function LoginModal() {
     <DrawerDialogContainer
       isOpen={isModalOpen}
       onClose={onClose}
-      className="rounded-lg bg-white p-15 shadow-lg"
+      className="rounded-lg bg-white p-25 shadow-lg "
     >
       <ProfileForm />
     </DrawerDialogContainer>
