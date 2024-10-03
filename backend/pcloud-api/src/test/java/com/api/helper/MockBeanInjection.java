@@ -10,6 +10,7 @@ import com.api.show.popups.application.PopupsQueryService;
 import com.api.show.popups.application.PopupsService;
 import com.api.show.recommend.application.RecommendService;
 import com.api.show.recommend.presentation.resolver.PopularShowRequestArgumentResolver;
+import com.api.show.show.application.ShowQueryService;
 import com.common.auth.TokenProvider;
 import com.domain.member.domain.MemberRepository;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -53,4 +54,7 @@ public class MockBeanInjection {
 
     @MockBean
     protected RecommendService recommendService;
+
+    @MockBean
+    protected ShowQueryService showQueryService;
 }

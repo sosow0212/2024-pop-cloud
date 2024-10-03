@@ -41,18 +41,6 @@ include::{snippets}/popups-controller-web-mvc-test/create_popups/http-request.ad
 include::{snippets}/popups-controller-web-mvc-test/create_popups/response-headers.adoc[]
 include::{snippets}/popups-controller-web-mvc-test/create_popups/http-response.adoc[]
 
-== 팝업스토어를 페이징 조회한다 (GET /api/popups?popupsId=${value}&pageSize=${value})
-
-=== Request
-
-include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/query-parameters.adoc[]
-include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/http-request.adoc[]
-
-=== Response
-
-include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/response-fields.adoc[]
-include::{snippets}/popups-controller-web-mvc-test/find_all_popups_with_paging/http-response.adoc[]
-
 == 팝업스토어를 상세 조회한다 (GET /api/popups/{popupsId})
 
 === Request

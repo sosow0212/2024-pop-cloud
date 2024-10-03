@@ -4,7 +4,6 @@ import com.api.helper.MockBeanInjection;
 import com.api.show.common.resolver.ClientIpFinderResolver;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
-import com.domain.show.popups.domain.response.PopupsSimpleResponse;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -16,8 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 import static com.api.helper.RestDocsHelper.customDocument;
@@ -42,7 +39,6 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static show.popups.domain.PopupsSpecificResponseFixture.팝업스토어_상세_조회_응답_생성;
 
@@ -97,34 +93,6 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                         ),
                         responseHeaders(
                                 headerWithName("location").description("생성된 팝업스토어 redirection URL")
-                        )
-                ));
-    }
-
-    @Test
-    void 페이징_조회를_한다() throws Exception {
-        // given
-        when(popupsQueryService.findAll(any(), any())).thenReturn(List.of(new PopupsSimpleResponse(1L, "빵빵이 전시회", "서울특별시 마포구", LocalDateTime.now().minusDays(30), LocalDateTime.now(), 0, 0)));
-
-        // when & then
-        mockMvc.perform(get("/popups")
-                        .param("popupsId", "11")
-                        .param("pageSize", "10")
-                ).andExpect(status().isOk())
-                .andDo(customDocument("find_all_popups_with_paging",
-                        queryParameters(
-                                parameterWithName("popupsId").description("마지막으로 받은 popupsId, 맨 처음 조회라면 null 허용"),
-                                parameterWithName("pageSize").description("한 페이지에 조회되는 사이즈")
-                        ),
-                        responseFields(
-                                fieldWithPath("[].id").description("팝업스토어 id"),
-                                fieldWithPath("[].title").description("팝업스토어 이름"),
-                                fieldWithPath("[].location").description("팝업스토어 장소명"),
-                                fieldWithPath("[].startDate").description("팝업스토어 시작일"),
-                                fieldWithPath("[].endDate").description("팝업스토어 종료일"),
-                                fieldWithPath("[].visitedCount").description("팝업스토어 게시글 방문자 수"),
-                                fieldWithPath("[].likedCount").description("팝업스토어 게시글 좋아요 수")
-
                         )
                 ));
     }
