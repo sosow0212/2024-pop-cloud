@@ -38,7 +38,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   };
 
   return (
-    <div className="relative flex md:h-full lg:h-screen">
+    <div className="flex md:h-full lg:h-screen">
       <menu
         className={clsx(
           "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
