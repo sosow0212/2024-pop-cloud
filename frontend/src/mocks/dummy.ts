@@ -8,7 +8,7 @@ export interface PopupBasic {
   endDate: string;
   visitedCount: number;
   likedCount: number;
-  image: any;
+  images: string[];
 }
 
 export interface PopupDetail extends PopupBasic {
@@ -52,5 +52,6 @@ export const createDummyPopups = (count: number): PopupDetail[] => {
     tags: ["가족", "데이트", "문화", "예술"]
       .sort(() => 0.5 - Math.random())
       .slice(0, 2),
+    images: ["/images/mock.jpeg", "/images/mock2.jpeg", "/images/mock3.jpeg"],
   }));
 };

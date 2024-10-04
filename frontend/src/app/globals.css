@@ -24,3 +24,8 @@
 .transition-animation {
   @apply transition-colors duration-300 ease-in-out;
 }
+
+/* 부모 컴포넌트에 relative 추가 후 사용가능 */
+.center {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+}

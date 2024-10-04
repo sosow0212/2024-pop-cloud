@@ -18,7 +18,8 @@
     "Parens",
     "Pretendard",
     "tailwindcss",
-    "zustand"
+    "zustand",
+    "kakao"
   ]
   //아래에는 일괄처리 하는 코드입니다.
   // "cSpell.enabled": false

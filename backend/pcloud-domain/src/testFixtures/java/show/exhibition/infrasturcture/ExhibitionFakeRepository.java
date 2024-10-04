@@ -3,14 +3,11 @@ package show.exhibition.infrasturcture;
 import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.ExhibitionRepository;
 import com.domain.show.exhibition.domain.LikedExhibition;
-import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
-import java.util.Comparator;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import show.exhibition.domain.ExhibitionSimpleResponseFixture;
 
 import static show.exhibition.domain.ExhibitionSpecificResponseFixture.개인전시회_상세_조회_응답_생성_개인전시회;
 
@@ -70,17 +67,6 @@ public class ExhibitionFakeRepository implements ExhibitionRepository {
         ExhibitionSpecificResponse response = 개인전시회_상세_조회_응답_생성_개인전시회(exhibition);
 
         return Optional.of(response);
-    }
-
-    @Override
-    public List<ExhibitionSimpleResponse> findAllWithPaging(final Long exhibitionId, final Integer pageSize) {
-        return exhibitionDB.values()
-                .stream()
-                .filter(exhibition -> exhibition.getId() < exhibitionId)
-                .sorted(Comparator.comparing(Exhibition::getId).reversed())
-                .limit(pageSize)
-                .map(ExhibitionSimpleResponseFixture::개인전시회_간단_조회_응답_생성_개인전시회)
-                .toList();
     }
 
     @Override
