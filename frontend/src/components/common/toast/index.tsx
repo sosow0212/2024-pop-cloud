@@ -2,7 +2,7 @@
 
 import { FaBan, FaCheckCircle } from "react-icons/fa";
 import { HiInformationCircle } from "react-icons/hi2";
-import { IoIosWarning } from "react-icons/io";
+import { IoIosClose, IoIosWarning } from "react-icons/io";
 
 import useToastStore from "@/store/use-toast-store";
 
@@ -22,7 +22,7 @@ import useToastStore from "@/store/use-toast-store";
  */
 
 export default function Toast() {
-  const { toast, isOpen } = useToastStore();
+  const { toast, isOpen, setIsOpen } = useToastStore();
 
   const pointColorMap = {
     info: "border-blue-500 bg-blue-1",
@@ -53,10 +53,10 @@ export default function Toast() {
 
   return (
     <div
-      className={`rounded-lg border border-solid ${pointColor} fixed left-1/2 top-45 z-50 w-max min-w-fit -translate-x-1/2 animate-fadeIn md:left-[calc(50%+35px)] lg:left-[calc(50%+123px)]`}
+      className={`rounded-lg border border-solid shadow-md shadow-gray-400 ${pointColor} fixed left-1/2 top-45 z-50 w-max min-w-fit -translate-x-1/2 animate-fadeIn md:left-[calc(50%+35px)] lg:left-[calc(50%+123px)]`}
     >
       <div className="flex items-center gap-10 px-10 py-6">
-        <div className="p-10">{icon}</div>
+        <div className="p-10 ">{icon}</div>
         <div className="pr-10 ">
           <p className="font-[NanumSquareRound] text-14 font-bold md:text-16">
             {toastText}
@@ -65,6 +65,10 @@ export default function Toast() {
             {toast.content}
           </p>
         </div>
+        <IoIosClose
+          className="size-25 cursor-pointer"
+          onClick={() => setIsOpen(false)}
+        />
       </div>
     </div>
   );
