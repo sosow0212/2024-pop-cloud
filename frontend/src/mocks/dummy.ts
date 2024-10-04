@@ -38,13 +38,6 @@ const cities = [
   },
   { name: "대구", districts: ["중구", "수성구", "달서구", "동구", "북구"] },
   {
-    name: "인천",
-    districts: ["미추홀구", "연수구", "남동구", "부평구", "계양구"],
-  },
-  { name: "광주", districts: ["동구", "서구", "남구", "북구", "광산구"] },
-  { name: "대전", districts: ["동구", "중구", "서구", "유성구", "대덕구"] },
-  { name: "울산", districts: ["중구", "남구", "동구", "북구", "울주군"] },
-  {
     name: "경기",
     districts: ["수원시", "성남시", "용인시", "고양시", "부천시"],
   },
@@ -101,7 +94,7 @@ export const createDummyShows = (count: number): ShowDetail[] => {
 
     return {
       showId: index + 1,
-      showType: Math.random() > 0.5 ? "POPUPS" : "EXHIBITION",
+      showType: "POPUPS",
       ownerId: Math.floor(Math.random() * 100) + 1,
       title: `${city.name} ${publicTags[Math.floor(Math.random() * publicTags.length)]} 쇼케이스 ${index + 1}`,
       description: `${city.name} ${district}에서 열리는 멋진 ${publicTags[Math.floor(Math.random() * publicTags.length)]} 쇼케이스입니다.`,

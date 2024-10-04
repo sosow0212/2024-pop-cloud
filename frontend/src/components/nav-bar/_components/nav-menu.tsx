@@ -81,7 +81,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
                 isFilterOpen ? "w-300" : "w-0 overflow-hidden",
               )}
             >
-              <FilterSidebar />
+              <FilterSidebar onClose={toggleFilter} />
             </div>
             <button
               type="button"

@@ -25,22 +25,28 @@ interface RegionSelectorProps {
 }
 
 function RegionSelector({ selectedRegion, onChange }: RegionSelectorProps) {
-  const [selectedCity, setSelectedCity] = useState<City>(
-    (selectedRegion.city as City) || (Object.keys(regions)[0] as City),
+  const [selectedCity, setSelectedCity] = useState<City | null>(
+    (selectedRegion.city as City) || null,
   );
 
   useEffect(() => {
-    setSelectedCity(
-      (selectedRegion.city as City) || (Object.keys(regions)[0] as City),
-    );
+    setSelectedCity((selectedRegion.city as City) || null);
   }, [selectedRegion.city]);
 
   const handleCityChange = (city: City) => {
-    setSelectedCity(city);
-    onChange({ city: city as string, country: [] });
+    if (selectedCity === city) {
+      // 이미 선택된 도시를 다시 클릭하면 선택 취소
+      setSelectedCity(null);
+      onChange({ city: "", country: [] });
+    } else {
+      setSelectedCity(city);
+      onChange({ city: city as string, country: [] });
+    }
   };
 
   const handleCountryChange = (countries: string[]) => {
+    if (!selectedCity) return; // 도시가 선택되지 않았다면 아무 작업도 하지 않음
+
     const allOption = `${selectedCity} 전체`;
     if (countries.includes(allOption)) {
       // "전체"가 선택되면 다른 선택을 모두 해제하고 "전체"만 선택
@@ -49,8 +55,6 @@ function RegionSelector({ selectedRegion, onChange }: RegionSelectorProps) {
       onChange({ city: selectedCity as string, country: countries });
     }
   };
-
-  const countriesWithAll = [`${selectedCity} 전체`, ...regions[selectedCity]];
 
   return (
     <div>
@@ -71,11 +75,13 @@ function RegionSelector({ selectedRegion, onChange }: RegionSelectorProps) {
           </button>
         ))}
       </div>
-      <CheckboxList
-        items={countriesWithAll}
-        selectedItems={selectedRegion.country}
-        onChange={handleCountryChange}
-      />
+      {selectedCity && (
+        <CheckboxList
+          items={[`${selectedCity} 전체`, ...regions[selectedCity]]}
+          selectedItems={selectedRegion.country}
+          onChange={handleCountryChange}
+        />
+      )}
     </div>
   );
 }

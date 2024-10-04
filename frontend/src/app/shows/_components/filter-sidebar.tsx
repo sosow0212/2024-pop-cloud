@@ -29,7 +29,7 @@ const placeTypes = [
   "기타",
 ];
 
-export default function FilterSidebar() {
+export default function FilterSidebar({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -45,8 +45,6 @@ export default function FilterSidebar() {
 
   const handleApplyFilters = () => {
     const newParams = new URLSearchParams(searchParams.toString());
-
-    // Update tags
     newParams.delete("publicTags");
     selectedTags.forEach((tag) => newParams.append("publicTags", tag));
 
@@ -67,15 +65,14 @@ export default function FilterSidebar() {
       newParams.delete("city");
       newParams.delete("country");
     }
-
-    // Update date range
     if (selectedDateRange.startDate)
       newParams.set("startDate", selectedDateRange.startDate);
     if (selectedDateRange.endDate)
       newParams.set("endDate", selectedDateRange.endDate);
 
-    // Navigate to the new URL with updated params
     router.push(`/shows?${newParams.toString()}`);
+
+    onClose();
   };
 
   const handleReset = () => {
@@ -86,7 +83,7 @@ export default function FilterSidebar() {
   };
 
   return (
-    <aside className="flex h-screen w-full flex-col border-r border-gray-200 bg-white px-12 pt-40">
+    <aside className="flex size-full flex-col border-r border-gray-200 bg-white px-12 pt-40 lg:h-screen">
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 md:px-5">
         <div className="mb-8 flex items-center gap-9">
           <BsFilterLeft className="size-20" />
@@ -126,13 +123,15 @@ export default function FilterSidebar() {
           />
         </FilterAccordion>
       </div>
-      <button
-        type="button"
-        onClick={handleApplyFilters}
-        className="mt-4 w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700"
-      >
-        적용하기
-      </button>
+      <div className="sticky mb-30 p-4">
+        <button
+          type="button"
+          onClick={handleApplyFilters}
+          className="text-16-bold h-40 w-full rounded-10 bg-blue-6 py-3 text-white transition-colors hover:bg-blue-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          적용하기
+        </button>
+      </div>
     </aside>
   );
 }

@@ -15,26 +15,30 @@ function MobileFilterSidebar() {
     setIsOpen(!isOpen);
   };
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <DrawerDialogContainer
         isOpen={isOpen}
-        onClose={toggleSidebar}
+        onClose={handleClose}
         className="h-[80vh] overflow-hidden rounded-t-[10px]"
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between border-b border-gray-200 p-4">
             <button
               type="button"
-              onClick={toggleSidebar}
-              className="mx-auto text-gray-500 hover:text-gray-700"
+              onClick={handleClose}
+              className="text-gray-500 hover:text-gray-700"
               aria-label="필터 닫기"
             >
-              <FiX className="size-30" />
+              <FiX className="size-24" />
             </button>
           </div>
           <div className="flex-1 overflow-y-auto">
-            <FilterSidebar />
+            <FilterSidebar onClose={handleClose} />
           </div>
         </div>
       </DrawerDialogContainer>
@@ -47,7 +51,7 @@ function MobileFilterSidebar() {
             className="flex items-center justify-center space-x-2 rounded-full border border-gray-200 bg-white px-6 py-3 shadow-lg"
             aria-label="필터 열기"
           >
-            <HiOutlineAdjustmentsVertical className="size-30 text-gray-600" />
+            <HiOutlineAdjustmentsVertical className="size-24 text-gray-600" />
             <span className="font-12-400 text-gray-700">필터</span>
           </button>
         </div>
