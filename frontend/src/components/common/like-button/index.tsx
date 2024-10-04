@@ -34,7 +34,7 @@ export default function LikeButton({
       aria-label={isLiked ? "좋아요 취소" : "좋아요"}
     >
       {isLiked ? (
-        <GoHeartFill className="shrink-0 text-red-500" size={size} />
+        <GoHeartFill className="shrink-0 text-white" size={size} />
       ) : (
         <GoHeart className={`shrink-0 ${color}`} size={size} />
       )}

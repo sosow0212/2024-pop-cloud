@@ -11,3 +11,16 @@ export interface CheckboxListProps {
 export interface RegionType {
   [key: string]: string[];
 }
+
+export interface ShowData {
+  showId: number;
+  title: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  images: string[];
+  publicTag: string;
+  showType: string;
+  visitedCount: number;
+  likedCount: number;
+}

@@ -7,6 +7,7 @@ import MobileHeader from "@/components/mobile-header";
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
 import NavBar from "@/components/nav-bar";
 import ModalProvider from "@/provider/modal-provider";
+import { Providers } from "@/provider/query-client-provider";
 
 import { MSWComponent } from "../mocks/msw-Initializer";
 
@@ -23,12 +24,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="md:flex">
-        <MSWComponent />
-        <ModalProvider />
-        <MobileSizeWatcher />
-        <MobileHeader />
-        <NavBar />
-        <MainContainer>{children}</MainContainer>
+        <Providers>
+          <MSWComponent />
+          <ModalProvider />
+          <MobileSizeWatcher />
+          <MobileHeader />
+          <NavBar />
+          <MainContainer>{children}</MainContainer>
+        </Providers>
       </body>
     </html>
   );
