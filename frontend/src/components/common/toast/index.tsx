@@ -6,8 +6,6 @@ import { IoIosClose, IoIosWarning } from "react-icons/io";
 
 import useToastStore from "@/store/use-toast-store";
 
-// 허스키 테스트
-
 /**
  * Toast 컴포넌트는 알림 메시지를 화면에 표시하는 역할을 합니다.
  * 알림 유형(정보, 성공, 경고, 오류)에 따라 배경색과 아이콘이 달라집니다.
