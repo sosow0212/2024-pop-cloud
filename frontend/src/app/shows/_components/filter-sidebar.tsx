@@ -1,4 +1,5 @@
-import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
 import { BsFilterLeft } from "react-icons/bs";
 import { FiMapPin, FiRefreshCw, FiTag } from "react-icons/fi";
 import { LuCalendarDays } from "react-icons/lu";
@@ -29,8 +30,63 @@ const placeTypes = [
 ];
 
 export default function FilterSidebar() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedRegion, setSelectedRegion] = useState<{
+    city: string;
+    country: string[];
+  }>({ city: "", country: [] });
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: string;
+    endDate: string;
+  }>({ startDate: "", endDate: "" });
+
+  const handleApplyFilters = () => {
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    // Update tags
+    newParams.delete("publicTags");
+    selectedTags.forEach((tag) => newParams.append("publicTags", tag));
+
+    // Update region
+    if (selectedRegion.city) {
+      newParams.set("city", selectedRegion.city);
+      newParams.delete("country");
+      if (selectedRegion.country.length > 0) {
+        if (selectedRegion.country[0] === `${selectedRegion.city} 전체`) {
+          // "전체"가 선택된 경우, country 파라미터를 추가하지 않음
+        } else {
+          selectedRegion.country.forEach((country) =>
+            newParams.append("country", country),
+          );
+        }
+      }
+    } else {
+      newParams.delete("city");
+      newParams.delete("country");
+    }
+
+    // Update date range
+    if (selectedDateRange.startDate)
+      newParams.set("startDate", selectedDateRange.startDate);
+    if (selectedDateRange.endDate)
+      newParams.set("endDate", selectedDateRange.endDate);
+
+    // Navigate to the new URL with updated params
+    router.push(`/shows?${newParams.toString()}`);
+  };
+
+  const handleReset = () => {
+    setSelectedTags([]);
+    setSelectedRegion({ city: "", country: [] });
+    setSelectedDateRange({ startDate: "", endDate: "" });
+    router.push("/shows");
+  };
+
   return (
-    <aside className="flex h-screen w-full flex-col border-r border-gray-200 bg-white px-12 pt-40 ">
+    <aside className="flex h-screen w-full flex-col border-r border-gray-200 bg-white px-12 pt-40">
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 md:px-5">
         <div className="mb-8 flex items-center gap-9">
           <BsFilterLeft className="size-20" />
@@ -38,6 +94,7 @@ export default function FilterSidebar() {
         </div>
         <button
           type="button"
+          onClick={handleReset}
           className="mb-8 size-18 text-gray-400 transition-colors hover:text-gray-600"
         >
           <FiRefreshCw className="size-20" />
@@ -45,20 +102,37 @@ export default function FilterSidebar() {
       </div>
       <div className="flex-1 overflow-y-auto">
         <FilterAccordion title="태그" icon={<FiTag className="size-20" />}>
-          <CheckboxList items={placeTypes} />
+          <CheckboxList
+            items={placeTypes}
+            selectedItems={selectedTags}
+            onChange={setSelectedTags}
+          />
         </FilterAccordion>
 
         <FilterAccordion title="지역" icon={<FiMapPin className="size-22" />}>
-          <RegionSelector />
+          <RegionSelector
+            selectedRegion={selectedRegion}
+            onChange={setSelectedRegion}
+          />
         </FilterAccordion>
 
         <FilterAccordion
           title="날짜"
           icon={<LuCalendarDays className="size-20" />}
         >
-          <DateFilter />
+          <DateFilter
+            selectedDateRange={selectedDateRange}
+            onChange={setSelectedDateRange}
+          />
         </FilterAccordion>
       </div>
+      <button
+        type="button"
+        onClick={handleApplyFilters}
+        className="mt-4 w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700"
+      >
+        적용하기
+      </button>
     </aside>
   );
 }

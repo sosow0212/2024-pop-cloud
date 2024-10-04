@@ -26,8 +26,7 @@ export default function ShowList({
   };
 
   if (isLoading) return <div>Loading...</div>;
-  if (error)
-    return <div>Failed to load popup stores. Please try again later.</div>;
+  if (error) return <div>Failed to load shows. Please try again later.</div>;
 
   return shows && shows.length > 0 ? (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-2">
@@ -43,6 +42,6 @@ export default function ShowList({
       ))}
     </div>
   ) : (
-    <div>현재 표시할 팝업 스토어가 없습니다.</div>
+    <div>현재 표시할 쇼케이스가 없습니다.</div>
   );
 }

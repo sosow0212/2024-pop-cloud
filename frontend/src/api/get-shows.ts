@@ -1,22 +1,14 @@
 import { ShowData } from "@/app/shows/types/index";
 
-function getDefaultDateRange(): { startDate: string; endDate: string } {
-  return {
-    startDate: "2024-01-01",
-    endDate: "2024-12-31",
-  };
-}
-
 export default async function fetchShows(params: {
   [key: string]: string | string[] | undefined;
 }): Promise<ShowData[]> {
-  const defaultDateRange = getDefaultDateRange();
   const searchParams = new URLSearchParams();
 
-  searchParams.set("startDate", defaultDateRange.startDate);
-  searchParams.set("endDate", defaultDateRange.endDate);
-  searchParams.set("showType", "popups");
-  searchParams.set("pageSize", "10");
+  // 필수 파라미터 설정
+  if (!params.startDate || !params.endDate) {
+    throw new Error("startDate and endDate are required parameters");
+  }
 
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {
@@ -25,6 +17,10 @@ export default async function fetchShows(params: {
       searchParams.set(key, value);
     }
   });
+
+  // 기본값 설정
+  if (!searchParams.has("showType")) searchParams.set("showType", "popups");
+  if (!searchParams.has("pageSize")) searchParams.set("pageSize", "10");
 
   const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/shows`);
   url.search = searchParams.toString();

@@ -6,6 +6,8 @@ export interface FilterAccordionProps {
 
 export interface CheckboxListProps {
   items: readonly string[];
+  selectedItems: string[];
+  onChange: (selectedItems: string[]) => void;
 }
 
 export interface RegionType {
