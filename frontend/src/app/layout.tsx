@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { Metadata } from "next";
 
+import Toast from "@/components/common/toast";
 import MainContainer from "@/components/main-container";
 import MobileHeader from "@/components/mobile-header";
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
@@ -28,6 +29,7 @@ export default function RootLayout({
         <MobileSizeWatcher />
         <MobileHeader />
         <NavBar />
+        <Toast />
         <MainContainer>{children}</MainContainer>
       </body>
     </html>
