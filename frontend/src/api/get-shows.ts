@@ -13,13 +13,11 @@ export default async function fetchShows(params: {
   const defaultDateRange = getDefaultDateRange();
   const searchParams = new URLSearchParams();
 
-  // Set default values
   searchParams.set("startDate", defaultDateRange.startDate);
   searchParams.set("endDate", defaultDateRange.endDate);
   searchParams.set("showType", "popups");
   searchParams.set("pageSize", "10");
 
-  // Add other params
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {
       value.forEach((v) => searchParams.append(key, v));

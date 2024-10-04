@@ -3,6 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import fetchShows from "@/api/get-shows";
@@ -16,6 +17,31 @@ export default async function PopupListPage({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const queryClient = new QueryClient();
+
+  // 기본 파라미터 설정 및 누락된 파라미터 확인
+  const defaultParams = {
+    startDate: "2024-01-01",
+    endDate: "2024-12-31",
+    showType: "popups",
+    pageSize: "10",
+  };
+
+  const newSearchParams = new URLSearchParams(
+    searchParams as Record<string, string>,
+  );
+  let needsRedirect = false;
+
+  Object.entries(defaultParams).forEach(([key, value]) => {
+    if (!searchParams[key]) {
+      newSearchParams.set(key, value);
+      needsRedirect = true;
+    }
+  });
+
+  // 누락된 파라미터가 있으면 리다이렉트
+  if (needsRedirect) {
+    redirect(`/shows?${newSearchParams.toString()}`);
+  }
 
   await queryClient.prefetchQuery({
     queryKey: ["shows", searchParams],

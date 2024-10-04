@@ -2,7 +2,7 @@
 import { http, HttpResponse } from "msw";
 import { ShowBasic, ShowDetail, createDummyShows } from "./dummy";
 
-const allShows = createDummyShows(20);
+const allShows = createDummyShows(40);
 
 export const handlers = [
   http.get("/api/shows", async ({ request }) => {
