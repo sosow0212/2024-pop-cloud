@@ -55,6 +55,7 @@ function ToastButtons() {
 const meta = {
   title: "Components/Toast",
   component: Toast,
+  tags: ["autodocs"],
 } as Meta<typeof Toast>;
 
 export default meta;
