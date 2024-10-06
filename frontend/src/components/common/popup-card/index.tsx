@@ -23,18 +23,17 @@ export type Popup = {
 
 type PopupCardProps = {
   popup: Popup;
+  className?: string;
 };
 
-<motion.div />;
-
-export default function PopupCard({ popup }: PopupCardProps) {
+export default function PopupCard({ popup, className }: PopupCardProps) {
   return (
     <motion.div
-      className="h-400 w-full max-w-350 shadow-lg hover:cursor-pointer hover:shadow-2xl"
+      className={`h-400 w-full max-w-350 shadow-lg hover:cursor-pointer hover:shadow-2xl ${className}`}
       whileHover={{ scale: 1.02 }}
       transition={{ type: "tween", duration: "0.2" }}
     >
-      <div className="relative flex h-240 w-full items-center justify-center bg-gray-200">
+      <div className="relative flex h-240 w-full items-center justify-center bg-gray-100">
         <Image
           src={Rhino}
           alt="팝업스토어 이미지"
