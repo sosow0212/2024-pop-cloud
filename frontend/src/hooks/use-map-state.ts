@@ -15,10 +15,24 @@ const initState: MapInfoType = {
   },
 };
 
+const DELTA = 0.02;
+
+const distance = (x1: number, y1: number, x2: number, y2: number) =>
+  (x2 - x1) ** 2 + (y2 - y1) ** 2;
+
 const useMapState = () => {
   const [mapInfo, setMapInfo] = useState<MapInfoType>(initState);
 
   const detectMoving = (map: kakao.maps.Map) => {
+    const currentCenter = {
+      lat: map.getCenter().getLat(),
+      lng: map.getCenter().getLng(),
+    };
+    const { lat, lng } = mapInfo.center;
+    const isInRange =
+      distance(lat, lng, currentCenter.lat, currentCenter.lng) <= DELTA ** 2;
+    if (isInRange) return;
+
     const level = map.getLevel();
     const bounds = map.getBounds();
     const north = bounds.getNorthEast().getLat();
@@ -35,8 +49,24 @@ const useMapState = () => {
         south,
         west,
       },
+      center: {
+        ...currentCenter,
+      },
     }));
   };
+
+  // useEffect(() => {
+  //   const getPlace = async (): Promise<MapInfoType[] | undefined> => {
+  //     try {
+  //       const res = await fetch("./새로운 장소 받아오기");
+  //       if (!res.ok) throw new Error("서버 에러");
+  //       const data: MapInfoType[] = await res.json();
+  //       return data;
+  //     } catch (error) {}
+  //   };
+  //   getPlace();
+  // }, [mapInfo.center]);
+
   return {
     mapInfo,
     detectMoving,

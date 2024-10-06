@@ -32,6 +32,7 @@ export default function MapContainer({
         }}
         center={center}
         onCenterChanged={handleChange}
+        minLevel={13}
       >
         <MapMarker
           title="현재 위치"
