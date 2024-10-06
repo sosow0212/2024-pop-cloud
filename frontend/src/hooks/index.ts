@@ -1,4 +1,5 @@
 // hooks
-export { default as useInitMapCenter } from "./use-init-map-center";
+
+export { default as useMapState } from "./use-map-state";
 
 export const a = "aa";
