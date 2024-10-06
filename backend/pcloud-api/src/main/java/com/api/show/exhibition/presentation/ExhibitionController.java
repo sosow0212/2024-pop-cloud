@@ -8,7 +8,6 @@ import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.api.show.exhibition.presentation.dto.ExhibitionLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
-import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
-import java.util.List;
 
 import static com.domain.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.member.domain.vo.MemberRole.MANAGER;
@@ -51,22 +48,11 @@ public class ExhibitionController {
                 .build();
     }
 
-    /**
-     * TODO: 조회 시 방문자 수 처리 (추후에 유스케이스 적용)
-     */
     @GetMapping("/{exhibitionId}")
     public ResponseEntity<ExhibitionSpecificResponse> findById(
             @PathVariable final Long exhibitionId,
             @ClientIpFinder final String clientIp) {
         return ResponseEntity.ok(exhibitionQueryService.findById(exhibitionId, clientIp));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<ExhibitionSimpleResponse>> findAll(
-            @RequestParam(name = "exhibitionId", required = false) final Long exhibitionId,
-            @RequestParam(name = "pageSize") final Integer pageSize
-    ) {
-        return ResponseEntity.ok(exhibitionQueryService.findAll(exhibitionId, pageSize));
     }
 
     @PatchMapping("/{exhibitionId}")

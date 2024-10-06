@@ -1,14 +1,11 @@
 package com.api.show.exhibition.presentation;
 
+import com.api.helper.MockBeanInjection;
 import com.api.show.common.resolver.ClientIpFinderResolver;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
-import com.api.helper.MockBeanInjection;
-import com.domain.show.exhibition.domain.dto.ExhibitionSimpleResponse;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -17,15 +14,14 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
+import static com.api.helper.RestDocsHelper.customDocument;
 import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
 import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_업데이트_요청_생성;
+import static member.fixture.MemberFixture.어드민_멤버_생성_id_없음_kakao_oauth_가입;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static show.exhibition.domain.ExhibitionSimpleResponseFixture.개인전시회_간단_조회_응답_생성;
-import static show.exhibition.domain.ExhibitionSpecificResponseFixture.개인전시회_상세_조회_응답_생성;
-import static com.api.helper.RestDocsHelper.customDocument;
-import static member.fixture.MemberFixture.어드민_멤버_생성_id_없음_kakao_oauth_가입;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.doNothing;
@@ -44,8 +40,8 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static show.exhibition.domain.ExhibitionSpecificResponseFixture.개인전시회_상세_조회_응답_생성;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
@@ -141,34 +137,6 @@ class ExhibitionControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("visitedCount").description("개인전시회 게시글 방문자 수"),
                                 fieldWithPath("likedCount").description("개인전시회 게시글 좋아요 수"),
                                 fieldWithPath("tags[]").description("커스텀 태그")
-                        )
-                ));
-    }
-
-    @Test
-    void 개인전시회를_페이징_조회한다() throws Exception {
-        // given
-        List<ExhibitionSimpleResponse> responses = List.of(개인전시회_간단_조회_응답_생성());
-        when(exhibitionQueryService.findAll(anyLong(), anyInt())).thenReturn(responses);
-
-        // when & then
-        mockMvc.perform(get("/exhibitions")
-                        .param("exhibitionId", "11")
-                        .param("pageSize", "10")
-                ).andExpect(status().isOk())
-                .andDo(customDocument("find_all_exhibition_with_paging",
-                        queryParameters(
-                                parameterWithName("exhibitionId").description("마지막으로 받은 개인전시회 id, 처음 조회 시 null"),
-                                parameterWithName("pageSize").description("한 페이지에 조회되는 데이터 수")
-                        ),
-                        responseFields(
-                                fieldWithPath("[].exhibitionId").description("개인전시회 id"),
-                                fieldWithPath("[].title").description("개인전시회 이름"),
-                                fieldWithPath("[].location").description("개인전시회 열리는 장소"),
-                                fieldWithPath("[].startDate").description("개인전시회 시작일"),
-                                fieldWithPath("[].endDate").description("개인전시회 종료일"),
-                                fieldWithPath("[].visitedCount").description("개인전시회 게시글 방문자 수"),
-                                fieldWithPath("[].likedCount").description("개인전시회 게시글 좋아요 수")
                         )
                 ));
     }

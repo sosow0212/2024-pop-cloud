@@ -1,4 +1,5 @@
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { createElement, PropsWithChildren } from "react";
 
 import cn from "@/components/ui/cn";
 import {
@@ -15,30 +16,30 @@ import {
 } from "@/components/ui/drawer";
 import { useIsMobileStore } from "@/store";
 
+interface ContainerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  className?: string;
+}
+
 /**
- * dialog와 drawer container 입니다. 
+ * 모달 container 입니다. 
  * 
  * 담고 싶은 내용을 children 형식으로 담아주시면 됩니다.
  * 
  * @example 
- *  <DrawerDialogContiner isOpen={isModalOpen} onClose={onClose}>
+ *  <DialogContainer isOpen={isModalOpen} onClose={onClose}>
       <ProfileForm />
-    </DrawerDialogContiner>
+    </DialogContainer>
  * @author 위영진
  */
-interface ContainerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-  className?: string;
-}
 
 function DialogContainer({
   isOpen,
   onClose,
   className,
   children,
-}: ContainerProps) {
+}: PropsWithChildren<ContainerProps>) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={cn("bg-white pt-10", className)}>
@@ -55,12 +56,24 @@ function DialogContainer({
   );
 }
 
+/**
+ * drawer container 입니다. 
+ * 
+ * 담고 싶은 내용을 children 형식으로 담아주시면 됩니다.
+ * 
+ * @example 
+ *  <DrawerDialogContainer isOpen={isModalOpen} onClose={onClose}>
+      <ProfileForm />
+    </DrawerDialogContainer>
+ * @author 위영진
+ */
+
 function DrawerContainer({
   children,
   isOpen,
   onClose,
   className,
-}: ContainerProps) {
+}: PropsWithChildren<ContainerProps>) {
   return (
     <Drawer open={isOpen} onOpenChange={onClose}>
       <DrawerContent className={cn("bg-white pb-20", className)}>
@@ -83,26 +96,18 @@ function DrawerContainer({
  *
  *  @author 위영진
  */
-function DrawerDialogContiner({
+function DrawerDialogContainer({
   children,
   isOpen,
   onClose,
   className,
-}: ContainerProps) {
+}: PropsWithChildren<ContainerProps>) {
   const isMobile = useIsMobileStore();
-
-  if (isMobile) {
-    return (
-      <DrawerContainer isOpen={isOpen} onClose={onClose} className={className}>
-        {children}
-      </DrawerContainer>
-    );
-  }
-  return (
-    <DialogContainer isOpen={isOpen} onClose={onClose} className={className}>
-      {children}
-    </DialogContainer>
+  return createElement(
+    isMobile ? DrawerContainer : DialogContainer,
+    { isOpen, onClose, className },
+    children,
   );
 }
 
-export { DialogContainer, DrawerContainer, DrawerDialogContiner };
+export { DialogContainer, DrawerContainer, DrawerDialogContainer };

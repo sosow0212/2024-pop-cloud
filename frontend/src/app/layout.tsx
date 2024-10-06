@@ -1,7 +1,9 @@
 import "./globals.css";
 
 import { Metadata } from "next";
+import Script from "next/script";
 
+import MainContainer from "@/components/main-container";
 import MobileHeader from "@/components/mobile-header";
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
 import NavBar from "@/components/nav-bar";
@@ -21,13 +23,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="md:flex">
+        <Script
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_KEY}&libraries=services,clusterer&autoload=false`}
+          strategy="beforeInteractive"
+        />
         <MSWComponent />
         <ModalProvider />
         <MobileSizeWatcher />
         <MobileHeader />
         <NavBar />
-        <main className="mb-50 md:mb-0 md:ml-70 lg:ml-245">{children}</main>
+        <MainContainer>{children}</MainContainer>
       </body>
     </html>
   );

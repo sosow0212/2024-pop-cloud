@@ -65,8 +65,8 @@ export default function CarouselUI({
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="absolute -left-8" />
-      <CarouselNext className="absolute -right-8" />
+      <CarouselPrevious className="absolute -left-8 sm:hidden md:left-0" />
+      <CarouselNext className="absolute -right-8 sm:hidden md:right-0" />
       {indicators && <CarouselIndicators />}
     </Carousel>
   );
