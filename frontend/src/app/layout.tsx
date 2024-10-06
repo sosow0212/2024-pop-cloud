@@ -1,7 +1,7 @@
 import "./globals.css";
 
-import Script from "next/script";
 import { Metadata } from "next";
+import Script from "next/script";
 
 import MainContainer from "@/components/main-container";
 import MobileHeader from "@/components/mobile-header";
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="md:flex">
+      <body className="">
         <Script
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_KEY}&libraries=services,clusterer&autoload=false`}
           strategy="beforeInteractive"
