@@ -36,12 +36,13 @@ export default function DetailsHeader({ publicTag, title }: Props) {
         <span className="relative size-40 rounded-full border border-solid border-gray-300 text-red-500">
           <LikeButton className="center" color="text-gray-500" size={24} />
         </span>
-        <span className="relative size-40 rounded-full border border-solid border-gray-300">
-          <IoShareSocial
-            className="center size-20 cursor-pointer text-gray-500"
-            onClick={copyLink}
-          />
-        </span>
+        <button
+          type="button"
+          className="relative size-40 rounded-full border border-solid border-gray-300"
+          onClick={copyLink}
+        >
+          <IoShareSocial className="center size-20 cursor-pointer text-gray-500" />
+        </button>
       </div>
     </section>
   );

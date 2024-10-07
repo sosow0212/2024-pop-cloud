@@ -25,10 +25,10 @@ export default function Toast() {
   const { toast, isOpen, setIsOpen } = useToastStore();
 
   const pointColorMap = {
-    info: "border-blue-500 bg-blue-1",
-    success: "border-green-500 bg-[#ebfbee]",
-    warn: "border-yellow-500 bg-[#fff9db]",
-    error: "border-red-500 bg-[#fff5f5]",
+    info: "border-blue-500",
+    success: "border-green-500",
+    warn: "border-yellow-500",
+    error: "border-red-500",
   };
 
   const iconMap = {
@@ -38,35 +38,22 @@ export default function Toast() {
     error: <FaBan color="#ff6b6b" size={20} />,
   };
 
-  const toastTextMap = {
-    info: "Info",
-    success: "Success",
-    warn: "Warning",
-    error: "Error",
-  };
-
   if (!isOpen || !toast) return null;
 
   const pointColor = pointColorMap[toast.type];
   const icon = iconMap[toast.type];
-  const toastText = toastTextMap[toast.type];
 
   return (
     <div
-      className={`rounded-lg border border-solid shadow-md shadow-gray-400 ${pointColor} fixed left-1/2 top-45 z-50 w-max min-w-fit -translate-x-1/2 animate-fadeIn md:left-[calc(50%+35px)] lg:left-[calc(50%+123px)]`}
+      className={`fixed left-1/2 top-45 z-50 w-max min-w-fit -translate-x-1/2 animate-fadeIn rounded-lg border border-solid bg-white shadow-md shadow-gray-300 md:left-[calc(50%+35px)] lg:left-[calc(50%+123px)] ${pointColor}`}
     >
       <div className="flex items-center gap-10 px-10 py-6">
-        <div className="p-10 ">{icon}</div>
-        <div className="pr-10 ">
-          <p className="font-[NanumSquareRound] text-14 font-bold md:text-16">
-            {toastText}
-          </p>
-          <p className="min-w-100 max-w-210 font-[NanumSquareRound] text-13 md:text-15">
-            {toast.content}
-          </p>
-        </div>
+        <div className="p-10">{icon}</div>
+        <p className="min-w-100 max-w-210 pr-10 text-13 md:text-15">
+          {toast.content}
+        </p>
         <IoIosClose
-          className="size-25 cursor-pointer"
+          className="size-25 cursor-pointer text-gray-500"
           onClick={() => setIsOpen(false)}
         />
       </div>
