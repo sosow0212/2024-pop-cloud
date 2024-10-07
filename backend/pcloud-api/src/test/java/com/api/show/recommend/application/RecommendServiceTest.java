@@ -1,7 +1,7 @@
 package com.api.show.recommend.application;
 
 import com.api.show.popups.application.request.DateSearchRequest;
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import com.domain.show.popups.domain.service.PopularityCalculator;
 import com.domain.show.recommend.domain.Recommend;
 import com.domain.show.recommend.domain.RecommendRepository;

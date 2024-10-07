@@ -1,4 +1,4 @@
-package com.domain.show.common;
+package com.domain.common;
 
 import java.util.Arrays;
 

@@ -1,7 +1,7 @@
 package com.api.show.recommend.infrastructure;
 
 import com.api.helper.IntegrationHelper;
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.ExhibitionRepository;
 import com.domain.show.popups.domain.Popups;

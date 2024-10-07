@@ -1,6 +1,6 @@
 package com.domain.show.recommend.infrastructure;
 
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import com.domain.show.recommend.domain.Recommend;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;

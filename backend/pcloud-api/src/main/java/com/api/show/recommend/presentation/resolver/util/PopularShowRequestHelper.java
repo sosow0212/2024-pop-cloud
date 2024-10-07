@@ -1,6 +1,6 @@
 package com.api.show.recommend.presentation.resolver.util;
 
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import com.domain.show.recommend.exception.RecommendException;
 
 import java.time.LocalDate;

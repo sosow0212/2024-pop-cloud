@@ -1,6 +1,6 @@
 package com.domain.show.exhibition.domain.dto;
 
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 
 import java.time.LocalDateTime;
 
