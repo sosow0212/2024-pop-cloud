@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import CarouselUI from "@/components/common/carousel";
 import PopupCard, { Popup } from "@/components/common/popup-card";
 
@@ -61,10 +63,9 @@ export default function Home() {
       </section>
       <div className={bannerStyle}>Banner</div>
       {/* CTA */}
-      <section className={`${sectionStyle} text-24 font-extrabold`}>
-        <div>Join us!</div>
-        <div>Showcase yours</div>
-        <div>Subscribe</div>
+      <section className={`${sectionStyle} px-20 text-24 font-extrabold`}>
+        <Link href="/">Showcase yours</Link>
+        <Link href="/">Subscribe</Link>
       </section>
     </main>
   );
