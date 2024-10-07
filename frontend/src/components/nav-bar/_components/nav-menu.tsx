@@ -5,14 +5,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import {
-  FiChevronLeft,
-  FiChevronRight,
+  // FiChevronLeft,
+  // FiChevronRight,
   FiHeart,
   FiHome,
   FiMapPin,
   FiSearch,
   FiUser,
 } from "react-icons/fi";
+import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 
 import FilterSidebar from "@/app/shows/_components/filter-sidebar";
 import MobileFilterSidebar from "@/app/shows/_components/mobile-filter";
@@ -105,9 +106,9 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
               aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
             >
               {isFilterOpen ? (
-                <FiChevronLeft className="size-50 text-gray-600" />
+                <HiOutlineAdjustmentsVertical className="size-50 text-gray-600" />
               ) : (
-                <FiChevronRight className="size-50 text-gray-600" />
+                <HiOutlineAdjustmentsVertical className="size-50 text-gray-600" />
               )}
             </motion.button>
           </div>
