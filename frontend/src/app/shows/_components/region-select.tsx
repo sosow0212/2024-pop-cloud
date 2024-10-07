@@ -67,7 +67,7 @@ function RegionSelector({ selectedRegion, onChange }: RegionSelectorProps) {
             className={clsx(
               "text-sm border p-2",
               selectedCity === region
-                ? "bg-black text-white"
+                ? "bg-blue-5 text-white"
                 : "bg-white text-black",
             )}
           >

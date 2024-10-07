@@ -4,10 +4,10 @@ import { BsFilterLeft } from "react-icons/bs";
 import { FiMapPin, FiRefreshCw, FiTag } from "react-icons/fi";
 import { LuCalendarDays } from "react-icons/lu";
 
-import CheckboxList from "./check-list";
 import DateFilter from "./date-ficker";
 import FilterAccordion from "./filter-acordian";
 import RegionSelector from "./region-select";
+import TagButtonList from "./tag-button-list";
 
 const placeTypes = [
   "브랜드",
@@ -20,12 +20,12 @@ const placeTypes = [
   "서적",
   "음악",
   "펫",
-  "운동",
   "디지털",
+  "운동",
   "예술",
-  "캐릭터",
-  "굿즈",
   "전시",
+  "굿즈",
+  "캐릭터",
   "기타",
 ];
 
@@ -38,6 +38,7 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
     city: string;
     country: string[];
   }>({ city: "", country: [] });
+
   const [selectedDateRange, setSelectedDateRange] = useState<{
     startDate: string;
     endDate: string;
@@ -99,7 +100,7 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
       </div>
       <div className="flex-1 overflow-y-auto">
         <FilterAccordion title="태그" icon={<FiTag className="size-20" />}>
-          <CheckboxList
+          <TagButtonList
             items={placeTypes}
             selectedItems={selectedTags}
             onChange={setSelectedTags}
@@ -127,7 +128,7 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
         <button
           type="button"
           onClick={handleApplyFilters}
-          className="text-16-bold h-40 w-full rounded-10 bg-blue-6 py-3 text-white transition-colors hover:bg-blue-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="text-16-bold h-40 w-full rounded-10 bg-blue-6 py-3 text-white transition-colors hover:bg-blue-5 focus:outline-none"
         >
           적용하기
         </button>

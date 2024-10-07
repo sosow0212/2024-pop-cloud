@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import {
@@ -75,22 +76,32 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
       {isSearchPage && (
         <>
           <div className="hidden md:block">
-            <div
-              className={clsx(
-                "transition-all duration-300 ease-in-out",
-                isFilterOpen ? "w-300" : "w-0 overflow-hidden",
+            <AnimatePresence>
+              {isFilterOpen && (
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: 300 }}
+                  exit={{ width: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  className="overflow-hidden"
+                >
+                  <div className="w-300">
+                    <FilterSidebar onClose={toggleFilter} />
+                  </div>
+                </motion.div>
               )}
-            >
-              <FilterSidebar onClose={toggleFilter} />
-            </div>
-            <button
+            </AnimatePresence>
+            <motion.button
               type="button"
               onClick={toggleFilter}
               className={clsx(
-                "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out",
-                isFilterOpen ? "left-[calc(100%)]" : "left-full",
+                "absolute top-1/2 -translate-y-1/2",
                 "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
               )}
+              animate={{
+                left: isFilterOpen ? "calc(100%)" : "100%",
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
             >
               {isFilterOpen ? (
@@ -98,7 +109,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
               ) : (
                 <FiChevronRight className="size-50 text-gray-600" />
               )}
-            </button>
+            </motion.button>
           </div>
           <div className="md:hidden">
             <MobileFilterSidebar />
