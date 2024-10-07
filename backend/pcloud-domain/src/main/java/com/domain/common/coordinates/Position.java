@@ -1,4 +1,4 @@
-package com.domain.show.common;
+package com.domain.common.coordinates;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

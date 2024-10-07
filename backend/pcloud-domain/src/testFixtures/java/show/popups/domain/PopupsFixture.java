@@ -1,8 +1,8 @@
 package show.popups.domain;
 
-import com.domain.show.common.Latitude;
-import com.domain.show.common.Longitude;
-import com.domain.show.common.Position;
+import com.domain.common.coordinates.Latitude;
+import com.domain.common.coordinates.Longitude;
+import com.domain.common.coordinates.Position;
 import com.domain.show.common.Price;
 import com.domain.show.common.PublicTag;
 import com.domain.show.common.ShowDetails;
@@ -10,6 +10,7 @@ import com.domain.show.common.ShowRules;
 import com.domain.show.common.ShowSchedule;
 import com.domain.show.common.Statistic;
 import com.domain.show.popups.domain.Popups;
+
 import java.time.LocalDateTime;
 
 @SuppressWarnings("NonAsciiCharacters")

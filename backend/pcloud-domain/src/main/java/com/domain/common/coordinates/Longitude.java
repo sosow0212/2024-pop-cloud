@@ -1,4 +1,4 @@
-package com.domain.show.common;
+package com.domain.common.coordinates;
 
 import com.domain.show.popups.exception.PopupsException;
 import com.domain.show.popups.exception.PopupsExceptionType;
