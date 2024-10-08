@@ -36,6 +36,7 @@ export default function RootLayout({
           <MobileSizeWatcher />
           <MobileHeader />
           <NavBar />
+          <Toast />
           <MainContainer>{children}</MainContainer>
         </Providers>
       </body>
