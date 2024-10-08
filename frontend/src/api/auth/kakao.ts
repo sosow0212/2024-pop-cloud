@@ -1,12 +1,14 @@
-import { NetworkError, UnknownError } from "@/custom-error";
 import {
   ApiError,
   BadRequestError,
+  CustomError,
   ForbiddenError,
   InternalServerError,
+  NetworkError,
   NotFoundError,
   UnauthorizedError,
-} from "@/custom-error/api-error";
+  UnknownError,
+} from "@/custom-error";
 
 interface Response {
   accessToken: string;
@@ -57,9 +59,7 @@ const postOauthPermittedCodeKakao: ApiType = async (oauthPermittedCode) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    if (error instanceof NetworkError) {
-      throw error;
-    } else if (error instanceof ApiError) {
+    if (error instanceof CustomError) {
       throw error;
     } else {
       throw new UnknownError();

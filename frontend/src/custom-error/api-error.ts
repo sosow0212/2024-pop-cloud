@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 
-import { CustomError } from ".";
+import { CustomError } from "./custom-error";
 
 export class ApiError extends CustomError {
   status: number;
