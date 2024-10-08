@@ -3,6 +3,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import Script from "next/script";
 
+import Toast from "@/components/common/toast";
 import MainContainer from "@/components/main-container";
 import MobileHeader from "@/components/mobile-header";
 import MobileSizeWatcher from "@/components/mobile-size-watcher";
