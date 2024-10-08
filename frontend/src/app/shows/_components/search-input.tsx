@@ -9,7 +9,7 @@ function SearchInput({
   placeholder = "공간명 또는 주소를 검색하세요.",
 }: SearchInputProps) {
   return (
-    <div className="relative w-full max-w-800">
+    <div className="relative w-full max-w-1000">
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-10">
         <FiSearch className="size-20 text-gray-400" />
       </div>

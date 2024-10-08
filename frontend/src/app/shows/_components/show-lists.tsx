@@ -29,7 +29,7 @@ export default function ShowList({
   if (error) return <div>Failed to load shows. Please try again later.</div>;
 
   return shows && shows.length > 0 ? (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-1">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
       {shows.map((show) => (
         <EventCard
           key={show.showId}

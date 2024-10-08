@@ -56,6 +56,20 @@ export default async function ShowListPage({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="grow p-4">
         <h1 className="mb-4 text-24-700">쇼케이스 목록</h1>
+        <div className="my-20 flex h-150 items-center justify-between rounded-lg bg-gray-100 p-20 md:gap-50 lg:gap-30">
+          <p className="text-16-600">
+            팝클라우드에 팝업스토어를 등록하고 싶으신가요?
+            <br />
+            팝업스토어를 소개해보세요.
+          </p>
+
+          <button
+            type="button"
+            className="h-50 w-120 rounded bg-black px-10 py-2 text-white sm:w-200"
+          >
+            공간 등록
+          </button>
+        </div>
         <SearchInput />
         <Suspense fallback={<div>Loading...</div>}>
           <ShowList searchParams={searchParams} />

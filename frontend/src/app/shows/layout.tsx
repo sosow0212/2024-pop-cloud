@@ -1,3 +1,3 @@
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="m-auto h-screen w-full p-25 md:p-30">{children}</div>;
+  return <div className="h-screen w-full max-w-1000 p-30">{children}</div>;
 }
