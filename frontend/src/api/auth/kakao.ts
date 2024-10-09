@@ -23,13 +23,16 @@ type ApiType = (oauthPermittedCode: string) => Promise<Response>;
 
 const postOauthPermittedCodeKakao: ApiType = async (oauthPermittedCode) => {
   try {
-    const response = await fetch("/auth/login/oauth/kakao", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        OAuthPermittedCode: oauthPermittedCode,
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login/oauth/kakao`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          OAuthPermittedCode: oauthPermittedCode,
+        },
       },
-    });
+    );
 
     // 네트워크 오류 확인
     if (!response) {

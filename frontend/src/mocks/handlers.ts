@@ -54,4 +54,19 @@ export const handlers = [
       return new HttpResponse(null, { status: 500 });
     }
   }),
+
+  http.post("/auth/login/oauth/kakao", async ({ params }) => {
+    try {
+      const popupsId = parseInt(params.popupsId as string, 10);
+      const popup = allPopups.find((p) => p.id === popupsId);
+
+      if (popup) {
+        return HttpResponse.json(popup, { status: 200 });
+      } else {
+        return new HttpResponse(null, { status: 404 });
+      }
+    } catch (error) {
+      return new HttpResponse(null, { status: 500 });
+    }
+  }),
 ];
