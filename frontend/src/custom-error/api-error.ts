@@ -12,28 +12,28 @@ export class ApiError extends CustomError {
 }
 
 export class BadRequestError extends ApiError {
-  constructor(message: string = "잘못된 요청입니다") {
+  constructor(message: string = "잘못된 요청입니다.") {
     super(message, 400); // 400 상태 코드
     this.name = "InvalidOAuthCodeError";
   }
 }
 
 export class UnauthorizedError extends ApiError {
-  constructor(message: string = "인증되지 않은 사용자입니다") {
+  constructor(message: string = "인증되지 않은 사용자입니다.") {
     super(message, 401);
     this.name = "UnauthorizedError";
   }
 }
 
 export class ForbiddenError extends ApiError {
-  constructor(message: string = "권한이 없는 사용자입니다") {
+  constructor(message: string = "권한이 없는 사용자입니다.") {
     super(message, 403); // 403 상태 코드
     this.name = "ForbiddenError";
   }
 }
 
 export class NotFoundError extends ApiError {
-  constructor(message: string = "존재하지 않는 요청입니다") {
+  constructor(message: string = "존재하지 않는 요청입니다.") {
     super(message, 404); // 404 상태 코드
     this.name = "NotFoundError";
   }

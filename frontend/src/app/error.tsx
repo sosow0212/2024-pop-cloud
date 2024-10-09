@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BsEmojiTear } from "react-icons/bs";
 
 import { CustomError, UnknownError } from "@/custom-error";
 
@@ -13,9 +14,15 @@ export default function Error({ error }: ErrorProps) {
     error instanceof CustomError ? error.message : UnknownError.getMessage();
 
   return (
-    <div>
-      <h2>{`${message} 다시 시도해 주세요`}</h2>
-      <Link href="/">홈으로</Link>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 text-center">
+      <BsEmojiTear className="mb-50 size-130" />
+      <h2 className="mb-20 text-24-600">{`${message} 다시 시도해 주세요.`}</h2>
+      <Link
+        href="/"
+        className="rounded bg-blue-6 px-44 py-12 text-white transition hover:bg-blue-9"
+      >
+        홈으로
+      </Link>
     </div>
   );
 }

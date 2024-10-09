@@ -82,15 +82,6 @@ const config: Config = {
       "12-500": ["12px", { lineHeight: "14px", fontWeight: "500" }],
       "12-400": ["12px", { lineHeight: "14px", fontWeight: "400" }],
     },
-    keyframes: {
-      fadeIn: {
-        from: { opacity: "0", transform: "translate3d(-50%, -60px, 0)" },
-        to: { opacity: "1", transform: "translate3d(-50%, 0, 0)" },
-      },
-    },
-    animation: {
-      fadeIn: "fadeIn 0.5s",
-    },
   },
   plugins: [require("@tailwindcss/line-clamp")],
 };

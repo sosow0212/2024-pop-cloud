@@ -8,7 +8,7 @@ export class CustomError extends Error {
 }
 
 export class NetworkError extends CustomError {
-  constructor(message: string = "아무런 응답을 받지 못했습니다") {
+  constructor(message: string = "아무런 응답을 받지 못했습니다.") {
     super(message);
   }
 }
