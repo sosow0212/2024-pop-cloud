@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import postOauthPermittedCodeKakao from "@/api/auth/kakao";
@@ -11,6 +12,7 @@ import { setCookie } from "@/utils/cookie";
 
 export default function GetKakaoToken() {
   const [error, setError] = useState<Error>();
+  const router = useRouter();
   useEffect(() => {
     const getToken = async () => {
       try {
@@ -22,6 +24,7 @@ export default function GetKakaoToken() {
         const res = await postOauthPermittedCodeKakao(oauthPermittedCode);
 
         await setCookie("accessToken", res.accessToken);
+        router.push("/");
       } catch (err) {
         if (err instanceof CustomError) {
           setError(err);
