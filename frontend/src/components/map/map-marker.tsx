@@ -1,3 +1,4 @@
+// import { useState } from "react";
 import {
   CustomOverlayMap,
   MapMarker as KaKaoMapMarker,
@@ -18,8 +19,9 @@ export default function MapMarker({
   infoUrl,
 }: MarkerType) {
   return (
-    <>
+    <div className="group">
       <KaKaoMapMarker
+        // onMouseOver={}
         position={position}
         image={{
           src: MarkerImageSrc[type],
@@ -38,7 +40,7 @@ export default function MapMarker({
       <CustomOverlayMap position={position} yAnchor={1}>
         <div
           className={cn(
-            "text-xs max-w-160 -translate-y-40 translate-x-12 truncate rounded-md  px-8 py-4 text-white",
+            "text-xs max-w-160 -translate-y-40 translate-x-12 truncate rounded-md  px-8 py-4 text-white  group-hover:text-blue-400",
             type === "current" && "bg-black",
             type === "bookmark" && "bg-yellow-500",
             type === "place" && "bg-blue-500",
@@ -49,6 +51,6 @@ export default function MapMarker({
           </a>
         </div>
       </CustomOverlayMap>
-    </>
+    </div>
   );
 }

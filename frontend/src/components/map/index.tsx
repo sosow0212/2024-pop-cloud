@@ -10,27 +10,21 @@ import { MarkerClusterer } from "react-kakao-maps-sdk";
 import MapContainer from "./map-container";
 import MapMarker from "./map-marker";
 
-interface MapProps extends MapInfoType {
+interface MapProps {
+  mapInfo: MapInfoType;
   className?: string;
   handleChange: (map: kakao.maps.Map) => void;
 }
 
-export default function Map({
-  className,
-  mapLevel,
-  center,
-  markers,
-  handleChange,
-}: MapProps) {
+export default function Map({ mapInfo, className, handleChange }: MapProps) {
   return (
     <MapContainer
-      level={mapLevel}
-      center={center}
+      mapInfo={mapInfo}
       className={className}
       handleChange={handleChange}
     >
       <MarkerClusterer averageCenter minLevel={10}>
-        {markers?.map((marker) => (
+        {mapInfo.markers?.map((marker) => (
           <MapMarker
             key={`${marker.position.lat}=${marker.position.lng}`}
             {...marker}

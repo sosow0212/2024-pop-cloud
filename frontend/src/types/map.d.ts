@@ -4,10 +4,15 @@ type MapPositionType = {
 };
 
 type MarkerType = {
+  id: string;
+  title: string;
   position: MapPositionType;
+  location: string;
   title: string;
   type: "current" | "bookmark" | "place";
-  infoUrl: string;
+  infoUrl?: string;
+  startDate?: Date;
+  endDate?: Date;
 };
 type BoundType = {
   north: number;
@@ -17,8 +22,11 @@ type BoundType = {
 };
 
 type MapInfoType = {
+  currentPosition: MapPositionType;
   center: MapPositionType;
-  markers?: MarkerType[];
+  markers: MarkerType[];
   mapLevel: number;
   bound: BoundType;
 };
+
+// type ShowType = {};

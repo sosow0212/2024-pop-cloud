@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const SEONGSU = {
+  lat: 37.544882695287725,
+  lng: 127.05574132618605,
+};
 
 const initState: MapInfoType = {
-  center: {
-    lat: 37.544882695287725,
-    lng: 127.05574132618605,
-  },
+  currentPosition: SEONGSU,
+  center: SEONGSU,
   markers: [],
   mapLevel: 4,
   bound: {
@@ -24,13 +27,13 @@ const useMapState = () => {
   const [mapInfo, setMapInfo] = useState<MapInfoType>(initState);
 
   const detectMoving = (map: kakao.maps.Map) => {
-    const currentCenter = {
+    const mapCenter = {
       lat: map.getCenter().getLat(),
       lng: map.getCenter().getLng(),
     };
     const { lat, lng } = mapInfo.center;
     const isInRange =
-      distance(lat, lng, currentCenter.lat, currentCenter.lng) <= DELTA ** 2;
+      distance(lat, lng, mapCenter.lat, mapCenter.lng) <= DELTA ** 2;
     if (isInRange) return;
 
     const level = map.getLevel();
@@ -50,22 +53,31 @@ const useMapState = () => {
         west,
       },
       center: {
-        ...currentCenter,
+        ...mapCenter,
       },
     }));
   };
 
-  // useEffect(() => {
-  //   const getPlace = async (): Promise<MapInfoType[] | undefined> => {
-  //     try {
-  //       const res = await fetch("./새로운 장소 받아오기");
-  //       if (!res.ok) throw new Error("서버 에러");
-  //       const data: MapInfoType[] = await res.json();
-  //       return data;
-  //     } catch (error) {}
-  //   };
-  //   getPlace();
-  // }, [mapInfo.center]);
+  useEffect(() => {
+    const getSuccessGeo = (p: GeolocationPosition) => {
+      const { latitude: lat, longitude: lng } = p.coords;
+      setMapInfo((previousMapInfo) => ({
+        ...previousMapInfo,
+        center: {
+          lat,
+          lng,
+        },
+        currentPosition: {
+          lat,
+          lng,
+        },
+      }));
+    };
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(getSuccessGeo);
+    }
+  }, []);
 
   return {
     mapInfo,
