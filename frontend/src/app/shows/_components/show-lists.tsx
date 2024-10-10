@@ -1,19 +1,19 @@
+/* eslint-disable */
 "use client";
-
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
+import { FaArrowUp } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 
-import fetchShows from "@/api/get-shows";
 import EventCard from "@/components/common/list-card";
-
+import useShowList from "../hooks/use-shows-list";
 import { ShowData } from "../types/index";
+import CustomSpinner from "./spinner";
 
 export default function ShowList({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
-}) {
+}): React.ReactElement {
   const { ref, inView } = useInView();
 
   const {
@@ -23,13 +23,7 @@ export default function ShowList({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["shows", searchParams],
-    queryFn: ({ pageParam }) =>
-      fetchShows({ ...searchParams, showId: pageParam as string | null }),
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
-    initialPageParam: null as string | null,
-  });
+  } = useShowList(searchParams);
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
@@ -37,31 +31,56 @@ export default function ShowList({
     }
   }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage]);
 
-  const handleLikeChange = (id: number, isLiked: boolean) => {
-    console.log(`Show ${id} like status changed to: ${isLiked}`); //eslint-disable-line
-  };
+  const scrollToTop = useCallback(() => {
+    console.log("Attempting to scroll to top");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
-  const renderLoadMoreButton = () => {
+  function handleLikeChange(id: number, isLiked: boolean): void {
+    console.log(`Show ${id} like status changed to: ${isLiked}`);
+  }
+
+  function renderFooter(): React.ReactNode {
     if (isFetchingNextPage) {
-      return "Loading more...";
+      return <CustomSpinner />;
     }
-    if (hasNextPage) {
-      return "Load More";
+    if (!hasNextPage) {
+      return (
+        <div className="flex items-center justify-center py-8 mb-10">
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="flex items-center rounded-full bg-blue-6 px-6 py-3 font-bold text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-600"
+          >
+            <FaArrowUp className="mr-2 size-15" />맨 위로 가기
+          </button>
+        </div>
+      );
     }
-    return "No more shows";
-  };
+    return null;
+  }
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Failed to load shows. Please try again later.</div>;
+  if (isLoading) return <CustomSpinner />;
+  if (error)
+    return (
+      <div className="py-8 text-center text-red-500">
+        Failed to load shows. Please try again later.
+      </div>
+    );
 
   const allShows = data?.pages.flatMap((page) => page.shows) || [];
 
   if (allShows.length === 0) {
-    return <div>No shows available.</div>;
+    return (
+      <div className="py-8 text-center text-gray-500">No shows available.</div>
+    );
   }
 
   return (
-    <>
+    <div className="space-y-8">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         {allShows.map((show: ShowData) => (
           <EventCard
@@ -74,7 +93,7 @@ export default function ShowList({
           />
         ))}
       </div>
-      <div ref={ref}>{renderLoadMoreButton()}</div>
-    </>
+      <div ref={ref}>{renderFooter()}</div>
+    </div>
   );
 }

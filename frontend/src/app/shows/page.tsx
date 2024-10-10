@@ -55,16 +55,9 @@ export default async function ShowListPage({
     initialPageParam: undefined,
   });
 
-  // 디버깅을 위해 prefetch된 데이터를 로그로 출력
-  console.log(
-    // eslint-disable-line
-    "Prefetched data:",
-    JSON.stringify(queryClient.getQueryData(["shows", searchParams]), null, 2),
-  ); // eslint-disable-line
-
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="grow p-4">
+      <div className="flex flex-col h-full overflow-hidden">
         <h1 className="mb-4 text-24-700">쇼케이스 목록</h1>
         <div className="my-20 flex h-150 min-w-330 items-center justify-between rounded-lg bg-gray-100 p-20 md:gap-50 lg:gap-30">
           <p className="text-16-600">
@@ -72,7 +65,6 @@ export default async function ShowListPage({
             <br />
             팝업스토어를 소개해보세요.
           </p>
-
           <button
             type="button"
             className="h-50 w-120 rounded bg-black px-10 py-2 text-white sm:ml-10 sm:w-160"
@@ -81,9 +73,11 @@ export default async function ShowListPage({
           </button>
         </div>
         <SearchInput />
-        <Suspense fallback={<div>Loading...</div>}>
-          <ShowList searchParams={searchParams} />
-        </Suspense>
+        <div className="flex-grow overflow-hidden">
+          <Suspense fallback={<div>Loading...</div>}>
+            <ShowList searchParams={searchParams} />
+          </Suspense>
+        </div>
       </div>
     </HydrationBoundary>
   );
