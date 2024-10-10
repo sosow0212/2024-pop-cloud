@@ -67,7 +67,7 @@ export default async function ShowListPage({
           </p>
           <button
             type="button"
-            className="h-50 w-120 rounded bg-black px-10 py-2 text-white sm:ml-10 sm:w-160"
+            className="h-50 w-120 rounded bg-black px-10 py-2 text-white sm:ml-15 sm:w-160 ml-15"
           >
             공간 등록
           </button>

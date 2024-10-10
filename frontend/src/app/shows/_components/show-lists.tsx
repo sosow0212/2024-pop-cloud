@@ -1,10 +1,11 @@
-/* eslint-disable */
 "use client";
-import React, { useCallback, useEffect, useRef } from "react";
+
+import React, { useCallback, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 
 import EventCard from "@/components/common/list-card";
+
 import useShowList from "../hooks/use-shows-list";
 import { ShowData } from "../types/index";
 import CustomSpinner from "./spinner";
@@ -32,7 +33,6 @@ export default function ShowList({
   }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage]);
 
   const scrollToTop = useCallback(() => {
-    console.log("Attempting to scroll to top");
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -40,7 +40,7 @@ export default function ShowList({
   }, []);
 
   const handleLikeChange = (id: number, isLiked: boolean): void => {
-    console.log(`Show ${id} like status changed to: ${isLiked}`);
+    console.log(`Show ${id} like status changed to: ${isLiked}`); //eslint-disable-line
   };
 
   function renderFooter(): React.ReactNode {
@@ -49,13 +49,13 @@ export default function ShowList({
     }
     if (!hasNextPage) {
       return (
-        <div className="flex items-center justify-center py-8 mb-10">
+        <div className="mb-13 flex items-center justify-center py-8">
           <button
             type="button"
             onClick={scrollToTop}
-            className="flex items-center rounded-full bg-blue-6 px-6 py-3 font-bold text-white transition duration-300 ease-in-out hover:scale-105 hover:bg-blue-600"
+            className="flex items-center p-13 text-16-700 text-neutral-900 transition duration-300 ease-in-out "
           >
-            <FaArrowUp className="mr-2 size-15" />맨 위로 가기
+            <FaArrowUp className="mr-8 size-15" />맨 위로 가기
           </button>
         </div>
       );
