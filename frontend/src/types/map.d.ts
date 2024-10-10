@@ -14,19 +14,10 @@ type MarkerType = {
   startDate?: Date;
   endDate?: Date;
 };
-type BoundType = {
-  north: number;
-  east: number;
-  south: number;
-  west: number;
-};
 
 type MapInfoType = {
   currentPosition: MapPositionType;
   center: MapPositionType;
   markers: MarkerType[];
   mapLevel: number;
-  bound: BoundType;
 };
-
-// type ShowType = {};
