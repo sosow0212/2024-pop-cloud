@@ -5,7 +5,7 @@ interface SearchInputProps {
   placeholder?: string;
 }
 
-function SearchInput({
+export default function SearchInput({
   placeholder = "공간명 또는 주소를 검색하세요.",
 }: SearchInputProps) {
   return (
@@ -21,5 +21,3 @@ function SearchInput({
     </div>
   );
 }
-
-export default SearchInput;

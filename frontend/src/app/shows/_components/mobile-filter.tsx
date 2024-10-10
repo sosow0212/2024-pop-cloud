@@ -8,7 +8,7 @@ import { DrawerDialogContainer } from "@/components/modal/modal-container";
 
 import FilterSidebar from "./filter-sidebar";
 
-function MobileFilterSidebar() {
+export default function MobileFilterSidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -59,5 +59,3 @@ function MobileFilterSidebar() {
     </>
   );
 }
-
-export default MobileFilterSidebar;

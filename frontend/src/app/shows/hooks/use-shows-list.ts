@@ -11,7 +11,7 @@ interface ShowsResponse {
   nextCursor: string | null;
 }
 
-function useShowList(searchParams: {
+export default function useShowList(searchParams: {
   [key: string]: string | string[] | undefined;
 }) {
   return useInfiniteQuery<ShowsResponse, Error>({
@@ -22,5 +22,3 @@ function useShowList(searchParams: {
     initialPageParam: null as string | null,
   });
 }
-
-export default useShowList;

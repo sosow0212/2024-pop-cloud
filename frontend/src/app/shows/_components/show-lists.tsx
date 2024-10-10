@@ -39,9 +39,9 @@ export default function ShowList({
     });
   }, []);
 
-  function handleLikeChange(id: number, isLiked: boolean): void {
+  const handleLikeChange = (id: number, isLiked: boolean): void => {
     console.log(`Show ${id} like status changed to: ${isLiked}`);
-  }
+  };
 
   function renderFooter(): React.ReactNode {
     if (isFetchingNextPage) {
