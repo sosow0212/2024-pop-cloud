@@ -2,7 +2,7 @@
 import { http, HttpResponse } from "msw";
 import { ShowBasic, ShowDetail, createDummyShows } from "./dummy";
 
-const allShows = createDummyShows(40);
+const allShows = createDummyShows(1000);
 
 export const handlers = [
   http.get("/api/shows", async ({ request }) => {
@@ -101,28 +101,28 @@ export const handlers = [
     }
   }),
 
-  http.get("/api/exhibitions/:exhibitionId", async ({ params }) => {
-    try {
-      const exhibitionId = parseInt(params.exhibitionId as string, 10);
-      const exhibition = allShows.find(
-        (s) => s.showId === exhibitionId && s.showType === "EXHIBITION",
-      );
+  // http.get("/api/exhibitions/:exhibitionId", async ({ params }) => {
+  //   try {
+  //     const exhibitionId = parseInt(params.exhibitionId as string, 10);
+  //     const exhibition = allShows.find(
+  //       (s) => s.showId === exhibitionId && s.showType === "EXHIBITION",
+  //     );
 
-      if (exhibition) {
-        return HttpResponse.json(exhibition, { status: 200 });
-      } else {
-        return new HttpResponse(null, {
-          status: 404,
-          statusText: "Exhibition not found",
-        });
-      }
-    } catch (error) {
-      return new HttpResponse(null, {
-        status: 500,
-        statusText: "Internal server error",
-      });
-    }
-  }),
+  //     if (exhibition) {
+  //       return HttpResponse.json(exhibition, { status: 200 });
+  //     } else {
+  //       return new HttpResponse(null, {
+  //         status: 404,
+  //         statusText: "Exhibition not found",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     return new HttpResponse(null, {
+  //       status: 500,
+  //       statusText: "Internal server error",
+  //     });
+  //   }
+  // }),
 
   http.get("/api/popups/:popupId", async ({ params }) => {
     try {

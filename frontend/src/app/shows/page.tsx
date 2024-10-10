@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import {
   dehydrate,
   HydrationBoundary,
@@ -47,10 +48,19 @@ export default async function ShowListPage({
     redirect(`/shows?${newSearchParams.toString()}`);
   }
 
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ["shows", searchParams],
-    queryFn: () => fetchShows(searchParams),
+    queryFn: ({ pageParam = undefined }) =>
+      fetchShows({ ...searchParams, showId: pageParam as string | undefined }),
+    initialPageParam: undefined,
   });
+
+  // 디버깅을 위해 prefetch된 데이터를 로그로 출력
+  console.log(
+    // eslint-disable-line
+    "Prefetched data:",
+    JSON.stringify(queryClient.getQueryData(["shows", searchParams]), null, 2),
+  ); // eslint-disable-line
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

@@ -1,11 +1,14 @@
 import { ShowData } from "@/app/shows/types/index";
 
-export default async function fetchShows(params: {
-  [key: string]: string | string[] | undefined;
-}): Promise<ShowData[]> {
+type FetchShowsParams = {
+  [key: string]: string | string[] | undefined | null;
+};
+
+export default async function fetchShows(
+  params: FetchShowsParams,
+): Promise<{ shows: ShowData[]; nextCursor: string | null }> {
   const searchParams = new URLSearchParams();
 
-  // 필수 파라미터 설정
   if (!params.startDate || !params.endDate) {
     throw new Error("startDate and endDate are required parameters");
   }
@@ -13,12 +16,11 @@ export default async function fetchShows(params: {
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {
       value.forEach((v) => searchParams.append(key, v));
-    } else if (value !== undefined) {
-      searchParams.set(key, value);
+    } else if (value !== undefined && value !== null) {
+      searchParams.set(key, value.toString());
     }
   });
 
-  // 기본값 설정
   if (!searchParams.has("showType")) searchParams.set("showType", "popups");
   if (!searchParams.has("pageSize")) searchParams.set("pageSize", "10");
 
@@ -29,5 +31,15 @@ export default async function fetchShows(params: {
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  return response.json();
+  const data = await response.json();
+
+  if (!Array.isArray(data)) {
+    return { shows: [], nextCursor: null };
+  }
+
+  const shows = data as ShowData[];
+  const nextCursor =
+    shows.length > 0 ? shows[shows.length - 1].showId.toString() : null;
+
+  return { shows, nextCursor };
 }

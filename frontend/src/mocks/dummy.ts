@@ -92,12 +92,18 @@ export const createDummyShows = (count: number): ShowDetail[] => {
       startDate.getTime() + Math.random() * 30 * 24 * 60 * 60 * 1000,
     );
 
+    // Randomly choose between "POPUPS" and "EXHIBITION"
+    const showType = Math.random() < 0.5 ? "POPUPS" : "EXHIBITION";
+
+    // Adjust the title based on the show type
+    const showTypeText = showType === "POPUPS" ? "팝업" : "전시";
+
     return {
       showId: index + 1,
-      showType: "POPUPS",
+      showType: showType,
       ownerId: Math.floor(Math.random() * 100) + 1,
-      title: `${city.name} ${publicTags[Math.floor(Math.random() * publicTags.length)]} 쇼케이스 ${index + 1}`,
-      description: `${city.name} ${district}에서 열리는 멋진 ${publicTags[Math.floor(Math.random() * publicTags.length)]} 쇼케이스입니다.`,
+      title: `${city.name} ${publicTags[Math.floor(Math.random() * publicTags.length)]} ${showTypeText} ${index + 1}`,
+      description: `${city.name} ${district}에서 열리는 멋진 ${publicTags[Math.floor(Math.random() * publicTags.length)]} ${showTypeText}입니다.`,
       startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
       openTimes: "평일 09:00 ~ 18:00,\n주말 12:00 ~ 21:00\n",
