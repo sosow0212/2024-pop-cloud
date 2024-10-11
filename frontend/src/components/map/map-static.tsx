@@ -6,6 +6,7 @@ import MapMarker from "./map-marker";
 interface MapStaticProps {
   position: MapPositionType;
   label: string;
+  location: string;
   level?: number;
   className?: string;
 }
@@ -13,6 +14,7 @@ interface MapStaticProps {
 export default function MapStatic({
   label,
   position,
+  location,
   level = 4,
   className,
 }: MapStaticProps) {
@@ -26,7 +28,14 @@ export default function MapStatic({
         }}
         center={position}
       >
-        <MapMarker title={label} type="place" position={position} infoUrl="" />
+        <MapMarker
+          id={location}
+          location={location}
+          title={label}
+          type="place"
+          position={position}
+          infoUrl=""
+        />
       </KakaoMap>
     </section>
   );

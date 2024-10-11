@@ -18,7 +18,6 @@ export default function MapContainer({
   handleChange,
 }: MapContainerProps) {
   const mapRef = useRef<kakao.maps.Map>(null);
-
   return (
     <section className={cn("relative w-500 h-500", className)}>
       <KakaoMap
