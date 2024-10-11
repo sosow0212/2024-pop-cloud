@@ -29,22 +29,24 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache yarn dependencies
+      - name: Cache yarn and node_modules
         uses: actions/cache@v3
         id: yarn-cache
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            **/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            frontend/node_modules/.cache
+            frontend/node_modules/.vite
+            !frontend/node_modules/.cache/storybook
+          key: ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}-${{ hashFiles('frontend/**/*.js', 'frontend/**/*.jsx', 'frontend/**/*.ts', 'frontend/**/*.tsx') }}
           restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}-
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: |
           cd frontend
-          yarn install --frozen-lockfile
+          yarn install --prefer-offline --frozen-lockfile
 
       - name: Build Storybook
         run: |
