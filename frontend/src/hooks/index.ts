@@ -1,5 +1,4 @@
 // hooks
 
 export { default as useMapState } from "./use-map-state";
-
-export const a = "aa";
+export { default as useMapSearch } from "./use-map-search";

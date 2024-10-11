@@ -2,10 +2,10 @@
 
 // import EventCard from "@/components/common/list-card";
 
-import { useEffect, useState } from "react";
-
 import Map from "@/components/map";
 import { useMapState } from "@/hooks";
+
+import MapSearch from "./_components/map-search";
 // import { useModalStore } from "@/store";
 
 // const event = {
@@ -17,86 +17,13 @@ import { useMapState } from "@/hooks";
 //   image: "/images/luffi.jpg",
 // };
 
-type SearchResultType = {
-  placeName: string;
-  category: string;
-  address: string;
-  lat: number;
-  lng: number;
-  id: string;
-};
-
 export default function MapPage() {
   const { mapInfo, detectMoving, changeCenterPosition } = useMapState();
-  const [inputValue, setInputValue] = useState("");
-  const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
-  const [debounce, setDebounce] = useState("");
-
-  useEffect(() => {
-    if (debounce === "") {
-      setSearchResults([]);
-      return;
-    }
-    const ps = new kakao.maps.services.Places();
-    const searchPlaces = () => {
-      ps.keywordSearch(debounce, (data) => {
-        if (!data) setSearchResults([]);
-        setSearchResults(() =>
-          data.slice(0, 5).map((d) => ({
-            id: d.id,
-            placeName: d.place_name,
-            category: d.category_group_name,
-            address: d.address_name,
-            lat: +d.y,
-            lng: +d.x,
-          })),
-        );
-      });
-    };
-    searchPlaces();
-  }, [debounce]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setDebounce(inputValue);
-    }, 500);
-  }, [inputValue]);
-
-  const handleCenter = (lat: number, lng: number) =>
-    changeCenterPosition(lat, lng);
 
   return (
     <section className="mapPage-px space-y-10">
       <div className="flex items-center justify-end">
-        <div className="relative w-full max-w-xl">
-          <input
-            className=" peer w-full rounded-md border py-10 pl-5 pr-60"
-            placeholder="키워드로 장소 지정"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <ul
-            className={`absolute inset-x-0 top-full z-50 hidden divide-y overflow-y-auto rounded-md border-black bg-white shadow-sm peer-focus:block ${searchResults.length && "border"}`}
-          >
-            {searchResults.map((result) => (
-              <li key={result.id} className="px-10 py-5">
-                <button
-                  type="button"
-                  className="my-5 cursor-pointer text-18 font-extrabold underline-offset-4 hover:underline"
-                  onMouseDown={(e) => {
-                    e.preventDefault();
-                    handleCenter(result.lat, result.lng);
-                    setDebounce("");
-                  }}
-                >
-                  {result.placeName}
-                </button>
-                <p className="text-14 text-slate-400">{result.category}</p>
-                <span className="text-14 text-slate-500">{result.address}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <MapSearch onChangeValue={changeCenterPosition} />
       </div>
       <Map mapInfo={mapInfo} handleChange={detectMoving} className="w-full" />
 
