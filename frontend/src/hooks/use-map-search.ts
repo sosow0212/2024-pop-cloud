@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-type SearchResultType = {
+export type SearchResultType = {
   placeName: string;
   category: string;
   address: string;

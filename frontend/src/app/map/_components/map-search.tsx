@@ -1,12 +1,20 @@
-import { useMapSearch } from "@/hooks";
+import { Dispatch, SetStateAction } from "react";
+
+import { SearchResultType } from "@/hooks/use-map-search";
 
 interface MapSearchProps {
   onChangeValue: (lat: number, lng: number) => void;
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
+  results: SearchResultType[];
 }
 
-export default function MapSearch({ onChangeValue }: MapSearchProps) {
-  const [inputValue, setInputValue, results] = useMapSearch();
-
+export default function MapSearch({
+  onChangeValue,
+  inputValue,
+  results,
+  setInputValue,
+}: MapSearchProps) {
   return (
     <div className="relative w-full max-w-xl">
       <input
@@ -16,9 +24,9 @@ export default function MapSearch({ onChangeValue }: MapSearchProps) {
         onChange={(e) => setInputValue(e.target.value)}
       />
       <ul
-        className={`absolute inset-x-0 top-full z-50 hidden divide-y overflow-y-auto rounded-md border-black bg-white shadow-sm peer-focus:block ${results.length && "border"}`}
+        className={`absolute inset-x-0 top-full z-50 hidden max-h-300 divide-y overflow-y-auto rounded-md border-black bg-white shadow-sm peer-focus:block ${results.length && "border"}`}
       >
-        {results.map((result) => (
+        {results?.map((result) => (
           <li key={result.id} className="px-10 py-5">
             <button
               type="button"

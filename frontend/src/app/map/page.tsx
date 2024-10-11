@@ -3,10 +3,10 @@
 // import EventCard from "@/components/common/list-card";
 
 import Map from "@/components/map";
-import { useMapState } from "@/hooks";
+import { useMapSearch, useMapState } from "@/hooks";
+import { useModalStore } from "@/store";
 
 import MapSearch from "./_components/map-search";
-// import { useModalStore } from "@/store";
 
 // const event = {
 //   id: 1,
@@ -19,11 +19,27 @@ import MapSearch from "./_components/map-search";
 
 export default function MapPage() {
   const { mapInfo, detectMoving, changeCenterPosition } = useMapState();
-
+  const [inputValue, setInputValue, results] = useMapSearch();
+  const { onOpen, onSetData } = useModalStore();
   return (
     <section className="mapPage-px space-y-10">
-      <div className="flex items-center justify-end">
-        <MapSearch onChangeValue={changeCenterPosition} />
+      <div className="flex items-center justify-between ">
+        <button
+          type="button"
+          onClick={() => {
+            onOpen("recommendation");
+            onSetData("places", mapInfo.markers);
+          }}
+          className="whitespace-nowrap rounded-md bg-blue-5 px-4 py-8 text-white hover:bg-blue-6 md:px-12"
+        >
+          경로 추천 받기
+        </button>
+        <MapSearch
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          results={results}
+          onChangeValue={changeCenterPosition}
+        />
       </div>
       <Map mapInfo={mapInfo} handleChange={detectMoving} className="w-full" />
 

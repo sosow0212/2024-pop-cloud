@@ -1,9 +1,10 @@
 import { create } from "zustand";
 
-export type ModalType = "login" | "alert";
+export type ModalType = "login" | "alert" | "recommendation";
 
 type ModalDataType = {
   isCheck?: boolean;
+  places?: MarkerType[];
 };
 
 interface ModalStore {
@@ -12,6 +13,11 @@ interface ModalStore {
   onOpen: (type: ModalType) => void;
   onClose: () => void;
   data: ModalDataType;
+  onSetData: (
+    key: keyof ModalDataType,
+    value: ModalDataType[keyof ModalDataType],
+  ) => void;
+  onClearData: () => void;
 }
 /**
  * 현재 화면 크기가 모바일인지 boolean 값을 가지고 있는 전역 변수입니다.
@@ -35,16 +41,25 @@ const useModalStore = create<ModalStore>((set) => ({
   type: null,
   isOpen: false,
   data: {},
-  onOpen: (type, data = {}) =>
+  onOpen: (type) =>
     set({
       isOpen: true,
       type,
-      data,
     }),
   onClose: () =>
     set({
       type: null,
       isOpen: false,
+    }),
+  onSetData: (key, value) =>
+    set((p) => ({
+      data: {
+        ...p.data,
+        [key]: value,
+      },
+    })),
+  onClearData: () =>
+    set({
       data: {},
     }),
 }));

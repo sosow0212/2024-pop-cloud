@@ -39,3 +39,7 @@ html,
 .mapPage-px {
   @apply md:px-10 lg:px-20;
 }
+
+input[type="radio"].recommend {
+  display: none;
+}
