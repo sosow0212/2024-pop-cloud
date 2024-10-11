@@ -40,7 +40,7 @@ export default function ShowList({
   }, []);
 
   const handleLikeChange = (id: number, isLiked: boolean): void => {
-    console.log(`Show ${id} like status changed to: ${isLiked}`); //eslint-disable-line
+    console.log(`Show ${id} like status changed to: ${isLiked}`); // eslint-disable-line no-console
   };
 
   function renderFooter(): React.ReactNode {
@@ -73,16 +73,26 @@ export default function ShowList({
 
   const allShows = data?.pages.flatMap((page) => page.shows) || [];
 
-  if (allShows.length === 0) {
+  const filteredShows = searchParams.title
+    ? allShows.filter((show) =>
+        show.title
+          .toLowerCase()
+          .includes((searchParams.title as string).toLowerCase()),
+      )
+    : allShows;
+
+  if (filteredShows.length === 0) {
     return (
-      <div className="py-8 text-center text-gray-500">No shows available.</div>
+      <div className="py-8 text-center text-gray-500">
+        No matching shows found.
+      </div>
     );
   }
 
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {allShows.map((show: ShowData) => (
+        {filteredShows.map((show: ShowData) => (
           <EventCard
             key={show.showId}
             event={{

@@ -19,14 +19,13 @@ export default async function ShowListPage({
 }) {
   const queryClient = new QueryClient();
 
-  // 기본 파라미터 설정 및 누락된 파라미터 확인
   const today = new Date();
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
   const oneYearLater = new Date(today.getFullYear() + 1, today.getMonth(), 0);
 
   const defaultParams = {
-    startDate: startOfMonth.toISOString().split("T")[0], // 이번 달 1일
-    endDate: oneYearLater.toISOString().split("T")[0], // 1년 후 같은 달의 마지막 날
+    startDate: startOfMonth.toISOString().split("T")[0],
+    endDate: oneYearLater.toISOString().split("T")[0],
     showType: "popups",
     pageSize: "10",
   };
@@ -43,7 +42,6 @@ export default async function ShowListPage({
     }
   });
 
-  // 누락된 파라미터가 있으면 리다이렉트
   if (needsRedirect) {
     redirect(`/shows?${newSearchParams.toString()}`);
   }
@@ -72,7 +70,7 @@ export default async function ShowListPage({
             공간 등록
           </button>
         </div>
-        <SearchInput />
+        <SearchInput initialValue={searchParams.title as string} />
         <div className="flex-grow overflow-hidden">
           <Suspense fallback={<div>Loading...</div>}>
             <ShowList searchParams={searchParams} />

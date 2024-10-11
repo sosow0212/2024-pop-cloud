@@ -37,7 +37,15 @@ export default async function fetchShows(
     return { shows: [], nextCursor: null };
   }
 
-  const shows = data as ShowData[];
+  let shows = data as ShowData[];
+
+  // Filter shows based on title if provided
+  if (params.title) {
+    shows = shows.filter((show) =>
+      show.title.toLowerCase().includes(params.title!.toString().toLowerCase()),
+    );
+  }
+
   const nextCursor =
     shows.length > 0 ? shows[shows.length - 1].showId.toString() : null;
 
