@@ -8,7 +8,7 @@ import Error from "@/app/error";
 import SquareSpinner from "@/components/common/loading/square-spinner";
 import { CustomError, UnknownError } from "@/custom-error";
 import { BadRequestError } from "@/custom-error/api-error";
-import { setCookie } from "@/utils/cookie";
+import { setCookie } from "@/utils/next-cookie";
 
 export default function GetKakaoToken() {
   const [error, setError] = useState<Error>();
@@ -36,7 +36,7 @@ export default function GetKakaoToken() {
     };
 
     getToken();
-  }, []);
+  }, [router]);
   return (
     <div>
       {error ? (

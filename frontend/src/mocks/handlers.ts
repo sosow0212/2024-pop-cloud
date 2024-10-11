@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { http, HttpResponse } from "msw";
 import { PopupBasic, createDummyPopups } from "./dummy";
-import { access } from "fs";
 
 const allPopups = createDummyPopups(20);
 
