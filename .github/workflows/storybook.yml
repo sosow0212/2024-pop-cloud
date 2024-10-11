@@ -29,18 +29,14 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache yarn and node_modules
+      - name: Cache yarn dependencies
         uses: actions/cache@v3
         id: yarn-cache
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
-            frontend/node_modules/.cache
-            frontend/node_modules/.vite
-            !frontend/node_modules/.cache/storybook
-          key: ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}-${{ hashFiles('frontend/**/*.js', 'frontend/**/*.jsx', 'frontend/**/*.ts', 'frontend/**/*.tsx') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}-
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
