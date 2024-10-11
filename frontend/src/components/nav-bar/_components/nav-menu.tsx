@@ -45,7 +45,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
       {loggedIn ? (
         <NavIconButton
           href={profileUrl}
-          name={loggedIn ? "프로필" : "로그인"}
+          name="프로필"
           icon={FiUser}
           isActive={pathname === profileUrl}
           isSearchPage={isSearchPage}
