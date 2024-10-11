@@ -29,14 +29,17 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - name: Cache yarn dependencies
+      - name: Cache yarn dependencies and Storybook
         uses: actions/cache@v3
         id: yarn-cache
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}
+            frontend/node_modules/.cache
+            frontend/.storybook
+          key: ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}-${{ hashFiles('frontend/**/*.js', 'frontend/**/*.jsx', 'frontend/**/*.ts', 'frontend/**/*.tsx') }}
           restore-keys: |
+            ${{ runner.os }}-yarn-${{ hashFiles('frontend/yarn.lock') }}-
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
@@ -51,7 +54,7 @@ jobs:
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
-        id: publish-to-chromatic # id 추가
+        id: publish-to-chromatic
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -68,7 +71,8 @@ jobs:
           utcOffset: "+09:00"
 
     outputs:
-      storybook_url: ${{ steps.publish-to-chromatic.outputs.storybookUrl }} # chromatic에서의 URL 출력
+      storybook_url: ${{ steps.publish-to-chromatic.outputs.storybookUrl }}
+      current_time: ${{ steps.current-time.outputs.formattedTime }}
 
   github-bot-storybook:
     needs: [storybook-preview]
@@ -79,5 +83,5 @@ jobs:
         with:
           comment_tag: ${{github.event.number}}-storybook
           message: |
-            💄 Storybook: ${{ needs.storybook-preview.outputs.storybook_url }}  # 출력된 URL 참조
+            💄 Storybook: ${{ needs.storybook-preview.outputs.storybook_url }}
             🕖 Update: ${{ needs.storybook-preview.outputs.current_time }}
