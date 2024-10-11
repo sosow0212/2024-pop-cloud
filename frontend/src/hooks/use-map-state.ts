@@ -22,6 +22,17 @@ const useMapState = () => {
     }),
     [mapInfo.mapLevel],
   );
+
+  const changeCenterPosition = (lat: number, lng: number) => {
+    setMapInfo((p) => ({
+      ...p,
+      center: {
+        lat,
+        lng,
+      },
+    }));
+  };
+
   const detectMoving = (map: kakao.maps.Map) => {
     const mapCenter = {
       lat: map.getCenter().getLat(),
@@ -81,6 +92,7 @@ const useMapState = () => {
   return {
     mapInfo,
     detectMoving,
+    changeCenterPosition,
   };
 };
 export default useMapState;

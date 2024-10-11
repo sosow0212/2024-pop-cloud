@@ -2,7 +2,7 @@
 
 // import EventCard from "@/components/common/list-card";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Map from "@/components/map";
 import { useMapState } from "@/hooks";
@@ -27,8 +27,7 @@ type SearchResultType = {
 };
 
 export default function MapPage() {
-  const { mapInfo, detectMoving } = useMapState();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { mapInfo, detectMoving, changeCenterPosition } = useMapState();
   const [inputValue, setInputValue] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
   const [debounce, setDebounce] = useState("");
@@ -63,25 +62,35 @@ export default function MapPage() {
     }, 500);
   }, [inputValue]);
 
+  const handleCenter = (lat: number, lng: number) =>
+    changeCenterPosition(lat, lng);
+
   return (
     <section className="mapPage-px space-y-10">
       <div className="flex items-center justify-end">
         <div className="relative w-full max-w-xl">
           <input
-            ref={inputRef}
-            className="peer w-full rounded-md border py-10 pl-5 pr-60"
+            className=" peer w-full rounded-md border py-10 pl-5 pr-60"
             placeholder="키워드로 장소 지정"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
           <ul
-            className={`absolute inset-x-0 top-full z-50 hidden divide-y overflow-y-auto rounded-md  border-black bg-white shadow-sm peer-focus:block ${searchResults.length && "border"} `}
+            className={`absolute inset-x-0 top-full z-50 hidden divide-y overflow-y-auto rounded-md border-black bg-white shadow-sm peer-focus:block ${searchResults.length && "border"}`}
           >
             {searchResults.map((result) => (
               <li key={result.id} className="px-10 py-5">
-                <h5 className="my-5 text-18 font-extrabold">
+                <button
+                  type="button"
+                  className="my-5 cursor-pointer text-18 font-extrabold underline-offset-4 hover:underline"
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    handleCenter(result.lat, result.lng);
+                    setDebounce("");
+                  }}
+                >
                   {result.placeName}
-                </h5>
+                </button>
                 <p className="text-14 text-slate-400">{result.category}</p>
                 <span className="text-14 text-slate-500">{result.address}</span>
               </li>
