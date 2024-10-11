@@ -51,6 +51,7 @@ jobs:
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
+        id: publish-to-chromatic # id 추가
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -67,8 +68,7 @@ jobs:
           utcOffset: "+09:00"
 
     outputs:
-      storybook_url: ${{ steps.chromatic.outputs.storybookUrl }}
-      current_time: ${{ steps.current-time.outputs.formattedTime }}
+      storybook_url: ${{ steps.publish-to-chromatic.outputs.storybookUrl }} # chromatic에서의 URL 출력
 
   github-bot-storybook:
     needs: [storybook-preview]
@@ -79,5 +79,5 @@ jobs:
         with:
           comment_tag: ${{github.event.number}}-storybook
           message: |
-            💄 Storybook: ${{ needs.storybook-preview.outputs.storybook_url }}
+            💄 Storybook: ${{ needs.storybook-preview.outputs.storybook_url }}  # 출력된 URL 참조
             🕖 Update: ${{ needs.storybook-preview.outputs.current_time }}
