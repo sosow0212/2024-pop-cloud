@@ -43,3 +43,6 @@ html,
 input[type="radio"].recommend {
   display: none;
 }
+input[type="checkbox"].recommend {
+  display: none;
+}

@@ -9,6 +9,7 @@ type MarkerType = {
   position: MapPositionType;
   location: string;
   title: string;
+  category?: "POPUPS" | "EXHIBITION";
   type: "current" | "bookmark" | "place";
   infoUrl?: string;
   startDate?: Date;

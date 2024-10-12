@@ -29,6 +29,7 @@ export default function MapPage() {
           onClick={() => {
             onOpen("recommendation");
             onSetData("places", mapInfo.markers);
+            onSetData("currentPosition", mapInfo.currentPosition);
           }}
           className="whitespace-nowrap rounded-md bg-blue-5 px-4 py-8 text-white hover:bg-blue-6 md:px-12"
         >

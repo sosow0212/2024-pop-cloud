@@ -6,12 +6,12 @@ import { DrawerDialogContainer } from "./modal-container";
 
 type RecommendType = "score" | "shortest";
 
-type ShowType = {
+type ShowCoordinateType = {
   searchTarget: "EXHIBITION" | "POPUPS";
   id: string;
   title: string;
-  lat: number;
-  lng: number;
+  latitude: number;
+  longitude: number;
   startDate: Date;
   endDate: Date;
 };
@@ -19,22 +19,31 @@ type ShowType = {
 type ResultType = {
   recommendType: RecommendType;
   myCoordinate: {
-    lat: number;
-    lng: number;
+    latitude: number;
+    longitude: number;
   };
-  show: ShowType[];
+  showsCoordinates: ShowCoordinateType[];
 };
 
 function RecommendationForm() {
   const { onClose, data } = useModalStore();
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const [pending, setPending] = useState(false);
   const [result, setResult] = useState<ResultType>({
     recommendType: "score",
     myCoordinate: {
-      lat: 0,
-      lng: 0,
+      latitude: data.currentPosition!.lat,
+      longitude: data.currentPosition!.lng,
     },
-    show: [],
+    showsCoordinates: data.places!.map((place) => ({
+      searchTarget: place.category!,
+      id: place.id,
+      title: place.title,
+      latitude: place.position.lat,
+      longitude: place.position.lng,
+      startDate: place.startDate!,
+      endDate: place.endDate!,
+    })),
   });
   const handleRecommendChange = (
     isCheck: boolean,
@@ -47,16 +56,64 @@ function RecommendationForm() {
       }));
   };
 
-  const handleClick = () => {
-    window.sessionStorage.setItem(
-      "recommend",
-      JSON.stringify(JSON.stringify(result)),
-    );
-    onClose();
+  const handlePlaceClick = (isInclude: boolean, id: string) => {
+    if (!isInclude) {
+      setResult((p) => ({
+        ...p,
+        showCoordinate: p.showsCoordinates.filter((show) => show.id !== id),
+      }));
+    } else {
+      const place = data.places?.find((p) => p.id === id);
+      setResult((p) => ({
+        ...p,
+        showCoordinate: [
+          ...p.showsCoordinates,
+          {
+            searchTarget: place!.category,
+            id: place!.id,
+            title: place!.title,
+            latitude: place!.position.lat,
+            longitude: place!.position.lng,
+            startDate: place!.startDate!,
+            endDate: place!.endDate!,
+          },
+        ],
+      }));
+    }
   };
 
+  const handleSubmit = async () => {
+    setPending(true);
+    try {
+      if (result.showsCoordinates.length === 0)
+        throw new Error("추천 경로를 위해 컨텐츠를 선택해주세요.");
+      const res = await fetch("/api/maps/recommendation-route", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(result),
+      });
+      if (!res.ok) throw new Error("서버 에러");
+      const responseData = await res.json();
+      window.sessionStorage.setItem(
+        "recommendation",
+        JSON.stringify(responseData),
+      );
+      onClose();
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    } finally {
+      setPending(false);
+    }
+  };
+
+  if (pending) return <div>추천 경로 생성 중...</div>;
+
   return (
-    <section className="space-y-20">
+    <section className="min-w-340 space-y-20">
       <header>
         <h3 className="text-20 font-extrabold">경로를 추천해드려요.</h3>
         <p className="text-14 text-slate-500">
@@ -69,13 +126,13 @@ function RecommendationForm() {
             className="recommend peer"
             type="radio"
             name="recommend"
-            id="a"
+            id="popular"
             defaultChecked
             onChange={(e) => handleRecommendChange(e.target.checked, "score")}
           />
           <label
+            htmlFor="popular"
             className="cursor-pointer rounded-md border px-10 py-5 peer-checked:border-blue-6 peer-checked:bg-blue-4 peer-checked:text-white"
-            htmlFor="a"
           >
             인기 순
           </label>
@@ -85,28 +142,51 @@ function RecommendationForm() {
             className="recommend peer"
             type="radio"
             name="recommend"
-            id="b"
+            id="short"
             onChange={(e) =>
               handleRecommendChange(e.target.checked, "shortest")
             }
           />
           <label
+            htmlFor="short"
             className="cursor-pointer rounded-md border px-10 py-5 peer-checked:border-blue-6 peer-checked:bg-blue-4 peer-checked:text-white"
-            htmlFor="b"
           >
             거리 순
           </label>
         </div>
       </div>
-      {data.places?.map((place) => <div key={place.id}>{place.location}</div>)}
+      <div className="flex flex-wrap gap-10">
+        {data.places?.map((place) => (
+          <div key={place.id}>
+            <div>
+              <input
+                type="checkbox"
+                className="recommend peer"
+                id={place.id}
+                defaultChecked
+                onChange={(e) => handlePlaceClick(e.target.checked, place.id)}
+              />
+              <label
+                className="cursor-pointer rounded-md border-2 px-12 py-5 hover:bg-slate-300 peer-checked:border-blue-7 peer-checked:bg-blue-7 peer-checked:text-white"
+                htmlFor={place.id}
+              >
+                {place.title}
+              </label>
+            </div>
+          </div>
+        ))}
+      </div>
       <div className="flex items-center gap-x-20" />
-      <button
-        className="rounded-md border px-10 py-5"
-        type="button"
-        onClick={handleClick}
-      >
-        추천 받기
-      </button>
+      <footer>
+        <button
+          className={`rounded-md border px-10 py-5 ${result.showsCoordinates.length === 0 && "cursor-not-allowed"}`}
+          type="button"
+          onClick={handleSubmit}
+        >
+          추천 받기
+        </button>
+        <div className="text-red-500">{errorMessage}</div>
+      </footer>
     </section>
   );
 }

@@ -5,6 +5,10 @@ export type ModalType = "login" | "alert" | "recommendation";
 type ModalDataType = {
   isCheck?: boolean;
   places?: MarkerType[];
+  currentPosition?: {
+    lat: number;
+    lng: number;
+  };
 };
 
 interface ModalStore {

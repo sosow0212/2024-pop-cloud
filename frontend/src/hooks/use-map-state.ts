@@ -8,7 +8,34 @@ const SEONGSU = {
 const initState: MapInfoType = {
   currentPosition: SEONGSU,
   center: SEONGSU,
-  markers: [],
+  markers: [
+    {
+      id: "asdasd",
+      location: "asdasd",
+      position: {
+        lat: SEONGSU.lat + 1,
+        lng: SEONGSU.lng + 1,
+      },
+      title: "title1",
+      type: "place",
+      category: "POPUPS",
+      endDate: new Date(),
+      startDate: new Date(),
+    },
+    {
+      id: "asdasdeee",
+      location: "asdasd",
+      position: {
+        lat: SEONGSU.lat + 2,
+        lng: SEONGSU.lng + 2,
+      },
+      title: "title1eee",
+      type: "place",
+      category: "POPUPS",
+      endDate: new Date(),
+      startDate: new Date(),
+    },
+  ],
   mapLevel: 4,
 };
 
