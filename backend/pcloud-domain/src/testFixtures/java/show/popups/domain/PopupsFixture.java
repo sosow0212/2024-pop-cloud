@@ -151,4 +151,38 @@ public class PopupsFixture {
                 .publicTag(PublicTag.PET)
                 .build();
     }
+
+    public static Popups 용마산_팝업_스토어_생성_펫샵_작성자아이디(final Long ownerId) {
+        return Popups.builder()
+                .ownerId(ownerId)
+                .showDetails(
+                        ShowDetails.builder()
+                                .title("귀여운 애완동물 팝업스토어")
+                                .description("모든 연령이 참여 가능한 팝업스토어입니다.")
+                                .build()
+                ).showSchedule(
+                        ShowSchedule.builder()
+                                .startDate(LocalDateTime.of(2024, 1, 1, 0, 0))
+                                .endDate(LocalDateTime.of(2024, 12, 31, 0, 0))
+                                .openTimes("평일 12시 ~ 18시")
+                                .build()
+                ).position(
+                        Position.builder()
+                                .latitude(Latitude.from("37.573647"))
+                                .longitude(Longitude.from("127.086727"))
+                                .location("용마산")
+                                .build()
+                ).showRules(
+                        ShowRules.builder()
+                                .isParkingAvailable(true)
+                                .isFoodAllowed(true)
+                                .isPetAllowed(true)
+                                .isKidsZone(true)
+                                .isWifiAvailable(true)
+                                .fee(Price.from(10000))
+                                .build()
+                ).statistic(Statistic.createDefault())
+                .publicTag(PublicTag.PET)
+                .build();
+    }
 }
