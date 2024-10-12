@@ -23,7 +23,7 @@ export default function Map({ mapInfo, className, handleChange }: MapProps) {
       className={className}
       handleChange={handleChange}
     >
-      <MarkerClusterer averageCenter minLevel={10}>
+      <MarkerClusterer averageCenter minLevel={8}>
         {mapInfo.markers?.map((marker) => (
           <MapMarker
             key={`${marker.position.lat}=${marker.position.lng}`}
