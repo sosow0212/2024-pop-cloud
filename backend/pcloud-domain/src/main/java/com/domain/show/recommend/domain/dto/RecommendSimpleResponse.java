@@ -1,6 +1,6 @@
 package com.domain.show.recommend.domain.dto;
 
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import com.domain.show.recommend.domain.Recommends;
 
 import java.time.LocalDateTime;

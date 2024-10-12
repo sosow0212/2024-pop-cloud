@@ -3,7 +3,7 @@ package com.api.show.recommend.presentation.resolver;
 import com.api.show.popups.application.request.DateSearchRequest;
 import com.api.show.recommend.presentation.annotation.PopularShowRequest;
 import com.api.show.recommend.presentation.resolver.util.PopularShowRequestHelper;
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

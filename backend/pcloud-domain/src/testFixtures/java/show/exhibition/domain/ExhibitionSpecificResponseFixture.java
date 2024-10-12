@@ -1,10 +1,11 @@
 package show.exhibition.domain;
 
+import com.domain.common.coordinates.Latitude;
+import com.domain.common.coordinates.Longitude;
 import com.domain.show.common.PublicTag;
 import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
-import com.domain.show.common.Latitude;
-import com.domain.show.common.Longitude;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
