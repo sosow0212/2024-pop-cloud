@@ -10,26 +10,39 @@ const initState: MapInfoType = {
   center: SEONGSU,
   markers: [
     {
-      id: "asdasd",
+      id: "장소 1",
       location: "asdasd",
       position: {
-        lat: SEONGSU.lat + 1,
-        lng: SEONGSU.lng + 1,
+        lat: 37.5548837 + 0.001,
+        lng: 126.911597 + 0.001,
       },
-      title: "title1",
+      title: "장소 1",
       type: "place",
       category: "POPUPS",
       endDate: new Date(),
       startDate: new Date(),
     },
     {
-      id: "asdasdeee",
+      id: "장소 2",
       location: "asdasd",
       position: {
-        lat: SEONGSU.lat + 2,
-        lng: SEONGSU.lng + 2,
+        lat: 37.5548837 - 0.001,
+        lng: 126.911597 - 0.001,
       },
-      title: "title1eee",
+      title: "장소 2",
+      type: "place",
+      category: "POPUPS",
+      endDate: new Date(),
+      startDate: new Date(),
+    },
+    {
+      id: "장소 3",
+      location: "asdasd",
+      position: {
+        lat: 37.5548837 - 0.001,
+        lng: 126.911597 + 0.001,
+      },
+      title: "장소 3",
       type: "place",
       category: "POPUPS",
       endDate: new Date(),
@@ -102,6 +115,7 @@ const useMapState = () => {
   useEffect(() => {
     const getSuccessGeo = (p: GeolocationPosition) => {
       const { latitude: lat, longitude: lng } = p.coords;
+
       setMapInfo((previousMapInfo) => ({
         ...previousMapInfo,
         center: {

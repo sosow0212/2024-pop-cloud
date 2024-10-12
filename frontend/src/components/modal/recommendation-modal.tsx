@@ -26,7 +26,7 @@ type ResultType = {
 };
 
 function RecommendationForm() {
-  const { onClose, data, onSetData } = useModalStore();
+  const { onClose, data } = useModalStore();
   const [errorMessage, setErrorMessage] = useState("");
   const [pending, setPending] = useState(false);
   const [result, setResult] = useState<ResultType>({
@@ -56,28 +56,29 @@ function RecommendationForm() {
       }));
   };
 
-  const handlePlaceClick = (isInclude: boolean, id: string) => {
-    if (!isInclude) {
+  const handlePlaceClick = (isChecked: boolean, id: string) => {
+    if (isChecked) {
+      const place = data.places?.find((p) => p.id === id);
+      if (!place) return;
+      const filteredPlace: ShowCoordinateType = {
+        searchTarget: place.category!,
+        id: place!.id,
+        title: place!.title,
+        latitude: place!.position.lat,
+        longitude: place!.position.lng,
+        startDate: place!.startDate!,
+        endDate: place!.endDate!,
+      };
+
       setResult((p) => ({
         ...p,
-        showCoordinate: p.showsCoordinates.filter((show) => show.id !== id),
+
+        showsCoordinates: [...p.showsCoordinates, filteredPlace],
       }));
     } else {
-      const place = data.places?.find((p) => p.id === id);
       setResult((p) => ({
         ...p,
-        showCoordinate: [
-          ...p.showsCoordinates,
-          {
-            searchTarget: place!.category,
-            id: place!.id,
-            title: place!.title,
-            latitude: place!.position.lat,
-            longitude: place!.position.lng,
-            startDate: place!.startDate!,
-            endDate: place!.endDate!,
-          },
-        ],
+        showsCoordinates: p.showsCoordinates.filter((show) => show.id !== id),
       }));
     }
   };
@@ -100,13 +101,7 @@ function RecommendationForm() {
       //   "recommendation",
       //   JSON.stringify(responseData),
       // );
-      window.sessionStorage.setItem(
-        "recommendation",
-        JSON.stringify({
-          title: result.showsCoordinates.map((s) => s.title),
-        }),
-      );
-      onSetData("isGetRecommendation", true);
+      data.onSuccess!(result.showsCoordinates.map((r) => r.title));
       onClose();
     } catch (error) {
       if (error instanceof Error) {

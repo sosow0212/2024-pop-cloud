@@ -2,7 +2,7 @@
 
 // import EventCard from "@/components/common/list-card";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Map from "@/components/map";
 import { useMapSearch, useMapState } from "@/hooks";
@@ -22,28 +22,23 @@ import MapSearch from "./_components/map-search";
 export default function MapPage() {
   const { mapInfo, detectMoving, changeCenterPosition } = useMapState();
   const [inputValue, setInputValue, results] = useMapSearch();
-  const { onOpen, onSetData, data } = useModalStore();
+  const { onOpen, onSetData } = useModalStore();
   const [recommendationRoutine, setRecommendationRoutine] = useState<string[]>(
     [],
   );
-  useEffect(() => {
-    if (data.isGetRecommendation) {
-      const res = JSON.parse(
-        window.sessionStorage.getItem("recommendation")!,
-      ).title;
-      setRecommendationRoutine(res);
-    }
-  }, [data.isGetRecommendation]);
+  const handleClick = () => {
+    onOpen("recommendation");
+    onSetData("places", mapInfo.markers);
+    onSetData("currentPosition", mapInfo.currentPosition);
+    onSetData("onSuccess", setRecommendationRoutine);
+  };
+
   return (
     <section className="mapPage-px space-y-10">
       <div className="flex items-center justify-between ">
         <button
           type="button"
-          onClick={() => {
-            onOpen("recommendation");
-            onSetData("places", mapInfo.markers);
-            onSetData("currentPosition", mapInfo.currentPosition);
-          }}
+          onClick={handleClick}
           className="mr-10 whitespace-nowrap rounded-md bg-blue-5 px-4 py-8 text-white hover:bg-blue-6 md:px-12"
         >
           경로 추천 받기
@@ -57,12 +52,28 @@ export default function MapPage() {
       </div>
       <Map mapInfo={mapInfo} handleChange={detectMoving} className="w-full" />
 
-      <article className="grid grid-cols-1 gap-10 md:grid-cols-2">
-        {recommendationRoutine.map((place) => (
-          <div key={place}>{place}</div>
-        ))}
-      </article>
-      <article className="grid grid-cols-1 gap-10 md:grid-cols-2">
+      {recommendationRoutine.length > 0 && (
+        <article>
+          <h5>추천 경로</h5>
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+            {recommendationRoutine.map((place) => (
+              <div className="h-100 bg-slate-300" key={place}>
+                {place}
+              </div>
+            ))}
+          </div>
+        </article>
+      )}
+
+      <article>
+        <h5>장소 정보</h5>
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+          {mapInfo.markers.map((marker) => (
+            <div className="h-100 bg-slate-400" key={marker.id}>
+              {marker.title}
+            </div>
+          ))}
+        </div>
         {/* {mapInfo.markers.map((marker)=>(
           <EventCard key={marker.info.id} {...marker.info}    />
         ))} */}

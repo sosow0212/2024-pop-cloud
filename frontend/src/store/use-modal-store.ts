@@ -8,7 +8,7 @@ type ModalDataType = {
     lat: number;
     lng: number;
   };
-  isGetRecommendation: boolean;
+  onSuccess?: (value: string[]) => void;
 };
 
 interface ModalStore {
@@ -44,9 +44,7 @@ interface ModalStore {
 const useModalStore = create<ModalStore>((set) => ({
   type: null,
   isOpen: false,
-  data: {
-    isGetRecommendation: false,
-  },
+  data: {},
   onOpen: (type) =>
     set({
       isOpen: true,
@@ -66,9 +64,7 @@ const useModalStore = create<ModalStore>((set) => ({
     })),
   onClearData: () =>
     set({
-      data: {
-        isGetRecommendation: false,
-      },
+      data: {},
     }),
 }));
 
