@@ -57,6 +57,10 @@ const useMapState = () => {
         lat,
         lng,
       },
+      currentPosition: {
+        lat,
+        lng,
+      },
     }));
   };
 

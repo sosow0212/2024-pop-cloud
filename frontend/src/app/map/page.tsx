@@ -2,6 +2,8 @@
 
 // import EventCard from "@/components/common/list-card";
 
+import { useEffect, useState } from "react";
+
 import Map from "@/components/map";
 import { useMapSearch, useMapState } from "@/hooks";
 import { useModalStore } from "@/store";
@@ -20,7 +22,18 @@ import MapSearch from "./_components/map-search";
 export default function MapPage() {
   const { mapInfo, detectMoving, changeCenterPosition } = useMapState();
   const [inputValue, setInputValue, results] = useMapSearch();
-  const { onOpen, onSetData } = useModalStore();
+  const { onOpen, onSetData, data } = useModalStore();
+  const [recommendationRoutine, setRecommendationRoutine] = useState<string[]>(
+    [],
+  );
+  useEffect(() => {
+    if (data.isGetRecommendation) {
+      const res = JSON.parse(
+        window.sessionStorage.getItem("recommendation")!,
+      ).title;
+      setRecommendationRoutine(res);
+    }
+  }, [data.isGetRecommendation]);
   return (
     <section className="mapPage-px space-y-10">
       <div className="flex items-center justify-between ">
@@ -31,7 +44,7 @@ export default function MapPage() {
             onSetData("places", mapInfo.markers);
             onSetData("currentPosition", mapInfo.currentPosition);
           }}
-          className="whitespace-nowrap rounded-md bg-blue-5 px-4 py-8 text-white hover:bg-blue-6 md:px-12"
+          className="mr-10 whitespace-nowrap rounded-md bg-blue-5 px-4 py-8 text-white hover:bg-blue-6 md:px-12"
         >
           경로 추천 받기
         </button>
@@ -44,6 +57,11 @@ export default function MapPage() {
       </div>
       <Map mapInfo={mapInfo} handleChange={detectMoving} className="w-full" />
 
+      <article className="grid grid-cols-1 gap-10 md:grid-cols-2">
+        {recommendationRoutine.map((place) => (
+          <div key={place}>{place}</div>
+        ))}
+      </article>
       <article className="grid grid-cols-1 gap-10 md:grid-cols-2">
         {/* {mapInfo.markers.map((marker)=>(
           <EventCard key={marker.info.id} {...marker.info}    />

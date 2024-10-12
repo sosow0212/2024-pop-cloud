@@ -3,12 +3,12 @@ import { create } from "zustand";
 export type ModalType = "login" | "alert" | "recommendation";
 
 type ModalDataType = {
-  isCheck?: boolean;
   places?: MarkerType[];
   currentPosition?: {
     lat: number;
     lng: number;
   };
+  isGetRecommendation: boolean;
 };
 
 interface ModalStore {
@@ -44,7 +44,9 @@ interface ModalStore {
 const useModalStore = create<ModalStore>((set) => ({
   type: null,
   isOpen: false,
-  data: {},
+  data: {
+    isGetRecommendation: false,
+  },
   onOpen: (type) =>
     set({
       isOpen: true,
@@ -64,7 +66,9 @@ const useModalStore = create<ModalStore>((set) => ({
     })),
   onClearData: () =>
     set({
-      data: {},
+      data: {
+        isGetRecommendation: false,
+      },
     }),
 }));
 

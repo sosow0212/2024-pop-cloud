@@ -26,7 +26,7 @@ type ResultType = {
 };
 
 function RecommendationForm() {
-  const { onClose, data } = useModalStore();
+  const { onClose, data, onSetData } = useModalStore();
   const [errorMessage, setErrorMessage] = useState("");
   const [pending, setPending] = useState(false);
   const [result, setResult] = useState<ResultType>({
@@ -87,19 +87,26 @@ function RecommendationForm() {
     try {
       if (result.showsCoordinates.length === 0)
         throw new Error("추천 경로를 위해 컨텐츠를 선택해주세요.");
-      const res = await fetch("/api/maps/recommendation-route", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(result),
-      });
-      if (!res.ok) throw new Error("서버 에러");
-      const responseData = await res.json();
+      // const res = await fetch("/api/maps/recommendation-route", {
+      //   method: "GET",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(result),
+      // });
+      // if (!res.ok) throw new Error("서버 에러");
+      // const responseData = await res.json();
+      // window.sessionStorage.setItem(
+      //   "recommendation",
+      //   JSON.stringify(responseData),
+      // );
       window.sessionStorage.setItem(
         "recommendation",
-        JSON.stringify(responseData),
+        JSON.stringify({
+          title: result.showsCoordinates.map((s) => s.title),
+        }),
       );
+      onSetData("isGetRecommendation", true);
       onClose();
     } catch (error) {
       if (error instanceof Error) {
