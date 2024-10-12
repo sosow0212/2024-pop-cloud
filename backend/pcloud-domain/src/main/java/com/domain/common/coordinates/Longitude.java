@@ -33,7 +33,15 @@ public class Longitude {
         return new Longitude(new BigDecimal(value));
     }
 
-    public static Longitude from(final BigDecimal value) {
+    public static Longitude from(BigDecimal value) {
+        if (value.compareTo(KOREA_MIN_LONGITUDE) < 0) {
+            value = KOREA_MIN_LONGITUDE;
+        }
+
+        if (value.compareTo(KOREA_MAX_LONGITUDE) > 0) {
+            value = KOREA_MAX_LONGITUDE;
+        }
+
         return new Longitude(value);
     }
 
@@ -41,5 +49,9 @@ public class Longitude {
         if (value.compareTo(KOREA_MIN_LONGITUDE) < 0 || value.compareTo(KOREA_MAX_LONGITUDE) > 0) {
             throw new PopupsException(PopupsExceptionType.INVALID_LONGITUDE);
         }
+    }
+
+    public void subtract(final BigDecimal value) {
+        this.value = this.value.subtract(value);
     }
 }

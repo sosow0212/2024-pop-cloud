@@ -36,4 +36,16 @@ public class Position {
                 .longitude(Longitude.from(longitude))
                 .build();
     }
+
+    public static Position of(
+            final String location,
+            final Latitude latitude,
+            final Longitude longitude
+    ) {
+        return Position.builder()
+                .location(location)
+                .latitude(latitude)
+                .longitude(longitude)
+                .build();
+    }
 }

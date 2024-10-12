@@ -33,7 +33,15 @@ public class Latitude {
         return new Latitude(new BigDecimal(value));
     }
 
-    public static Latitude from(final BigDecimal value) {
+    public static Latitude from(BigDecimal value) {
+        if (value.compareTo(KOREA_MIN_LATITUDE) < 0) {
+            value = KOREA_MIN_LATITUDE;
+        }
+
+        if (value.compareTo(KOREA_MAX_LATITUDE) > 0) {
+            value = KOREA_MAX_LATITUDE;
+        }
+
         return new Latitude(value);
     }
 
