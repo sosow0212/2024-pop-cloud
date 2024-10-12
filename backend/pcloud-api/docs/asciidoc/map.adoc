@@ -1,0 +1,30 @@
+= Map API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+
+== 좌표 주변 쇼케이스를 탐색한다 (GET /api/maps/recommendation-location?latitude=:&longitude=:&latitudeDelta=:&longitudeDelta:)
+
+=== Request
+
+include::{snippets}/map-controller-web-mvc-test/find_around_shows/query-parameters.adoc[]
+include::{snippets}/map-controller-web-mvc-test/find_around_shows/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/map-controller-web-mvc-test/find_around_shows/response-fields.adoc[]
+include::{snippets}/map-controller-web-mvc-test/find_around_shows/http-response.adoc[]
+
+== 쇼 경로를 추천한다 (GET /maps/recommendation-route)
+
+=== Request
+
+include::{snippets}/map-controller-web-mvc-test/find_recommend_shows_routes/request-fields.adoc[]
+include::{snippets}/map-controller-web-mvc-test/find_recommend_shows_routes/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/map-controller-web-mvc-test/find_recommend_shows_routes/response-fields.adoc[]
+include::{snippets}/map-controller-web-mvc-test/find_recommend_shows_routes/http-response.adoc[]
