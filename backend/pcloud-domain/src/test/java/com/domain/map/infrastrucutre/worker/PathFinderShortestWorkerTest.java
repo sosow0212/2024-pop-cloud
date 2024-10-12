@@ -19,9 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
-class ShortestWorkerTest {
+class PathFinderShortestWorkerTest {
 
-    private final ShortestWorker shortestWorker = new ShortestWorker();
+    private final PathFinderShortestWorker pathFinderShortestWorker = new PathFinderShortestWorker();
 
     @Test
     void shortest_패스를_지원한다() {
@@ -29,7 +29,7 @@ class ShortestWorkerTest {
         RecommendType expect = RecommendType.SHORTEST;
 
         // when
-        RecommendType recommendType = shortestWorker.getRecommendType();
+        RecommendType recommendType = pathFinderShortestWorker.getRecommendType();
 
         // then
         assertThat(recommendType).isEqualTo(expect);
@@ -47,7 +47,7 @@ class ShortestWorkerTest {
         ShowIdentifiers showIdentifiers = ShowIdentifiers.from(identifiers);
 
         // when
-        shortestWorker.work(myCoordinate, showIdentifiers);
+        pathFinderShortestWorker.work(myCoordinate, showIdentifiers);
 
         // then
         assertThat(showIdentifiers.getShowIdentifiers())

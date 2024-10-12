@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 
 @Component
-public class PopularWorker implements PathFinderWorker {
+public class PathFinderPopularWorker implements PathFinderWorker {
 
     private static final double VIEW_COUNT_POPULAR_SCORE = 0.2;
 

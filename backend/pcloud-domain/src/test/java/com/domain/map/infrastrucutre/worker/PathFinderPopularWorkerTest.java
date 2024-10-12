@@ -19,9 +19,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SuppressWarnings("NonAsciiCharacters")
-class PopularWorkerTest {
+class PathFinderPopularWorkerTest {
 
-    private final PopularWorker popularWorker = new PopularWorker();
+    private final PathFinderPopularWorker pathFinderPopularWorker = new PathFinderPopularWorker();
 
     @Test
     void 자신의_추천_상태를_반환한다() {
@@ -29,7 +29,7 @@ class PopularWorkerTest {
         RecommendType expected = RecommendType.POPULAR;
 
         // when
-        RecommendType result = popularWorker.getRecommendType();
+        RecommendType result = pathFinderPopularWorker.getRecommendType();
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -46,7 +46,7 @@ class PopularWorkerTest {
         ShowIdentifiers showIdentifiers = ShowIdentifiers.from(identifiers);
 
         // when
-        popularWorker.work(myCoordinate, showIdentifiers);
+        pathFinderPopularWorker.work(myCoordinate, showIdentifiers);
 
         // then
         assertThat(showIdentifiers.getShowIdentifiers())

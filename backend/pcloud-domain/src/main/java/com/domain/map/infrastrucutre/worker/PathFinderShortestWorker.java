@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class ShortestWorker implements PathFinderWorker {
+public class PathFinderShortestWorker implements PathFinderWorker {
 
     private static final int SQUARE_NUMBER_CONSTANT = 2;
 
