@@ -32,7 +32,6 @@ export default function MapContainer({
         minLevel={13}
       >
         <MapMarker
-          title="현재 위치"
           type="current"
           lat={mapInfo.currentPosition.lat}
           lng={mapInfo.currentPosition.lng}

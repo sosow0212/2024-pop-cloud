@@ -18,7 +18,7 @@ const MarkerImageSrc = {
 
 interface MapMarkerProps {
   type: "current" | "popups" | "exhibition";
-  title: string;
+  title?: string;
   lat: number;
   lng: number;
   id: number;
@@ -41,8 +41,8 @@ export default function MapMarker({
         image={{
           src: MarkerImageSrc[type],
           size: {
-            width: 24,
-            height: 35,
+            width: type === "current" ? 20 : 24,
+            height: type === "current" ? 20 : 35,
           },
           options: {
             offset: {
@@ -52,26 +52,28 @@ export default function MapMarker({
           },
         }}
       />
-      <CustomOverlayMap
-        position={{
-          lat,
-          lng,
-        }}
-        yAnchor={1}
-      >
-        <div
-          className={cn(
-            "text-xs max-w-160 -translate-y-40 translate-x-12 truncate rounded-md  px-8 py-4 text-white ",
-            type === "current" && "bg-black",
-            type === "exhibition" && "bg-yellow-500",
-            type === "popups" && "bg-blue-500",
-          )}
+      {title && (
+        <CustomOverlayMap
+          position={{
+            lat,
+            lng,
+          }}
+          yAnchor={1}
         >
-          <Link href={`/${type}/${id}`}>
-            <span>{title}</span>
-          </Link>
-        </div>
-      </CustomOverlayMap>
+          <div
+            className={cn(
+              "text-xs max-w-160 -translate-y-40 translate-x-12 truncate rounded-md  px-8 py-4 text-white ",
+              type === "current" && "bg-black",
+              type === "exhibition" && "bg-yellow-500",
+              type === "popups" && "bg-blue-500",
+            )}
+          >
+            <Link href={`/${type}/${id}`}>
+              <span>{title}</span>
+            </Link>
+          </div>
+        </CustomOverlayMap>
+      )}
     </>
   );
 }
