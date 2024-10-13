@@ -1,3 +1,4 @@
+import instance from "@/api/custom-fetch";
 import CarouselUI from "@/components/common/carousel";
 
 import DetailsHeader from "./_components/details-header";
@@ -29,11 +30,8 @@ export type Popup = {
 };
 
 async function getPopupDetails(popupId: number): Promise<Popup> {
-  const url = new URL(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/popups/${popupId}`,
-  );
-  const res = await fetch(url);
-  return res.json();
+  const { data } = await instance.get<Popup>(`/api/popups/${popupId}`);
+  return data;
 }
 
 export default async function PopupDetails({

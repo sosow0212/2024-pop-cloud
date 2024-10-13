@@ -4,15 +4,7 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import {
-  // FiChevronLeft,
-  // FiChevronRight,
-  FiHeart,
-  FiHome,
-  FiMapPin,
-  FiSearch,
-  FiUser,
-} from "react-icons/fi";
+import { FiHeart, FiHome, FiMapPin, FiSearch, FiUser } from "react-icons/fi";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 
 import FilterSidebar from "@/app/shows/_components/filter-sidebar";
@@ -65,7 +57,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
         {loggedIn ? (
           <NavIconButton
             href={profileUrl}
-            name={loggedIn ? "프로필" : "로그인"}
+            name="프로필"
             icon={FiUser}
             isActive={pathname === profileUrl}
             isSearchPage={isSearchPage}
