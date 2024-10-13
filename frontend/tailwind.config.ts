@@ -104,6 +104,19 @@ const config: Config = {
       "12-500": ["12px", { lineHeight: "14px", fontWeight: "500" }],
       "12-400": ["12px", { lineHeight: "14px", fontWeight: "400" }],
     },
+    keyframes: {
+      fadeIn: {
+        from: { opacity: "0", transform: "translate3d(-50%, -60px, 0)" },
+        to: { opacity: "1", transform: "translate3d(-50%, 0, 0)" },
+      },
+      spin: {
+        to: { transform: "rotate(360deg)" },
+      },
+    },
+    animation: {
+      fadeIn: "fadeIn 0.5s",
+      spin: "spin 1s linear infinite",
+    },
   },
   plugins: [],
 };
