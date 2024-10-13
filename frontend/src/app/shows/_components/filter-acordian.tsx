@@ -9,7 +9,11 @@ import {
 
 import { FilterAccordionProps } from "../types/index";
 
-function FilterAccordion({ title, icon, children }: FilterAccordionProps) {
+export default function FilterAccordion({
+  title,
+  icon,
+  children,
+}: FilterAccordionProps) {
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value={title} className="border-b border-gray-200">
@@ -24,5 +28,3 @@ function FilterAccordion({ title, icon, children }: FilterAccordionProps) {
     </Accordion>
   );
 }
-
-export default FilterAccordion;

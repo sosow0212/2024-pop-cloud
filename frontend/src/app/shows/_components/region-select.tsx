@@ -24,7 +24,10 @@ interface RegionSelectorProps {
   onChange: (region: { city: string; country: string[] }) => void;
 }
 
-function RegionSelector({ selectedRegion, onChange }: RegionSelectorProps) {
+export default function RegionSelector({
+  selectedRegion,
+  onChange,
+}: RegionSelectorProps) {
   const [selectedCity, setSelectedCity] = useState<City | null>(
     (selectedRegion.city as City) || null,
   );
@@ -85,5 +88,3 @@ function RegionSelector({ selectedRegion, onChange }: RegionSelectorProps) {
     </div>
   );
 }
-
-export default RegionSelector;

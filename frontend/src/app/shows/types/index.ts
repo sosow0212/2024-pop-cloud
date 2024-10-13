@@ -22,7 +22,7 @@ export interface ShowData {
   endDate: string;
   images: string[];
   publicTag: string;
-  showType: string;
+  showType: "POPUPS" | "EXHIBITION";
   visitedCount: number;
   likedCount: number;
 }

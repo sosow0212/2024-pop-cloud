@@ -8,7 +8,11 @@ interface CheckboxListProps {
   onChange: (selectedItems: string[]) => void;
 }
 
-function CheckboxList({ items, selectedItems, onChange }: CheckboxListProps) {
+export default function CheckboxList({
+  items,
+  selectedItems,
+  onChange,
+}: CheckboxListProps) {
   const handleItemChange = (item: string) => {
     const updatedItems = selectedItems.includes(item)
       ? selectedItems.filter((i) => i !== item)
@@ -34,5 +38,3 @@ function CheckboxList({ items, selectedItems, onChange }: CheckboxListProps) {
     </div>
   );
 }
-
-export default CheckboxList;

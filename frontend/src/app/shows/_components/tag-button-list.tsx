@@ -8,7 +8,11 @@ interface TagButtonListProps {
   onChange: (selectedItems: string[]) => void;
 }
 
-function TagButtonList({ items, selectedItems, onChange }: TagButtonListProps) {
+export default function TagButtonList({
+  items,
+  selectedItems,
+  onChange,
+}: TagButtonListProps) {
   const handleItemChange = (item: string) => {
     const updatedItems = selectedItems.includes(item)
       ? selectedItems.filter((i) => i !== item)
@@ -36,5 +40,3 @@ function TagButtonList({ items, selectedItems, onChange }: TagButtonListProps) {
     </div>
   );
 }
-
-export default TagButtonList;
