@@ -45,7 +45,7 @@ export default function Toast() {
 
   return (
     <div
-      className={`fixed left-1/2 top-45 z-50 w-max min-w-fit -translate-x-1/2 animate-fadeIn rounded-lg border border-solid bg-white shadow-md shadow-gray-300 md:left-[calc(50%+35px)] lg:left-[calc(50%+123px)] ${pointColor}`}
+      className={`animate-fadeIn fixed left-1/2 top-45 z-50 w-max min-w-fit -translate-x-1/2 rounded-lg border border-solid bg-white shadow-md shadow-gray-300 md:left-[calc(50%+35px)] lg:left-[calc(50%+123px)] ${pointColor}`}
     >
       <div className="flex items-center gap-10 px-10 py-6">
         <div className="p-10">{icon}</div>
