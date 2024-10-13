@@ -99,7 +99,7 @@ export default function DetailsTabs({ data }: Popup) {
               position={{ lat: data.latitude, lng: data.longitude }}
               className="order-2 size-full h-300 md:order-1"
             />
-            <div className="order-1 mb-26 ml-20 md:order-2">
+            <div className="order-1 mb-26 md:order-2 md:ml-20">
               {DETAIL_INFO.map(({ title, info }) => (
                 <dl key={title} className="mb-20 last:mb-0 md:mb-34">
                   <dt className="mb-8 text-16-600 text-gray-700">{title}</dt>
