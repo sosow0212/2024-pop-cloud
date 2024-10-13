@@ -1,8 +1,9 @@
 import instance from "@/api/custom-fetch";
 import CarouselUI from "@/components/common/carousel";
-import DetailsHeader from "@/components/details-page/details-header";
-import DetailsTabs from "@/components/details-page/details-tabs";
-import DetailsTags from "@/components/details-page/details-tags";
+
+import DetailsHeader from "./_components/details-header";
+import DetailsTabs from "./_components/details-tabs";
+import DetailsTags from "./_components/details-tags";
 
 export type Popup = {
   id: number;
@@ -47,6 +48,7 @@ export default async function PopupDetails({
       <hr className="mb-40 h-1 w-full bg-gray-200" />
       <CarouselUI
         data={data.images}
+        autoPlay={false}
         className="h-300 w-full md:h-460 md:w-700 lg:h-500"
       />
       <DetailsTabs data={data} />
