@@ -1,12 +1,12 @@
 package com.domain.show.exhibition.domain;
 
 import com.common.exception.AuthException;
-import com.domain.show.common.ShowRules;
+import com.domain.common.coordinates.Position;
 import com.domain.global.domain.BaseEntity;
 import com.domain.show.common.PublicTag;
 import com.domain.show.common.ShowDetails;
+import com.domain.show.common.ShowRules;
 import com.domain.show.common.ShowSchedule;
-import com.domain.show.common.Position;
 import com.domain.show.common.Statistic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -17,13 +17,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Version;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 import static com.common.exception.AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION;
 

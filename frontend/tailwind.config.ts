@@ -5,7 +5,7 @@ const pxToRem = require("tailwindcss-preset-px-to-rem");
 
 const config: Config = {
   presets: [pxToRem],
-  darkMode: "selector",
+  darkMode: ["selector", "class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -30,6 +30,28 @@ const config: Config = {
         "blue-7": "#1c7ed6",
         "blue-8": "#1971c2",
         "blue-9": "#1864ab",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
     fontSize: {
@@ -83,6 +105,6 @@ const config: Config = {
       "12-400": ["12px", { lineHeight: "14px", fontWeight: "400" }],
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [],
 };
 export default config;

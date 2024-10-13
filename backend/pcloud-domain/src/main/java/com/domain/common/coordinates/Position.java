@@ -1,4 +1,4 @@
-package com.domain.show.common;
+package com.domain.common.coordinates;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -34,6 +34,18 @@ public class Position {
                 .location(location)
                 .latitude(Latitude.from(latitude))
                 .longitude(Longitude.from(longitude))
+                .build();
+    }
+
+    public static Position of(
+            final String location,
+            final Latitude latitude,
+            final Longitude longitude
+    ) {
+        return Position.builder()
+                .location(location)
+                .latitude(latitude)
+                .longitude(longitude)
                 .build();
     }
 }

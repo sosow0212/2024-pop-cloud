@@ -1,8 +1,8 @@
 package com.domain.show.popups.domain;
 
 import com.common.exception.AuthException;
+import com.domain.common.coordinates.Position;
 import com.domain.global.domain.BaseEntity;
-import com.domain.show.common.Position;
 import com.domain.show.common.PublicTag;
 import com.domain.show.common.ShowDetails;
 import com.domain.show.common.ShowRules;
