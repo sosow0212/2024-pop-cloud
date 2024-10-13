@@ -1,7 +1,7 @@
 package com.domain.show.show.infrastructure;
 
+import com.domain.common.ShowType;
 import com.domain.helper.IntegrationHelper;
-import com.domain.show.common.ShowType;
 import com.domain.show.exhibition.infrastructure.ExhibitionJpaRepository;
 import com.domain.show.show.domain.dto.ShowSimpleResponse;
 import org.junit.jupiter.api.DisplayNameGeneration;

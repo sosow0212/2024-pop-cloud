@@ -1,10 +1,11 @@
 package show.popups.domain;
 
-import com.domain.show.common.Latitude;
-import com.domain.show.common.Longitude;
+import com.domain.common.coordinates.Latitude;
+import com.domain.common.coordinates.Longitude;
 import com.domain.show.common.PublicTag;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;

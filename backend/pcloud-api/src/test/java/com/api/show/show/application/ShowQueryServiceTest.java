@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.domain.common.ShowType.EXHIBITION;
 import static com.domain.show.common.PublicTag.ARTIST;
-import static com.domain.show.common.ShowType.EXHIBITION;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;

@@ -1,8 +1,8 @@
 package com.domain.show.recommend.domain;
 
+import com.domain.common.ShowType;
 import com.domain.show.common.ShowDetails;
 import com.domain.show.common.ShowSchedule;
-import com.domain.show.common.ShowType;
 import com.domain.show.common.Statistic;
 import com.domain.show.popups.domain.service.PopularityCalculator;
 import lombok.AccessLevel;
