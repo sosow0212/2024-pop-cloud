@@ -1,7 +1,8 @@
 import CarouselUI from "@/components/common/carousel";
-import DetailsHeader from "@/components/details-page/details-header";
-import DetailsTabs from "@/components/details-page/details-tabs";
-import DetailsTags from "@/components/details-page/details-tags";
+
+import DetailsHeader from "./_components/details-header";
+import DetailsTabs from "./_components/details-tabs";
+import DetailsTags from "./_components/details-tags";
 
 export type Popup = {
   id: number;
