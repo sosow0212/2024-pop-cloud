@@ -10,47 +10,70 @@ const initState: MapInfoType = {
   center: SEONGSU,
   markers: [
     {
-      id: "장소 1",
-      location: "asdasd",
-      position: {
-        lat: 37.5548837 + 0.001,
-        lng: 126.911597 + 0.001,
-      },
+      searchTarget: "POPUPS",
+      id: 111,
       title: "장소 1",
-      type: "place",
-      category: "POPUPS",
-      endDate: new Date(),
+      position: {
+        latitude: {
+          value: 37.4824124 + 0.001,
+        },
+        longitude: {
+          value: 126.9161069 + 0.001,
+        },
+        location: "주소 1",
+      },
       startDate: new Date(),
+      endDate: new Date(),
+      visitedCount: 10,
+      likedCount: 20,
     },
     {
-      id: "장소 2",
-      location: "asdasd",
-      position: {
-        lat: 37.5548837 - 0.001,
-        lng: 126.911597 - 0.001,
-      },
+      searchTarget: "POPUPS",
+      id: 222,
       title: "장소 2",
-      type: "place",
-      category: "POPUPS",
-      endDate: new Date(),
+      position: {
+        latitude: {
+          value: 37.4824124 - 0.001,
+        },
+        longitude: {
+          value: 126.9161069 - 0.001,
+        },
+        location: "주소 2",
+      },
       startDate: new Date(),
+      endDate: new Date(),
+      visitedCount: 10,
+      likedCount: 20,
     },
     {
-      id: "장소 3",
-      location: "asdasd",
-      position: {
-        lat: 37.5548837 - 0.001,
-        lng: 126.911597 + 0.001,
-      },
+      searchTarget: "EXHIBITION",
+      id: 333,
       title: "장소 3",
-      type: "place",
-      category: "POPUPS",
-      endDate: new Date(),
+      position: {
+        latitude: {
+          value: 37.4824124 + 0.001,
+        },
+        longitude: {
+          value: 126.9161069 - 0.001,
+        },
+        location: "주소 3",
+      },
       startDate: new Date(),
+      endDate: new Date(),
+      visitedCount: 10,
+      likedCount: 20,
     },
   ],
   mapLevel: 4,
 };
+
+// const getNewPlaces = async (): Promise<MarkerType[] | null> => {
+//   const res = await fetch(`/maps/recommendation-location`);
+//   if (res.ok) {
+//     const data: MapResponseType[] = await res.json();
+//   }
+//   return null;
+// };
 
 const useMapState = () => {
   const [mapInfo, setMapInfo] = useState<MapInfoType>(initState);
@@ -77,20 +100,12 @@ const useMapState = () => {
     }));
   };
 
-  const detectMoving = (map: kakao.maps.Map) => {
+  const judgeInRange = (map: kakao.maps.Map) => {
+    const { lat, lng } = mapInfo.center;
     const mapCenter = {
       lat: map.getCenter().getLat(),
       lng: map.getCenter().getLng(),
     };
-    const { lat, lng } = mapInfo.center;
-
-    const level = map.getLevel();
-    if (level !== mapInfo.mapLevel) {
-      setMapInfo((p) => ({
-        ...p,
-        mapLevel: level,
-      }));
-    }
 
     const bounds = map.getBounds();
     const north = bounds.getNorthEast().getLat();
@@ -103,8 +118,6 @@ const useMapState = () => {
       lng + delta.lng <= east ||
       lng - delta.lng >= west
     ) {
-      // 새로운 데이터 받아오기
-      // console.log("플레이스 새로 받아오기");
       setMapInfo((p) => ({
         ...p,
         center: mapCenter,
@@ -112,10 +125,20 @@ const useMapState = () => {
     }
   };
 
+  const detectMoving = (map: kakao.maps.Map) => {
+    const level = map.getLevel();
+    if (level !== mapInfo.mapLevel) {
+      setMapInfo((p) => ({
+        ...p,
+        mapLevel: level,
+      }));
+    }
+    judgeInRange(map);
+  };
+
   useEffect(() => {
     const getSuccessGeo = (p: GeolocationPosition) => {
       const { latitude: lat, longitude: lng } = p.coords;
-
       setMapInfo((previousMapInfo) => ({
         ...previousMapInfo,
         center: {

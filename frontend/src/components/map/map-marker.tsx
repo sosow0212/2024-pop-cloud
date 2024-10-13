@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   CustomOverlayMap,
   MapMarker as KaKaoMapMarker,
@@ -7,20 +8,36 @@ import cn from "../ui/cn";
 
 const MarkerImageSrc = {
   current: "./images/map/current-marker.png",
-  bookmark: "./images/map/bookmark-marker.png",
-  place: "./images/map/place-marker.png",
+  popups: "./images/map/popups-marker.png",
+  exhibition: "./images/map/exhibition-marker.png",
 };
 
+// interface MapMarkerProps extends MarkerType {
+//   isRecommendation?: boolean;
+// }
+
+interface MapMarkerProps {
+  type: "current" | "popups" | "exhibition";
+  title: string;
+  lat: number;
+  lng: number;
+  id: number;
+}
+
 export default function MapMarker({
-  position,
+  id,
+  lat,
+  lng,
   title,
   type,
-  infoUrl,
-}: MarkerType) {
+}: MapMarkerProps) {
   return (
     <>
       <KaKaoMapMarker
-        position={position}
+        position={{
+          lat,
+          lng,
+        }}
         image={{
           src: MarkerImageSrc[type],
           size: {
@@ -31,22 +48,28 @@ export default function MapMarker({
             offset: {
               x: 0,
               y: 35,
-            }, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+            },
           },
         }}
       />
-      <CustomOverlayMap position={position} yAnchor={1}>
+      <CustomOverlayMap
+        position={{
+          lat,
+          lng,
+        }}
+        yAnchor={1}
+      >
         <div
           className={cn(
             "text-xs max-w-160 -translate-y-40 translate-x-12 truncate rounded-md  px-8 py-4 text-white ",
             type === "current" && "bg-black",
-            type === "bookmark" && "bg-yellow-500",
-            type === "place" && "bg-blue-500",
+            type === "exhibition" && "bg-yellow-500",
+            type === "popups" && "bg-blue-500",
           )}
         >
-          <a href={infoUrl} target="_blank" rel="noreferrer">
+          <Link href={`/${type}/${id}`}>
             <span>{title}</span>
-          </a>
+          </Link>
         </div>
       </CustomOverlayMap>
     </>

@@ -26,8 +26,12 @@ export default function Map({ mapInfo, className, handleChange }: MapProps) {
       <MarkerClusterer averageCenter minLevel={8}>
         {mapInfo.markers?.map((marker) => (
           <MapMarker
-            key={`${marker.position.lat}=${marker.position.lng}`}
-            {...marker}
+            key={marker.id}
+            id={marker.id}
+            lat={marker.position.latitude.value}
+            lng={marker.position.longitude.value}
+            title={marker.title}
+            type={marker.searchTarget.toLowerCase() as "popups" | "exhibition"}
           />
         ))}
       </MarkerClusterer>

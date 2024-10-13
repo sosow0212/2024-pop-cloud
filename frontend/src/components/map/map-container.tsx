@@ -34,9 +34,9 @@ export default function MapContainer({
         <MapMarker
           title="현재 위치"
           type="current"
-          position={mapInfo.currentPosition}
-          location=""
-          id="asdds"
+          lat={mapInfo.currentPosition.lat}
+          lng={mapInfo.currentPosition.lng}
+          id={1010101010}
         />
         {children}
       </KakaoMap>

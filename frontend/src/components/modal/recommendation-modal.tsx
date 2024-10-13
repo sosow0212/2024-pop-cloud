@@ -8,12 +8,15 @@ type RecommendType = "score" | "shortest";
 
 type ShowCoordinateType = {
   searchTarget: "EXHIBITION" | "POPUPS";
-  id: string;
+  id: number;
   title: string;
   latitude: number;
   longitude: number;
+  location: string;
   startDate: Date;
   endDate: Date;
+  visitedCount: number;
+  likedCount: number;
 };
 
 type ResultType = {
@@ -25,6 +28,13 @@ type ResultType = {
   showsCoordinates: ShowCoordinateType[];
 };
 
+const filterPlace = (place: MarkerType): ShowCoordinateType => ({
+  ...place,
+  latitude: place.position.latitude.value,
+  longitude: place.position.longitude.value,
+  location: place.position.location,
+});
+
 function RecommendationForm() {
   const { onClose, data } = useModalStore();
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,15 +45,7 @@ function RecommendationForm() {
       latitude: data.currentPosition!.lat,
       longitude: data.currentPosition!.lng,
     },
-    showsCoordinates: data.places!.map((place) => ({
-      searchTarget: place.category!,
-      id: place.id,
-      title: place.title,
-      latitude: place.position.lat,
-      longitude: place.position.lng,
-      startDate: place.startDate!,
-      endDate: place.endDate!,
-    })),
+    showsCoordinates: data.places!.map((place) => filterPlace(place)),
   });
   const handleRecommendChange = (
     isCheck: boolean,
@@ -56,24 +58,14 @@ function RecommendationForm() {
       }));
   };
 
-  const handlePlaceClick = (isChecked: boolean, id: string) => {
+  const handlePlaceClick = (isChecked: boolean, id: number) => {
     if (isChecked) {
       const place = data.places?.find((p) => p.id === id);
       if (!place) return;
-      const filteredPlace: ShowCoordinateType = {
-        searchTarget: place.category!,
-        id: place!.id,
-        title: place!.title,
-        latitude: place!.position.lat,
-        longitude: place!.position.lng,
-        startDate: place!.startDate!,
-        endDate: place!.endDate!,
-      };
 
       setResult((p) => ({
         ...p,
-
-        showsCoordinates: [...p.showsCoordinates, filteredPlace],
+        showsCoordinates: [...p.showsCoordinates, filterPlace(place)],
       }));
     } else {
       setResult((p) => ({
@@ -164,13 +156,13 @@ function RecommendationForm() {
               <input
                 type="checkbox"
                 className="recommend peer"
-                id={place.id}
+                id={`${place.id}`}
                 defaultChecked
                 onChange={(e) => handlePlaceClick(e.target.checked, place.id)}
               />
               <label
                 className="cursor-pointer rounded-md border-2 px-12 py-5 hover:bg-slate-300 peer-checked:border-blue-7 peer-checked:bg-blue-7 peer-checked:text-white"
-                htmlFor={place.id}
+                htmlFor={`${place.id}`}
               >
                 {place.title}
               </label>
