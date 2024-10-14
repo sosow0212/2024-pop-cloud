@@ -15,10 +15,10 @@ const initState: MapInfoType = {
       title: "장소 1",
       position: {
         latitude: {
-          value: 37.4824124 + 0.001,
+          value: 37.4795269 + 0.001,
         },
         longitude: {
-          value: 126.9161069 + 0.001,
+          value: 126.9524542 + 0.001,
         },
         location: "주소 1",
       },
@@ -33,10 +33,10 @@ const initState: MapInfoType = {
       title: "장소 2",
       position: {
         latitude: {
-          value: 37.4824124 - 0.001,
+          value: 37.4795269 - 0.001,
         },
         longitude: {
-          value: 126.9161069 - 0.001,
+          value: 126.9524542 - 0.001,
         },
         location: "주소 2",
       },
@@ -51,10 +51,10 @@ const initState: MapInfoType = {
       title: "장소 3",
       position: {
         latitude: {
-          value: 37.4824124 + 0.001,
+          value: 37.4795269 + 0.001,
         },
         longitude: {
-          value: 126.9161069 - 0.001,
+          value: 126.9524542 - 0.001,
         },
         location: "주소 3",
       },
@@ -77,7 +77,7 @@ const initState: MapInfoType = {
 
 const useMapState = () => {
   const [mapInfo, setMapInfo] = useState<MapInfoType>(initState);
-
+  const [loading, setLoading] = useState(true);
   const delta = useMemo(
     () => ({
       lat: 0.0011246652784322464 * 2 ** mapInfo.mapLevel,
@@ -150,10 +150,15 @@ const useMapState = () => {
           lng,
         },
       }));
+      setLoading(false);
     };
 
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(getSuccessGeo);
+      navigator.geolocation.getCurrentPosition(getSuccessGeo, () =>
+        setLoading(false),
+      );
+    } else {
+      setLoading(false);
     }
   }, []);
 
@@ -161,6 +166,7 @@ const useMapState = () => {
     mapInfo,
     detectMoving,
     changeCenterPosition,
+    loading,
   };
 };
 export default useMapState;

@@ -20,7 +20,8 @@ import MapSearch from "./_components/map-search";
 // };
 
 export default function MapPage() {
-  const { mapInfo, detectMoving, changeCenterPosition } = useMapState();
+  const { mapInfo, detectMoving, changeCenterPosition, loading } =
+    useMapState();
   const [inputValue, setInputValue, results] = useMapSearch();
   const { onOpen, onSetData } = useModalStore();
   const [recommendationRoutine, setRecommendationRoutine] = useState<string[]>(
@@ -50,37 +51,41 @@ export default function MapPage() {
           onChangeValue={changeCenterPosition}
         />
       </div>
-      <Map mapInfo={mapInfo} handleChange={detectMoving} className="w-full" />
+      {loading ? (
+        <div className="relative h-500 animate-pulse bg-slate-300" />
+      ) : (
+        <>
+          <Map
+            mapInfo={mapInfo}
+            handleChange={detectMoving}
+            className="w-full"
+          />
 
-      {recommendationRoutine.length > 0 && (
-        <article>
-          <h5>추천 경로</h5>
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-            {recommendationRoutine.map((place) => (
-              <div className="h-100 bg-slate-300" key={place}>
-                {place}
+          {recommendationRoutine.length > 0 && (
+            <article>
+              <h5>추천 경로</h5>
+              <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+                {recommendationRoutine.map((place) => (
+                  <div className="h-100 bg-slate-300" key={place}>
+                    {place}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </article>
-      )}
+            </article>
+          )}
 
-      <article>
-        <h5>장소 정보</h5>
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-          {mapInfo.markers.map((marker) => (
-            <div className="h-100 bg-slate-400" key={marker.id}>
-              {marker.title}
+          <article>
+            <h5>장소 정보</h5>
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+              {mapInfo.markers.map((marker) => (
+                <div className="h-100 bg-slate-400" key={marker.id}>
+                  {marker.title}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        {/* {mapInfo.markers.map((marker)=>(
-          <EventCard key={marker.info.id} {...marker.info}    />
-        ))} */}
-        {/* <EventCard event={event} />
-        <EventCard event={event} />
-        <EventCard event={event} /> */}
-      </article>
+          </article>
+        </>
+      )}
     </section>
   );
 }
