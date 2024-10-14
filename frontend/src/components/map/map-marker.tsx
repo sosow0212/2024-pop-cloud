@@ -1,9 +1,8 @@
-import Link from "next/link";
-import {
-  CustomOverlayMap,
-  MapMarker as KaKaoMapMarker,
-} from "react-kakao-maps-sdk";
+import Image from "next/image";
+import { useState } from "react";
+import { CustomOverlayMap } from "react-kakao-maps-sdk";
 
+import { formatDate } from "../common/list-card";
 import cn from "../ui/cn";
 
 const MarkerImageSrc = {
@@ -12,16 +11,24 @@ const MarkerImageSrc = {
   exhibition: "/images/map/exhibition-marker.png",
 };
 
-// interface MapMarkerProps extends MarkerType {
-//   isRecommendation?: boolean;
-// }
+const bgVarinant = {
+  current: "bg-black",
+  exhibition: "bg-yellow-500",
+  popups: "bg-blue-500",
+};
 
 interface MapMarkerProps {
+  isStaticMap?: boolean;
   type: "current" | "popups" | "exhibition";
   title?: string;
+  location?: string;
+  startDate?: string;
+  endDate?: string;
   lat: number;
   lng: number;
   id: number;
+  clickedMarker?: number;
+  onClickMarker?: (markerId: number) => void;
 }
 
 export default function MapMarker({
@@ -30,50 +37,59 @@ export default function MapMarker({
   lng,
   title,
   type,
+  location,
+  startDate,
+  endDate,
+  isStaticMap,
+  clickedMarker,
+  onClickMarker,
 }: MapMarkerProps) {
+  const [isHover, setIsHover] = useState(false);
+
   return (
-    <>
-      <KaKaoMapMarker
+    <button
+      type="button"
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      onClick={() => {
+        if (onClickMarker) onClickMarker(id);
+      }}
+    >
+      <CustomOverlayMap
         position={{
           lat,
           lng,
         }}
-        image={{
-          src: MarkerImageSrc[type],
-          size: {
-            width: type === "current" ? 20 : 24,
-            height: type === "current" ? 20 : 35,
-          },
-          options: {
-            offset: {
-              x: 0,
-              y: 35,
-            },
-          },
-        }}
-      />
-      {title && (
-        <CustomOverlayMap
-          position={{
-            lat,
-            lng,
-          }}
-          yAnchor={1}
+        xAnchor={0.15}
+      >
+        <Image width={20} height={20} alt="marker" src={MarkerImageSrc[type]} />
+        <div
+          className={cn(
+            "text-xs -translate-x-[calc(50%-10)] transition-all truncate rounded-md  px-8 py-4 text-white",
+            bgVarinant[type],
+            isHover || id === clickedMarker
+              ? "size-full opacity-100"
+              : "size-0 opacity-0",
+            isStaticMap && "opacity-100 size-full",
+          )}
         >
-          <div
-            className={cn(
-              "text-xs max-w-160 -translate-y-40 translate-x-12 truncate rounded-md  px-8 py-4 text-white ",
-              type === "current" && "bg-black",
-              type === "exhibition" && "bg-yellow-500",
-              type === "popups" && "bg-blue-500",
-            )}
-          >
-            <Link href={`/${type}/${id}`}>
-              <span>{title}</span>
-            </Link>
-          </div>
-        </CustomOverlayMap>
-      )}
-    </>
+          <div>{title}</div>
+          {id === clickedMarker && (
+            <div className="text-black">
+              <div className="text-14">{location}</div>
+              <div className="mt-2 text-right text-12">
+                {startDate && (
+                  <time dateTime={startDate}>{formatDate(startDate)}</time>
+                )}
+                {" - "}
+                {endDate && (
+                  <time dateTime={endDate}>{formatDate(endDate)}</time>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </CustomOverlayMap>
+    </button>
   );
 }

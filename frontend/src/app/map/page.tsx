@@ -18,12 +18,15 @@ export default function MapPage() {
   const [recommendationRoutine, setRecommendationRoutine] = useState<
     RecommendationResponse[]
   >([]);
-
+  const [clickedMarker, setClickedMarker] = useState(-1);
   const handleClick = () => {
     onOpen("recommendation");
     onSetData("places", mapInfo.markers);
     onSetData("currentPosition", mapInfo.currentPosition);
     onSetData("onSuccess", setRecommendationRoutine);
+  };
+  const handleClickMarker = (id: number) => {
+    setClickedMarker((p) => (p === id ? -1 : id));
   };
 
   return (
@@ -49,6 +52,8 @@ export default function MapPage() {
         <>
           <Map
             mapInfo={mapInfo}
+            clickedMarker={clickedMarker}
+            onClickMarker={handleClickMarker}
             handleChange={detectMoving}
             className="w-full"
           />

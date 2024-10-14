@@ -31,12 +31,16 @@ export default function MapContainer({
         onCenterChanged={handleChange}
         minLevel={13}
       >
-        <MapMarker
-          type="current"
-          lat={mapInfo.currentPosition.lat}
-          lng={mapInfo.currentPosition.lng}
-          id={1010101010}
-        />
+        {mapInfo.mapLevel < 7 && (
+          <MapMarker
+            type="current"
+            lat={mapInfo.currentPosition.lat}
+            lng={mapInfo.currentPosition.lng}
+            id={Date.now()}
+            isStaticMap={false}
+            title="현재 위치"
+          />
+        )}
         {children}
       </KakaoMap>
     </section>

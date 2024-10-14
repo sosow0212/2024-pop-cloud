@@ -23,7 +23,7 @@ interface EventCardProps {
   onLikeChange?: (isLiked: boolean) => void;
 }
 
-const formatDate = (dateString: string) => {
+export const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const year = date.getFullYear().toString().slice(2);
   const month = (date.getMonth() + 1).toString().padStart(2, "0");

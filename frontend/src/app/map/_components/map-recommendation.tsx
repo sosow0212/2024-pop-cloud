@@ -7,14 +7,20 @@ export default function MapRecommendation({
   recommendationRoutine: RecommendationResponse[];
 }) {
   const recommendationCircleRef = useRef<HTMLDivElement>(null);
-
+  const svgRef = useRef<SVGSVGElement>(null);
   useEffect(() => {
+    const { current } = svgRef;
     if (recommendationRoutine?.length > 0) {
       recommendationCircleRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
+
+      current?.classList.add("recommedation-path");
     }
+    return () => {
+      current?.classList.remove("recommedation-path");
+    };
   }, [recommendationRoutine]);
 
   const getPosition = (index: number, total: number) => {
@@ -31,7 +37,7 @@ export default function MapRecommendation({
       <h5 className="rounded-md bg-slate-200 px-12 py-8 ">추천 경로</h5>
       <div ref={recommendationCircleRef} className="relative size-[300px]">
         <div className="absolute inset-0 rounded-full border">
-          <div className=" recommedation-start left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
+          <div className="recommedation-start left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
             Start
           </div>
           {recommendationRoutine.map((item, index) => {
@@ -50,7 +56,7 @@ export default function MapRecommendation({
               </div>
             );
           })}
-          <svg className="recommedation-path" viewBox="0 0 300 300">
+          <svg ref={svgRef} viewBox="0 0 300 300">
             <path
               d="M150,150 L150,15 A135,135 0 1,1 149.99,15"
               fill="none"
@@ -74,7 +80,6 @@ export default function MapRecommendation({
             <div className="truncate ">
               <span className="font-extrabold text-blue-7">({idx + 1})</span>
               {item.title}
-              sdmsadkansdlnkasdlkansd
             </div>
           </li>
         ))}

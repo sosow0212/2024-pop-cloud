@@ -11,19 +11,27 @@ import MapContainer from "./map-container";
 import MapMarker from "./map-marker";
 
 interface MapProps {
-  mapInfo: MapInfoType;
   className?: string;
+  mapInfo: MapInfoType;
+  clickedMarker: number;
+  onClickMarker: (markerId: number) => void;
   handleChange: (map: kakao.maps.Map) => void;
 }
 
-export default function Map({ mapInfo, className, handleChange }: MapProps) {
+export default function Map({
+  mapInfo,
+  className,
+  handleChange,
+  clickedMarker,
+  onClickMarker,
+}: MapProps) {
   return (
     <MapContainer
       mapInfo={mapInfo}
       className={className}
       handleChange={handleChange}
     >
-      <MarkerClusterer averageCenter minLevel={8}>
+      <MarkerClusterer averageCenter minLevel={7}>
         {mapInfo.markers?.map((marker) => (
           <MapMarker
             key={marker.id}
@@ -32,6 +40,11 @@ export default function Map({ mapInfo, className, handleChange }: MapProps) {
             lng={marker.position.longitude.value}
             title={marker.title}
             type={marker.searchTarget.toLowerCase() as "popups" | "exhibition"}
+            clickedMarker={clickedMarker}
+            onClickMarker={onClickMarker}
+            location={marker.position.location}
+            startDate={marker.startDate}
+            endDate={marker.endDate}
           />
         ))}
       </MarkerClusterer>

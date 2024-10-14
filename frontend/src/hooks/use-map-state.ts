@@ -12,15 +12,15 @@ const initState: MapInfoType = {
     {
       searchTarget: "POPUPS",
       id: 111,
-      title: "장소 1",
+      title: "타임스트림",
       position: {
         latitude: {
-          value: 37.4795269 + 0.001,
+          value: 37.48388636094257,
         },
         longitude: {
-          value: 126.9524542 + 0.001,
+          value: 126.93034045502553,
         },
-        location: "주소 1",
+        location: "주소 타임스트림",
       },
       startDate: String(new Date()),
       endDate: String(new Date()),
@@ -30,15 +30,15 @@ const initState: MapInfoType = {
     {
       searchTarget: "POPUPS",
       id: 222,
-      title: "장소 2",
+      title: "강남수 요양병원",
       position: {
         latitude: {
-          value: 37.4795269 - 0.001,
+          value: 37.4851550452392,
         },
         longitude: {
-          value: 126.9524542 - 0.001,
+          value: 126.930450082986,
         },
-        location: "주소 2",
+        location: "주소 강남수요양병원",
       },
       startDate: String(new Date()),
       endDate: String(new Date()),
@@ -48,15 +48,15 @@ const initState: MapInfoType = {
     {
       searchTarget: "EXHIBITION",
       id: 333,
-      title: "장소 3",
+      title: "미남장소",
       position: {
         latitude: {
-          value: 37.4795269 + 0.001,
+          value: 37.4842340583771,
         },
         longitude: {
-          value: 126.9524542 - 0.001,
+          value: 126.92719916344,
         },
-        location: "주소 3",
+        location: "주소 미남참치",
       },
       startDate: String(new Date()),
       endDate: String(new Date()),
@@ -64,7 +64,7 @@ const initState: MapInfoType = {
       likedCount: 20,
     },
   ],
-  mapLevel: 4,
+  mapLevel: 3,
 };
 
 // const getNewPlaces = async (): Promise<MarkerType[] | null> => {

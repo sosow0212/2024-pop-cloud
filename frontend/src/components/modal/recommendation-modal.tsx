@@ -78,8 +78,8 @@ function RecommendationForm() {
   const handleSubmit = async () => {
     setPending(true);
     try {
-      if (recommendationState.showsCoordinates.length === 0)
-        throw new Error("추천 경로를 위해 장소를 선택해주세요.");
+      if (recommendationState.showsCoordinates.length < 2)
+        throw new Error("추천 경로를 위해 두 곳 이상의 장소를 선택해주세요.");
       if (recommendationState.showsCoordinates.length > 8)
         throw new Error("최대 여덟 장소의 경로를 추천해드려요.");
       // const res = await fetch("/api/maps/recommendation-route", {

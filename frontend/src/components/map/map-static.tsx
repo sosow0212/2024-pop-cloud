@@ -39,6 +39,7 @@ export default function MapStatic({
           type={type}
           lat={lat}
           lng={lng}
+          isStaticMap
         />
       </KakaoMap>
     </section>
