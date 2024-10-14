@@ -19,7 +19,7 @@ export default function MapSearch({
   return (
     <div className="relative flex w-full max-w-lg justify-end">
       <input
-        className={`peer rounded-md border object-left py-10 pl-5 pr-60 transition-all ${inputOpen ? "w-full" : "w-130 pr-0"}`}
+        className={`peer rounded-md border object-left py-10 pl-5 pr-0 transition-all ${inputOpen ? "w-full" : "w-130"}`}
         placeholder="키워드로 장소 지정"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}

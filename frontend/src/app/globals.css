@@ -48,10 +48,10 @@ input[type="checkbox"].recommend {
 }
 
 .recommedation-point {
-  @apply z-10 absolute rounded-md bg-blue-4 px-4 py-2 text-center text-white;
+  @apply z-10 absolute rounded-md bg-blue-4 px-4 py-2 text-center text-white max-w-100 truncate;
 }
 .recommedation-start {
-  @apply z-10 absolute rounded-md bg-black px-4 py-2 text-center text-white;
+  @apply z-10 absolute rounded-md bg-black px-4 py-2 text-center text-white max-w-100 truncate;
 }
 
 .recommedation-path {
@@ -63,14 +63,14 @@ input[type="checkbox"].recommend {
   fill: none;
   stroke: red;
   stroke-width: 2;
-  stroke-dasharray: 935;
-  stroke-dashoffset: 935;
-  animation: draw 6s linear forwards;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 4s 0.5s linear forwards;
 }
 
 @keyframes draw {
   0% {
-    stroke-dashoffset: 935;
+    stroke-dashoffset: 1000;
   }
   16.67% {
     stroke-dashoffset: 815;

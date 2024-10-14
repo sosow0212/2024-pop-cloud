@@ -8,7 +8,7 @@ type ModalDataType = {
     lat: number;
     lng: number;
   };
-  onSuccess?: (value: string[]) => void;
+  onSuccess?: (value: RecommendationResponse[]) => void;
 };
 
 interface ModalStore {

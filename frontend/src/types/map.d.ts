@@ -28,3 +28,22 @@ type MapInfoType = {
   markers: MarkerType[];
   mapLevel: number;
 };
+
+type RecommendationResponse = {
+  id: number;
+  searchTarget: "POPUPS" | "EXHIBITION";
+  title: string;
+  position: {
+    location: string;
+    latitude: {
+      value: number;
+    };
+    longitude: {
+      value: number;
+    };
+  };
+  startDate: string;
+  endDate: string;
+  visitedCount: number;
+  likedCount: number;
+};

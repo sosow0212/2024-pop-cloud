@@ -13,13 +13,13 @@ type ShowCoordinateType = {
   latitude: number;
   longitude: number;
   location: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   visitedCount: number;
   likedCount: number;
 };
 
-type ResultType = {
+type RecommendationStateType = {
   recommendType: RecommendType;
   myCoordinate: {
     latitude: number;
@@ -39,20 +39,21 @@ function RecommendationForm() {
   const { onClose, data } = useModalStore();
   const [errorMessage, setErrorMessage] = useState("");
   const [pending, setPending] = useState(false);
-  const [result, setResult] = useState<ResultType>({
-    recommendType: "score",
-    myCoordinate: {
-      latitude: data.currentPosition!.lat,
-      longitude: data.currentPosition!.lng,
-    },
-    showsCoordinates: data.places!.map((place) => filterPlace(place)),
-  });
+  const [recommendationState, setRecommendationState] =
+    useState<RecommendationStateType>({
+      recommendType: "score",
+      myCoordinate: {
+        latitude: data.currentPosition!.lat,
+        longitude: data.currentPosition!.lng,
+      },
+      showsCoordinates: data.places!.map((place) => filterPlace(place)),
+    });
   const handleRecommendChange = (
     isCheck: boolean,
     recommendType: RecommendType,
   ) => {
     if (isCheck)
-      setResult((p) => ({
+      setRecommendationState((p) => ({
         ...p,
         recommendType,
       }));
@@ -62,13 +63,12 @@ function RecommendationForm() {
     if (isChecked) {
       const place = data.places?.find((p) => p.id === id);
       if (!place) return;
-
-      setResult((p) => ({
+      setRecommendationState((p) => ({
         ...p,
         showsCoordinates: [...p.showsCoordinates, filterPlace(place)],
       }));
     } else {
-      setResult((p) => ({
+      setRecommendationState((p) => ({
         ...p,
         showsCoordinates: p.showsCoordinates.filter((show) => show.id !== id),
       }));
@@ -78,14 +78,16 @@ function RecommendationForm() {
   const handleSubmit = async () => {
     setPending(true);
     try {
-      if (result.showsCoordinates.length === 0)
-        throw new Error("추천 경로를 위해 컨텐츠를 선택해주세요.");
+      if (recommendationState.showsCoordinates.length === 0)
+        throw new Error("추천 경로를 위해 장소를 선택해주세요.");
+      if (recommendationState.showsCoordinates.length > 8)
+        throw new Error("최대 여덟 장소의 경로를 추천해드려요.");
       // const res = await fetch("/api/maps/recommendation-route", {
       //   method: "GET",
       //   headers: {
       //     "Content-Type": "application/json",
       //   },
-      //   body: JSON.stringify(result),
+      //   body: JSON.stringify(recommendationState),
       // });
       // if (!res.ok) throw new Error("서버 에러");
       // const responseData = await res.json();
@@ -93,7 +95,26 @@ function RecommendationForm() {
       //   "recommendation",
       //   JSON.stringify(responseData),
       // );
-      data.onSuccess!(result.showsCoordinates.map((r) => r.title));
+      data.onSuccess!(
+        recommendationState.showsCoordinates.map((r) => ({
+          id: r.id,
+          searchTarget: r.searchTarget,
+          title: r.title,
+          position: {
+            location: r.location,
+            latitude: {
+              value: r.latitude,
+            },
+            longitude: {
+              value: r.longitude,
+            },
+          },
+          startDate: r.startDate,
+          endDate: r.endDate,
+          visitedCount: r.visitedCount,
+          likedCount: r.likedCount,
+        })),
+      );
       onClose();
     } catch (error) {
       if (error instanceof Error) {
@@ -111,7 +132,9 @@ function RecommendationForm() {
       <header>
         <h3 className="text-20 font-extrabold">경로를 추천해드려요.</h3>
         <p className="text-14 text-slate-500">
-          현재 위치를 기준으로 지도에 보이는 장소들의 경로를 추천해드립니다.
+          현재 위치를 기준으로{" "}
+          <span className="text-red-400">최대 여덟 장소</span>의 경로를
+          추천해드립니다.
         </p>
       </header>
       <div className="flex items-center gap-x-10">
@@ -149,10 +172,10 @@ function RecommendationForm() {
           </label>
         </div>
       </div>
-      <div className="flex flex-wrap gap-10">
-        {data.places?.map((place) => (
-          <div key={place.id}>
-            <div>
+      <div className="max-h-400 overflow-y-auto">
+        <div className="flex flex-col gap-20 py-10">
+          {data.places?.map((place) => (
+            <div key={place.id}>
               <input
                 type="checkbox"
                 className="recommend peer"
@@ -161,25 +184,25 @@ function RecommendationForm() {
                 onChange={(e) => handlePlaceClick(e.target.checked, place.id)}
               />
               <label
-                className="cursor-pointer rounded-md border-2 px-12 py-5 hover:bg-slate-300 peer-checked:border-blue-7 peer-checked:bg-blue-7 peer-checked:text-white"
+                className="cursor-pointer truncate rounded-md border-2 px-12 py-5 hover:bg-slate-100 peer-checked:border-blue-7 peer-checked:bg-blue-7 peer-checked:text-white"
                 htmlFor={`${place.id}`}
               >
                 {place.title}
               </label>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <div className="flex items-center gap-x-20" />
       <footer>
         <button
-          className={`rounded-md border px-10 py-5 ${result.showsCoordinates.length === 0 && "cursor-not-allowed"}`}
+          className={`rounded-md border px-10 py-5 ${recommendationState.showsCoordinates.length === 0 && "cursor-not-allowed"}`}
           type="button"
           onClick={handleSubmit}
         >
           추천 받기
         </button>
-        <div className="text-red-500">{errorMessage}</div>
+        <div className="text-14 text-red-500">{errorMessage}</div>
       </footer>
     </section>
   );
