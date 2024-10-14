@@ -49,8 +49,8 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
             <Image
               src={event.image}
               alt={`${event.title} 이미지`}
-              layout="fill"
-              objectFit="cover"
+              fill
+              className="object-contain"
             />
           </div>
         </figure>

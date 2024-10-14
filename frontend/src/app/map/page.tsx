@@ -1,23 +1,13 @@
 "use client";
 
-// import EventCard from "@/components/common/list-card";
-
 import { useState } from "react";
 
+import EventCard from "@/components/common/list-card";
 import Map from "@/components/map";
 import { useMapSearch, useMapState } from "@/hooks";
 import { useModalStore } from "@/store";
 
 import MapSearch from "./_components/map-search";
-
-// const event = {
-//   id: 1,
-//   title: "아보디저트 팝업스토어",
-//   location: "서울특별시 송파구",
-//   startDate: "2024-09-02T00:00:00",
-//   endDate: "2024-09-24T00:00:00",
-//   image: "/images/luffi.jpg",
-// };
 
 export default function MapPage() {
   const { mapInfo, detectMoving, changeCenterPosition, loading } =
@@ -62,14 +52,29 @@ export default function MapPage() {
           />
 
           {recommendationRoutine.length > 0 && (
-            <article>
-              <h5>추천 경로</h5>
-              <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-                {recommendationRoutine.map((place) => (
-                  <div className="h-100 bg-slate-300" key={place}>
-                    {place}
+            <article className="flex flex-col items-center justify-center gap-y-20">
+              <h5 className="rounded-md bg-slate-200 px-12 py-8 ">추천 경로</h5>
+              <div className="size-300">
+                <div className="relative size-full rounded-full border">
+                  <div className="recommedation-start left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2 ">
+                    Start
                   </div>
-                ))}
+                  <div className="recommedation-point left-1/2 top-10 -translate-x-1/2 ">
+                    첫번째
+                  </div>
+                  <div className="recommedation-point right-10 top-1/2 -translate-y-1/2">
+                    두번째
+                  </div>
+                  <div className="recommedation-point bottom-10 left-1/2 -translate-x-1/2">
+                    세번째
+                  </div>
+                  <div className="recommedation-point left-10 top-1/2 -translate-y-1/2">
+                    도착점
+                  </div>
+                  <svg className="recommedation-path">
+                    <path d="M150,150 L150,30 A120,120 0 1,1 149.99,30" />
+                  </svg>
+                </div>
               </div>
             </article>
           )}
@@ -78,9 +83,17 @@ export default function MapPage() {
             <h5>장소 정보</h5>
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
               {mapInfo.markers.map((marker) => (
-                <div className="h-100 bg-slate-400" key={marker.id}>
-                  {marker.title}
-                </div>
+                <EventCard
+                  key={marker.id}
+                  event={{
+                    id: marker.id,
+                    startDate: marker.startDate,
+                    endDate: marker.endDate,
+                    image: "/images/luffi.jpg",
+                    location: marker.position.location,
+                    title: marker.title,
+                  }}
+                />
               ))}
             </div>
           </article>

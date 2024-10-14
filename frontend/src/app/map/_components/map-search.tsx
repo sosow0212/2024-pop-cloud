@@ -18,7 +18,7 @@ export default function MapSearch({
   return (
     <div className="relative w-full max-w-xl">
       <input
-        className=" peer w-full rounded-md border py-10 pl-5 pr-60"
+        className="peer w-full rounded-md border py-10 pl-5 pr-60"
         placeholder="키워드로 장소 지정"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}

@@ -3,17 +3,6 @@ type MapPositionType = {
   lng: number;
 };
 
-// type MarkerType = {
-//   searchTarget?: "POPUPS" | "EXHIBITION";
-//   id: number;
-//   title: string;
-//   position: MapPositionType;
-//   location: string;
-//   type: "current" | "popups" | "exhibition";
-//   startDate?: Date;
-//   endDate?: Date;
-// };
-
 type MarkerType = {
   searchTarget: "POPUPS" | "EXHIBITION";
   id: number;
@@ -27,8 +16,8 @@ type MarkerType = {
       value: number;
     };
   };
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   visitedCount: number;
   likedCount: number;
 };
@@ -39,22 +28,3 @@ type MapInfoType = {
   markers: MarkerType[];
   mapLevel: number;
 };
-
-// type MapResponseType = {
-//   searchTarget: "POPUPS" | "EXHIBITION";
-//   id: number;
-//   title: string;
-//   position: {
-//     location: string;
-//     latitude: {
-//       value: number;
-//     };
-//     longitude: {
-//       value: number;
-//     };
-//   };
-//   startDate: Date;
-//   endDate: Date;
-//   visitedCount: number;
-//   likedCount: number;
-// };
