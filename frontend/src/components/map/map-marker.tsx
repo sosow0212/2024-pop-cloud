@@ -7,9 +7,9 @@ import {
 import cn from "../ui/cn";
 
 const MarkerImageSrc = {
-  current: "./images/map/current-marker.png",
-  popups: "./images/map/popups-marker.png",
-  exhibition: "./images/map/exhibition-marker.png",
+  current: "/images/map/current-marker.png",
+  popups: "/images/map/popups-marker.png",
+  exhibition: "/images/map/exhibition-marker.png",
 };
 
 // interface MapMarkerProps extends MarkerType {

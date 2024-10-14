@@ -38,8 +38,8 @@ export default function PopupCard({ popup }: PopupCardProps) {
         <Image
           src={Rhino}
           alt="팝업스토어 이미지"
-          layout="fill"
-          objectFit="contain"
+          fill
+          className="object-contain"
         />
         {/* 태그 */}
         <div className="absolute bottom-5 left-0 flex h-20 w-full items-center px-5">

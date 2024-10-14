@@ -1,4 +1,4 @@
-import PopupCard, { Popup } from "@/components/common/popup-card";
+import PopupCard, { type Popup } from "@/components/common/popup-card";
 
 const popupMock: Popup = {
   id: 9,
