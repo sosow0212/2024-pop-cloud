@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import { SearchResultType } from "@/hooks/use-map-search";
 
@@ -15,14 +15,17 @@ export default function MapSearch({
   results,
   setInputValue,
 }: MapSearchProps) {
+  const [inputOpen, setInputOpen] = useState(false);
   return (
-    <div className="relative w-full max-w-xl">
+    <div className="relative flex w-full max-w-lg justify-end">
       <input
-        className="peer w-full rounded-md border py-10 pl-5 pr-60"
+        className={`peer rounded-md border object-left py-10 pl-5 pr-60 transition-all ${inputOpen ? "w-full" : "w-130 pr-0"}`}
         placeholder="키워드로 장소 지정"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        onClick={() => setInputOpen(true)}
       />
+
       <ul
         className={`absolute inset-x-0 top-full z-50 hidden max-h-300 divide-y overflow-y-auto rounded-md border-black bg-white shadow-sm peer-focus:block ${results.length && "border"}`}
       >
@@ -35,6 +38,7 @@ export default function MapSearch({
                 e.preventDefault();
                 onChangeValue(result.lat, result.lng);
                 setInputValue("");
+                setInputOpen(false);
               }}
             >
               {result.placeName}

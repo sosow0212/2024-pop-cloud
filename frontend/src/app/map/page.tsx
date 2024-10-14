@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import EventCard from "@/components/common/list-card";
 import Map from "@/components/map";
@@ -10,13 +10,14 @@ import { useModalStore } from "@/store";
 import MapSearch from "./_components/map-search";
 
 export default function MapPage() {
+  const { onOpen, onSetData } = useModalStore();
   const { mapInfo, detectMoving, changeCenterPosition, loading } =
     useMapState();
   const [inputValue, setInputValue, results] = useMapSearch();
-  const { onOpen, onSetData } = useModalStore();
   const [recommendationRoutine, setRecommendationRoutine] = useState<string[]>(
     [],
   );
+  const recommendationCircleRef = useRef<HTMLDivElement>(null);
   const handleClick = () => {
     onOpen("recommendation");
     onSetData("places", mapInfo.markers);
@@ -24,9 +25,18 @@ export default function MapPage() {
     onSetData("onSuccess", setRecommendationRoutine);
   };
 
+  useEffect(() => {
+    if (recommendationRoutine.length > 0) {
+      recommendationCircleRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [recommendationRoutine]);
+
   return (
     <section className="mapPage-px space-y-10">
-      <div className="flex items-center justify-between ">
+      <div className="px flex items-center justify-between px-5">
         <button
           type="button"
           onClick={handleClick}
@@ -54,7 +64,7 @@ export default function MapPage() {
           {recommendationRoutine.length > 0 && (
             <article className="flex flex-col items-center justify-center gap-y-20">
               <h5 className="rounded-md bg-slate-200 px-12 py-8 ">추천 경로</h5>
-              <div className="size-300">
+              <div ref={recommendationCircleRef} className="size-300">
                 <div className="relative size-full rounded-full border">
                   <div className="recommedation-start left-1/2 top-1/2  -translate-x-1/2 -translate-y-1/2 ">
                     Start
@@ -79,7 +89,7 @@ export default function MapPage() {
             </article>
           )}
 
-          <article>
+          <article className="px-10">
             <h5>장소 정보</h5>
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
               {mapInfo.markers.map((marker) => (
