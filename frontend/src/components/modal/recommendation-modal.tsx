@@ -80,8 +80,6 @@ function RecommendationForm() {
     try {
       if (recommendationState.showsCoordinates.length < 2)
         throw new Error("추천 경로를 위해 두 곳 이상의 장소를 선택해주세요.");
-      if (recommendationState.showsCoordinates.length > 8)
-        throw new Error("최대 여덟 장소의 경로를 추천해드려요.");
       // const res = await fetch("/api/maps/recommendation-route", {
       //   method: "GET",
       //   headers: {
@@ -131,11 +129,6 @@ function RecommendationForm() {
     <section className="min-w-340 space-y-20">
       <header>
         <h3 className="text-20 font-extrabold">경로를 추천해드려요.</h3>
-        <p className="text-14 text-slate-500">
-          현재 위치를 기준으로{" "}
-          <span className="text-red-400">최대 여덟 장소</span>의 경로를
-          추천해드립니다.
-        </p>
       </header>
       <div className="flex items-center gap-x-10">
         <div>

@@ -10,6 +10,13 @@ import { useModalStore } from "@/store";
 import MapRecommendation from "./_components/map-recommendation";
 import MapSearch from "./_components/map-search";
 
+/**
+ *
+ * @author 위영진
+ * 경로 추천 버튼 클릭 시 recommendation-modal이 오픈 되고 해당 모달에서 데이터가 처리됩니다.
+ * clickMarker는 지도에서 보여질 마커의 상세 정보를 위한 state입니다
+ */
+
 export default function MapPage() {
   const { onOpen, onSetData } = useModalStore();
   const { mapInfo, detectMoving, changeCenterPosition, loading } =
