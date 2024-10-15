@@ -3,6 +3,7 @@ package com.api.helper;
 import com.api.auth.application.AuthService;
 import com.api.global.aop.OptimisticLockRetryAspect;
 import com.api.global.config.interceptor.auth.support.AuthenticationContext;
+import com.api.map.application.MapQueryService;
 import com.api.show.common.resolver.ClientIpFinderResolver;
 import com.api.show.exhibition.application.ExhibitionQueryService;
 import com.api.show.exhibition.application.ExhibitionService;
@@ -57,4 +58,7 @@ public class MockBeanInjection {
 
     @MockBean
     protected ShowQueryService showQueryService;
+
+    @MockBean
+    protected MapQueryService mapQueryService;
 }

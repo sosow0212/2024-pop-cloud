@@ -1,5 +1,6 @@
 package com.domain.show.common;
 
+import com.domain.common.coordinates.Longitude;
 import com.domain.show.popups.exception.PopupsException;
 import com.domain.show.popups.exception.PopupsExceptionType;
 import org.junit.jupiter.api.DisplayNameGeneration;

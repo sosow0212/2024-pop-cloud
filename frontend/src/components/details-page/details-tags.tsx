@@ -10,9 +10,9 @@ export default function DetailsTags({ tags }: Props) {
         <IoPricetagSharp className="text-blue-5" />
         연관태그
       </span>
-      <div className="mt-14 flex gap-10">
+      <div className="mt-14 flex gap-16">
         {tags.map((tag) => (
-          <button type="button" key={tag}>
+          <button type="button" className="text-gray-500" key={tag}>
             # {tag}
           </button>
         ))}

@@ -14,7 +14,7 @@ import { DrawerDialogContainer } from "./modal-container";
 
 const LOGIN_OPTION = [
   {
-    href: `https://kauth.kakao.com/oauth/authorize?response_type=code&${process.env.NEXT_PUBLIC_KAKAO_CLIENTID}&redirect_uri=http://localhost:8080/api/auth/login/oauth/kakao&scope=profile_nickname,account_email`,
+    href: `https://kauth.kakao.com/oauth/authorize?response_type=${process.env.NEXT_PUBLIC_KAKAO_RESPONSE_TYPE}&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&scope=${process.env.NEXT_PUBLIC_KAKAO_SCOPE}`,
     icon: kakaoTalkIcon,
     alt: "카카오톡 로고",
   },

@@ -53,6 +53,7 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
 
     @Autowired
     private ObjectMapper objectMapper;
+
     @Autowired
     private ClientIpFinderResolver clientIpFinderResolver;
 
