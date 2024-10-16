@@ -8,7 +8,7 @@ interface NavIconButtonProps {
   name: string;
   icon: IconType;
   isActive: boolean;
-  isSearchPage: boolean;
+  shrink: boolean;
 }
 
 function NavIconButton({
@@ -16,7 +16,7 @@ function NavIconButton({
   name,
   icon: Icon,
   isActive,
-  isSearchPage,
+  shrink,
 }: NavIconButtonProps) {
   return (
     <Link
@@ -24,23 +24,20 @@ function NavIconButton({
       href={href}
       className={clsx(
         "flex size-48 items-center justify-center rounded-5 text-center hover:bg-gray-100",
-        isSearchPage ? "lg:w-48 lg:pl-0" : "lg:w-220 lg:pl-12",
+        !shrink && "lg:w-220 lg:pl-12",
       )}
     >
       <div
         className={clsx(
           "flex w-full justify-center gap-16 lg:justify-start",
-          isSearchPage && "lg:justify-center",
+          shrink && "lg:justify-center",
         )}
       >
         <Icon
           className={clsx("size-24 text-black", isActive && "text-blue-500")}
         />
         <span
-          className={clsx(
-            "hidden text-black lg:block",
-            isSearchPage && "lg:hidden",
-          )}
+          className={clsx("hidden text-black lg:block", shrink && "lg:hidden")}
         >
           {name}
         </span>

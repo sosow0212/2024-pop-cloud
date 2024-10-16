@@ -2,20 +2,20 @@ import clsx from "clsx";
 import Link from "next/link";
 import { GiFluffyCloud } from "react-icons/gi";
 
-export default function NavLogo({ isSearchPage }: { isSearchPage: boolean }) {
+export default function NavLogo({ shrink }: { shrink: boolean }) {
   return (
     <Link href="/" className="mb-25 hidden md:block">
       <header>
         <GiFluffyCloud
           className={clsx(
             "size-40 text-blue-5 md:block",
-            isSearchPage ? "lg:block" : "lg:hidden",
+            shrink ? "lg:block" : "lg:hidden",
           )}
         />
         <h1
           className={clsx(
             "hidden font-[TTSamlipCreamyWhiteR] text-25 font-bold text-blue-5",
-            isSearchPage ? "lg:hidden" : "lg:block",
+            shrink ? "lg:hidden" : "lg:block",
           )}
         >
           POP CLOUD
