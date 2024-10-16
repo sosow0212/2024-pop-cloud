@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 
 import { SearchResultType } from "@/hooks/use-map-search";
@@ -17,17 +18,22 @@ export default function MapSearch({
 }: MapSearchProps) {
   const [inputOpen, setInputOpen] = useState(false);
   return (
-    <div className="relative flex w-full max-w-lg">
+    <div
+      className={`relative flex  transition-all ${inputOpen ? "w-full" : "w-24"}`}
+    >
       <input
-        className={`peer rounded-md border object-left py-10 pl-5 pr-0 transition-all ${inputOpen ? "w-full" : "w-130"}`}
+        className="peer w-full rounded-md border object-left py-2 pl-30"
         placeholder="키워드로 장소 지정"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onClick={() => setInputOpen(true)}
+      />
+      <Search
+        onClick={() => setInputOpen((p) => !p)}
+        className="absolute left-4 top-1/2 size-24 -translate-y-1/2 cursor-pointer rounded-md  "
       />
 
       <ul
-        className={`absolute inset-x-0 top-full z-30 hidden max-h-300 divide-y overflow-y-auto rounded-md border-black bg-white shadow-sm peer-focus:block ${results.length && "border"}`}
+        className={`absolute inset-x-0 top-full z-50 hidden max-h-300 divide-y overflow-y-auto rounded-md border-black bg-white shadow-sm peer-focus:block ${results.length && "border"}`}
       >
         {results?.map((result) => (
           <li key={result.id} className="px-10 py-5">
@@ -38,7 +44,6 @@ export default function MapSearch({
                 e.preventDefault();
                 onChangeValue(result.lat, result.lng);
                 setInputValue("");
-                setInputOpen(false);
               }}
             >
               {result.placeName}
