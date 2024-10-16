@@ -1,22 +1,24 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-import EventCard from "@/components/common/list-card";
 import cn from "@/components/ui/cn";
 import { useMapSearch } from "@/hooks";
 import { useIsMobileStore, useModalStore } from "@/store";
 
 import MapRecommendation from "./map-recommendation";
 import MapSearch from "./map-search";
+import MapSideItem from "./map-side-item";
 
 interface MapSidebarProps {
   mapInfo: MapInfoType;
   changeCenterPosition: (lat: number, lng: number) => void;
+  clickedMarkerId: number;
 }
 
 export default function MapSidebar({
   mapInfo,
   changeCenterPosition,
+  clickedMarkerId,
 }: MapSidebarProps) {
   const isMobile = useIsMobileStore();
   const [sideOpen, setSideOpen] = useState(true);
@@ -84,18 +86,11 @@ export default function MapSidebar({
         <MapRecommendation recommendationRoutine={recommendationRoutine} />
         <ul>
           {mapInfo.markers.map((marker) => (
-            <li key={marker.id} className="border px-20 py-10">
-              <EventCard
-                event={{
-                  id: marker.id,
-                  startDate: marker.startDate,
-                  endDate: marker.endDate,
-                  image: "/images/luffi.jpg",
-                  location: marker.position.location,
-                  title: marker.title,
-                }}
-              />
-            </li>
+            <MapSideItem
+              key={marker.id}
+              clickedMarkerId={clickedMarkerId}
+              marker={marker}
+            />
           ))}
         </ul>
       </article>

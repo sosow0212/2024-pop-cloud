@@ -31,6 +31,7 @@ export default function FullMapPage() {
       <MapSidebar
         mapInfo={mapInfo}
         changeCenterPosition={changeCenterPosition}
+        clickedMarkerId={clickedMarker}
       />
       <Map
         mapInfo={mapInfo}
