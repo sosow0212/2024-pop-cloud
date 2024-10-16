@@ -66,7 +66,7 @@
     </td>
     <td align="center">
       <a href="https://github.com/AdamSeungheonShin" target="_blank">
-        신승현
+        신승헌
       </a>
     </td>
   </tr>
