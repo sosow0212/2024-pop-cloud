@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 export type SearchResultType = {
   placeName: string;
@@ -9,6 +16,15 @@ export type SearchResultType = {
   id: string;
 };
 
+type KakaoPlacesSearchResult = {
+  id: string;
+  place_name: string;
+  category_group_name: string;
+  address_name: string;
+  y: string;
+  x: string;
+};
+
 const useMapSearch = (): [
   string,
   Dispatch<SetStateAction<string>>,
@@ -16,37 +32,49 @@ const useMapSearch = (): [
 ] => {
   const [inputValue, setInputValue] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResultType[]>([]);
-  const [debounce, setDebounce] = useState("");
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (debounce === "") {
+  const searchPlaces = useCallback((keyword: string) => {
+    if (keyword === "") {
       setSearchResults([]);
       return;
     }
+
     const ps = new kakao.maps.services.Places();
-    const searchPlaces = () => {
-      ps.keywordSearch(debounce, (data) => {
-        if (!data) setSearchResults([]);
-        setSearchResults(() =>
-          data.slice(0, 5).map((d) => ({
-            id: d.id,
-            placeName: d.place_name,
-            category: d.category_group_name,
-            address: d.address_name,
-            lat: +d.y,
-            lng: +d.x,
-          })),
-        );
-      });
-    };
-    searchPlaces();
-  }, [debounce]);
+    ps.keywordSearch(keyword, (data: KakaoPlacesSearchResult[] | null) => {
+      if (!data) {
+        setSearchResults([]);
+        return;
+      }
+
+      setSearchResults(
+        data.slice(0, 5).map((d) => ({
+          id: d.id,
+          placeName: d.place_name,
+          category: d.category_group_name,
+          address: d.address_name,
+          lat: parseFloat(d.y),
+          lng: parseFloat(d.x),
+        })),
+      );
+    });
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setDebounce(inputValue);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      searchPlaces(inputValue);
     }, 500);
-  }, [inputValue]);
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [inputValue, searchPlaces]);
 
   return [inputValue, setInputValue, searchResults];
 };
