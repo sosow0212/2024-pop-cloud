@@ -25,7 +25,7 @@ export default function MapPage() {
   };
 
   if (loading)
-    return <section className="size-full animate-pulse bg-slate-300" />;
+    return <section className="animate-pulse size-full bg-slate-300 " />;
   return (
     <section className="relative h-full">
       <MapSidebar

@@ -15,12 +15,16 @@ export default function MapSideItem({
     >
       <EventCard
         event={{
-          id: marker.id,
+          showId: marker.id,
           startDate: marker.startDate,
           endDate: marker.endDate,
-          image: "/images/luffi.jpg",
+          images: ["/images/luffi.jpg"],
           location: marker.position.location,
           title: marker.title,
+          likedCount: marker.likedCount,
+          publicTag: "",
+          showType: marker.searchTarget,
+          visitedCount: marker.visitedCount,
         }}
       />
     </li>
