@@ -10,12 +10,16 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import LikeButton from "../like-button/index";
 
 interface EventData {
-  id: number;
+  showId: number;
   title: string;
   location: string;
   startDate: string;
   endDate: string;
-  image: string;
+  images: string[];
+  publicTag: string;
+  showType: string;
+  visitedCount: number;
+  likedCount: number;
 }
 
 interface EventCardProps {
@@ -42,12 +46,12 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
   };
 
   return (
-    <Link href={`/events/${event.id}`} className="block">
-      <article className="flex h-145 w-full max-w-800 gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
+    <Link href={`/popups/${event.showId}`} className="block w-full max-w-1000">
+      <article className="flex w-full gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
         <figure className="relative size-142 shrink-0">
           <div className="absolute inset-8 overflow-hidden rounded-lg">
             <Image
-              src={event.image}
+              src={event.images[0]}
               alt={`${event.title} 이미지`}
               layout="fill"
               objectFit="cover"

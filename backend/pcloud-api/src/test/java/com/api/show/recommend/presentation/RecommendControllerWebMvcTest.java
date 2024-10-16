@@ -2,7 +2,7 @@ package com.api.show.recommend.presentation;
 
 import com.api.helper.MockBeanInjection;
 import com.api.show.popups.application.request.DateSearchRequest;
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import com.domain.show.recommend.domain.Recommends;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

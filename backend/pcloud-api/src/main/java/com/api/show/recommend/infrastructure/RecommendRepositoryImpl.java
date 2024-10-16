@@ -1,6 +1,6 @@
 package com.api.show.recommend.infrastructure;
 
-import com.domain.show.common.ShowType;
+import com.domain.common.ShowType;
 import com.domain.show.recommend.domain.Recommend;
 import com.domain.show.recommend.domain.RecommendRepository;
 import com.domain.show.recommend.infrastructure.RecommendQueryRepository;
