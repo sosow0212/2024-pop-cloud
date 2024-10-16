@@ -126,7 +126,7 @@ function RecommendationForm() {
   if (pending) return <div>추천 경로 생성 중...</div>;
 
   return (
-    <section className="min-w-340 space-y-20">
+    <section className="min-w-300 space-y-20">
       <header>
         <h3 className="text-20 font-extrabold">경로를 추천해드려요.</h3>
       </header>

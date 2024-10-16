@@ -53,8 +53,8 @@ const useMapSearch = (): [
           placeName: d.place_name,
           category: d.category_group_name,
           address: d.address_name,
-          lat: parseFloat(d.y),
-          lng: parseFloat(d.x),
+          lat: +d.y,
+          lng: +d.x,
         })),
       );
     });
