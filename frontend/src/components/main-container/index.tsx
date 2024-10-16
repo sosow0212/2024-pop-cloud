@@ -17,7 +17,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
   return (
     <main
       className={clsx(
-        "mb-50 grow overflow-auto md:mb-0 md:ml-70",
+        "mb-50 grow overflow-hidden md:mb-0 md:ml-70",
         !isSearchPage && "lg:ml-245",
       )}
     >
