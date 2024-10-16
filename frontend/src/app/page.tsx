@@ -11,7 +11,7 @@ const BANNER_MOCK = [
 ];
 
 const sectionStyle = "my-30 flex flex-col max-w-1100 mx-auto";
-const headingStyle = "text-24 font-extrabold pl-20";
+const headingStyle = "pl-20 text-24 font-extrabold";
 const cardContainerStyle = "flex justify-center";
 const bannerStyle = "h-180 w-full bg-blue-100 ";
 
@@ -22,7 +22,13 @@ export default function Home() {
         <CarouselUI data={BANNER_MOCK} />
       </section>
       <section className="mx-auto flex max-w-1100 flex-col py-30">
-        <h2 className="pl-20 text-24 font-extrabold">🔥 Hottest</h2>
+        <h2 className="pl-20 text-24 font-extrabold">🔥 인기 팝업</h2>
+        <div className={cardContainerStyle}>
+          <Slide popups={mockData} />
+        </div>
+      </section>
+      <section className={sectionStyle}>
+        <h2 className={headingStyle}>🌟 인기 전시</h2>
         <div className={cardContainerStyle}>
           <Slide popups={mockData} />
         </div>
@@ -36,13 +42,13 @@ export default function Home() {
       </section>
       <div className={bannerStyle}>Banner</div>
       <section className={sectionStyle}>
-        <h2 className={headingStyle}>Pop-ups</h2>
+        <h2 className={headingStyle}>추천 팝업</h2>
         <div className={cardContainerStyle}>
           <Slide popups={mockData} />
         </div>
       </section>
       <section className={sectionStyle}>
-        <h2 className={headingStyle}>Exhibitions</h2>
+        <h2 className={headingStyle}>추천 전시</h2>
         <div className={cardContainerStyle}>
           <Slide popups={mockData} />
         </div>
