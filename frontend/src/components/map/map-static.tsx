@@ -4,17 +4,21 @@ import cn from "../ui/cn";
 import MapMarker from "./map-marker";
 
 interface MapStaticProps {
-  position: MapPositionType;
+  lat: number;
+  lng: number;
   label: string;
+  type: "popups" | "exhibition";
   level?: number;
   className?: string;
 }
 
 export default function MapStatic({
   label,
-  position,
+  lat,
+  lng,
   level = 4,
   className,
+  type,
 }: MapStaticProps) {
   return (
     <section className={cn("relative w-500 h-500", className)}>
@@ -24,9 +28,19 @@ export default function MapStatic({
           position: "absolute",
           inset: 0,
         }}
-        center={position}
+        center={{
+          lat,
+          lng,
+        }}
       >
-        <MapMarker title={label} type="place" position={position} infoUrl="" />
+        <MapMarker
+          id={lat + lng}
+          title={label}
+          type={type}
+          lat={lat}
+          lng={lng}
+          isStaticMap
+        />
       </KakaoMap>
     </section>
   );

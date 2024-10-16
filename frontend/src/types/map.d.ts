@@ -4,21 +4,46 @@ type MapPositionType = {
 };
 
 type MarkerType = {
-  position: MapPositionType;
+  searchTarget: "POPUPS" | "EXHIBITION";
+  id: number;
   title: string;
-  type: "current" | "bookmark" | "place";
-  infoUrl: string;
-};
-type BoundType = {
-  north: number;
-  east: number;
-  south: number;
-  west: number;
+  position: {
+    location: string;
+    latitude: {
+      value: number;
+    };
+    longitude: {
+      value: number;
+    };
+  };
+  startDate: string;
+  endDate: string;
+  visitedCount: number;
+  likedCount: number;
 };
 
 type MapInfoType = {
+  currentPosition: MapPositionType;
   center: MapPositionType;
-  markers?: MarkerType[];
+  markers: MarkerType[];
   mapLevel: number;
-  bound: BoundType;
+};
+
+type RecommendationResponse = {
+  id: number;
+  searchTarget: "POPUPS" | "EXHIBITION";
+  title: string;
+  position: {
+    location: string;
+    latitude: {
+      value: number;
+    };
+    longitude: {
+      value: number;
+    };
+  };
+  startDate: string;
+  endDate: string;
+  visitedCount: number;
+  likedCount: number;
 };

@@ -37,3 +37,47 @@
 .center {
   @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
 }
+
+.mapPage-px {
+  @apply md:px-10 lg:px-20;
+}
+
+input[type="radio"].recommend {
+  display: none;
+}
+input[type="checkbox"].recommend {
+  display: none;
+}
+
+.recommedation-point {
+  @apply z-[1] absolute rounded-md bg-blue-4 px-4 py-2 text-center text-white max-w-100 truncate;
+}
+.recommedation-start {
+  @apply z-[1] absolute rounded-md bg-black px-4 py-2 text-center text-white max-w-100 truncate;
+}
+
+.recommedation-path {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: red;
+  stroke-width: 2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 4s 0.5s linear forwards;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  16.67% {
+    stroke-dashoffset: 815;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
