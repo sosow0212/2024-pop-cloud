@@ -9,6 +9,7 @@ import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 
 import FilterSidebar from "@/app/shows/_components/filter-sidebar";
 import MobileFilterSidebar from "@/app/shows/_components/mobile-filter";
+import { shrinkPage } from "@/constants";
 
 import NavIconButton from "./nav-icon-button";
 import NavLoginButton from "./nav-login-button";
@@ -23,7 +24,7 @@ const NAV_ITEMS = [
 
 export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
-  const shrink = ["/shows", "/map"].includes(pathname);
+  const shrink = shrinkPage.includes(pathname);
   const isSearchPage = pathname === "/shows";
   const profileUrl = loggedIn ? "/profile" : "/login";
   const [isFilterOpen, setIsFilterOpen] = useState(false);
