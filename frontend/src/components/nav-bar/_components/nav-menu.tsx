@@ -23,12 +23,13 @@ const NAV_ITEMS = [
 
 export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
+  const shrink = ["/shows", "/map"].includes(pathname);
   const isSearchPage = pathname === "/shows";
   const profileUrl = loggedIn ? "/profile" : "/login";
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const toggleFilter = () => {
-    setIsFilterOpen(!isFilterOpen);
+    setIsFilterOpen((prev) => !prev);
   };
 
   return (
@@ -36,10 +37,10 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
       <menu
         className={clsx(
           "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
-          isSearchPage && "lg:w-70",
+          shrink && "lg:w-70",
         )}
       >
-        <NavLogo isSearchPage={isSearchPage} />
+        <NavLogo shrink={shrink} />
         {NAV_ITEMS.map(({ href, name, icon }) => {
           const isActive = pathname === href;
 
@@ -50,7 +51,7 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
               name={name}
               icon={icon}
               isActive={isActive}
-              isSearchPage={isSearchPage}
+              shrink={shrink}
             />
           );
         })}
@@ -60,10 +61,10 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
             name="프로필"
             icon={FiUser}
             isActive={pathname === profileUrl}
-            isSearchPage={isSearchPage}
+            shrink={shrink}
           />
         ) : (
-          <NavLoginButton isSearchPage={isSearchPage} />
+          <NavLoginButton shrink={shrink} />
         )}
       </menu>
       {isSearchPage && (
