@@ -76,8 +76,8 @@ export default function MapSidebar({
   };
 
   const mobileClasses = isMobile
-    ? "bottom-0 left-0 h-[40vh] w-full"
-    : "top-0 left-0 h-screen";
+    ? "bottom-0 left-0 h-350 w-full"
+    : "top-0 left-0 md:h-screen h-[calc(100vh-110px)]";
 
   let transformClasses = "";
   if (isMobile) {
@@ -89,7 +89,7 @@ export default function MapSidebar({
   return (
     <nav
       className={cn(
-        `absolute z-10  bg-white transition-all`,
+        `absolute z-10  bg-white transition-all min-w-340`,
         mobileClasses,
         transformClasses,
       )}
@@ -99,7 +99,7 @@ export default function MapSidebar({
       ) : (
         <DesktopButton isOpen={sideOpen} setIsOpen={setSideOpen} />
       )}
-      <article className="relative h-full overflow-y-auto">
+      <article className="relative flex h-full flex-col overflow-y-auto">
         <header className="sticky top-0 z-10 flex items-center gap-x-20 bg-black px-20 py-10">
           <MapSearch
             inputValue={inputValue}
@@ -123,20 +123,7 @@ export default function MapSidebar({
               key={marker.id}
               clickedMarkerId={clickedMarkerId}
               marker={marker}
-            />
-          ))}
-          {mapInfo.markers.map((marker) => (
-            <MapSideItem
-              key={marker.id + 100}
-              clickedMarkerId={clickedMarkerId}
-              marker={marker}
-            />
-          ))}
-          {mapInfo.markers.map((marker) => (
-            <MapSideItem
-              key={marker.id + 200}
-              clickedMarkerId={clickedMarkerId}
-              marker={marker}
+              changeCenterPosition={changeCenterPosition}
             />
           ))}
         </ul>
