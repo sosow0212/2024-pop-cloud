@@ -11,7 +11,7 @@ export default function MapSideItem({
 }: MapSideItemProps) {
   return (
     <li
-      className={`border px-20 py-10 ${clickedMarkerId === marker.id ? "bg-slate-300" : "bg-white"}`}
+      className={`${clickedMarkerId === marker.id ? "bg-slate-300" : "bg-white"}`}
     >
       <EventCard
         event={{

@@ -94,8 +94,8 @@ const useMapState = () => {
   const [loading, setLoading] = useState(true);
   const delta = useMemo(
     () => ({
-      lat: 0.0011246652784322464 * 2 ** mapInfo.mapLevel,
-      lng: 0.003353123718198958 * 2 ** mapInfo.mapLevel,
+      lat: 0.0017985216362035317 * 2 ** mapInfo.mapLevel,
+      lng: 0.003461695223506922 * 2 ** mapInfo.mapLevel,
     }),
     [mapInfo.mapLevel],
   );
