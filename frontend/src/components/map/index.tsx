@@ -30,7 +30,7 @@ export default function Map({
       className={className}
       handleChange={handleChange}
     >
-      <MarkerClusterer averageCenter minLevel={7}>
+      <MarkerClusterer averageCenter minLevel={8}>
         {mapInfo.markers?.map((marker) => (
           <MapMarker
             key={marker.id}

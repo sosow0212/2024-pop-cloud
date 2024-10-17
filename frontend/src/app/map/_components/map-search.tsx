@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { SearchResultType } from "@/hooks/use-map-search";
 
 interface MapSearchProps {
-  onChangeValue: (lat: number, lng: number) => void;
+  onChangeValue: (lat: number, lng: number, withCurrent: boolean) => void;
   inputValue: string;
   setInputValue: Dispatch<SetStateAction<string>>;
   results: SearchResultType[];
@@ -42,7 +42,7 @@ export default function MapSearch({
               className="my-5 cursor-pointer text-18 font-extrabold underline-offset-4 hover:underline"
               onMouseDown={(e) => {
                 e.preventDefault();
-                onChangeValue(result.lat, result.lng);
+                onChangeValue(result.lat, result.lng, true);
                 setInputValue("");
               }}
             >

@@ -7,7 +7,11 @@ import { formatDate } from "@/components/common/list-card";
 interface MapSideItemProps {
   marker: MarkerType;
   clickedMarkerId: number;
-  changeCenterPosition: (lat: number, lng: number) => void;
+  changeCenterPosition: (
+    lat: number,
+    lng: number,
+    withCurrent: boolean,
+  ) => void;
 }
 
 export default function MapSideItem({
@@ -48,6 +52,7 @@ export default function MapSideItem({
                 changeCenterPosition(
                   position.latitude.value,
                   position.longitude.value,
+                  false,
                 )
               }
             >

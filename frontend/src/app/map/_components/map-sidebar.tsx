@@ -1,58 +1,22 @@
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-} from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 
 import cn from "@/components/ui/cn";
 import { useMapSearch } from "@/hooks";
 import { useIsMobileStore, useModalStore } from "@/store";
 
+import { DesktopButton, MobileButton } from "./map-openButton";
 import MapRecommendation from "./map-recommendation";
 import MapSearch from "./map-search";
 import MapSideItem from "./map-side-item";
 
 interface MapSidebarProps {
   mapInfo: MapInfoType;
-  changeCenterPosition: (lat: number, lng: number) => void;
+  changeCenterPosition: (
+    lat: number,
+    lng: number,
+    withCurrent: boolean,
+  ) => void;
   clickedMarkerId: number;
-}
-interface ButtonProps {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-function MobileButton({ isOpen, setIsOpen }: ButtonProps) {
-  return (
-    <button
-      className={cn(
-        "top-0 -translate-y-full left-1/2 -translate-x-1/2 rounded-t-lg bg-gray-200 border-gray-400 border border-b-0 hover:bg-gray-300 text-slate-500 absolute",
-      )}
-      type="button"
-      onClick={() => setIsOpen((p) => !p)}
-    >
-      {isOpen ? (
-        <ChevronDown className="h-20 w-60" />
-      ) : (
-        <ChevronUp className="h-20 w-60" />
-      )}
-    </button>
-  );
-}
-function DesktopButton({ isOpen, setIsOpen }: ButtonProps) {
-  return (
-    <button
-      className={cn(
-        "rounded-r-lg bg-gray-100 hover:bg-gray-200 py-10 text-slate-500 absolute top-1/2 right-0 translate-x-full -translate-y-1/2 border-gray-400 border border-l-0",
-      )}
-      type="button"
-      onClick={() => setIsOpen((p) => !p)}
-    >
-      {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
-    </button>
-  );
 }
 
 export default function MapSidebar({
@@ -76,7 +40,7 @@ export default function MapSidebar({
   };
 
   const mobileClasses = isMobile
-    ? "bottom-0 left-0 h-350 w-full"
+    ? "bottom-0 left-0 h-300 w-full"
     : "top-0 left-0 md:h-screen h-[calc(100vh-110px)]";
 
   let transformClasses = "";
@@ -89,7 +53,7 @@ export default function MapSidebar({
   return (
     <nav
       className={cn(
-        `absolute z-10  bg-white transition-all min-w-340`,
+        `absolute z-10 bg-white transition-all min-w-340`,
         mobileClasses,
         transformClasses,
       )}
@@ -99,7 +63,9 @@ export default function MapSidebar({
       ) : (
         <DesktopButton isOpen={sideOpen} setIsOpen={setSideOpen} />
       )}
-      <article className="relative flex h-full flex-col overflow-y-auto">
+      <article
+        className={`relative flex h-full flex-col overflow-y-auto ${isMobile && "rounded-t-xl"}`}
+      >
         <header className="sticky top-0 z-10 flex items-center gap-x-20 bg-black px-20 py-10">
           <MapSearch
             inputValue={inputValue}
@@ -118,6 +84,22 @@ export default function MapSidebar({
         </header>
         <MapRecommendation recommendationRoutine={recommendationRoutine} />
         <ul>
+          {mapInfo.markers.map((marker) => (
+            <MapSideItem
+              key={marker.id}
+              clickedMarkerId={clickedMarkerId}
+              marker={marker}
+              changeCenterPosition={changeCenterPosition}
+            />
+          ))}
+          {mapInfo.markers.map((marker) => (
+            <MapSideItem
+              key={marker.id}
+              clickedMarkerId={clickedMarkerId}
+              marker={marker}
+              changeCenterPosition={changeCenterPosition}
+            />
+          ))}
           {mapInfo.markers.map((marker) => (
             <MapSideItem
               key={marker.id}

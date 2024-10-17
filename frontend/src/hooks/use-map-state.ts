@@ -100,18 +100,33 @@ const useMapState = () => {
     [mapInfo.mapLevel],
   );
 
-  const changeCenterPosition = (lat: number, lng: number) => {
-    setMapInfo((p) => ({
-      ...p,
-      center: {
-        lat,
-        lng,
-      },
-      currentPosition: {
-        lat,
-        lng,
-      },
-    }));
+  const changeCenterPosition = (
+    lat: number,
+    lng: number,
+    withCurrent: boolean,
+  ) => {
+    if (withCurrent) {
+      setMapInfo((p) => ({
+        ...p,
+        center: {
+          lat,
+          lng,
+        },
+        currentPosition: {
+          lat,
+          lng,
+        },
+      }));
+    } else {
+      setMapInfo((p) => ({
+        ...p,
+        center: {
+          lat,
+          lng,
+        },
+        mapLevel: 4,
+      }));
+    }
   };
 
   const judgeInRange = (map: kakao.maps.Map) => {
