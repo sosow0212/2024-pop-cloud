@@ -24,8 +24,7 @@ export default function MapPage() {
     setClickedMarker((p) => (p === id ? -1 : id));
   };
 
-  if (loading)
-    return <section className="animate-pulse size-full bg-slate-400 " />;
+  if (loading) return <section className="size-full animate-pulse" />;
   return (
     <section className="relative h-full">
       <MapSidebar

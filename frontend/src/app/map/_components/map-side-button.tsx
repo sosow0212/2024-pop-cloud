@@ -44,4 +44,16 @@ function DesktopButton({ isOpen, setIsOpen }: ButtonProps) {
   );
 }
 
-export { DesktopButton, MobileButton };
+export default function MapSideButton({
+  isOpen,
+  setIsOpen,
+  isMobile,
+}: ButtonProps & {
+  isMobile: boolean;
+}) {
+  return isMobile ? (
+    <MobileButton isOpen={isOpen} setIsOpen={setIsOpen} />
+  ) : (
+    <DesktopButton isOpen={isOpen} setIsOpen={setIsOpen} />
+  );
+}
