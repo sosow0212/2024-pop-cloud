@@ -26,7 +26,7 @@ export default function MapPage() {
 
   if (loading) return <section className="size-full animate-pulse" />;
   return (
-    <section className="relative h-full">
+    <section className="relative h-full overflow-hidden">
       <MapSidebar
         mapInfo={mapInfo}
         changeCenterPosition={changeCenterPosition}

@@ -1,11 +1,24 @@
-import Image from "next/image";
 import React, { useEffect, useRef } from "react";
+
+import MapSideItem from "./map-side-item";
+
+interface MapRecommendationProps {
+  recommendationRoutine: RecommendationResponse[];
+  openRecommendationModal: () => void;
+  clickedMarkerId: number;
+  changeCenterPosition: (
+    lat: number,
+    lng: number,
+    withCurrent: boolean,
+  ) => void;
+}
 
 export default function MapRecommendation({
   recommendationRoutine = [],
-}: {
-  recommendationRoutine: RecommendationResponse[];
-}) {
+  openRecommendationModal,
+  changeCenterPosition,
+  clickedMarkerId,
+}: MapRecommendationProps) {
   const recommendationCircleRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   useEffect(() => {
@@ -13,7 +26,7 @@ export default function MapRecommendation({
     if (recommendationRoutine?.length > 0) {
       recommendationCircleRef.current?.scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "end",
       });
 
       current?.classList.add("recommedation-path");
@@ -30,12 +43,33 @@ export default function MapRecommendation({
     return { x, y };
   };
 
-  if (recommendationRoutine.length === 0) return null;
+  if (recommendationRoutine.length === 0) {
+    return (
+      <article className="flex size-full items-center justify-center ">
+        <button
+          type="button"
+          className="rounded-md bg-blue-5 px-10 py-5 text-white"
+          onClick={openRecommendationModal}
+        >
+          추천 경로 생성
+        </button>
+      </article>
+    );
+  }
 
   return (
     <article className="flex flex-col items-center justify-center gap-y-20 px-10">
-      <h5 className="rounded-md bg-slate-200 px-12 py-8 ">추천 경로</h5>
-      <div ref={recommendationCircleRef} className="relative size-300">
+      <button
+        type="button"
+        className="rounded-md bg-slate-400 px-10 py-5 text-white hover:bg-slate-500"
+        onClick={openRecommendationModal}
+      >
+        추천 경로 재생성
+      </button>
+      <div
+        ref={recommendationCircleRef}
+        className="relative size-200 sm:size-250"
+      >
         <div className="absolute inset-0 rounded-full border">
           <div className="recommedation-start left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
             Start
@@ -66,22 +100,14 @@ export default function MapRecommendation({
           </svg>
         </div>
       </div>
-      <ul className="flex flex-wrap items-center gap-10">
-        {recommendationRoutine.map((item, idx) => (
-          <li key={item.id} className="w-80 rounded-md border md:w-120">
-            <div className="relative h-80 w-full md:h-120">
-              <Image
-                src="/images/luffi.jpg"
-                fill
-                className="object-center"
-                alt={`${item.title}`}
-              />
-            </div>
-            <div className="truncate ">
-              <span className="font-extrabold text-blue-7">({idx + 1})</span>
-              {item.title}
-            </div>
-          </li>
+      <ul className="flex w-full flex-col items-center gap-10">
+        {recommendationRoutine.map((place) => (
+          <MapSideItem
+            key={place.id}
+            marker={place}
+            clickedMarkerId={clickedMarkerId}
+            changeCenterPosition={changeCenterPosition}
+          />
         ))}
       </ul>
     </article>
