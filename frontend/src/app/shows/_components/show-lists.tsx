@@ -91,7 +91,7 @@ export default function ShowList({
 
   return (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         {filteredShows.map((show: ShowData) => (
           <EventCard
             key={show.showId}

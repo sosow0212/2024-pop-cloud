@@ -39,7 +39,7 @@ export default function SearchInput({
   };
 
   return (
-    <form onSubmit={handleSearch} className="relative w-full max-w-1000">
+    <form onSubmit={handleSearch} className="relative w-full max-w-1400">
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-10">
         <FiSearch className="size-20 text-gray-400" />
       </div>
