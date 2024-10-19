@@ -4,6 +4,8 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
+import { shrinkPage } from "@/constants";
+
 /**
  * 사이드 바 크기에 따라서 마진을 적용하는 컨테이너입니다.
  *
@@ -12,13 +14,13 @@ import { ReactNode } from "react";
 
 export default function MainContainer({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isSearchPage = pathname === "/popups";
+  const shrinkSideBar = shrinkPage.includes(pathname);
 
   return (
     <main
       className={clsx(
-        "mb-50 h-full grow overflow-auto md:mb-0 md:ml-70",
-        !isSearchPage && "lg:ml-245",
+        "mb-50 grow overflow-auto md:mb-0 md:ml-70",
+        !shrinkSideBar && "lg:ml-245",
       )}
     >
       {children}
