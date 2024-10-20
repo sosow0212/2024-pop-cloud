@@ -5,6 +5,7 @@ import { FaDog } from "react-icons/fa6";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdChildCare } from "react-icons/md";
 
+import MapStatic from "@/components/map/map-static";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface Popup {
@@ -39,7 +40,6 @@ export default function DetailsTabs({ data }: Popup) {
       title: "행사기간",
       info: `${format(new Date(data.startDate), "yyyy. MM. dd")} - ${format(new Date(data.endDate), "yyyy. MM. dd")}`,
     },
-    { title: "장소", info: data.location },
     { title: "이용시간", info: data.openTimes },
     { title: "이용요금", info: `${data.fee}원` },
     { title: "주소", info: data.location },
@@ -93,13 +93,21 @@ export default function DetailsTabs({ data }: Popup) {
           <article className="leading-16 mb-50 text-16 text-gray-600">
             {data.description}
           </article>
-
-          {DETAIL_INFO.map(({ title, info }) => (
-            <dl key={title}>
-              <dt className="mt-20 text-16-600 text-gray-700">{title}</dt>
-              <dd className="mt-8 text-15 text-gray-500">{info}</dd>
-            </dl>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <MapStatic
+              label={data.title}
+              position={{ lat: data.latitude, lng: data.longitude }}
+              className="order-2 size-full h-300 md:order-1"
+            />
+            <div className="order-1 mb-26 md:order-2 md:ml-20">
+              {DETAIL_INFO.map(({ title, info }) => (
+                <dl key={title} className="mb-20 last:mb-0 md:mb-34">
+                  <dt className="mb-8 text-16-600 text-gray-700">{title}</dt>
+                  <dd className="text-15 text-gray-500">{info}</dd>
+                </dl>
+              ))}
+            </div>
+          </div>
         </section>
 
         <hr className="mb-30 h-1 w-full bg-gray-200" />
