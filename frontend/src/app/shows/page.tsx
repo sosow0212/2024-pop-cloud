@@ -10,6 +10,7 @@ import fetchShows from "@/api/get-shows";
 
 import SearchInput from "./_components/search-input";
 import ShowList from "./_components/show-lists";
+import ShowTypeFilter from "./_components/shows-type-filter";
 
 export default async function ShowListPage({
   searchParams,
@@ -70,6 +71,9 @@ export default async function ShowListPage({
           </button>
         </div>
         <SearchInput initialValue={searchParams.title as string} />
+        <div className="my-4">
+          <ShowTypeFilter />
+        </div>
         <div className="grow overflow-hidden">
           <Suspense fallback={<div>Loading...</div>}>
             <ShowList searchParams={searchParams} />
