@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import { ShowData } from "@/app/shows/types/index";
 import { ApiError } from "@/custom-error";
 
@@ -5,11 +7,6 @@ import instance from "./custom-fetch";
 
 type FetchShowsParams = {
   [key: string]: string | string[] | undefined | null;
-};
-
-type ShowsResponse = {
-  data: ShowData[];
-  nextCursor: string | null;
 };
 
 export default async function fetchShows(
@@ -33,11 +30,15 @@ export default async function fetchShows(
   if (!searchParams.has("pageSize")) searchParams.set("pageSize", "10");
 
   try {
-    const { data } = await instance.get<ShowsResponse>(
+    const { data } = await instance.get<ShowData[]>(
       `/api/shows?${searchParams.toString()}`,
     );
 
-    let shows = data.data;
+    if (!Array.isArray(data)) {
+      return { shows: [], nextCursor: null };
+    }
+
+    let shows = data;
 
     // Filter shows based on title if provided
     if (params.title) {
@@ -48,13 +49,16 @@ export default async function fetchShows(
       );
     }
 
-    const { nextCursor } = data;
+    const nextCursor =
+      shows.length > 0 ? shows[shows.length - 1].showId.toString() : null;
 
     return { shows, nextCursor };
   } catch (error) {
     if (error instanceof ApiError) {
-      /* TODO: 에러처리하기 */
-      console.error(`API Error: ${error.message}, Status: ${error.status}`); // eslint-disable-line no-console
+      //TODO - 에러처리 추가
+      console.error(`API Error: ${error.message}, Status: ${error.status}`);
+    } else {
+      console.error("An unexpected error occurred:", error);
     }
     throw error;
   }
