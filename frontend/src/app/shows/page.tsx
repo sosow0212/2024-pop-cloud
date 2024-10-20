@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import fetchShows from "@/api/get-shows";
 
 import SearchInput from "./_components/search-input";
+import SelectedTags from "./_components/selected-tags";
 import ShowList from "./_components/show-lists";
 import ShowTypeFilter from "./_components/shows-type-filter";
 
@@ -71,8 +72,11 @@ export default async function ShowListPage({
           </button>
         </div>
         <SearchInput initialValue={searchParams.title as string} />
-        <div className="my-4">
+        <div className="my-4 flex flex-wrap items-center">
           <ShowTypeFilter />
+          <div className="ml-4 flex flex-wrap items-center">
+            <SelectedTags />
+          </div>
         </div>
         <div className="grow overflow-hidden">
           <Suspense fallback={<div>Loading...</div>}>
