@@ -6,9 +6,9 @@ import {
 import cn from "../ui/cn";
 
 const MarkerImageSrc = {
-  current: "./images/map/current-marker.png",
-  bookmark: "./images/map/bookmark-marker.png",
-  place: "./images/map/place-marker.png",
+  current: "/images/map/current-marker.png",
+  bookmark: "/images/map/bookmark-marker.png",
+  place: "/images/map/place-marker.png",
 };
 
 export default function MapMarker({
