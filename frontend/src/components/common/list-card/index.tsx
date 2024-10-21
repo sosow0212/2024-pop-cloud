@@ -27,7 +27,7 @@ interface EventCardProps {
   onLikeChange?: (isLiked: boolean) => void;
 }
 
-const formatDate = (dateString: string) => {
+export const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const year = date.getFullYear().toString().slice(2);
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -46,15 +46,15 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
   };
 
   return (
-    <Link href={`/popups/${event.showId}`} className="block w-full max-w-1000">
-      <article className="flex w-full gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
+    <Link href={`/shows/${event.showId}`} className="block">
+      <article className="flex w-full max-w-800 gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
         <figure className="relative size-142 shrink-0">
           <div className="absolute inset-8 overflow-hidden rounded-lg">
             <Image
               src={event.images[0]}
               alt={`${event.title} 이미지`}
-              layout="fill"
-              objectFit="cover"
+              fill
+              className="object-contain"
             />
           </div>
         </figure>
