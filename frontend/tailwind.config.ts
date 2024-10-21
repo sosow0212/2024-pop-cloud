@@ -112,10 +112,15 @@ const config: Config = {
       spin: {
         to: { transform: "rotate(360deg)" },
       },
+      pulse: {
+        "0%, 100%": { backgroundColor: "transparent" },
+        "50%": { backgroundColor: "#cbd5e1" },
+      },
     },
     animation: {
       fadeIn: "fadeIn 0.5s",
       spin: "spin 1s linear infinite",
+      pulse: "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
     },
   },
   plugins: [],

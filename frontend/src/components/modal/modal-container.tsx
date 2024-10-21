@@ -12,6 +12,7 @@ import {
   Drawer,
   DrawerContent,
   DrawerDescription,
+  DrawerOverlay,
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { useIsMobileStore } from "@/store";
@@ -76,6 +77,7 @@ function DrawerContainer({
 }: PropsWithChildren<ContainerProps>) {
   return (
     <Drawer open={isOpen} onOpenChange={onClose}>
+      <DrawerOverlay />
       <DrawerContent className={cn("bg-white pb-20", className)}>
         {/* Title과 Description을 설정하지 않을 시 경고창이 떠서 이를 막기 위해 선언하였습니다  */}
         <VisuallyHidden.Root asChild>
