@@ -1,5 +1,7 @@
 package com.api.show.popups.application;
 
+import com.api.show.common.event.ImageCreatedEvent;
+import com.api.show.common.event.ImageUpdatedEvent;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
 import com.common.config.event.Events;
@@ -27,7 +29,12 @@ public class PopupsService {
 
     public Long create(final Long memberId, final PopupsCreateRequest request) {
         Popups popups = popupsRepository.save(request.toDomain(memberId));
-        Events.raise(new PopupsTagsCreatedEvent(popups.getId(), request.tags(), CustomTagType.POPUPS));
+        Events.raise(new PopupsTagsCreatedEvent(
+                popups.getId(),
+                request.tags(),
+                CustomTagType.POPUPS)
+        );
+        Events.raise(ImageCreatedEvent.createdPopupsImages(popups.getId(), request.images()));
         return popups.getId();
     }
 
@@ -39,7 +46,18 @@ public class PopupsService {
         Popups popups = findPopups(popupsId);
         popups.update(request.toDomain(memberId));
         popupsCacheRepository.evictCache(popupsId);
-        Events.raise(new PopupsTagsUpdatedEvent(popups.getId(), request.tags(), CustomTagType.POPUPS));
+
+        Events.raise(new PopupsTagsUpdatedEvent(
+                popups.getId(),
+                request.tags(),
+                CustomTagType.POPUPS)
+        );
+
+        Events.raise(ImageUpdatedEvent.updatedPopupsImages(
+                popups.getId(),
+                request.addedImages(),
+                request.deletedImageIds())
+        );
     }
 
     private Popups findPopups(final Long popupsId) {

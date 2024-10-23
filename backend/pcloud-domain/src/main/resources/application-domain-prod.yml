@@ -12,3 +12,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+
+file:
+  show:
+    upload:
+      location: /todo/

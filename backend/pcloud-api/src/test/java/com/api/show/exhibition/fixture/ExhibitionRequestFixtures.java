@@ -3,7 +3,9 @@ package com.api.show.exhibition.fixture;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.domain.show.common.PublicTag;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -29,7 +31,8 @@ public class ExhibitionRequestFixtures {
                 true,
                 10000,
                 PublicTag.EXHIBITION.getName(),
-                List.of("빵빵이", "만원", "가족", "데이트")
+                List.of("빵빵이", "만원", "가족", "데이트"),
+                new ArrayList<>()
         );
     }
 
@@ -53,7 +56,9 @@ public class ExhibitionRequestFixtures {
                 true,
                 10000,
                 PublicTag.EXHIBITION.getName(),
-                List.of("빵빵이", "만원", "가족", "데이트")
+                List.of("빵빵이", "만원", "가족", "데이트"),
+                new ArrayList<>(),
+                new ArrayList<>()
         );
     }
 }

@@ -9,14 +9,15 @@ import com.api.show.exhibition.presentation.dto.ExhibitionLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,13 +36,10 @@ public class ExhibitionController {
     private final ExhibitionService exhibitionService;
     private final ExhibitionQueryService exhibitionQueryService;
 
-    /**
-     * TODO: 이미지 처리
-     */
     @PostMapping
     public ResponseEntity<Void> create(
             @AuthMembers(permit = {MANAGER, ADMIN}) final Long memberId,
-            @RequestBody final ExhibitionCreateRequest request
+            @ModelAttribute @Valid final ExhibitionCreateRequest request
     ) {
         Long createdExhibitionId = exhibitionService.create(memberId, request);
         return ResponseEntity.created(URI.create(URI_PREFIX + createdExhibitionId))
@@ -59,7 +57,7 @@ public class ExhibitionController {
     public ResponseEntity<Void> patchById(
             @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
             @PathVariable final Long exhibitionId,
-            @RequestBody final ExhibitionUpdateRequest request
+            @ModelAttribute @Valid final ExhibitionUpdateRequest request
     ) {
         exhibitionService.patchById(
                 memberId,

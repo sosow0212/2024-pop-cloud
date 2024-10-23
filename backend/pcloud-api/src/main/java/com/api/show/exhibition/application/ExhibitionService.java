@@ -1,5 +1,7 @@
 package com.api.show.exhibition.application;
 
+import com.api.show.common.event.ImageCreatedEvent;
+import com.api.show.common.event.ImageUpdatedEvent;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.common.config.event.Events;
@@ -28,9 +30,9 @@ public class ExhibitionService {
         Events.raise(new ExhibitionTagsCreatedEvents(
                 savedExhibition.getId(),
                 request.tags(),
-                CustomTagType.PERSONAL_EXHIBITION
-        ));
-
+                CustomTagType.PERSONAL_EXHIBITION)
+        );
+        Events.raise(ImageCreatedEvent.createdExhibitionImages(savedExhibition.getId(), request.images()));
         return savedExhibition.getId();
     }
 
@@ -40,12 +42,18 @@ public class ExhibitionService {
             final ExhibitionUpdateRequest request
     ) {
         Exhibition foundExhibition = findExhibition(exhibitionId);
-        Exhibition updateExhibition = request.toDomain(memberId);
-        foundExhibition.update(updateExhibition);
+        foundExhibition.update(request.toDomain(memberId));
+
         Events.raise(new ExhibitionTagsUpdatedEvents(
                 foundExhibition.getId(),
                 request.tags(),
                 CustomTagType.PERSONAL_EXHIBITION)
+        );
+
+        Events.raise(ImageUpdatedEvent.updatedExhibitionImages(
+                foundExhibition.getId(),
+                request.addedImages(),
+                request.deletedImageIds())
         );
     }
 
