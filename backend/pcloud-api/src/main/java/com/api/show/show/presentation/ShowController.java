@@ -20,7 +20,7 @@ public class ShowController {
     private final ShowQueryService showQueryService;
 
     @GetMapping
-    public ResponseEntity<List<ShowSimpleResponse>> findAll(
+    public ResponseEntity<List<ShowSimpleResponse>> findFilteredShowsWithPaging(
             @RequestParam(required = false) final Long showId,
             @RequestParam(required = false, defaultValue = "10") final Integer pageSize,
             @RequestParam(required = false, defaultValue = "popups") final String showType,
