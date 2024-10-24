@@ -1,4 +1,9 @@
+/*eslint-disable */
+
 import { ShowData } from "@/app/shows/types/index";
+import { ApiError } from "@/custom-error";
+
+import instance from "./custom-fetch";
 
 type FetchShowsParams = {
   [key: string]: string | string[] | undefined | null;
@@ -24,30 +29,37 @@ export default async function fetchShows(
   if (!searchParams.has("showType")) searchParams.set("showType", "popups");
   if (!searchParams.has("pageSize")) searchParams.set("pageSize", "10");
 
-  const url = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/api/shows`);
-  url.search = searchParams.toString();
-
-  const response = await fetch(url.toString());
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-  const data = await response.json();
-
-  if (!Array.isArray(data)) {
-    return { shows: [], nextCursor: null };
-  }
-
-  let shows = data as ShowData[];
-
-  // Filter shows based on title if provided
-  if (params.title) {
-    shows = shows.filter((show) =>
-      show.title.toLowerCase().includes(params.title!.toString().toLowerCase()),
+  try {
+    const { data } = await instance.get<ShowData[]>(
+      `/api/shows?${searchParams.toString()}`,
     );
+
+    if (!Array.isArray(data)) {
+      return { shows: [], nextCursor: null };
+    }
+
+    let shows = data;
+
+    // Filter shows based on title if provided
+    if (params.title) {
+      shows = shows.filter((show) =>
+        show.title
+          .toLowerCase()
+          .includes(params.title!.toString().toLowerCase()),
+      );
+    }
+
+    const nextCursor =
+      shows.length > 0 ? shows[shows.length - 1].showId.toString() : null;
+
+    return { shows, nextCursor };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      //TODO - 에러처리 추가
+      console.error(`API Error: ${error.message}, Status: ${error.status}`);
+    } else {
+      console.error("An unexpected error occurred:", error);
+    }
+    throw error;
   }
-
-  const nextCursor =
-    shows.length > 0 ? shows[shows.length - 1].showId.toString() : null;
-
-  return { shows, nextCursor };
 }
