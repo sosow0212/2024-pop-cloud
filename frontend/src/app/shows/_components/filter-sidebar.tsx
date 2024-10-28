@@ -84,7 +84,7 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <aside className="flex size-full flex-col border-r border-gray-200 bg-white px-12 pt-40 lg:h-screen">
+    <aside className="flex size-full flex-col border-r border-gray-200 bg-white px-12 pt-40 md:h-screen lg:h-screen">
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 md:px-5">
         <div className="mb-8 flex items-center gap-9">
           <BsFilterLeft className="size-20" />

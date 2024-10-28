@@ -1,14 +1,9 @@
 "use client";
 
 import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
 import { FiHeart, FiHome, FiMapPin, FiSearch, FiUser } from "react-icons/fi";
-import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 
-import FilterSidebar from "@/app/shows/_components/filter-sidebar";
-import MobileFilterSidebar from "@/app/shows/_components/mobile-filter";
 import { shrinkPage } from "@/constants";
 
 import NavIconButton from "./nav-icon-button";
@@ -25,13 +20,8 @@ const NAV_ITEMS = [
 export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
   const shrink = shrinkPage.includes(pathname);
-  const isSearchPage = pathname === "/shows";
-  const profileUrl = loggedIn ? "/profile" : "/login";
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const toggleFilter = () => {
-    setIsFilterOpen((prev) => !prev);
-  };
+  const profileUrl = loggedIn ? "/profile" : "/login";
 
   return (
     <div className="flex md:h-full lg:h-screen">
@@ -68,49 +58,6 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
           <NavLoginButton shrink={shrink} />
         )}
       </menu>
-      {isSearchPage && (
-        <>
-          <div className="hidden md:block">
-            <AnimatePresence>
-              {isFilterOpen && (
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: 300 }}
-                  exit={{ width: 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className="overflow-hidden"
-                >
-                  <div className="w-300">
-                    <FilterSidebar onClose={toggleFilter} />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <motion.button
-              type="button"
-              onClick={toggleFilter}
-              className={clsx(
-                "absolute top-1/2 -translate-y-1/2",
-                "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
-              )}
-              animate={{
-                left: isFilterOpen ? "calc(100%)" : "100%",
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
-            >
-              {isFilterOpen ? (
-                <HiOutlineAdjustmentsVertical className="size-50 text-gray-600" />
-              ) : (
-                <HiOutlineAdjustmentsVertical className="size-50 text-gray-600" />
-              )}
-            </motion.button>
-          </div>
-          <div className="md:hidden">
-            <MobileFilterSidebar />
-          </div>
-        </>
-      )}
     </div>
   );
 }
