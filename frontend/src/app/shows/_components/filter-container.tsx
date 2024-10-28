@@ -2,22 +2,44 @@
 
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { HiOutlineAdjustmentsVertical } from "react-icons/hi2";
 
 import FilterSidebar from "./filter-sidebar";
 import MobileFilterSidebar from "./mobile-filter";
 
-export default function FilterContainer() {
+const DesktopFilterButton = memo(
+  ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      className={clsx(
+        "absolute top-1/2 -translate-y-1/2",
+        "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
+      )}
+      animate={{
+        left: isOpen ? "300px" : "0",
+      }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      aria-label={isOpen ? "필터 닫기" : "필터 열기"}
+    >
+      <HiOutlineAdjustmentsVertical className="size-50 text-gray-600" />
+    </motion.button>
+  ),
+);
+
+DesktopFilterButton.displayName = "DesktopFilterButton";
+
+function FilterContainer() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const toggleFilter = () => {
+  const toggleFilter = useCallback(() => {
     setIsFilterOpen((prev) => !prev);
-  };
+  }, []);
 
   return (
     <>
-      {/* 데크스탑 */}
+      {/* 데스크탑 */}
       <div className="fixed left-70 top-0 z-50 hidden h-screen md:block">
         <AnimatePresence>
           {isFilterOpen && (
@@ -34,21 +56,7 @@ export default function FilterContainer() {
             </motion.div>
           )}
         </AnimatePresence>
-        <motion.button
-          type="button"
-          onClick={toggleFilter}
-          className={clsx(
-            "absolute top-1/2 -translate-y-1/2",
-            "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
-          )}
-          animate={{
-            left: isFilterOpen ? "300px" : "0",
-          }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
-        >
-          <HiOutlineAdjustmentsVertical className="size-50 text-gray-600" />
-        </motion.button>
+        <DesktopFilterButton isOpen={isFilterOpen} onClick={toggleFilter} />
       </div>
 
       {/* 모바일 */}
@@ -58,3 +66,5 @@ export default function FilterContainer() {
     </>
   );
 }
+
+export default memo(FilterContainer);
