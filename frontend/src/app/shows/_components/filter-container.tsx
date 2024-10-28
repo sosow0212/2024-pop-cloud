@@ -18,7 +18,7 @@ export default function FilterContainer() {
   return (
     <>
       {/* 데스크탑 */}
-      <div className="fixed left-70 top-0 z-50 hidden h-screen md:block">
+      <div className="fixed top-0 z-50 hidden h-screen md:block">
         <AnimatePresence>
           {isFilterOpen && (
             <motion.div
