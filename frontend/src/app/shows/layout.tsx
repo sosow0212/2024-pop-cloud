@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import FilterContainer from "./_components/filter-container";
+import FilterWrapper from "./_components/filter-wrapper";
 
 export const metadata: Metadata = {
   title: "팝업,전시회 목록 | POP CLOUD",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <FilterContainer />
+      <FilterWrapper />
       <div className="min-h-screen w-full max-w-1400 p-30 pt-40 lg:px-70 lg:pt-50">
         {children}
       </div>
