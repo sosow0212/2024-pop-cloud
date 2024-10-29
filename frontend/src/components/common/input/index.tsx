@@ -53,7 +53,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={inputId}
             className={clsx(
-              "mb-4 block text-16-600  text-gray-700 ",
+              "mb-5 block text-16-600  text-gray-700 ",
               labelClassName,
             )}
           >
@@ -64,7 +64,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             id={inputId}
             className={clsx(
-              "w-full rounded-lg py-2 pl-3 pr-10 leading-tight text-gray-700",
+              "w-full rounded-lg py-2 pl-8   pr-10 leading-tight text-gray-700",
               "border border-gray-300 bg-white focus:border-blue-500 focus:outline-none",
               "transition-all duration-200 ease-in-out",
               error
