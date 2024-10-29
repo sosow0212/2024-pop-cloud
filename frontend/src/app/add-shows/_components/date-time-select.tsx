@@ -96,7 +96,7 @@ export default function DateTimeSection({
         <textarea
           id="openTimes"
           className={clsx(
-            "h-58 w-full resize-none rounded-6 border p-16",
+            "h-90 w-full resize-none rounded-6 border p-16",
             errors.openTimes && "border-red-500",
           )}
           placeholder="운영시간을 입력해주세요 (예: 평일 09:00 ~ 18:00)"

@@ -30,7 +30,7 @@ export default function BasicInfo({ register, errors }: BasicInfoProps) {
         <textarea
           id="description"
           className={clsx(
-            "h-58 w-full resize-none rounded-6 border p-16",
+            "h-138 w-full resize-none rounded-6 border p-16",
             errors.description && "border-red-500",
           )}
           placeholder="팝업/전시회 설명을 입력해주세요"
