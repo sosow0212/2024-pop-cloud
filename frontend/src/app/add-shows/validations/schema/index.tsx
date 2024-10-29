@@ -6,7 +6,7 @@ export const addShowForm = z.object({
   publicTag: z.string(),
 });
 
-export type SignupFormData = z.infer<typeof addShowForm>;
+export type AddShowFormData = z.infer<typeof addShowForm>;
 
 export interface AddShowsFormResponse {
   location: string;
