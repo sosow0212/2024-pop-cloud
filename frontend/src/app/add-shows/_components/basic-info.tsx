@@ -16,14 +16,14 @@ export default function BasicInfo({ register, errors }: BasicInfoProps) {
       <Input
         label="팝업/전시회 이름 *"
         id="title"
-        className="flex h-58 w-351 items-start gap-10 self-stretch rounded-6 border bg-white p-16 lg:w-full"
+        className="flex h-58 w-full items-start gap-10 self-stretch rounded-6 border bg-white p-16 lg:w-full"
         placeholder="팝업/전시회 이름을 입력해주세요"
         type="text"
         error={errors.title?.message}
         {...register("title")}
       />
 
-      <div className="w-351 md:w-full lg:w-full">
+      <div className="w-full md:w-full lg:w-full">
         <label htmlFor="description" className="mb-5 block text-16-600">
           설명 *
         </label>

@@ -51,7 +51,7 @@ export default function DateTimeSection({
 
   return (
     <>
-      <div className="flex w-351 gap-12 md:w-full lg:w-full">
+      <div className="flex w-full gap-12 md:w-full lg:w-full">
         <div className="flex-1">
           <label htmlFor="startDate" className="mb-5 block text-16-600">
             시작일 *
@@ -60,7 +60,7 @@ export default function DateTimeSection({
             id="startDate"
             selected={parseISODate(startDate) || null}
             onChange={handleStartDateChange}
-            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 lg:w-500"
+            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 md:w-340 lg:w-500"
             placeholderText="시작일을 선택해주세요"
             dateFormat="yyyy-MM-dd"
           />
@@ -78,7 +78,7 @@ export default function DateTimeSection({
             id="endDate"
             selected={parseISODate(endDate) || null}
             onChange={handleEndDateChange}
-            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 lg:w-540"
+            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 md:w-340 lg:w-540"
             placeholderText="종료일을 선택해주세요"
             dateFormat="yyyy-MM-dd"
             minDate={parseISODate(startDate)}
@@ -89,7 +89,7 @@ export default function DateTimeSection({
         </div>
       </div>
 
-      <div className="w-351 md:w-full lg:w-full">
+      <div className="w-full md:w-full lg:w-full">
         <label htmlFor="openTimes" className="mb-5 block text-16-600">
           운영시간 *
         </label>

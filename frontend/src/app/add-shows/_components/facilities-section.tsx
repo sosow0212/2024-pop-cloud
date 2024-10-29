@@ -10,7 +10,7 @@ export default function FacilitiesSection({
   register,
 }: FacilitiesSectionProps) {
   return (
-    <div className="w-351 md:w-full lg:w-full">
+    <div className="w-full md:w-full lg:w-full">
       <label htmlFor="facil" className="mb-4 block text-16-600">
         편의시설
       </label>

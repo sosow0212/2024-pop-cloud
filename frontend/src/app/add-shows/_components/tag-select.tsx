@@ -49,7 +49,7 @@ export default function TagSection({
         name="publicTag"
       />
 
-      <div className="w-351 md:w-full lg:w-full">
+      <div className="w-full md:w-full lg:w-full">
         <label htmlFor="tag" className="mb-5 block text-16-600">
           태그
         </label>

@@ -78,7 +78,7 @@ export default function AddShowsForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-center gap-24 px-40 py-20"
+      className="flex flex-col items-center gap-24"
     >
       <h1 className="text-24-700">팝업/전시회 등록</h1>
 
