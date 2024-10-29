@@ -22,8 +22,6 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
   const shrink = shrinkPage.includes(pathname);
 
-  const profileUrl = loggedIn ? "/profile" : "/login";
-
   return (
     <menu
       className={clsx(
@@ -49,10 +47,10 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
       <div className="md:absolute md:bottom-16">
         {loggedIn ? (
           <NavIconButton
-            href={profileUrl}
+            href="/profile"
             name="마이페이지"
             icon={SiBookmyshow}
-            isActive={pathname === profileUrl}
+            isActive={pathname === "/profile"}
             shrink={shrink}
           />
         ) : (
