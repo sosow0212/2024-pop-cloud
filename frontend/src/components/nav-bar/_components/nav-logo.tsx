@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import Link from "next/link";
+import { memo } from "react";
 import { GiFluffyCloud } from "react-icons/gi";
 
-export default function NavLogo({ shrink }: { shrink: boolean }) {
+function NavLogo({ shrink }: { shrink: boolean }) {
   return (
     <Link href="/" className="mb-25 hidden md:block">
       <header>
@@ -24,3 +25,4 @@ export default function NavLogo({ shrink }: { shrink: boolean }) {
     </Link>
   );
 }
+export default memo(NavLogo);

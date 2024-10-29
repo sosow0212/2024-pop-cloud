@@ -30,8 +30,8 @@ function NavIconButton({
     >
       <div
         className={clsx(
-          "flex w-full justify-center gap-16 lg:justify-start",
-          shrink && "lg:justify-center",
+          "flex w-full justify-center gap-16",
+          shrink ? "lg:justify-center" : "lg:justify-start",
         )}
       >
         <Icon

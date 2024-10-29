@@ -2,7 +2,8 @@
 
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { FiHeart, FiHome, FiMapPin, FiSearch, FiUser } from "react-icons/fi";
+import { FiHeart, FiHome, FiMapPin, FiSearch } from "react-icons/fi";
+import { SiBookmyshow } from "react-icons/si";
 
 import { shrinkPage } from "@/constants";
 
@@ -24,40 +25,40 @@ export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const profileUrl = loggedIn ? "/profile" : "/login";
 
   return (
-    <div className="flex md:h-full lg:h-screen">
-      <menu
-        className={clsx(
-          "flex size-full items-center justify-evenly md:w-70 md:flex-col md:items-center md:justify-start md:gap-14 md:pt-30 lg:w-245",
-          shrink && "lg:w-70",
-        )}
-      >
-        <NavLogo shrink={shrink} />
-        {NAV_ITEMS.map(({ href, name, icon }) => {
-          const isActive = pathname === href;
+    <menu
+      className={clsx(
+        "relative flex size-full items-center justify-evenly md:w-70 md:flex-col md:justify-start md:gap-14 md:pt-30",
+        shrink ? "lg:w-70" : "lg:w-245",
+      )}
+    >
+      <NavLogo shrink={shrink} />
+      {NAV_ITEMS.map(({ href, name, icon }) => {
+        const isActive = pathname === href;
 
-          return (
-            <NavIconButton
-              key={href}
-              href={href}
-              name={name}
-              icon={icon}
-              isActive={isActive}
-              shrink={shrink}
-            />
-          );
-        })}
+        return (
+          <NavIconButton
+            key={href}
+            href={href}
+            name={name}
+            icon={icon}
+            isActive={isActive}
+            shrink={shrink}
+          />
+        );
+      })}
+      <div className="md:absolute md:bottom-16">
         {loggedIn ? (
           <NavIconButton
             href={profileUrl}
-            name="프로필"
-            icon={FiUser}
+            name="마이페이지"
+            icon={SiBookmyshow}
             isActive={pathname === profileUrl}
             shrink={shrink}
           />
         ) : (
           <NavLoginButton shrink={shrink} />
         )}
-      </menu>
-    </div>
+      </div>
+    </menu>
   );
 }
