@@ -45,7 +45,7 @@ export default function BasicInfo({ register, errors }: BasicInfoProps) {
 
       <Input
         label="입장료"
-        type="number"
+        type="text"
         className="flex h-58 w-351 items-start gap-10 rounded-6 border bg-white p-16 lg:w-full"
         placeholder="입장료를 입력해주세요"
         {...register("fee", { valueAsNumber: true })}

@@ -1,7 +1,7 @@
 "use client";
 
 import { clsx } from "clsx";
-import { ComponentProps, forwardRef, useState } from "react";
+import { ComponentProps, forwardRef, useId, useState } from "react";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 
 import { useToggle } from "@/hooks";
@@ -38,7 +38,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const [inputType, setInputType] = useState(type);
     const { value: isVisible, handleToggle } = useToggle();
-    const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const generatedId = useId();
+    const inputId = id || `input-${generatedId}`;
 
     const handleClickVisible = () => {
       handleToggle();

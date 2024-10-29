@@ -28,7 +28,7 @@ export default function AddShowsForm() {
     formState: { errors, isDirty, isValid },
   } = useForm<ShowType>({
     resolver: zodResolver(addShowForm),
-    mode: "onBlur",
+    mode: "all",
     defaultValues: {
       title: "",
       description: "",
