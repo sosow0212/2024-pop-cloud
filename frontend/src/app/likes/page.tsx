@@ -1,5 +1,5 @@
-import UpComing from "@/components/up-coming-page";
+import UpComing from "../upcoming";
 
-export default function Likes() {
+export default function Profile() {
   return <UpComing />;
 }

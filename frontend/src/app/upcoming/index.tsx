@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { GiFluffyCloud } from "react-icons/gi";
 
-function UpComing() {
+function Upcoming() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 text-center">
       {/* Icon and Animation */}
@@ -23,4 +23,4 @@ function UpComing() {
   );
 }
 
-export default UpComing;
+export default Upcoming;
