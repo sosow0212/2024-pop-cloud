@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 import Input from "@/components/common/input";
@@ -27,7 +28,10 @@ export default function BasicInfo({ register, errors }: BasicInfoProps) {
           설명 *
         </label>
         <textarea
-          className="h-58 w-full resize-none rounded-6 border p-16"
+          className={clsx(
+            "h-58 w-full resize-none rounded-6 border p-16",
+            errors.description && "border-red-500",
+          )}
           placeholder="팝업/전시회 설명을 입력해주세요"
           {...register("description")}
         />

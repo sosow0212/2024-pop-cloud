@@ -2,6 +2,7 @@
 
 import "react-datepicker/dist/react-datepicker.css";
 
+import clsx from "clsx";
 import DatePicker from "react-datepicker";
 import {
   FieldErrors,
@@ -91,7 +92,10 @@ export default function DateTimeSection({
           운영시간 *
         </label>
         <textarea
-          className="h-58 w-full resize-none rounded-6 border p-16"
+          className={clsx(
+            "h-58 w-full resize-none rounded-6 border p-16",
+            errors.openTimes && "border-red-500",
+          )}
           placeholder="운영시간을 입력해주세요 (예: 평일 09:00 ~ 18:00)"
           {...register("openTimes")}
         />
