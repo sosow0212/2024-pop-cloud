@@ -13,7 +13,7 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      sm: { max: "375px" },
+      sm: { max: "744px" },
       md: { min: "744px" },
       lg: { min: "1200px" },
       xl: { min: "1280px" },
@@ -30,6 +30,9 @@ const config: Config = {
         "blue-7": "#1c7ed6",
         "blue-8": "#1971c2",
         "blue-9": "#1864ab",
+        "gray-1": "#333236",
+        "gray-2": "rgba(255, 255, 255, 0.05)",
+        "gray-3": "rgba(255, 255, 255, 0.6)",
       },
       keyframes: {
         "accordion-down": {
