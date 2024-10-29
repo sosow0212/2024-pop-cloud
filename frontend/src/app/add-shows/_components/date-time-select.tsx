@@ -50,7 +50,7 @@ export default function DateTimeSection({
 
   return (
     <>
-      <div className="flex w-351 gap-12 lg:w-full">
+      <div className="flex w-351 gap-12 md:w-full lg:w-full">
         <div className="flex-1">
           <label htmlFor="startDate" className="mb-5 block text-16-600">
             시작일 *
@@ -86,7 +86,7 @@ export default function DateTimeSection({
         </div>
       </div>
 
-      <div className="w-351 lg:w-full">
+      <div className="w-351 md:w-full lg:w-full">
         <label htmlFor="openTimes" className="mb-5 block text-16-600">
           운영시간 *
         </label>

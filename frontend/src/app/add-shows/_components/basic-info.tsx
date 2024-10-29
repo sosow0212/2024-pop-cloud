@@ -22,7 +22,7 @@ export default function BasicInfo({ register, errors }: BasicInfoProps) {
         {...register("title")}
       />
 
-      <div className="w-351 lg:w-full">
+      <div className="w-351 md:w-full lg:w-full">
         <label htmlFor="description" className="mb-2 block text-16-500">
           설명 *
         </label>

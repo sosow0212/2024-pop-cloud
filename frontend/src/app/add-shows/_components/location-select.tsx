@@ -42,7 +42,7 @@ export default function LocationSection({
         strategy="beforeInteractive"
       />
 
-      <div className="flex w-351 flex-col gap-16 lg:w-full">
+      <div className="flex w-351 flex-col gap-16 lg:w-full md:w-full">
         <Input
           label="주소 *"
           id="address"

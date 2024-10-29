@@ -3,6 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
@@ -68,12 +69,12 @@ export default async function ShowListPage({
                 <br />
                 팝업스토어를 소개해보세요.
               </p>
-              <button
-                type="button"
-                className="ml-15 h-50 w-120 rounded bg-black px-10 py-2 text-white sm:ml-15 sm:w-160"
+              <Link
+                href="/add-shows"
+                className="ml-15 flex h-50 w-120 items-center justify-center rounded bg-black px-10 py-2 text-center text-white sm:ml-15 sm:w-160"
               >
                 공간 등록
-              </button>
+              </Link>
             </div>
             <SearchInput initialValue={searchParams.title as string} />
             <div className="my-4 flex flex-wrap items-center">

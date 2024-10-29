@@ -49,7 +49,7 @@ export default function TagSection({
         name="publicTag"
       />
 
-      <div className="w-351 lg:w-full">
+      <div className="w-351 md:w-full lg:w-full">
         <label htmlFor="tag" className="mb-2 block text-16-500">
           태그
         </label>
@@ -57,7 +57,7 @@ export default function TagSection({
           type="text"
           value={tagInput}
           onChange={(e) => setTagInput(e.target.value)}
-          onKeyPress={handleAddTag}
+          onKeyDown={handleAddTag}
           placeholder="태그를 입력하고 Enter를 누르세요"
           className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-16"
         />
