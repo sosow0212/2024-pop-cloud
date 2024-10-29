@@ -8,6 +8,7 @@ import { Suspense } from "react";
 
 import fetchShows from "@/api/get-shows";
 
+import FilterContainer from "./_components/filter-container";
 import SearchInput from "./_components/search-input";
 import SelectedTags from "./_components/selected-tags";
 import ShowList from "./_components/show-lists";
@@ -55,35 +56,40 @@ export default async function ShowListPage({
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="flex h-full flex-col overflow-hidden">
-        <h1 className="mb-4 text-24-700">쇼케이스 목록</h1>
-        <div className="my-20 flex h-150 min-w-330 items-center justify-between rounded-lg bg-gray-100 p-20 md:gap-50 lg:gap-30">
-          <p className="text-16-600">
-            팝클라우드에 팝업스토어를 등록하고 싶으신가요?
-            <br />
-            팝업스토어를 소개해보세요.
-          </p>
-          <button
-            type="button"
-            className="ml-15 h-50 w-120 rounded bg-black px-10 py-2 text-white sm:ml-15 sm:w-160"
-          >
-            공간 등록
-          </button>
-        </div>
-        <SearchInput initialValue={searchParams.title as string} />
-        <div className="my-4 flex flex-wrap items-center">
-          <ShowTypeFilter />
-          <div className="ml-4 flex flex-wrap items-center">
-            <SelectedTags />
+    <div className="flex">
+      <FilterContainer />
+      <div className="min-h-screen w-full lg:ml-10">
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <div className="flex h-full flex-col overflow-hidden p-30 pt-40 lg:px-70 lg:pt-50">
+            <h1 className="mb-4 text-24-700">쇼케이스 목록</h1>
+            <div className="my-20 flex h-150 min-w-330 items-center justify-between rounded-lg bg-gray-100 p-20 md:gap-50 lg:gap-30">
+              <p className="text-16-600">
+                팝클라우드에 팝업스토어를 등록하고 싶으신가요?
+                <br />
+                팝업스토어를 소개해보세요.
+              </p>
+              <button
+                type="button"
+                className="ml-15 h-50 w-120 rounded bg-black px-10 py-2 text-white sm:ml-15 sm:w-160"
+              >
+                공간 등록
+              </button>
+            </div>
+            <SearchInput initialValue={searchParams.title as string} />
+            <div className="my-4 flex flex-wrap items-center">
+              <ShowTypeFilter />
+              <div className="ml-4 flex flex-wrap items-center">
+                <SelectedTags />
+              </div>
+            </div>
+            <div className="grow overflow-hidden">
+              <Suspense fallback={<div>Loading...</div>}>
+                <ShowList searchParams={searchParams} />
+              </Suspense>
+            </div>
           </div>
-        </div>
-        <div className="grow overflow-hidden">
-          <Suspense fallback={<div>Loading...</div>}>
-            <ShowList searchParams={searchParams} />
-          </Suspense>
-        </div>
+        </HydrationBoundary>
       </div>
-    </HydrationBoundary>
+    </div>
   );
 }

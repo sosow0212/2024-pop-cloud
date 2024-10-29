@@ -1,5 +1,5 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
 import { BsFilterLeft } from "react-icons/bs";
 import { FiMapPin, FiRefreshCw, FiTag } from "react-icons/fi";
 import { LuCalendarDays } from "react-icons/lu";
@@ -29,7 +29,11 @@ const placeTypes = [
   "기타",
 ];
 
-export default function FilterSidebar({ onClose }: { onClose: () => void }) {
+interface FilterSidebarProps {
+  onClose: () => void;
+}
+
+export default function FilterSidebar({ onClose }: FilterSidebarProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -44,19 +48,20 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
     endDate: string;
   }>({ startDate: "", endDate: "" });
 
-  const handleApplyFilters = () => {
+  // 복잡한 필터 적용 로직은 useCallback 유지
+  const handleApplyFilters = useCallback(() => {
     const newParams = new URLSearchParams(searchParams.toString());
+
+    // Tags
     newParams.delete("publicTags");
     selectedTags.forEach((tag) => newParams.append("publicTags", tag));
 
-    // Update region
+    // Region
     if (selectedRegion.city) {
       newParams.set("city", selectedRegion.city);
       newParams.delete("country");
       if (selectedRegion.country.length > 0) {
-        if (selectedRegion.country[0] === `${selectedRegion.city} 전체`) {
-          // "전체"가 선택된 경우, country 파라미터를 추가하지 않음
-        } else {
+        if (selectedRegion.country[0] !== `${selectedRegion.city} 전체`) {
           selectedRegion.country.forEach((country) =>
             newParams.append("country", country),
           );
@@ -66,15 +71,25 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
       newParams.delete("city");
       newParams.delete("country");
     }
-    if (selectedDateRange.startDate)
+
+    // Date
+    if (selectedDateRange.startDate) {
       newParams.set("startDate", selectedDateRange.startDate);
-    if (selectedDateRange.endDate)
+    }
+    if (selectedDateRange.endDate) {
       newParams.set("endDate", selectedDateRange.endDate);
+    }
 
     router.push(`/shows?${newParams.toString()}`);
-
     onClose();
-  };
+  }, [
+    selectedTags,
+    selectedRegion,
+    selectedDateRange,
+    searchParams,
+    router,
+    onClose,
+  ]);
 
   const handleReset = () => {
     setSelectedTags([]);
@@ -84,7 +99,7 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <aside className="flex size-full flex-col border-r border-gray-200 bg-white px-12 pt-40 lg:h-screen">
+    <aside className="flex size-full flex-col border-r border-gray-200 bg-white px-12 pt-40 md:h-screen lg:h-screen">
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 md:px-5">
         <div className="mb-8 flex items-center gap-9">
           <BsFilterLeft className="size-20" />
@@ -98,6 +113,7 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
           <FiRefreshCw className="size-20" />
         </button>
       </div>
+
       <div className="flex-1 overflow-y-auto">
         <FilterAccordion title="태그" icon={<FiTag className="size-20" />}>
           <TagButtonList
@@ -124,6 +140,7 @@ export default function FilterSidebar({ onClose }: { onClose: () => void }) {
           />
         </FilterAccordion>
       </div>
+
       <div className="sticky mb-30 p-4">
         <button
           type="button"
