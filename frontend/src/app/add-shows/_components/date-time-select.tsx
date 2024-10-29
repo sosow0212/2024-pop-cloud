@@ -57,6 +57,7 @@ export default function DateTimeSection({
             시작일 *
           </label>
           <DatePicker
+            id="startDate"
             selected={parseISODate(startDate) || null}
             onChange={handleStartDateChange}
             className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 lg:w-500"
@@ -74,6 +75,7 @@ export default function DateTimeSection({
             종료일 *
           </label>
           <DatePicker
+            id="endDate"
             selected={parseISODate(endDate) || null}
             onChange={handleEndDateChange}
             className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 lg:w-540"
@@ -92,6 +94,7 @@ export default function DateTimeSection({
           운영시간 *
         </label>
         <textarea
+          id="openTimes"
           className={clsx(
             "h-58 w-full resize-none rounded-6 border p-16",
             errors.openTimes && "border-red-500",

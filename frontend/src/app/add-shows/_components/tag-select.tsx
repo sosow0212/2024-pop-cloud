@@ -54,6 +54,7 @@ export default function TagSection({
           태그
         </label>
         <input
+          id="tag"
           type="text"
           value={tagInput}
           onChange={(e) => setTagInput(e.target.value)}

@@ -28,6 +28,7 @@ export default function BasicInfo({ register, errors }: BasicInfoProps) {
           설명 *
         </label>
         <textarea
+          id="description"
           className={clsx(
             "h-58 w-full resize-none rounded-6 border p-16",
             errors.description && "border-red-500",
