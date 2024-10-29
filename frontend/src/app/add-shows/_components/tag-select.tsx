@@ -44,6 +44,7 @@ export default function TagSection({
     <>
       <PublicTagSelect
         register={register}
+        setValue={setValue}
         error={errors.publicTag?.message}
         name="publicTag"
       />

@@ -28,18 +28,24 @@ export default function DateTimeSection({
   const startDate = watch("startDate");
   const endDate = watch("endDate");
 
+  const toISOWithTime = (date: Date): string => {
+    const withTime = new Date(date);
+    withTime.setHours(17, 7, 41, 789);
+    return withTime.toISOString();
+  };
+
   const handleStartDateChange = (date: Date | null) => {
-    setValue(
-      "startDate",
-      date ? new Date(date.setHours(17, 7, 41, 789)).toISOString() : "",
-    );
+    setValue("startDate", date ? toISOWithTime(date) : "");
   };
 
   const handleEndDateChange = (date: Date | null) => {
-    setValue(
-      "endDate",
-      date ? new Date(date.setHours(17, 7, 41, 789)).toISOString() : "",
-    );
+    setValue("endDate", date ? toISOWithTime(date) : "");
+  };
+
+  const parseISODate = (isoString: string): Date | undefined => {
+    if (!isoString) return undefined;
+    const date = new Date(isoString);
+    return Number.isNaN(date.getTime()) ? undefined : date;
   };
 
   return (
@@ -50,9 +56,9 @@ export default function DateTimeSection({
             시작일 *
           </label>
           <DatePicker
-            selected={startDate ? new Date(startDate) : null}
+            selected={parseISODate(startDate) || null}
             onChange={handleStartDateChange}
-            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12"
+            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 lg:w-500"
             placeholderText="시작일을 선택해주세요"
             dateFormat="yyyy-MM-dd"
           />
@@ -67,12 +73,12 @@ export default function DateTimeSection({
             종료일 *
           </label>
           <DatePicker
-            selected={endDate ? new Date(endDate) : null}
+            selected={parseISODate(endDate) || null}
             onChange={handleEndDateChange}
-            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12"
+            className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-12 lg:w-540"
             placeholderText="종료일을 선택해주세요"
             dateFormat="yyyy-MM-dd"
-            minDate={startDate ? new Date(startDate) : undefined}
+            minDate={parseISODate(startDate)}
           />
           {errors.endDate?.message && (
             <p className="text-14-400 text-red-500">{errors.endDate.message}</p>

@@ -28,7 +28,7 @@ export default function AddShowsForm() {
     formState: { errors, isDirty, isValid },
   } = useForm<ShowType>({
     resolver: zodResolver(addShowForm),
-    mode: "onChange",
+    mode: "onBlur",
     defaultValues: {
       title: "",
       description: "",
@@ -61,6 +61,7 @@ export default function AddShowsForm() {
   const isFormComplete = watchedFields.every(
     (field) => field && field.length > 0,
   );
+  const formValues = watch();
 
   const onSubmit = async (data: ShowType) => {
     try {
@@ -119,9 +120,25 @@ export default function AddShowsForm() {
         {isLoading ? "등록 중..." : "등록하기"}
       </button>
 
+      {/* 디버깅 정보 */}
+      {/* <div className="text-sm text-gray-500">
+        <div>Form Values: {JSON.stringify(formValues, null, 2)}</div>
+        <div>Is Complete: {isFormComplete.toString()}</div>
+        <div>Is Valid: {isValid.toString()}</div>
+        <div>Has Errors: {Object.keys(errors).length > 0 ? "Yes" : "No"}</div>
+        {Object.entries(errors).map(([key, error]) => (
+          <div key={key}>
+            {key}: {error.message}
+          </div>
+        ))}
+      </div> */}
+
       {Object.keys(errors).length > 0 && (
         <div className="text-red-500 text-14-400 text-center">
-          모든 필수 항목을 입력해주세요.
+          <div>필수입력 항목을 입력해주세요</div>
+          {Object.values(errors).map((error, index) => (
+            <div key={index}>{error.message}</div>
+          ))}
         </div>
       )}
     </form>

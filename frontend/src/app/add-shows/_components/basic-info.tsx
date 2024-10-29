@@ -23,7 +23,7 @@ export default function BasicInfo({ register, errors }: BasicInfoProps) {
       />
 
       <div className="w-351 lg:w-full">
-        <label htmlFor="descriptiom" className="mb-2 block text-16-600">
+        <label htmlFor="description" className="mb-2 block text-16-500">
           설명 *
         </label>
         <textarea

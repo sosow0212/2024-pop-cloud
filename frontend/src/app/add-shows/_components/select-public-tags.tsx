@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import {
+  FieldValues,
+  Path,
+  PathValue,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 
 import {
   Select,
@@ -35,6 +41,7 @@ type PlaceType = (typeof placeTypes)[number];
 
 interface PlaceSelectProps<TFormValues extends FieldValues> {
   register: UseFormRegister<TFormValues>;
+  setValue: UseFormSetValue<TFormValues>;
   error?: string;
   name: Path<TFormValues>;
   label?: string;
@@ -42,15 +49,18 @@ interface PlaceSelectProps<TFormValues extends FieldValues> {
 
 function PublicTagSelect<TFormValues extends FieldValues>({
   register,
+  setValue,
   error,
   name,
-  label = "대표 태그",
+  label = "대표 태그 *",
 }: PlaceSelectProps<TFormValues>) {
   const [selectedType, setSelectedType] = useState<PlaceType | "">("");
   const inputId = `select-${name}`;
 
   const handleSelect = (value: PlaceType) => {
     setSelectedType(value);
+    // Type assertion을 사용하여 타입 호환성 문제 해결
+    setValue(name, value as PathValue<TFormValues, Path<TFormValues>>);
   };
 
   return (
