@@ -14,14 +14,14 @@ export interface ShowType {
   longitude: string; // 경도
 
   // 편의시설 정보
-  isParkingAvailable: boolean; // 주차 가능 여부
-  isFoodAllowed: boolean; // 음식물 반입 가능 여부
-  isPetAllowed: boolean; // 반려동물 동반 가능 여부
-  isKidsZone: boolean; // 키즈존 유무
-  isWifiAvailable: boolean; // 와이파이 사용 가능 여부
+  isParkingAvailable?: boolean; // 주차 가능 여부
+  isFoodAllowed?: boolean; // 음식물 반입 가능 여부
+  isPetAllowed?: boolean; // 반려동물 동반 가능 여부
+  isKidsZone?: boolean; // 키즈존 유무
+  isWifiAvailable?: boolean; // 와이파이 사용 가능 여부
 
   // 요금 및 태그
-  fee: number; // 입장료
+  fee?: number; // 입장료
   publicTag: string; // 대표 태그
-  tags: string[]; // 태그 목록
+  tags?: string[]; // 태그 목록
 }

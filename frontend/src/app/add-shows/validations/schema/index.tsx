@@ -17,21 +17,21 @@ export const addShowForm = z.object({
 
   longitude: z.string().optional().nullable(),
 
-  fee: z.number().nonnegative().default(0),
+  fee: z.number().nonnegative().optional().default(0),
 
   publicTag: z.string().min(1, "공개 태그는 필수입니다"),
 
-  tags: z.array(z.string()).default([]),
+  tags: z.array(z.string()).optional().default([]),
 
-  isParkingAvailable: z.boolean().default(false),
+  isParkingAvailable: z.boolean().optional().default(false),
 
-  isFoodAllowed: z.boolean().default(false),
+  isFoodAllowed: z.boolean().optional().default(false),
 
-  isPetAllowed: z.boolean().default(false),
+  isPetAllowed: z.boolean().optional().default(false),
 
-  isKidsZone: z.boolean().default(false),
+  isKidsZone: z.boolean().optional().default(false),
 
-  isWifiAvailable: z.boolean().default(false),
+  isWifiAvailable: z.boolean().optional().default(false),
 });
 
 export type ShowType = z.infer<typeof addShowForm>;
