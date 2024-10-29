@@ -36,6 +36,8 @@ export default function AddShowsForm() {
       endDate: "",
       openTimes: "",
       location: "",
+      latitude: "",
+      longitude: "",
       tags: [],
       fee: 0,
       isParkingAvailable: false,
@@ -81,6 +83,7 @@ export default function AddShowsForm() {
         register={register}
         errors={errors}
         setValue={setValue}
+        watch={watch}
       />
 
       <TagSection
@@ -111,7 +114,6 @@ export default function AddShowsForm() {
       {/* 디버깅 정보 */}
       {/* <div className="text-sm text-gray-500">
         <div>Form Values: {JSON.stringify(formValues, null, 2)}</div>
-        <div>Is Complete: {isFormComplete.toString()}</div>
         <div>Is Valid: {isValid.toString()}</div>
         <div>Has Errors: {Object.keys(errors).length > 0 ? "Yes" : "No"}</div>
         {Object.entries(errors).map(([key, error]) => (
