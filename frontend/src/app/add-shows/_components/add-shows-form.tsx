@@ -1,48 +1,129 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
+/* eslint-disable */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
-import Input from "@/components/common/input";
-import { Select } from "@/components/ui/select";
-
 import { ShowType } from "../types";
 import { addShowForm } from "../validations/schema";
-import PublicTagSelect from "./select-public-tags";
+
+import BasicInfo from "./basic-info";
+import DateTimeSection from "./date-time-select";
+import LocationSection from "./location-select";
+import TagSection from "./tag-select";
+import FacilitiesSection from "./facilities-section";
 
 export default function AddShowsForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [tagInput, setTagInput] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
   const {
     register,
+    setValue,
+    watch,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isDirty, isValid },
   } = useForm<ShowType>({
     resolver: zodResolver(addShowForm),
     mode: "onChange",
+    defaultValues: {
+      title: "",
+      description: "",
+      startDate: "",
+      endDate: "",
+      openTimes: "",
+      location: "",
+      tags: [],
+      fee: 0,
+      isParkingAvailable: false,
+      isFoodAllowed: false,
+      isPetAllowed: false,
+      isKidsZone: false,
+      isWifiAvailable: false,
+      publicTag: "",
+    },
   });
 
+  // 모든 필수 필드를 감시
+  const watchedFields = watch([
+    "title",
+    "description",
+    "startDate",
+    "endDate",
+    "openTimes",
+    "location",
+    "publicTag",
+  ]);
+
+  const isFormComplete = watchedFields.every(
+    (field) => field && field.length > 0,
+  );
+
+  const onSubmit = async (data: ShowType) => {
+    try {
+      setIsLoading(true);
+      console.log(data);
+      router.push("/shows");
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <form className="flex flex-col items-center gap-24 px-40 py-12">
-      <Input
-        label="팝업/전시회 이름 *"
-        id="showTitle"
-        className="flex h-58 w-351 items-start gap-10 self-stretch rounded-6 border bg-white p-16 lg:w-full"
-        placeholder="팝업/전시회 이름을 입력해주세요"
-        type="text"
-        error={errors.title?.message}
-        {...register("title")}
-      />
-      <PublicTagSelect
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col items-center gap-24 px-40 py-20"
+    >
+      <h1 className="text-24-700">팝업/전시회 등록</h1>
+
+      <BasicInfo register={register} errors={errors} />
+
+      <DateTimeSection
         register={register}
-        error={errors.publicTag?.message}
-        name="publicTag"
+        errors={errors}
+        setValue={setValue}
+        watch={watch}
       />
+
+      <LocationSection
+        register={register}
+        errors={errors}
+        setValue={setValue}
+      />
+
+      <TagSection
+        register={register}
+        errors={errors}
+        tagInput={tagInput}
+        setTagInput={setTagInput}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+        setValue={setValue}
+      />
+
+      <FacilitiesSection register={register} />
+      <button
+        type="submit"
+        disabled={!isFormComplete || !isValid || isLoading}
+        className={`h-58 w-351 rounded-6 text-white lg:w-full transition-colors ${
+          !isFormComplete || !isValid || isLoading
+            ? "bg-gray-300 cursor-not-allowed"
+            : "bg-blue-500 hover:bg-blue-600"
+        }`}
+      >
+        {isLoading ? "등록 중..." : "등록하기"}
+      </button>
+
+      {Object.keys(errors).length > 0 && (
+        <div className="text-red-500 text-14-400 text-center">
+          모든 필수 항목을 입력해주세요.
+        </div>
+      )}
     </form>
   );
 }

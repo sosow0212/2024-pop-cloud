@@ -63,7 +63,7 @@ function PublicTagSelect<TFormValues extends FieldValues>({
           <SelectTrigger className="w-full" id={inputId}>
             <SelectValue placeholder="대표 태그를 선택해주세요" />
           </SelectTrigger>
-          <SelectContent className="h-160">
+          <SelectContent className="h-160 bg-white">
             {placeTypes.map((type) => (
               <SelectItem key={type} value={type} className="cursor-pointer">
                 {type}

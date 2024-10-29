@@ -8,7 +8,7 @@ import { useToggle } from "@/hooks";
 
 interface InputProps extends Omit<ComponentProps<"input">, "type"> {
   /** input의 placeholder 속성입니다. */
-  placeholder: string;
+  placeholder?: string;
   /** input 의 타입입니다. text, email, password */
   type?: "text" | "email" | "password" | "number";
   /** 추가적인 className입니다. 너비와 높이 등을 설정할 수 있습니다. */
