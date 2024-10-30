@@ -55,7 +55,7 @@ export default function AddShowsForm(): JSX.Element {
   });
 
   // 전체 폼 값을 감시
-  const formValues = useWatch({ control });
+  const formValues = useWatch({ control }); //eslint-disable-line
 
   const onSubmit = async (data: ShowType) => {
     try {
@@ -128,7 +128,7 @@ export default function AddShowsForm(): JSX.Element {
       </button>
 
       {/* 디버깅 정보 */}
-      <div className="text-sm text-gray-500">
+      {/* <div className="text-sm text-gray-500">
         <div>Form Values: {JSON.stringify(formValues, null, 2)}</div>
         <div>Is Valid: {isValid.toString()}</div>
         <div>Has Errors: {Object.keys(errors).length > 0 ? "Yes" : "No"}</div>
@@ -137,7 +137,7 @@ export default function AddShowsForm(): JSX.Element {
             {key}: {error.message}
           </div>
         ))}
-      </div>
+      </div> */}
 
       {Object.keys(errors).length > 0 && (
         <div className="text-center text-14-400 text-red-500">
