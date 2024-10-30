@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { UseFormSetValue } from "react-hook-form";
+import { Control, UseFormSetValue, useWatch } from "react-hook-form";
 
 import { ShowType } from "../types/index";
 
@@ -11,15 +11,22 @@ interface CustomTagInputProps {
   selectedTags: string[];
   setSelectedTags: (tags: string[]) => void;
   setValue: UseFormSetValue<ShowType>;
+  control: Control<ShowType>;
 }
 
-export default function CustomTagInputComponent({
+function CustomTagInputComponent({
   tagInput,
   setTagInput,
   selectedTags,
   setSelectedTags,
   setValue,
+  control,
 }: CustomTagInputProps): JSX.Element {
+  const tags = useWatch({
+    control,
+    name: "tags",
+  });
+
   const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && tagInput.trim() !== "") {
       e.preventDefault();
@@ -53,7 +60,7 @@ export default function CustomTagInputComponent({
         className="flex h-58 w-full items-start gap-10 rounded-6 border bg-white p-16"
       />
       <div className="mt-5 flex flex-wrap gap-5">
-        {selectedTags.map((tag) => (
+        {tags?.map((tag) => (
           <span
             key={tag}
             className="flex items-center gap-1 rounded-full bg-blue-100 px-8 py-4 text-16-400 text-blue-800"
@@ -75,3 +82,5 @@ export default function CustomTagInputComponent({
 
 const CustomTagInput = memo(CustomTagInputComponent);
 CustomTagInput.displayName = "CustomTagInput";
+
+export default CustomTagInput;

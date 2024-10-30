@@ -1,19 +1,23 @@
 /*eslint-disable*/
+import { memo } from "react";
+import { useEffect, useState } from "react";
 import {
   FieldErrors,
   UseFormRegister,
   UseFormSetValue,
-  UseFormWatch,
+  Control,
+  useWatch,
 } from "react-hook-form";
-import { ShowType } from "../types/index";
+
 import Input from "@/components/common/input";
-import { useEffect, useState } from "react";
+
+import { ShowType } from "../types/index";
 
 interface LocationSectionProps {
   register: UseFormRegister<ShowType>;
   errors: FieldErrors<ShowType>;
   setValue: UseFormSetValue<ShowType>;
-  watch: UseFormWatch<ShowType>;
+  control: Control<ShowType>;
 }
 
 declare global {
@@ -45,12 +49,18 @@ declare global {
   }
 }
 
-export default function LocationSection({
+function LocationSectionComponent({
   register,
   errors,
   setValue,
+  control,
 }: LocationSectionProps) {
   const [isKakaoInitialized, setIsKakaoInitialized] = useState(false);
+
+  const location = useWatch({
+    control,
+    name: "location",
+  });
 
   useEffect(() => {
     if (window.kakao && !isKakaoInitialized) {
@@ -98,7 +108,13 @@ export default function LocationSection({
         error={errors.location?.message}
         onClick={handleAddressSearch}
         {...register("location")}
+        value={location}
       />
     </div>
   );
 }
+
+const LocationSection = memo(LocationSectionComponent);
+LocationSection.displayName = "LocationSection";
+
+export default LocationSection;

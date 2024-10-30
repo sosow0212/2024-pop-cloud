@@ -1,22 +1,32 @@
-// ./open-times-input.tsx
-
 "use client";
 
 import clsx from "clsx";
 import { memo } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  UseFormRegister,
+  useWatch,
+} from "react-hook-form";
 
 import { ShowType } from "../types/index";
 
 interface OpenTimesInputProps {
   register: UseFormRegister<ShowType>;
   errors: FieldErrors<ShowType>;
+  control: Control<ShowType>;
 }
 
-export default function OpenTimesInputComponent({
+function OpenTimesInputComponent({
   register,
   errors,
+  control,
 }: OpenTimesInputProps): JSX.Element {
+  const openTimes = useWatch({
+    control,
+    name: "openTimes",
+  });
+
   return (
     <div className="w-full md:w-full lg:w-full">
       <label htmlFor="openTimes" className="mb-5 block text-16-600">
@@ -30,6 +40,7 @@ export default function OpenTimesInputComponent({
         )}
         placeholder="운영시간을 입력해주세요 (예: 평일 09:00 ~ 18:00)"
         {...register("openTimes")}
+        value={openTimes}
       />
       {errors.openTimes?.message && (
         <p className="text-14-400 text-red-500">{errors.openTimes.message}</p>
@@ -40,3 +51,5 @@ export default function OpenTimesInputComponent({
 
 const OpenTimesInput = memo(OpenTimesInputComponent);
 OpenTimesInput.displayName = "OpenTimesInput";
+
+export default OpenTimesInput;

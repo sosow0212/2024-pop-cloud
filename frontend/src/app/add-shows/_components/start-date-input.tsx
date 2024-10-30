@@ -1,12 +1,15 @@
-// ./start-date-input.tsx
-
 "use client";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 import { memo } from "react";
 import DatePicker from "react-datepicker";
-import { FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  UseFormSetValue,
+  useWatch,
+} from "react-hook-form";
 
 import { ShowType } from "../types/index";
 import { parseISODate, toISOWithTime } from "../utils/date-utils";
@@ -14,15 +17,18 @@ import { parseISODate, toISOWithTime } from "../utils/date-utils";
 interface StartDateInputProps {
   errors: FieldErrors<ShowType>;
   setValue: UseFormSetValue<ShowType>;
-  watch: UseFormWatch<ShowType>;
+  control: Control<ShowType>;
 }
 
 function StartDateInputComponent({
   errors,
   setValue,
-  watch,
+  control,
 }: StartDateInputProps): JSX.Element {
-  const startDate = watch("startDate");
+  const startDate = useWatch({
+    control,
+    name: "startDate",
+  });
 
   const handleStartDateChange = (date: Date | null) => {
     setValue("startDate", date ? toISOWithTime(date) : "");

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 
 import { ShowType } from "../types";
 import { addShowForm } from "../validations/schema";
@@ -28,7 +28,7 @@ export default function AddShowsForm(): JSX.Element {
   const {
     register,
     setValue,
-    watch,
+    control,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<ShowType>({
@@ -54,7 +54,8 @@ export default function AddShowsForm(): JSX.Element {
     },
   });
 
-  const formValues = watch(); //eslint-disable-line
+  // 전체 폼 값을 감시
+  const formValues = useWatch({ control });
 
   const onSubmit = async (data: ShowType) => {
     try {
@@ -75,21 +76,22 @@ export default function AddShowsForm(): JSX.Element {
     >
       <h1 className="text-24-700">팝업/전시회 등록</h1>
 
-      <TitleInput register={register} errors={errors} />
-      <DescriptionInput register={register} errors={errors} />
-      <FeeInput register={register} errors={errors} />
+      <TitleInput register={register} errors={errors} control={control} />
+      <DescriptionInput register={register} errors={errors} control={control} />
+      <FeeInput register={register} errors={errors} control={control} />
 
       <div className="flex w-full gap-12 md:w-full lg:w-full">
-        <StartDateInput errors={errors} setValue={setValue} watch={watch} />
-        <EndDateInput errors={errors} setValue={setValue} watch={watch} />
+        <StartDateInput errors={errors} setValue={setValue} control={control} />
+        <EndDateInput errors={errors} setValue={setValue} control={control} />
       </div>
-      <OpenTimesInput register={register} errors={errors} />
+
+      <OpenTimesInput register={register} errors={errors} control={control} />
 
       <LocationSection
         register={register}
         errors={errors}
         setValue={setValue}
-        watch={watch}
+        control={control}
       />
 
       <PublicTagSelect
@@ -97,6 +99,7 @@ export default function AddShowsForm(): JSX.Element {
         setValue={setValue}
         error={errors.publicTag?.message}
         name="publicTag"
+        control={control}
       />
 
       <CustomTagInput
@@ -105,9 +108,10 @@ export default function AddShowsForm(): JSX.Element {
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
         setValue={setValue}
+        control={control}
       />
 
-      <FacilitiesSection register={register} />
+      <FacilitiesSection register={register} control={control} />
 
       <button
         type="submit"
@@ -124,7 +128,7 @@ export default function AddShowsForm(): JSX.Element {
       </button>
 
       {/* 디버깅 정보 */}
-      {/* <div className="text-sm text-gray-500">
+      <div className="text-sm text-gray-500">
         <div>Form Values: {JSON.stringify(formValues, null, 2)}</div>
         <div>Is Valid: {isValid.toString()}</div>
         <div>Has Errors: {Object.keys(errors).length > 0 ? "Yes" : "No"}</div>
@@ -133,7 +137,7 @@ export default function AddShowsForm(): JSX.Element {
             {key}: {error.message}
           </div>
         ))}
-      </div> */}
+      </div>
 
       {Object.keys(errors).length > 0 && (
         <div className="text-center text-14-400 text-red-500">

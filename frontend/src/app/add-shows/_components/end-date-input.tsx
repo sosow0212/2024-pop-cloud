@@ -1,12 +1,15 @@
-// ./end-date-input.tsx
-
 "use client";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 import { memo } from "react";
 import DatePicker from "react-datepicker";
-import { FieldErrors, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  UseFormSetValue,
+  useWatch,
+} from "react-hook-form";
 
 import { ShowType } from "../types/index";
 import { parseISODate, toISOWithTime } from "../utils/date-utils";
@@ -14,16 +17,23 @@ import { parseISODate, toISOWithTime } from "../utils/date-utils";
 interface EndDateInputProps {
   errors: FieldErrors<ShowType>;
   setValue: UseFormSetValue<ShowType>;
-  watch: UseFormWatch<ShowType>;
+  control: Control<ShowType>;
 }
 
-export default function EndDateInputComponent({
+function EndDateInputComponent({
   errors,
   setValue,
-  watch,
+  control,
 }: EndDateInputProps): JSX.Element {
-  const startDate = watch("startDate");
-  const endDate = watch("endDate");
+  const startDate = useWatch({
+    control,
+    name: "startDate",
+  });
+
+  const endDate = useWatch({
+    control,
+    name: "endDate",
+  });
 
   const handleEndDateChange = (date: Date | null) => {
     setValue("endDate", date ? toISOWithTime(date) : "");
@@ -52,3 +62,5 @@ export default function EndDateInputComponent({
 
 const EndDateInput = memo(EndDateInputComponent);
 EndDateInput.displayName = "EndDateInput";
+
+export default EndDateInput;

@@ -1,18 +1,30 @@
 import clsx from "clsx";
 import { memo } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  UseFormRegister,
+  useWatch,
+} from "react-hook-form";
 
 import { ShowType } from "../types";
 
 interface DescriptionInputProps {
   register: UseFormRegister<ShowType>;
   errors: FieldErrors<ShowType>;
+  control: Control<ShowType>;
 }
 
-export default function DescriptionInputComponent({
+function DescriptionInputComponent({
   register,
   errors,
+  control,
 }: DescriptionInputProps): JSX.Element {
+  const description = useWatch({
+    control,
+    name: "description",
+  });
+
   return (
     <div className="w-full md:w-full lg:w-full">
       <label htmlFor="description" className="mb-5 block text-16-600">
@@ -26,6 +38,7 @@ export default function DescriptionInputComponent({
         )}
         placeholder="팝업/전시회 설명을 입력해주세요"
         {...register("description")}
+        value={description}
       />
       {errors.description?.message && (
         <p className="text-14-400 text-red-500">{errors.description.message}</p>
@@ -36,3 +49,5 @@ export default function DescriptionInputComponent({
 
 const DescriptionInput = memo(DescriptionInputComponent);
 DescriptionInput.displayName = "DescriptionInput";
+
+export default DescriptionInput;
