@@ -8,13 +8,18 @@ import { useForm } from "react-hook-form";
 
 import { ShowType } from "../types";
 import { addShowForm } from "../validations/schema";
-import BasicInfo from "./basic-info";
-import DateTimeSection from "./date-time-select";
-import FacilitiesSection from "./facilities-section";
+import CustomTagInput from "./custom-tag-input";
+import DescriptionInput from "./description-input";
+import EndDateInput from "./end-date-input";
+import FacilitiesSection from "./facilities-selector";
+import FeeInput from "./fee-input";
 import LocationSection from "./location-select";
-import TagSection from "./tag-select";
+import OpenTimesInput from "./open-time-input";
+import PublicTagSelect from "./select-public-tags";
+import StartDateInput from "./start-date-input";
+import TitleInput from "./title-input";
 
-export default function AddShowsForm() {
+export default function AddShowsForm(): JSX.Element {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [tagInput, setTagInput] = useState("");
@@ -70,14 +75,15 @@ export default function AddShowsForm() {
     >
       <h1 className="text-24-700">팝업/전시회 등록</h1>
 
-      <BasicInfo register={register} errors={errors} />
+      <TitleInput register={register} errors={errors} />
+      <DescriptionInput register={register} errors={errors} />
+      <FeeInput register={register} errors={errors} />
 
-      <DateTimeSection
-        register={register}
-        errors={errors}
-        setValue={setValue}
-        watch={watch}
-      />
+      <div className="flex w-full gap-12 md:w-full lg:w-full">
+        <StartDateInput errors={errors} setValue={setValue} watch={watch} />
+        <EndDateInput errors={errors} setValue={setValue} watch={watch} />
+      </div>
+      <OpenTimesInput register={register} errors={errors} />
 
       <LocationSection
         register={register}
@@ -86,9 +92,14 @@ export default function AddShowsForm() {
         watch={watch}
       />
 
-      <TagSection
+      <PublicTagSelect
         register={register}
-        errors={errors}
+        setValue={setValue}
+        error={errors.publicTag?.message}
+        name="publicTag"
+      />
+
+      <CustomTagInput
         tagInput={tagInput}
         setTagInput={setTagInput}
         selectedTags={selectedTags}
@@ -97,6 +108,7 @@ export default function AddShowsForm() {
       />
 
       <FacilitiesSection register={register} />
+
       <button
         type="submit"
         disabled={!isValid || isLoading}
