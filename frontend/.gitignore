@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+src/mocks/db.json
 
 # testing
 /coverage
@@ -37,3 +38,5 @@ yarn-error.log*
 next-env.d.ts
 
 *storybook.log
+
+db.json
