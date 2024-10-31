@@ -1,10 +1,11 @@
 /* eslint-disable */
 import { http, HttpResponse } from "msw";
-import { ShowBasic, ShowDetail, createDummyShows } from "./dummy";
-import { dbService } from "./db.service";
+import { ShowBasic, createDummyShows } from "./dummy";
 
 const allShows = createDummyShows(1000);
-
+export const MOCK_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ";
+//리얼 더미토큰이라 아무것도 안담겨있어요
 interface CreatePopupRequest {
   title: string;
   description: string;
@@ -167,14 +168,45 @@ export const handlers = [
     }
   }),
 
-  http.post("/auth/login/oauth/kakao", async () => {
-    return HttpResponse.json(
-      { accessToken: "mock-accessToken" },
-      { status: 200 },
-    );
-  }),
+  // handlers.ts의 팝업 생성 핸들러 부분만 수정
   http.post<never, CreatePopupRequest>("/api/popups", async ({ request }) => {
     try {
+      // Authorization 헤더 검증
+      const authHeader = request.headers.get("Authorization");
+      console.log("Authorization header:", authHeader); // 추가된 로그
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return new HttpResponse(
+          JSON.stringify({
+            status: 401,
+            message: "인증이 필요합니다.",
+          }),
+          {
+            status: 401,
+            headers: {
+              "Content-Type": "application/json;charset=UTF-8",
+            },
+          },
+        );
+      }
+
+      // 토큰 검증
+      const token = authHeader.split("Bearer ")[1].trim();
+      if (token !== MOCK_TOKEN) {
+        return new HttpResponse(
+          JSON.stringify({
+            status: 401,
+            message: "유효하지 않은 토큰입니다.",
+          }),
+          {
+            status: 401,
+            headers: {
+              "Content-Type": "application/json;charset=UTF-8",
+            },
+          },
+        );
+      }
+
       const requestBody = (await request.json()) as CreatePopupRequest;
 
       // 필수 필드 검증
@@ -189,7 +221,12 @@ export const handlers = [
             status: 400,
             message: "필수 필드가 누락되었습니다.",
           }),
-          { status: 400 },
+          {
+            status: 400,
+            headers: {
+              "Content-Type": "application/json;charset=UTF-8",
+            },
+          },
         );
       }
 
@@ -203,32 +240,42 @@ export const handlers = [
             status: 400,
             message: "종료일이 시작일보다 빠를 수 없습니다.",
           }),
-          { status: 400 },
+          {
+            status: 400,
+            headers: {
+              "Content-Type": "application/json;charset=UTF-8",
+            },
+          },
         );
       }
-
-      // db.json에 저장
-      const newPopupId = dbService.savePopup(requestBody);
-
-      // 성공 응답
-      return HttpResponse.json(
-        {
+      return new HttpResponse(
+        JSON.stringify({
           status: 201,
           message: "팝업스토어가 성공적으로 등록되었습니다.",
           data: {
-            id: newPopupId,
+            id: 100,
+          },
+        }),
+        {
+          status: 201,
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
           },
         },
-        { status: 201 },
       );
     } catch (error) {
-      console.error("Error in create popup handler:", error);
+      console.error("Error in popup handler:", error);
       return new HttpResponse(
         JSON.stringify({
           status: 500,
           message: "서버 에러가 발생했습니다.",
         }),
-        { status: 500 },
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        },
       );
     }
   }),
