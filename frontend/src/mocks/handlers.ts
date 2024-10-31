@@ -1,8 +1,28 @@
 /* eslint-disable */
 import { http, HttpResponse } from "msw";
 import { ShowBasic, ShowDetail, createDummyShows } from "./dummy";
+import { dbService } from "./db.service";
 
 const allShows = createDummyShows(1000);
+
+interface CreatePopupRequest {
+  title: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  openTimes: string;
+  location: string;
+  latitude: string;
+  longitude: string;
+  isParkingAvailable: boolean;
+  isFoodAllowed: boolean;
+  isPetAllowed: boolean;
+  isKidsZone: boolean;
+  isWifiAvailable: boolean;
+  fee: number;
+  publicTag: string;
+  tags: string[];
+}
 
 export const handlers = [
   http.get("/api/shows", async ({ request }) => {
@@ -152,5 +172,64 @@ export const handlers = [
       { accessToken: "mock-accessToken" },
       { status: 200 },
     );
+  }),
+  http.post<never, CreatePopupRequest>("/api/popups", async ({ request }) => {
+    try {
+      const requestBody = (await request.json()) as CreatePopupRequest;
+
+      // 필수 필드 검증
+      if (
+        !requestBody.title ||
+        !requestBody.description ||
+        !requestBody.startDate ||
+        !requestBody.endDate
+      ) {
+        return new HttpResponse(
+          JSON.stringify({
+            status: 400,
+            message: "필수 필드가 누락되었습니다.",
+          }),
+          { status: 400 },
+        );
+      }
+
+      // 날짜 유효성 검증
+      const startDate = new Date(requestBody.startDate);
+      const endDate = new Date(requestBody.endDate);
+
+      if (endDate <= startDate) {
+        return new HttpResponse(
+          JSON.stringify({
+            status: 400,
+            message: "종료일이 시작일보다 빠를 수 없습니다.",
+          }),
+          { status: 400 },
+        );
+      }
+
+      // db.json에 저장
+      const newPopupId = dbService.savePopup(requestBody);
+
+      // 성공 응답
+      return HttpResponse.json(
+        {
+          status: 201,
+          message: "팝업스토어가 성공적으로 등록되었습니다.",
+          data: {
+            id: newPopupId,
+          },
+        },
+        { status: 201 },
+      );
+    } catch (error) {
+      console.error("Error in create popup handler:", error);
+      return new HttpResponse(
+        JSON.stringify({
+          status: 500,
+          message: "서버 에러가 발생했습니다.",
+        }),
+        { status: 500 },
+      );
+    }
   }),
 ];
