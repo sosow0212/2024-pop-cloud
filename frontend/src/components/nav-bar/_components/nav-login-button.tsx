@@ -18,20 +18,20 @@ function NavLoginButton({ shrink }: NavLoginButtonProps) {
     <button
       type="button"
       className={clsx(
-        "flex size-48 items-center justify-center rounded-5 text-center hover:bg-gray-100",
+        "flex size-48 items-center justify-center rounded-5 text-center hover:bg-gray-2",
         !shrink && "lg:w-220 lg:pl-12",
       )}
       onClick={handleClick}
     >
       <div
         className={clsx(
-          "flex w-full justify-center gap-16 lg:justify-start",
-          shrink && "lg:justify-center",
+          "flex w-full justify-center gap-16",
+          shrink ? "lg:justify-center" : "lg:justify-start",
         )}
       >
-        <FiUser className="size-24 text-black" />
+        <FiUser className="size-24 text-gray-3" />
         <span
-          className={clsx("hidden text-black lg:block", shrink && "lg:hidden")}
+          className={clsx("hidden text-gray-3 lg:block", shrink && "lg:hidden")}
         >
           로그인
         </span>

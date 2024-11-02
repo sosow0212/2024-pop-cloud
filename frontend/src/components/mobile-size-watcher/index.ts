@@ -13,7 +13,7 @@ import { useIsMobileStore } from "@/store";
 
 export default function MobileSizeWatcher() {
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 480px)");
+    const mediaQuery = window.matchMedia("(max-width: 744px)");
 
     const handleMediaQueryChange = (e: MediaQueryListEvent) => {
       useIsMobileStore.setState(e.matches);
