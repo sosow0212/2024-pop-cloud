@@ -61,7 +61,7 @@ export default async function ShowListPage({
       <FilterContainer />
       <div className="min-h-screen w-full lg:ml-10">
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <div className="flex h-full flex-col overflow-hidden p-30 pt-40 lg:px-70 lg:pt-50">
+          <div className="l flex h-full flex-col overflow-hidden p-30 pt-40 lg:px-70 lg:pt-50">
             <h1 className="mb-4 text-24-700">쇼케이스 목록</h1>
             <div className="my-20 flex h-150 min-w-330 items-center justify-between rounded-lg bg-gray-100 p-20 md:gap-50 lg:gap-30">
               <p className="text-16-600">
