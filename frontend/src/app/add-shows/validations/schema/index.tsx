@@ -11,8 +11,6 @@ export const addShowForm = z.object({
 
   openTimes: z.string().min(1, "운영시간은 필수입니다"),
 
-  location: z.string().min(1, "주소는 필수입니다"),
-
   latitude: z.string().optional().nullable(),
 
   longitude: z.string().optional().nullable(),

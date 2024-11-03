@@ -131,7 +131,7 @@ export default function AddShowsForm(): JSX.Element {
         type="submit"
         disabled={!isValid || isLoading}
         className={clsx(
-          "h-58 w-351 rounded-6 text-white transition-colors lg:w-full",
+          "h-58 w-full rounded-6 text-white transition-colors lg:w-full",
           {
             "bg-gray-300 cursor-not-allowed": !isValid || isLoading,
             "bg-blue-500 hover:bg-blue-600": isValid && !isLoading,
