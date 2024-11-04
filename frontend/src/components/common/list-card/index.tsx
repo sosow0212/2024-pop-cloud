@@ -54,7 +54,7 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
               src={event.images[0]}
               alt={`${event.title} 이미지`}
               fill
-              className="object-contain"
+              className="object-cover"
             />
           </div>
         </figure>
