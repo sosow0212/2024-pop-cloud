@@ -21,7 +21,7 @@ export default function DetailsTabs({ data }: DetailsProps) {
       </TabsList>
       <TabsContent value="information">
         <section className="my-40">
-          <article className="leading-16 mb-50 text-16 text-gray-600">
+          <article className="leading-16 mb-50 text-16 text-gray-90">
             {data.description}
           </article>
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -34,9 +34,9 @@ export default function DetailsTabs({ data }: DetailsProps) {
             />
             <div className="order-1 mb-26 md:order-2 md:ml-20">
               {DETAIL_INFO.map(({ title, info }) => (
-                <dl key={title} className="mb-20 last:mb-0 md:mb-34">
-                  <dt className="mb-8 text-16-600 text-gray-700">{title}</dt>
-                  <dd className="text-15 text-gray-500">{info}</dd>
+                <dl key={title} className="mb-20 last:mb-0 md:mb-30">
+                  <dt className="mb-8 font-bold">{title}</dt>
+                  <dd className="text-15 text-gray-80">{info}</dd>
                 </dl>
               ))}
             </div>

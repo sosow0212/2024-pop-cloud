@@ -6,7 +6,7 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { MdChildCare } from "react-icons/md";
 
 export default function DetailsInfo({ data }: DetailsProps) {
-  const PUBLIC_CN = "size-20 md:size-26 text-gray-600";
+  const PUBLIC_CN = "size-20 md:size-26 text-gray-90";
 
   const DETAIL_INFO_BOOLEAN = [
     {
@@ -50,11 +50,11 @@ export default function DetailsInfo({ data }: DetailsProps) {
             ) : (
               <span className="relative">
                 {icon}
-                <CiNoWaitingSign className="absolute -left-12 -top-11 size-43 text-gray-600 md:-left-10 md:-top-10 md:size-46" />
+                <CiNoWaitingSign className="absolute -left-12 -top-11 size-43 text-gray-90 md:-left-10 md:-top-10 md:size-46" />
               </span>
             )}
           </dd>
-          <dt className="text-center text-12-600 text-gray-600">
+          <dt className="md:text-12-700 break-words text-center text-11 font-bold text-gray-90	">
             {info ? able : disable}
           </dt>
         </dl>

@@ -12,7 +12,7 @@ export default function DetailsTags({ tags }: Props) {
       </span>
       <div className="mt-14 flex gap-16">
         {tags.map((tag) => (
-          <button type="button" className="text-gray-500" key={tag}>
+          <button type="button" className="text-gray-90" key={tag}>
             # {tag}
           </button>
         ))}
