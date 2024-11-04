@@ -22,8 +22,4 @@ declare module "@pop-cloud-types" {
     tags: string[];
     images: string[];
   }
-
-  interface DetailsProps {
-    data: Show;
-  }
 }

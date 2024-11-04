@@ -4,6 +4,7 @@ import CarouselUI from "@/components/common/carousel";
 import DetailsHeader from "./_components/details-header";
 import DetailsTabs from "./_components/details-tabs";
 import DetailsTags from "./_components/details-tags";
+import RelativeShows from "./_components/relative-shows";
 
 export default async function PopupDetails({
   params,
@@ -27,9 +28,7 @@ export default async function PopupDetails({
 
       <DetailsTags tags={data.tags} />
       <hr className="my-30 h-1 w-full bg-gray-200" />
-      <section className="mb-70">
-        <h3 className="text-20-600 md:text-24-600">연관 추천 팝업</h3>
-      </section>
+      <RelativeShows />
     </div>
   );
 }
