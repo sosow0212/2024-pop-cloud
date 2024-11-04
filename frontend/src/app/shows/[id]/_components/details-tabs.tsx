@@ -36,7 +36,7 @@ export default function DetailsTabs({ data }: DetailsProps) {
               {DETAIL_INFO.map(({ title, info }) => (
                 <dl key={title} className="mb-20 last:mb-0 md:mb-30">
                   <dt className="mb-8 font-bold">{title}</dt>
-                  <dd className="text-15 text-gray-80">{info}</dd>
+                  <dd className="text-15 text-gray-100/80">{info}</dd>
                 </dl>
               ))}
             </div>

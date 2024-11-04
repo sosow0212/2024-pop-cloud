@@ -50,11 +50,11 @@ export default function DetailsInfo({ data }: DetailsProps) {
             ) : (
               <span className="relative">
                 {icon}
-                <CiNoWaitingSign className="absolute -left-12 -top-11 size-43 text-gray-90 md:-left-10 md:-top-10 md:size-46" />
+                <CiNoWaitingSign className="absolute -left-12 -top-11 size-43 text-gray-100 md:-left-10 md:-top-10 md:size-46" />
               </span>
             )}
           </dd>
-          <dt className="md:text-12-700 break-words text-center text-11 font-bold text-gray-90	">
+          <dt className="md:text-12-700 break-words text-center text-11 font-bold text-gray-100/80">
             {info ? able : disable}
           </dt>
         </dl>
