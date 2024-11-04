@@ -1,16 +1,9 @@
-import { Show } from "@pop-cloud-types";
-
-import instance from "@/api/custom-fetch";
+import { getShowsDetails } from "@/api/get-shows";
 import CarouselUI from "@/components/common/carousel";
 
 import DetailsHeader from "./_components/details-header";
 import DetailsTabs from "./_components/details-tabs";
 import DetailsTags from "./_components/details-tags";
-
-async function getPopupDetails(popupId: number): Promise<Show> {
-  const { data } = await instance.get<Show>(`/api/popups/${popupId}`);
-  return data;
-}
 
 export default async function PopupDetails({
   params,
@@ -18,7 +11,7 @@ export default async function PopupDetails({
   params: { id: string };
 }) {
   const popupId = Number(params.id);
-  const data = await getPopupDetails(popupId);
+  const data = await getShowsDetails(popupId);
 
   return (
     <div className="text-gray-100">

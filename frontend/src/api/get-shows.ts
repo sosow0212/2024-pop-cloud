@@ -4,12 +4,13 @@ import { ShowData } from "@/app/shows/types/index";
 import { ApiError } from "@/custom-error";
 
 import instance from "./custom-fetch";
+import { Show } from "@pop-cloud-types";
 
 type FetchShowsParams = {
   [key: string]: string | string[] | undefined | null;
 };
 
-export default async function fetchShows(
+export async function fetchShows(
   params: FetchShowsParams,
 ): Promise<{ shows: ShowData[]; nextCursor: string | null }> {
   const searchParams = new URLSearchParams();
@@ -62,4 +63,9 @@ export default async function fetchShows(
     }
     throw error;
   }
+}
+
+export async function getShowsDetails(popupId: number): Promise<Show> {
+  const { data } = await instance.get<Show>(`/api/popups/${popupId}`);
+  return data;
 }

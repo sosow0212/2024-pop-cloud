@@ -7,7 +7,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
-import fetchShows from "@/api/get-shows";
+import { fetchShows } from "@/api/get-shows";
 
 import FilterContainer from "./_components/filter-container";
 import SearchInput from "./_components/search-input";
