@@ -11,7 +11,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="m-auto w-full px-20 py-30 md:py-50 lg:w-1000">
+    <div className="m-auto w-full px-20 py-30 md:px-110 md:py-60">
       {children}
     </div>
   );

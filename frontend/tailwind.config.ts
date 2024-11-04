@@ -33,6 +33,21 @@ const config: Config = {
         "gray-1": "#333236",
         "gray-2": "rgba(255, 255, 255, 0.05)",
         "gray-3": "rgba(255, 255, 255, 0.6)",
+        gray: {
+          "00": "#fff",
+          "05": "#fbfbfb",
+          10: "#f6f6f8",
+          15: "#ededf0",
+          20: "#e5e5ea",
+          30: "#dddee4",
+          40: "#d5d6dd",
+          50: "#c2c3cd",
+          60: "#adaeb8",
+          70: "#888893",
+          80: "#66666E",
+          90: "#4a494f",
+          100: "#333236",
+        },
       },
       keyframes: {
         "accordion-down": {
