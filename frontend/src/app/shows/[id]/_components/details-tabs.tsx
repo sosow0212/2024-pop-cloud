@@ -2,7 +2,7 @@ import { DetailsProps } from "@pop-cloud-types";
 
 import MapStatic from "@/components/map/map-static";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import getDetailInfo from "@/constants/details";
+import { getDetailInfo } from "@/constants/shows";
 
 import DetailsInfo from "./details-info";
 
