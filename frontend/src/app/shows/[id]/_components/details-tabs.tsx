@@ -33,12 +33,20 @@ export default function DetailsTabs({ data }: DetailsProps) {
               className="order-2 size-full h-300 md:order-1"
             />
             <div className="order-1 mb-26 md:order-2 md:ml-20">
-              {DETAIL_INFO.map(({ title, info }) => (
-                <dl key={title} className="mb-20 last:mb-0 md:mb-30">
-                  <dt className="mb-8 font-bold">{title}</dt>
-                  <dd className="text-15 text-gray-100/80">{info}</dd>
-                </dl>
-              ))}
+              {DETAIL_INFO.map(({ title, info }) => {
+                const formattedInfo =
+                  title === "이용요금"
+                    ? `${new Intl.NumberFormat("ko-KR").format(Number(info))}원`
+                    : info;
+                return (
+                  <dl key={title} className="mb-20 last:mb-0 md:mb-30">
+                    <dt className="mb-8 font-bold">{title}</dt>
+                    <dd className="text-15 text-gray-100/80">
+                      {formattedInfo}
+                    </dd>
+                  </dl>
+                );
+              })}
             </div>
           </div>
         </section>
