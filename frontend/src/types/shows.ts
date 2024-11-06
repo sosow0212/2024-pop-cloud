@@ -22,4 +22,17 @@ declare module "@pop-cloud-types" {
     tags: string[];
     images: string[];
   }
+
+  export interface RelativeShow {
+    showId: number;
+    showType: string;
+    publicTag: string;
+    title: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+    visitedCount: number;
+    likedCount: number;
+    images: string[];
+  }
 }

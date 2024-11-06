@@ -4,7 +4,8 @@ import { ShowData } from "@/app/shows/types/index";
 import { ApiError } from "@/custom-error";
 
 import instance from "./custom-fetch";
-import { Show } from "@pop-cloud-types";
+import { RelativeShow, Show } from "@pop-cloud-types";
+import { defaultParams } from "@/constants/shows";
 
 type FetchShowsParams = {
   [key: string]: string | string[] | undefined | null;
@@ -65,7 +66,20 @@ export async function fetchShows(
   }
 }
 
+// 상세페이지의 show 정보를 불러오는 api 함수입니다.
 export async function getShowsDetails(popupId: number): Promise<Show> {
   const { data } = await instance.get<Show>(`/api/popups/${popupId}`);
+  return data;
+}
+
+// 상세페이지에서 연관 전시 정보를 불러오는 api 함수입니다.
+export async function getRelativeShows(
+  publicTags: string,
+  showType: "popups" | "exhibition" = defaultParams.showType,
+): Promise<RelativeShow[]> {
+  const { data } = await instance.get<RelativeShow[]>(
+    `/api/shows?showType=${showType}&publicTags=${[publicTags]}&startDate=${defaultParams.startDate}&endDate=${defaultParams.endDate}&pageSize=${defaultParams.pageSize}`,
+  );
+
   return data;
 }

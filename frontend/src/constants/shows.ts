@@ -18,7 +18,7 @@ const oneYearLater = new Date(today.getFullYear() + 1, today.getMonth(), 0);
 export const defaultParams = {
   startDate: startOfMonth.toISOString().split("T")[0],
   endDate: oneYearLater.toISOString().split("T")[0],
-  showType: "popups",
+  showType: "popups" as "popups" | "exhibition",
   pageSize: "10",
 };
 
