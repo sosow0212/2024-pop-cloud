@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 
+import createPopup from "@/api/create-popup";
+import { ApiError } from "@/custom-error";
+
 import { ShowType } from "../types";
 import { addShowForm } from "../validations/schema";
 import CustomTagInput from "./custom-tag-input";
@@ -22,6 +25,7 @@ import TitleInput from "./title-input";
 export default function AddShowsForm(): JSX.Element {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState<string>("");
   const [tagInput, setTagInput] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
@@ -54,16 +58,26 @@ export default function AddShowsForm(): JSX.Element {
     },
   });
 
-  // 전체 폼 값을 감시
   const formValues = useWatch({ control }); //eslint-disable-line
 
   const onSubmit = async (data: ShowType) => {
     try {
       setIsLoading(true);
-      console.log(data); //eslint-disable-line
+      setApiError("");
+
+      const response = await createPopup({
+        ...data,
+      });
+
+      console.log("팝업스토어가 성공적으로 생성되었습니다:", response); //eslint-disable-line
       router.push("/shows");
     } catch (error) {
       console.error("Error:", error); //eslint-disable-line
+      if (error instanceof ApiError) {
+        setApiError(error.message);
+      } else {
+        setApiError("알 수 없는 오류가 발생했습니다.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -117,7 +131,7 @@ export default function AddShowsForm(): JSX.Element {
         type="submit"
         disabled={!isValid || isLoading}
         className={clsx(
-          "h-58 w-351 rounded-6 text-white transition-colors lg:w-full",
+          "h-58 w-full rounded-6 text-white transition-colors lg:w-full",
           {
             "bg-gray-300 cursor-not-allowed": !isValid || isLoading,
             "bg-blue-500 hover:bg-blue-600": isValid && !isLoading,
@@ -127,17 +141,10 @@ export default function AddShowsForm(): JSX.Element {
         {isLoading ? "등록 중..." : "등록하기"}
       </button>
 
-      {/* 디버깅 정보 */}
-      {/* <div className="text-sm text-gray-500">
-        <div>Form Values: {JSON.stringify(formValues, null, 2)}</div>
-        <div>Is Valid: {isValid.toString()}</div>
-        <div>Has Errors: {Object.keys(errors).length > 0 ? "Yes" : "No"}</div>
-        {Object.entries(errors).map(([key, error]) => (
-          <div key={key}>
-            {key}: {error.message}
-          </div>
-        ))}
-      </div> */}
+      {/* API 에러 메시지 표시 */}
+      {apiError && (
+        <div className="text-center text-14-400 text-red-500">{apiError}</div>
+      )}
 
       {Object.keys(errors).length > 0 && (
         <div className="text-center text-14-400 text-red-500">
