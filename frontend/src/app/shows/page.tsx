@@ -63,7 +63,7 @@ export default async function ShowListPage({
         <HydrationBoundary state={dehydrate(queryClient)}>
           <div className="flex h-full flex-col overflow-hidden p-30 pt-40 lg:px-70 lg:pt-50">
             <h1 className="mb-4 text-24-700">쇼케이스 목록</h1>
-            <div className="my-20 flex h-150 min-w-330 items-center justify-between rounded-lg bg-gray-100 p-20 md:gap-50 lg:gap-30">
+            <div className="my-20 flex h-150 min-w-330 items-center justify-between rounded-lg bg-gray-10 p-20 md:gap-50 lg:gap-30">
               <p className="text-16-600">
                 팝클라우드에 팝업스토어를 등록하고 싶으신가요?
                 <br />
