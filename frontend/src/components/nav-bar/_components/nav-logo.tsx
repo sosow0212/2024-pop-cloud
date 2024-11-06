@@ -1,21 +1,16 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { memo } from "react";
-import { GiFluffyCloud } from "react-icons/gi";
+import { SiPopos } from "react-icons/si";
 
 function NavLogo({ shrink }: { shrink: boolean }) {
   return (
     <Link href="/" className="mb-25 hidden md:block">
-      <header>
-        <GiFluffyCloud
-          className={clsx(
-            "size-40 text-blue-5 md:block",
-            shrink ? "lg:block" : "lg:hidden",
-          )}
-        />
+      <header className="items-center justify-start gap-4 lg:flex">
+        <SiPopos className="size-32 text-white lg:hidden" />
         <h1
           className={clsx(
-            "hidden font-[TTSamlipCreamyWhiteR] text-25 font-bold text-blue-5",
+            "hidden pt-6 font-[yg-jalnan] text-25 font-bold text-white",
             shrink ? "lg:hidden" : "lg:block",
           )}
         >
