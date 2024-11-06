@@ -22,7 +22,7 @@ export default function DetailsTags({ tags }: Props) {
         {tags.map((tag) => (
           <button
             type="button"
-            className="text-gray-90"
+            className="rounded-6 bg-blue-5/20 px-6 py-1 text-blue-6"
             key={tag}
             onClick={() => handleTagClick(tag)}
           >
