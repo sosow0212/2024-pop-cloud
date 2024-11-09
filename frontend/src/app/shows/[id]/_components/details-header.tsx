@@ -27,12 +27,14 @@ export default function DetailsHeader({ publicTag, title }: Props) {
   };
 
   return (
-    <section className="w-full text-center">
-      <span className="mb-14 block w-full font-extrabold text-blue-5">
-        {publicTag}
-      </span>
-      <h2 className="text-24-600 md:text-32-600 lg:text-32-600">{title}</h2>
-      <div className="my-30 flex justify-center gap-16 md:my-40">
+    <section className="w-full text-center lg:flex lg:justify-between lg:text-left">
+      <div>
+        <span className="mb-14 block w-full font-extrabold text-blue-5">
+          {publicTag}
+        </span>
+        <h2 className="text-24-600 md:text-28 lg:font-bold">{title}</h2>
+      </div>
+      <div className="my-20 flex justify-center gap-16 md:my-30">
         <span className="relative size-40 rounded-full border border-solid border-gray-300 text-red-500">
           <LikeButton className="center" color="text-gray-500" size={24} />
         </span>

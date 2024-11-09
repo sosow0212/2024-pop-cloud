@@ -33,7 +33,7 @@ export default function PopupCard({ popup, className }: PopupCardProps) {
       whileHover={{ scale: 1.02 }}
       transition={{ type: "tween", duration: "0.2" }}
     >
-      <div className="relative flex h-240 w-full items-center justify-center bg-gray-100">
+      <div className="relative flex h-240 w-full items-center justify-center bg-gray-10">
         <Image
           src={Rhino}
           alt="팝업스토어 이미지"
