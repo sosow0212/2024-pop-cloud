@@ -1,0 +1,35 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_MOCKING: ${NEXT_PUBLIC_API_MOCKING}
+        NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
+        NEXT_PUBLIC_KAKAOMAP_KEY: ${NEXT_PUBLIC_KAKAOMAP_KEY}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mock-server
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_MOCKING=${NEXT_PUBLIC_API_MOCKING}
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+      - NEXT_PUBLIC_KAKAOMAP_KEY=${NEXT_PUBLIC_KAKAOMAP_KEY}
+
+  mock-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_MOCKING: ${NEXT_PUBLIC_API_MOCKING}
+        NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
+        NEXT_PUBLIC_KAKAOMAP_KEY: ${NEXT_PUBLIC_KAKAOMAP_KEY}
+    command: npx tsx watch ./src/mocks/http.ts
+    ports:
+      - "9090:9090"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_MOCKING=${NEXT_PUBLIC_API_MOCKING}
+      - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+      - NEXT_PUBLIC_KAKAOMAP_KEY=${NEXT_PUBLIC_KAKAOMAP_KEY}

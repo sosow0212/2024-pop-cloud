@@ -12,7 +12,9 @@
     "build-storybook": "storybook build",
     "postinstall": "cd .. && husky ./frontend/.husky",
     "chromatic": "npx chromatic --project-token=chpt_b8f6446447a64d6",
-    "mock": "npx tsx watch ./src/mocks/http.ts"
+    "mock": "npx tsx watch ./src/mocks/http.ts",
+    "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env.development up --build",
+    "docker:prod": "docker compose up --build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -31,6 +33,7 @@
     "@tanstack/react-query": "^5.56.2",
     "@tanstack/react-query-devtools": "^5.56.2",
     "class-variance-authority": "^0.7.0",
+    "ts-node": "^10.9.1",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
