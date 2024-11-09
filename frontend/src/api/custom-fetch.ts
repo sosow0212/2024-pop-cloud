@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { ApiError, NotFoundError } from "@/custom-error";
 import getBrowserCookie from "@/utils/browser-cookies";
 import { getCookie } from "@/utils/next-cookie";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-if (!BASE_URL) throw new NotFoundError("base url이 없습니다.");
-
 class CustomFetch {
-  baseURL: string;
+  private baseURL: string;
   accessToken?: string;
 
-  constructor(baseURL: string) {
-    this.baseURL = baseURL;
+  constructor() {
+    const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+    if (!BASE_URL) {
+      throw new NotFoundError("base url이 없습니다.");
+    }
+    this.baseURL = BASE_URL;
   }
 
   async getAccessToken() {
@@ -51,7 +51,7 @@ class CustomFetch {
       throw error;
     }
 
-    return { data: await response.json() }; // Automatically return parsed JSON
+    return { data: await response.json() };
   }
 
   // GET 메서드
@@ -115,6 +115,6 @@ class CustomFetch {
       switch (error.status) {
  */
 
-const instance = new CustomFetch(BASE_URL);
+const instance = new CustomFetch();
 
 export default instance;
