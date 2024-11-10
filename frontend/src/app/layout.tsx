@@ -32,7 +32,9 @@ export default function RootLayout({
             strategy="beforeInteractive"
           />
           <Script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" />
-          <MSWComponent />
+          {process.env.NEXT_PUBLIC_API_MOCKING === "enabled" && (
+            <MSWComponent />
+          )}
           <ModalProvider />
           <MobileSizeWatcher />
           <MobileHeader />

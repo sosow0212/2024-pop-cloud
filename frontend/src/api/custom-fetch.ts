@@ -12,7 +12,11 @@ class CustomFetch {
     if (!BASE_URL) {
       throw new NotFoundError("base url이 없습니다.");
     }
-    this.baseURL = BASE_URL;
+    // 브라우저에서는 localhost:9090, 서버사이드에서는 mock:9090 사용
+    this.baseURL =
+      typeof window !== "undefined"
+        ? BASE_URL.replace("mock", "localhost")
+        : BASE_URL;
   }
 
   async getAccessToken() {
