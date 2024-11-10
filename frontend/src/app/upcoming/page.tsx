@@ -3,7 +3,7 @@ import { GiFluffyCloud } from "react-icons/gi";
 
 function Upcoming() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-10 text-center">
       <GiFluffyCloud className="mb-30 size-130 text-blue-500" />
       <h2 className="mb-20 text-24-600">페이지 준비 중</h2>
       <p className="mb-40 text-18-500 text-gray-600">
