@@ -2,14 +2,16 @@
 
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import { useCallback } from "react";
 import { FiHeart, FiHome, FiMapPin, FiSearch } from "react-icons/fi";
 import { SiBookmyshow } from "react-icons/si";
 
-import { shrinkPage } from "@/constants";
+import { useShrinkNavStore } from "@/store";
 
 import NavIconButton from "./nav-icon-button";
 import NavLoginButton from "./nav-login-button";
 import NavLogo from "./nav-logo";
+import NavSizeButton from "./nav-size-button";
 
 const NAV_ITEMS = [
   { href: "/", name: "홈", icon: FiHome },
@@ -20,16 +22,20 @@ const NAV_ITEMS = [
 
 export default function NavMenu({ loggedIn }: { loggedIn: boolean }) {
   const pathname = usePathname();
-  const shrink = shrinkPage.includes(pathname);
+  const shrink = useShrinkNavStore();
+  const toggleShrink = useCallback(() => {
+    useShrinkNavStore.setState((prev) => !prev);
+  }, []);
 
   return (
     <menu
       className={clsx(
-        "relative flex size-full items-center justify-evenly md:w-70 md:flex-col md:justify-start md:gap-14 md:pt-30",
-        shrink ? "lg:w-70" : "lg:w-245",
+        "flex size-full items-center justify-evenly md:flex-col md:justify-start md:gap-25 md:pt-30",
+        shrink ? "md:w-75" : "md:w-245",
       )}
     >
       <NavLogo shrink={shrink} />
+      <NavSizeButton shrink={shrink} toggleShrink={toggleShrink} />
       {NAV_ITEMS.map(({ href, name, icon }) => {
         const isActive = pathname === href;
 

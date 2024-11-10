@@ -279,4 +279,10 @@ export const handlers = [
       );
     }
   }),
+  http.post("/auth/login/oauth/kakao", async () => {
+    return HttpResponse.json(
+      { accessToken: "mock-accessToken" },
+      { status: 200 },
+    );
+  }),
 ];

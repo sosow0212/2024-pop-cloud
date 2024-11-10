@@ -14,7 +14,7 @@ export default function Error({ error }: ErrorProps) {
     error instanceof CustomError ? error.message : UnknownError.getMessage();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-10 text-center">
       <BsEmojiTear className="mb-50 size-130 text-blue-500" />
       <h2 className="mb-20 text-24-600">{`${message} 다시 시도해 주세요.`}</h2>
       <Link
