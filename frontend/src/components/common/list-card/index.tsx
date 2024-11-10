@@ -47,14 +47,14 @@ export default function EventCard({ event, onLikeChange }: EventCardProps) {
 
   return (
     <Link href={`/shows/${event.showId}`} className="block">
-      <article className="flex w-full max-w-800 gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
+      <article className="flex w-full max-w-1200 gap-10 overflow-hidden rounded-lg border border-gray-200 bg-white text-black shadow-md shadow-gray-600/20 transition-shadow hover:shadow-lg">
         <figure className="relative size-142 shrink-0">
           <div className="absolute inset-8 overflow-hidden rounded-lg">
             <Image
               src={event.images[0]}
               alt={`${event.title} 이미지`}
               fill
-              className="object-contain"
+              className="object-cover"
             />
           </div>
         </figure>

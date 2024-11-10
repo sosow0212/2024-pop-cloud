@@ -1,82 +1,13 @@
-import { format } from "date-fns";
-import { CiNoWaitingSign } from "react-icons/ci";
-import { FaCar, FaWifi } from "react-icons/fa";
-import { FaDog } from "react-icons/fa6";
-import { IoFastFoodOutline } from "react-icons/io5";
-import { MdChildCare } from "react-icons/md";
+import { DetailsProps } from "@pop-cloud-types";
 
 import MapStatic from "@/components/map/map-static";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getDetailInfo } from "@/constants/shows";
 
-interface Popup {
-  data: {
-    id: number;
-    ownerId: number;
-    title: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    openTimes: string;
-    location: string;
-    latitude: number;
-    longitude: number;
-    isParkingAvailable: boolean;
-    isFoodAllowed: boolean;
-    isPetAllowed: boolean;
-    isKidsZone: boolean;
-    isWifiAvailable: boolean;
-    fee: number;
-    publicTag: string;
-    visitCount: number;
-    likedCount: number;
-    tags: string[];
-    images: string[];
-  };
-}
+import DetailsInfo from "./details-info";
 
-export default function DetailsTabs({ data }: Popup) {
-  const DETAIL_INFO = [
-    {
-      title: "행사기간",
-      info: `${format(new Date(data.startDate), "yyyy. MM. dd")} - ${format(new Date(data.endDate), "yyyy. MM. dd")}`,
-    },
-    { title: "이용시간", info: data.openTimes },
-    { title: "이용요금", info: `${data.fee}원` },
-    { title: "주소", info: data.location },
-  ];
-  const PUBLIC_CN = "size-20 md:size-26 text-gray-600";
-  const DETAIL_INFO_BOOLEAN = [
-    {
-      able: "주차가능",
-      disable: "주차불가",
-      info: data.isParkingAvailable,
-      icon: <FaCar className={PUBLIC_CN} />,
-    },
-    {
-      able: "키즈존",
-      disable: "노키즈존",
-      info: data.isKidsZone,
-      icon: <MdChildCare className={PUBLIC_CN} />,
-    },
-    {
-      able: "식음료반입 가능",
-      disable: "식음료반입 금지",
-      info: data.isFoodAllowed,
-      icon: <IoFastFoodOutline className={PUBLIC_CN} />,
-    },
-    {
-      able: "와이파이 가능",
-      disable: "와이파이 불가",
-      info: data.isWifiAvailable,
-      icon: <FaWifi className={PUBLIC_CN} />,
-    },
-    {
-      able: "동물동반 가능",
-      disable: "동물동반 불가",
-      info: data.isPetAllowed,
-      icon: <FaDog className={PUBLIC_CN} />,
-    },
-  ];
+export default function DetailsTabs({ data }: DetailsProps) {
+  const DETAIL_INFO = getDetailInfo(data);
 
   return (
     <Tabs defaultValue="information" className="my-30 w-full">
@@ -90,47 +21,37 @@ export default function DetailsTabs({ data }: Popup) {
       </TabsList>
       <TabsContent value="information">
         <section className="my-40">
-          <article className="leading-16 mb-50 text-16 text-gray-600">
+          <article className="leading-16 mb-50 text-16 text-gray-90">
             {data.description}
           </article>
           <div className="grid grid-cols-1 md:grid-cols-2">
             <MapStatic
               label={data.title}
-              position={{ lat: data.latitude, lng: data.longitude }}
+              lat={data.latitude}
+              lng={data.longitude}
+              type="popups"
               className="order-2 size-full h-300 md:order-1"
             />
             <div className="order-1 mb-26 md:order-2 md:ml-20">
-              {DETAIL_INFO.map(({ title, info }) => (
-                <dl key={title} className="mb-20 last:mb-0 md:mb-34">
-                  <dt className="mb-8 text-16-600 text-gray-700">{title}</dt>
-                  <dd className="text-15 text-gray-500">{info}</dd>
-                </dl>
-              ))}
+              {DETAIL_INFO.map(({ title, info }) => {
+                const formattedInfo =
+                  title === "이용요금"
+                    ? `${new Intl.NumberFormat("ko-KR").format(Number(info))}원`
+                    : info;
+                return (
+                  <dl key={title} className="mb-20 last:mb-0 md:mb-30">
+                    <dt className="mb-8 font-bold">{title}</dt>
+                    <dd className="text-15 text-gray-100/80">
+                      {formattedInfo}
+                    </dd>
+                  </dl>
+                );
+              })}
             </div>
           </div>
         </section>
-
         <hr className="mb-30 h-1 w-full bg-gray-200" />
-
-        <section className="flex justify-evenly">
-          {DETAIL_INFO_BOOLEAN.map(({ able, disable, info, icon }) => (
-            <dl className="flex w-53 flex-col items-center pt-10" key={able}>
-              <dd className="mb-16 text-16">
-                {info ? (
-                  icon
-                ) : (
-                  <span className="relative">
-                    {icon}
-                    <CiNoWaitingSign className="absolute -left-12 -top-11 size-43 text-gray-600 md:-left-10 md:-top-10 md:size-46" />
-                  </span>
-                )}
-              </dd>
-              <dt className="text-center text-12-600 text-gray-600">
-                {info ? able : disable}
-              </dt>
-            </dl>
-          ))}
-        </section>
+        <DetailsInfo data={data} />
       </TabsContent>
       <TabsContent className="h-100" value="review">
         후기가 존재하지 않습니다

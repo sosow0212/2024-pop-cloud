@@ -3,9 +3,19 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Pretendard-Regular";
-  src: url("https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+  font-family: "yg-jalnan";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
     format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SpoqaHanSansNeo-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
@@ -25,7 +35,8 @@
 }
 
 * {
-  font-family: "Pretendard-Regular", Arial, sans-serif, "PyeongChangPeace-Bold";
+  font-family: "SpoqaHanSansNeo-Regular", Arial, sans-serif,
+    "PyeongChangPeace-Bold";
   box-sizing: border-box;
 }
 

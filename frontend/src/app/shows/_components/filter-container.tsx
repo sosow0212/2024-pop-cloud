@@ -18,7 +18,7 @@ export default function FilterContainer() {
   return (
     <>
       {/* 데스크탑 */}
-      <div className="fixed top-0 z-50 hidden h-screen md:block">
+      <div className="fixed top-0 z-50 hidden h-screen md:block ">
         <AnimatePresence>
           {isFilterOpen && (
             <motion.div
@@ -39,7 +39,10 @@ export default function FilterContainer() {
           onClick={toggleFilter}
           className={clsx(
             "absolute top-1/2 -translate-y-1/2",
-            "flex h-50 w-30 items-center justify-center rounded-r-md border border-gray-200 bg-white",
+            "flex h-50 w-30 items-center justify-center rounded-r-md border",
+            isFilterOpen
+              ? "border-gray-200 bg-white"
+              : "border-gray-1 bg-gray-1",
           )}
           animate={{
             left: isFilterOpen ? "300px" : "0",
@@ -47,7 +50,12 @@ export default function FilterContainer() {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           aria-label={isFilterOpen ? "필터 닫기" : "필터 열기"}
         >
-          <HiOutlineAdjustmentsVertical className="size-50 text-gray-600" />
+          <HiOutlineAdjustmentsVertical
+            className={clsx(
+              "size-50",
+              isFilterOpen ? "text-gray-600" : "text-gray-3",
+            )}
+          />
         </motion.button>
       </div>
 
