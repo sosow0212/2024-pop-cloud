@@ -1,3 +1,4 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
@@ -14,6 +15,19 @@ const nextConfig = {
     };
     return config;
   },
+  // 추가된 설정
+  experimental: {
+    serverComponentsExternalPackages: ["msw"],
+  },
+  // API 프록시 설정
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: "/api/:path*",
+  //       destination: `${process.env.NEXT_PUBLIC_BASE_URL}/:path*`,
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;
