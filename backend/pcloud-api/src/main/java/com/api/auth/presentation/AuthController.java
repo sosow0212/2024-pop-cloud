@@ -26,4 +26,12 @@ public class AuthController {
         String token = authService.loginWithOAuth(platform, oAuthPermittedCode);
         return ResponseEntity.ok(new TokenResponse(token));
     }
+
+
+    // test용 로그인 기능입니다.(추후에 삭제 예정)
+    @PostMapping("/login/test")
+    public ResponseEntity<TokenResponse> test() {
+        String token = authService.test();
+        return ResponseEntity.ok(new TokenResponse(token));
+    }
 }

@@ -32,4 +32,13 @@ public class AuthService {
     private Member signup(final Member member) {
         return memberRepository.save(member);
     }
+
+    // test용 로그인 기능입니다.(추후에 삭제 예정)
+    @Transactional
+    public String test() {
+        Member member = Member.createWithNormalRole("1234", "kakao", "email");
+        memberRepository.save(member);
+
+        return tokenProvider.create(member.getId());
+    }
 }
