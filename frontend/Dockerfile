@@ -1,7 +1,8 @@
-FROM node:18-alpine AS base
+FROM node:18-alpine3.18 AS base
 
 # Dependencies
 FROM base AS deps
+RUN apk update && apk upgrade
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
@@ -11,6 +12,8 @@ RUN yarn install --frozen-lockfile
 # Builder
 FROM base AS builder
 WORKDIR /app
+
+RUN apk update && apk upgrade
 
 # ARG 정의
 ARG NEXT_PUBLIC_API_MOCKING
@@ -30,6 +33,8 @@ RUN yarn build
 # Runner
 FROM base AS runner
 WORKDIR /app
+
+RUN apk update && apk upgrade
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
