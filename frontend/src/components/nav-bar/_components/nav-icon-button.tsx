@@ -23,15 +23,17 @@ function NavIconButton({
       key={href}
       href={href}
       className={clsx(
-        "flex size-48 items-center justify-center rounded-5 text-center hover:bg-gray-2",
-        !shrink && "lg:w-220 lg:pl-12",
+        "flex size-68 items-center justify-center rounded-5 text-center hover:bg-gray-2",
+        !shrink && "md:w-220 md:pl-12",
         isActive && "bg-gray-2",
       )}
     >
       <div
         className={clsx(
-          "flex w-full justify-center gap-16",
-          shrink ? "lg:justify-center" : "lg:justify-start",
+          "flex w-full items-center",
+          shrink
+            ? "flex-col justify-center gap-5"
+            : "flex-row justify-start gap-15",
         )}
       >
         <Icon
@@ -39,8 +41,8 @@ function NavIconButton({
         />
         <span
           className={clsx(
-            "hidden lg:block",
-            shrink && "lg:hidden",
+            "hidden md:block",
+            shrink ? "text-13" : "text-18",
             isActive ? "text-white" : "text-gray-3",
           )}
         >

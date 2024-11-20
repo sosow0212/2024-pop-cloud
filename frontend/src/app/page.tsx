@@ -3,6 +3,7 @@ import Link from "next/link";
 import CarouselUI from "@/components/common/carousel";
 import Slide from "@/components/common/popup-slide";
 import mockData from "@/components/common/popup-slide/mockData";
+import Footer from "@/components/footer";
 
 const BANNER_MOCK = [
   "/images/rhino.webp",
@@ -61,6 +62,7 @@ export default function Home() {
         <Link href="/">Showcase yours🌏</Link>
         <Link href="/">Subscribe our newsletters!</Link>
       </section>
+      <Footer />
     </>
   );
 }

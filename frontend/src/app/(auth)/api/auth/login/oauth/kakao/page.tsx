@@ -42,7 +42,7 @@ export default function GetKakaoToken() {
       {error ? (
         <Error error={error} />
       ) : (
-        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 text-center">
+        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-90 text-center">
           <SquareSpinner className="size-100" />
         </div>
       )}
