@@ -27,20 +27,20 @@ export default function ShowTypeFilter() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="mb-10 flex h-40 w-80 items-center justify-between rounded-10 border border-gray-300 bg-white px-10 text-16-600 transition-colors hover:bg-gray-50 focus:outline-none">
+      <DropdownMenuTrigger className="mb-10 flex h-40 w-80 items-center justify-between rounded-10 border border-gray-300 bg-white px-10 text-16-600 transition-colors ">
         {selectedType === "popups" ? "팝업" : "전시"}
         <ChevronDown className="ml-2 size-15" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="ml-30 mt-1 h-80 w-90 rounded-10 border border-gray-200 bg-white p-1 shadow-lg lg:ml-50">
+      <DropdownMenuContent className="ml-30 mt-1 h-80 w-90 rounded-10 border border-gray-300 bg-white p-1 shadow-lg lg:ml-50">
         <DropdownMenuItem
           onClick={() => handleTypeChange("popups")}
-          className="cursor-pointer rounded-5 p-10 text-16-600 transition-colors hover:bg-gray-100"
+          className="cursor-pointer rounded-5 p-10 text-16-600 transition-colors"
         >
           팝업
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => handleTypeChange("exhibition")}
-          className="cursor-pointer rounded-5 p-10 text-16-600 transition-colors hover:bg-gray-100"
+          className="cursor-pointer rounded-5 p-10 text-16-600 transition-colors "
         >
           전시
         </DropdownMenuItem>
