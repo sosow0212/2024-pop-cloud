@@ -54,4 +54,8 @@ public class Member extends BaseEntity {
                 .memberRole(MemberRole.NORMAL)
                 .build();
     }
+
+    public void changeMemberRoleToAdmin() {
+        this.memberRole = MemberRole.ADMIN;
+    }
 }
