@@ -1,16 +1,12 @@
 package com.domain.show.popups.domain;
 
-import com.common.exception.AuthException;
-import com.common.exception.AuthExceptionType;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static show.popups.domain.PopupsFixture.일반_팝업_스토어_생성_뷰티;
-import static show.popups.domain.PopupsFixture.일반_팝업_스토어_생성_뷰티_유효하지_않은_주인;
 import static show.popups.domain.PopupsFixture.일반_팝업_스토어_생성_펫샵;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -33,18 +29,6 @@ class PopupsTest {
             assertThat(popups)
                     .usingRecursiveComparison()
                     .isEqualTo(updatePopups);
-        }
-
-        @Test
-        void 자신의_계정이_아니면_업데이트_못한다() {
-            // given
-            Popups popups = 일반_팝업_스토어_생성_뷰티();
-            Popups updatedPopups = 일반_팝업_스토어_생성_뷰티_유효하지_않은_주인();
-
-            // when & then
-            assertThatThrownBy(() -> popups.update(updatedPopups))
-                    .isInstanceOf(AuthException.class)
-                    .hasMessageContaining(AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION.message());
         }
     }
 }

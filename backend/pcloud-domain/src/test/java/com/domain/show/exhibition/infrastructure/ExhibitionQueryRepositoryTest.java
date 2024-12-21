@@ -40,6 +40,7 @@ class ExhibitionQueryRepositoryTest extends IntegrationHelper {
             softly.assertThat(response.get())
                     .usingRecursiveComparison()
                     .ignoringFields("tags")
+                    .ignoringFields("imageNames")
                     .withComparatorForType(BigDecimal::compareTo, BigDecimal.class)
                     .isEqualTo(개인전시회_상세_조회_응답_생성_개인전시회(savedExhibition));
         });

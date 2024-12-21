@@ -3,9 +3,7 @@ package com.api.show.exhibition.fixture;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.domain.show.common.PublicTag;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -19,8 +17,8 @@ public class ExhibitionRequestFixtures {
                 LocalDateTime.now(),
                 """
                         평일 09:00 ~ 18:00,
-                        주말 12:00 ~ 21:00 
-                         """,
+                        주말 12:00 ~ 21:00
+                        """,
                 "서울 마포구 동교동 155-55",
                 "37.556725",
                 "126.9234952",
@@ -32,7 +30,7 @@ public class ExhibitionRequestFixtures {
                 10000,
                 PublicTag.EXHIBITION.getName(),
                 List.of("빵빵이", "만원", "가족", "데이트"),
-                new ArrayList<>()
+                List.of("image1.png", "image2.png", "image3.png")
         );
     }
 
@@ -44,8 +42,8 @@ public class ExhibitionRequestFixtures {
                 LocalDateTime.now(),
                 """
                         평일 09:00 ~ 18:00,
-                        주말 12:00 ~ 21:00 
-                         """,
+                        주말 12:00 ~ 21:00
+                        """,
                 "서울 마포구 동교동 155-55",
                 "37.556725",
                 "126.9234952",
@@ -57,8 +55,7 @@ public class ExhibitionRequestFixtures {
                 10000,
                 PublicTag.EXHIBITION.getName(),
                 List.of("빵빵이", "만원", "가족", "데이트"),
-                new ArrayList<>(),
-                new ArrayList<>()
+                List.of("image4.png", "image5.png", "image6.png")
         );
     }
 }

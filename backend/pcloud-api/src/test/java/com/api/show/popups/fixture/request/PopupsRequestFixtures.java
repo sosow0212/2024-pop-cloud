@@ -3,9 +3,7 @@ package com.api.show.popups.fixture.request;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
 import com.domain.show.common.PublicTag;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PopupsRequestFixtures {
@@ -31,7 +29,7 @@ public class PopupsRequestFixtures {
                 10000,
                 PublicTag.CHARACTER.getName(),
                 List.of("빵빵이", "만원", "가족", "데이트"),
-                new ArrayList<>()
+                List.of("image1.png", "image2.png", "image3.png")
         );
     }
 
@@ -56,8 +54,7 @@ public class PopupsRequestFixtures {
                 10000,
                 PublicTag.CHARACTER.getName(),
                 List.of("빵빵이", "만원", "가족", "데이트"),
-                new ArrayList<>(),
-                new ArrayList<>()
+                List.of("image1.png", "image2.png", "image3.png")
         );
     }
 }

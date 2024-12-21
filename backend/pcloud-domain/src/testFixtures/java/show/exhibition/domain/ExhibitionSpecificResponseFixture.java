@@ -5,10 +5,9 @@ import com.domain.common.coordinates.Longitude;
 import com.domain.show.common.PublicTag;
 import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @SuppressWarnings("NonAsciiCharacters")
 public class ExhibitionSpecificResponseFixture {
@@ -20,7 +19,7 @@ public class ExhibitionSpecificResponseFixture {
                 "빵빵이 전시회",
                 "빵빵이와 함께하는 전시회",
                 LocalDateTime.now().minusMinutes(10),
-                LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(10),
                 """
                         평일 09:00 ~ 18:00,
                         주말 12:00 ~ 21:00 
@@ -37,7 +36,8 @@ public class ExhibitionSpecificResponseFixture {
                 PublicTag.EXHIBITION,
                 0,
                 0,
-                List.of("가족", "데이트")
+                Set.of("가족", "데이트"),
+                Set.of("image1.png", "image2.png", "image3.png")
         );
     }
 
@@ -62,7 +62,8 @@ public class ExhibitionSpecificResponseFixture {
                 exhibition.getPublicTag(),
                 exhibition.getStatistic().getVisitedCount(),
                 exhibition.getStatistic().getLikedCount(),
-                List.of("가족", "데이트")
+                Set.of("가족", "데이트"),
+                Set.of("image1.png", "image2.png", "image3.png")
         );
     }
 }
