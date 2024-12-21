@@ -5,14 +5,12 @@ import com.api.show.popups.application.PopupsQueryService;
 import com.api.show.popups.application.PopupsService;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
-import com.api.show.popups.application.response.PopupsImageResponse;
 import com.api.show.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import jakarta.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,7 +52,7 @@ public class PopupsController {
     }
 
     @PatchMapping("/{popupsId}")
-    public ResponseEntity<List<PopupsImageResponse>> patchById(
+    public ResponseEntity<Void> patchById(
             @AuthMember final Long memberId,
             @PathVariable final Long popupsId,
             @ModelAttribute @Valid final PopupsUpdateRequest request
