@@ -4,8 +4,6 @@ import com.domain.show.popups.domain.Popups;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -58,9 +56,7 @@ public record PopupsUpdateRequest(
         @NotEmpty(message = "팝업스토어 커스텀 태그를 붙여주세요.")
         List<String> tags,
 
-        List<MultipartFile> addedImages,
-
-        List<Long> deletedImageIds
+        List<String> imageNames
 ) {
 
     public Popups toDomain(final Long memberId) {

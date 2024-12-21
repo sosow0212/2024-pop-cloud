@@ -6,11 +6,10 @@ import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import com.domain.show.popups.event.PopupsFoundEvent;
 import com.domain.show.popups.exception.PopupsException;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 import static com.domain.show.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 
@@ -39,7 +38,7 @@ public class PopupsQueryService {
         return foundPopups;
     }
 
-    private void cachePopupsIfExpiredEvictTtl(final Long popupsId, PopupsSpecificResponse foundPopups) {
+    private void cachePopupsIfExpiredEvictTtl(final Long popupsId, final PopupsSpecificResponse foundPopups) {
         LocalDateTime startFindTime = LocalDateTime.now();
         LocalDateTime cacheEvictTime = popupsCacheRepository.findCacheEvictedTimeById(popupsId);
 

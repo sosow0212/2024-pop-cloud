@@ -1,6 +1,7 @@
 package com.api.show.popups.application;
 
 import com.api.show.common.event.ImageCreatedEvent;
+import com.api.show.common.event.ImageDeletedEvent;
 import com.api.show.common.event.ImageUpdatedEvent;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
@@ -11,6 +12,7 @@ import com.domain.show.popups.domain.LikedPopups;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.popups.event.PopupsTagsCreatedEvent;
+import com.domain.show.popups.event.PopupsTagsDeletedEvent;
 import com.domain.show.popups.event.PopupsTagsUpdatedEvent;
 import com.domain.show.popups.exception.PopupsException;
 import lombok.RequiredArgsConstructor;
@@ -28,14 +30,15 @@ public class PopupsService {
     private final PopupsCacheRepository popupsCacheRepository;
 
     public Long create(final Long memberId, final PopupsCreateRequest request) {
-        Popups popups = popupsRepository.save(request.toDomain(memberId));
+        Popups savedPopupsId = popupsRepository.save(request.toDomain(memberId));
         Events.raise(new PopupsTagsCreatedEvent(
-                popups.getId(),
+                savedPopupsId.getId(),
                 request.tags(),
                 CustomTagType.POPUPS)
         );
-        Events.raise(ImageCreatedEvent.createdPopupsImages(popups.getId(), request.images()));
-        return popups.getId();
+        Events.raise(ImageCreatedEvent.createdPopupsImages(savedPopupsId.getId(), request.imageNames()));
+
+        return savedPopupsId.getId();
     }
 
     public void patchById(
@@ -43,21 +46,16 @@ public class PopupsService {
             final Long popupsId,
             final PopupsUpdateRequest request
     ) {
-        Popups popups = findPopups(popupsId);
-        popups.update(request.toDomain(memberId));
+        Popups foundPopups = findPopups(popupsId);
+        foundPopups.validateOwnerEquals(memberId);
+        foundPopups.update(request.toDomain(memberId));
         popupsCacheRepository.evictCache(popupsId);
-
         Events.raise(new PopupsTagsUpdatedEvent(
-                popups.getId(),
+                foundPopups.getId(),
                 request.tags(),
                 CustomTagType.POPUPS)
         );
-
-        Events.raise(ImageUpdatedEvent.updatedPopupsImages(
-                popups.getId(),
-                request.addedImages(),
-                request.deletedImageIds())
-        );
+        Events.raise(ImageUpdatedEvent.updatedPopupsImages(foundPopups.getId(), request.imageNames()));
     }
 
     private Popups findPopups(final Long popupsId) {
@@ -65,10 +63,19 @@ public class PopupsService {
                 .orElseThrow(() -> new PopupsException(POPUPS_NOT_FOUND_EXCEPTION));
     }
 
+    public void deleteById(final Long memberId, final Long popupsId) {
+        Popups foundPopups = findPopups(popupsId);
+        foundPopups.validateOwnerEquals(memberId);
+        popupsRepository.deleteById(foundPopups.getId());
+        Events.raise(new PopupsTagsDeletedEvent(popupsId, CustomTagType.POPUPS));
+        Events.raise(ImageDeletedEvent.deletedPopupsImages(popupsId));
+    }
+
     public boolean likes(final Long memberId, final Long popupsId) {
         Popups popups = findPopupsWithLock(popupsId);
         boolean canAddLikes = handlePopupsLikes(popupsId, memberId);
         popups.addLikedCount(canAddLikes);
+
         return canAddLikes;
     }
 

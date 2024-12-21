@@ -19,4 +19,6 @@ public interface PopupsRepository {
     void deleteLikedPopupsByPopupsIdAndMemberId(Long popupsId, Long memberId);
 
     LikedPopups saveLikedPopups(LikedPopups likedPopups);
+
+    void deleteById(Long popupsId);
 }

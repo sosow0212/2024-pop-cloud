@@ -1,19 +1,20 @@
 package com.domain.show.popups.infrastructure;
 
 import com.domain.common.CustomTagType;
+import com.domain.common.ShowType;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-
 import static com.domain.customtag.domain.QCustomTag.customTag;
+import static com.domain.show.common.image.domain.QImage.image;
 import static com.domain.show.popups.domain.QPopups.popups;
 import static com.querydsl.core.group.GroupBy.groupBy;
-import static com.querydsl.core.group.GroupBy.list;
+import static com.querydsl.core.group.GroupBy.set;
 
 @RequiredArgsConstructor
 @Repository
@@ -27,7 +28,12 @@ public class PopupsQueryRepository {
                 .leftJoin(customTag).on(
                         customTag.targetId.eq(popupsId),
                         customTag.type.eq(CustomTagType.POPUPS)
-                ).transform(groupBy(popups.id)
+                )
+                .leftJoin(image).on(
+                        image.targetId.eq(popupsId),
+                        image.showType.eq(ShowType.POPUPS)
+                )
+                .transform(groupBy(popups.id)
                         .list(Projections.constructor(PopupsSpecificResponse.class,
                                         popups.id,
                                         popups.ownerId,
@@ -48,7 +54,8 @@ public class PopupsQueryRepository {
                                         popups.publicTag,
                                         popups.statistic.visitedCount,
                                         popups.statistic.likedCount,
-                                        list(customTag.name)
+                                        set(customTag.name),
+                                        set(image.name)
                                 )
                         ));
 

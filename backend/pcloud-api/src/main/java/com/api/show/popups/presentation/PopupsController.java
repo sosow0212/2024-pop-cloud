@@ -5,13 +5,17 @@ import com.api.show.popups.application.PopupsQueryService;
 import com.api.show.popups.application.PopupsService;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
+import com.api.show.popups.application.response.PopupsImageResponse;
 import com.api.show.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
 import jakarta.validation.Valid;
+import java.net.URI;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,8 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
 
 import static com.domain.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.member.domain.vo.MemberRole.MANAGER;
@@ -52,12 +54,22 @@ public class PopupsController {
     }
 
     @PatchMapping("/{popupsId}")
-    public ResponseEntity<Void> patchById(
+    public ResponseEntity<List<PopupsImageResponse>> patchById(
             @AuthMember final Long memberId,
             @PathVariable final Long popupsId,
             @ModelAttribute @Valid final PopupsUpdateRequest request
     ) {
         popupsService.patchById(memberId, popupsId, request);
+        return ResponseEntity.noContent()
+                .build();
+    }
+
+    @DeleteMapping("/{popupsId}")
+    public ResponseEntity<Void> deleteById(
+            @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
+            @PathVariable final Long popupsId
+    ) {
+        popupsService.deleteById(memberId, popupsId);
         return ResponseEntity.noContent()
                 .build();
     }

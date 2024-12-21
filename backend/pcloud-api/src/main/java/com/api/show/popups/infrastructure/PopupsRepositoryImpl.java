@@ -54,4 +54,9 @@ public class PopupsRepositoryImpl implements PopupsRepository {
     public LikedPopups saveLikedPopups(final LikedPopups likedPopups) {
         return likedPopupsJpaRepository.save(likedPopups);
     }
+
+    @Override
+    public void deleteById(final Long popupsId) {
+        popupsJpaRepository.deleteById(popupsId);
+    }
 }

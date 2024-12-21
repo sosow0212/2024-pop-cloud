@@ -110,7 +110,6 @@ public class Exhibition extends BaseEntity {
     }
 
     public void update(final Exhibition updateExhibition) {
-        validateOwnerEquals(updateExhibition.getOwnerId());
         this.showDetails = updateExhibition.getShowDetails();
         this.showSchedule = updateExhibition.getShowSchedule();
         this.position = updateExhibition.getPosition();
@@ -119,7 +118,7 @@ public class Exhibition extends BaseEntity {
         this.publicTag = updateExhibition.getPublicTag();
     }
 
-    public void validateOwnerEquals(final Long ownerId) {
+    public void validateOwnerWithOwnerId(final Long ownerId) {
         if (!this.getOwnerId().equals(ownerId)) {
             throw new AuthException(AUTH_NOT_EQUALS_EXCEPTION);
         }
