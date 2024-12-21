@@ -3,7 +3,7 @@ package com.domain.show.exhibition.domain.dto;
 import com.domain.show.common.PublicTag;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 public record ExhibitionSpecificResponse(
         Long exhibitionId,
@@ -25,7 +25,8 @@ public record ExhibitionSpecificResponse(
         String publicTag,
         Integer visitedCount,
         Integer likedCount,
-        List<String> tags
+        Set<String> tags,
+        Set<String> imageNames
 ) {
 
     public ExhibitionSpecificResponse(
@@ -48,7 +49,8 @@ public record ExhibitionSpecificResponse(
             PublicTag publicTag,
             Integer visitedCount,
             Integer likedCount,
-            List<String> tags
+            Set<String> tags,
+            Set<String> imageNames
     ) {
         this(
                 exhibitionId,
@@ -70,7 +72,8 @@ public record ExhibitionSpecificResponse(
                 publicTag.getName(),
                 visitedCount,
                 likedCount,
-                tags
+                tags,
+                imageNames
         );
     }
 }

@@ -1,94 +1,82 @@
 package com.api.show.image.application;
 
 import com.api.show.common.event.ImageCreatedEvent;
+import com.api.show.common.event.ImageDeletedEvent;
 import com.api.show.common.event.ImageUpdatedEvent;
 import com.domain.common.ShowType;
 import com.domain.show.common.image.domain.Image;
 import com.domain.show.common.image.domain.ImageRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
 public class ImageService {
 
-    private final ImagePreProcessor imagePreProcessor;
-    private final ImageUploader imageUploader;
     private final ImageRepository imageRepository;
+    private final ImageProcessor imageProcessor;
 
     @Transactional
     @EventListener(value = ImageCreatedEvent.class)
     public void createImages(final ImageCreatedEvent event) {
-        List<Image> images = saveAddedImages(
-                event.showType(),
+        List<Image> images = generateImages(
                 event.targetId(),
-                event.images()
+                event.showType(),
+                event.imageNames()
         );
-
-        handleImage(images, event);
+        saveNewImages(images);
     }
 
-    private List<Image> saveAddedImages(
-            final ShowType showType,
+    private List<Image> generateImages(
             final Long targetId,
-            final List<MultipartFile> addedImages
+            final ShowType showType,
+            final List<String> imageNames
     ) {
-        if (Objects.isNull(addedImages) || addedImages.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        List<Image> convertedAddedImages = imagePreProcessor.convertMultipartFileToImage(
-                showType,
-                targetId,
-                addedImages
-        );
-        imageRepository.saveAll(convertedAddedImages);
-        return convertedAddedImages;
+        return imageNames.stream()
+                .map(imageName -> Image.of(targetId, showType, imageName)).toList();
     }
 
-    @Async
-    public void handleImage(final List<Image> images, final ImageCreatedEvent event) {
-        imageUploader.upload(images, event.images());
+    private void saveNewImages(final List<Image> images) {
+        if (images != null && !images.isEmpty()) {
+            imageRepository.saveAll(images);
+        }
     }
 
     @Transactional
     @EventListener(value = ImageUpdatedEvent.class)
     public void updateImages(final ImageUpdatedEvent event) {
-        List<String> deletedImageUniqueNames = deleteImages(event.deletedImageIds());
-
-        List<Image> convertedAddedImages = saveAddedImages(
-                event.showType(),
+        List<Image> images = generateImages(
                 event.targetId(),
-                event.addedImages()
+                event.showType(),
+                event.imageNames()
         );
-
-        updateImages(deletedImageUniqueNames, event.addedImages(), convertedAddedImages);
+        deleteOldImages(event.targetId(), event.showType());
+        saveNewImages(images);
     }
 
-    private List<String> deleteImages(final List<Long> deletedImageIds) {
-        List<Image> foundDeletedImages = imageRepository.findAllByIdIn(deletedImageIds);
-        List<String> deletedImageUniqueNames = foundDeletedImages.stream()
-                .map(Image::getUniqueName)
-                .toList();
-        imageRepository.deleteAll(foundDeletedImages);
-        return deletedImageUniqueNames;
+    private void deleteOldImages(final Long targetId, final ShowType showType) {
+        deleteUploadedOldImages(targetId, showType);
+        deleteSavedOldImages(targetId, showType);
     }
 
-    @Async
-    public void updateImages(
-            final List<String> deletedImageUniqueNames,
-            final List<MultipartFile> addedImages,
-            final List<Image> convertedAddedImages
-    ) {
-        imageUploader.deleteAll(deletedImageUniqueNames);
-        imageUploader.upload(convertedAddedImages, addedImages);
+    private void deleteUploadedOldImages(final Long targetId, final ShowType showType) {
+        List<String> uniqueImageNamesToDelete = imageRepository.findImageNamesByTargetIdAndShowType(
+                targetId,
+                showType
+        );
+        imageProcessor.deleteImagesByUniqueNames(uniqueImageNamesToDelete);
+    }
+
+    private void deleteSavedOldImages(final Long targetId, final ShowType showType) {
+        imageRepository.deleteAllByTargetIdAndShowType(targetId, showType);
+    }
+
+    @Transactional
+    @EventListener(value = ImageDeletedEvent.class)
+    public void deleteOldImages(final ImageDeletedEvent event) {
+        deleteOldImages(event.targetId(), event.showType());
     }
 }

@@ -4,8 +4,6 @@ import com.domain.show.exhibition.domain.Exhibition;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -58,8 +56,8 @@ public record ExhibitionCreateRequest(
         @NotEmpty(message = "개인전시회 커스텀 태그를 붙여주세요.")
         List<String> tags,
 
-        @NotEmpty(message = "개인전시회 이미지를 붙여주세요.")
-        List<MultipartFile> images
+        @NotEmpty(message = "개인전시회 이미지명을 입력해주세요.")
+        List<String> imageNames
 ) {
     public Exhibition toDomain(final Long memberId) {
         return Exhibition.of(

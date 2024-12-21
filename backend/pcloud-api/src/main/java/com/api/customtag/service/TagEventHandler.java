@@ -4,8 +4,10 @@ import com.domain.common.CustomTagType;
 import com.domain.customtag.domain.CustomTag;
 import com.domain.customtag.domain.CustomTagRepository;
 import com.domain.show.exhibition.event.ExhibitionTagsCreatedEvents;
+import com.domain.show.exhibition.event.ExhibitionTagsDeletedEvent;
 import com.domain.show.exhibition.event.ExhibitionTagsUpdatedEvents;
 import com.domain.show.popups.event.PopupsTagsCreatedEvent;
+import com.domain.show.popups.event.PopupsTagsDeletedEvent;
 import com.domain.show.popups.event.PopupsTagsUpdatedEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +46,11 @@ public class TagEventHandler {
         customTagRepository.saveAll(customTags);
     }
 
+    @EventListener(PopupsTagsDeletedEvent.class)
+    public void deletePopupsTags(final PopupsTagsDeletedEvent event) {
+        customTagRepository.deleteAllByTypeAndTargetId(event.type(), event.popupsId());
+    }
+
     @EventListener(ExhibitionTagsCreatedEvents.class)
     public void saveExhibitionTags(final ExhibitionTagsCreatedEvents event) {
         List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.exhibitionId());
@@ -55,5 +62,10 @@ public class TagEventHandler {
         List<CustomTag> customTags = getCustomTag(event.tags(), event.type(), event.exhibitionId());
         customTagRepository.deleteAllByTypeAndTargetId(event.type(), event.exhibitionId());
         customTagRepository.saveAll(customTags);
+    }
+
+    @EventListener(ExhibitionTagsDeletedEvent.class)
+    public void deleteExhibitionTags(final ExhibitionTagsDeletedEvent event) {
+        customTagRepository.deleteAllByTypeAndTargetId(event.type(), event.exhibitionId());
     }
 }

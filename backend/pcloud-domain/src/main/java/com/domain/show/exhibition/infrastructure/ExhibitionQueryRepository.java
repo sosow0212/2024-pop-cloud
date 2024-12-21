@@ -1,18 +1,19 @@
 package com.domain.show.exhibition.infrastructure;
 
 import com.domain.common.CustomTagType;
+import com.domain.common.ShowType;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-
 import static com.domain.customtag.domain.QCustomTag.customTag;
+import static com.domain.show.common.image.domain.QImage.image;
 import static com.domain.show.exhibition.domain.QExhibition.exhibition;
 import static com.querydsl.core.group.GroupBy.groupBy;
-import static com.querydsl.core.group.GroupBy.list;
+import static com.querydsl.core.group.GroupBy.set;
 import static com.querydsl.core.types.Projections.constructor;
 
 @RequiredArgsConstructor
@@ -27,7 +28,12 @@ public class ExhibitionQueryRepository {
                 .leftJoin(customTag).on(
                         customTag.targetId.eq(exhibitionId),
                         customTag.type.eq(CustomTagType.PERSONAL_EXHIBITION)
-                ).transform(groupBy(exhibition.id)
+                )
+                .leftJoin(image).on(
+                        image.targetId.eq(exhibitionId),
+                        image.showType.eq(ShowType.EXHIBITION)
+                )
+                .transform(groupBy(exhibition.id)
                         .list(constructor(ExhibitionSpecificResponse.class,
                                 exhibition.id,
                                 exhibition.ownerId,
@@ -48,7 +54,8 @@ public class ExhibitionQueryRepository {
                                 exhibition.publicTag,
                                 exhibition.statistic.visitedCount,
                                 exhibition.statistic.likedCount,
-                                list(customTag.name)
+                                set(customTag.name),
+                                set(image.name)
                         ))
                 );
 

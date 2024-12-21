@@ -10,6 +10,7 @@ import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import jakarta.validation.Valid;
+import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,8 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
 
 import static com.domain.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.member.domain.vo.MemberRole.MANAGER;
@@ -49,7 +48,8 @@ public class ExhibitionController {
     @GetMapping("/{exhibitionId}")
     public ResponseEntity<ExhibitionSpecificResponse> findById(
             @PathVariable final Long exhibitionId,
-            @ClientIpFinder final String clientIp) {
+            @ClientIpFinder final String clientIp
+    ) {
         return ResponseEntity.ok(exhibitionQueryService.findById(exhibitionId, clientIp));
     }
 
@@ -59,13 +59,9 @@ public class ExhibitionController {
             @PathVariable final Long exhibitionId,
             @ModelAttribute @Valid final ExhibitionUpdateRequest request
     ) {
-        exhibitionService.patchById(
-                memberId,
-                exhibitionId,
-                request
-        );
+        exhibitionService.patchById(memberId, exhibitionId, request);
 
-        return ResponseEntity.noContent()
+        return ResponseEntity.ok()
                 .build();
     }
 

@@ -1,6 +1,7 @@
 package com.api.show.exhibition.application;
 
 import com.api.show.common.event.ImageCreatedEvent;
+import com.api.show.common.event.ImageDeletedEvent;
 import com.api.show.common.event.ImageUpdatedEvent;
 import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
@@ -10,6 +11,7 @@ import com.domain.show.exhibition.domain.Exhibition;
 import com.domain.show.exhibition.domain.ExhibitionRepository;
 import com.domain.show.exhibition.domain.LikedExhibition;
 import com.domain.show.exhibition.event.ExhibitionTagsCreatedEvents;
+import com.domain.show.exhibition.event.ExhibitionTagsDeletedEvent;
 import com.domain.show.exhibition.event.ExhibitionTagsUpdatedEvents;
 import com.domain.show.exhibition.exception.ExhibitionException;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +32,10 @@ public class ExhibitionService {
         Events.raise(new ExhibitionTagsCreatedEvents(
                 savedExhibition.getId(),
                 request.tags(),
-                CustomTagType.PERSONAL_EXHIBITION)
-        );
-        Events.raise(ImageCreatedEvent.createdExhibitionImages(savedExhibition.getId(), request.images()));
+                CustomTagType.PERSONAL_EXHIBITION
+        ));
+        Events.raise(ImageCreatedEvent.createdExhibitionImages(savedExhibition.getId(), request.imageNames()));
+
         return savedExhibition.getId();
     }
 
@@ -42,19 +45,18 @@ public class ExhibitionService {
             final ExhibitionUpdateRequest request
     ) {
         Exhibition foundExhibition = findExhibition(exhibitionId);
+        foundExhibition.validateOwnerWithOwnerId(memberId);
         foundExhibition.update(request.toDomain(memberId));
-
         Events.raise(new ExhibitionTagsUpdatedEvents(
-                foundExhibition.getId(),
+                exhibitionId,
                 request.tags(),
                 CustomTagType.PERSONAL_EXHIBITION)
         );
 
         Events.raise(ImageUpdatedEvent.updatedExhibitionImages(
-                foundExhibition.getId(),
-                request.addedImages(),
-                request.deletedImageIds())
-        );
+                exhibitionId,
+                request.imageNames()
+        ));
     }
 
     private Exhibition findExhibition(final Long exhibitionId) {
@@ -64,8 +66,10 @@ public class ExhibitionService {
 
     public void deleteById(final Long memberId, final Long exhibitionId) {
         Exhibition foundExhibition = findExhibition(exhibitionId);
-        foundExhibition.validateOwnerEquals(memberId);
+        foundExhibition.validateOwnerWithOwnerId(memberId);
         exhibitionRepository.deleteById(foundExhibition.getId());
+        Events.raise(new ExhibitionTagsDeletedEvent(exhibitionId, CustomTagType.PERSONAL_EXHIBITION));
+        Events.raise(ImageDeletedEvent.deletedExhibitionImages(exhibitionId));
     }
 
     public boolean toggleLike(final Long memberId, final Long exhibitionId) {

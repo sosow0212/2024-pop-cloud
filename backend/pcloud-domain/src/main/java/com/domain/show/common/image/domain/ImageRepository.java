@@ -1,12 +1,13 @@
 package com.domain.show.common.image.domain;
 
+import com.domain.common.ShowType;
 import java.util.List;
 
 public interface ImageRepository {
 
     List<Image> saveAll(List<Image> images);
+    
+    List<String> findImageNamesByTargetIdAndShowType(Long targetId, ShowType showType);
 
-    List<Image> findAllByIdIn(List<Long> deletedImageIds);
-
-    void deleteAll(List<Image> images);
+    void deleteAllByTargetIdAndShowType(Long targetId, ShowType showType);
 }
