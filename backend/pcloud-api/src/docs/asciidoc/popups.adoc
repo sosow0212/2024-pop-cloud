@@ -65,6 +65,19 @@ include::{snippets}/popups-controller-web-mvc-test/patch_popups/http-request.ado
 
 include::{snippets}/popups-controller-web-mvc-test/patch_popups/http-response.adoc[]
 
+== 팝업스토어를 삭제한다 (DELETE /api/popups/{popupsId})
+
+=== Request
+
+include::{snippets}/popups-controller-web-mvc-test/delete_popups/http-request.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/delete_popups/path-parameters.adoc[]
+include::{snippets}/popups-controller-web-mvc-test/delete_popups/request-headers.adoc[]
+
+=== Response
+
+include::{snippets}/popups-controller-web-mvc-test/delete_popups/http-response.adoc[]
+
+
 == 팝업스토어를 좋아요 처리 및 취소한다 (POST /api/popups/{popupsId}/likes)
 
 === Request
