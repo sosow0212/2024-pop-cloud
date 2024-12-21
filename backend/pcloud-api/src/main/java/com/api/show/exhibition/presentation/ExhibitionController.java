@@ -15,10 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +38,7 @@ public class ExhibitionController {
     @PostMapping
     public ResponseEntity<Void> create(
             @AuthMembers(permit = {MANAGER, ADMIN}) final Long memberId,
-            @ModelAttribute @Valid final ExhibitionCreateRequest request
+            @RequestBody @Valid final ExhibitionCreateRequest request
     ) {
         Long createdExhibitionId = exhibitionService.create(memberId, request);
         return ResponseEntity.created(URI.create(URI_PREFIX + createdExhibitionId))
@@ -57,11 +57,11 @@ public class ExhibitionController {
     public ResponseEntity<Void> patchById(
             @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
             @PathVariable final Long exhibitionId,
-            @ModelAttribute @Valid final ExhibitionUpdateRequest request
+            @RequestBody @Valid final ExhibitionUpdateRequest request
     ) {
         exhibitionService.patchById(memberId, exhibitionId, request);
 
-        return ResponseEntity.ok()
+        return ResponseEntity.noContent()
                 .build();
     }
 

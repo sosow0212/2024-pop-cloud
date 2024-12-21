@@ -15,10 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +36,7 @@ public class PopupsController {
     @PostMapping
     public ResponseEntity<Void> create(
             @AuthMembers(permit = {MANAGER, ADMIN}) final Long memberId,
-            @ModelAttribute @Valid final PopupsCreateRequest request
+            @RequestBody @Valid final PopupsCreateRequest request
     ) {
         Long createdPopupsId = popupsService.create(memberId, request);
         return ResponseEntity.created(URI.create("/popups/" + createdPopupsId))
@@ -55,7 +55,7 @@ public class PopupsController {
     public ResponseEntity<Void> patchById(
             @AuthMember final Long memberId,
             @PathVariable final Long popupsId,
-            @ModelAttribute @Valid final PopupsUpdateRequest request
+            @RequestBody @Valid final PopupsUpdateRequest request
     ) {
         popupsService.patchById(memberId, popupsId, request);
         return ResponseEntity.noContent()
