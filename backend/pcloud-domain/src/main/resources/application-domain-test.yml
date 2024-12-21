@@ -21,3 +21,14 @@ file:
   show:
     upload:
       location: /test
+
+
+cloud:
+  aws:
+    stack:
+      auto: test
+    region:
+      static: test
+    credentials:
+      accessKey: test
+      secretKey: test
