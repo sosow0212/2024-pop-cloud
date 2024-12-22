@@ -8,6 +8,7 @@ public record ImageCreatedEvent(
         Long targetId,
         List<String> imageNames
 ) {
+
     public static ImageCreatedEvent createdPopupsImages(final Long targetId, final List<String> imageNames) {
         return new ImageCreatedEvent(ShowType.POPUPS, targetId, imageNames);
     }
