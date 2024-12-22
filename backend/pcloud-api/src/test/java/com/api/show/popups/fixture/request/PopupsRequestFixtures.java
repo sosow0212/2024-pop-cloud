@@ -3,7 +3,6 @@ package com.api.show.popups.fixture.request;
 import com.api.show.popups.application.request.PopupsCreateRequest;
 import com.api.show.popups.application.request.PopupsUpdateRequest;
 import com.domain.show.common.PublicTag;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class PopupsRequestFixtures {
                 """
                         평일 09:00 ~ 18:00,
                         주말 12:00 ~ 21:00 
-                         """,
+                        """,
                 "37.556725",
                 "126.9234952",
                 true,
@@ -29,7 +28,8 @@ public class PopupsRequestFixtures {
                 true,
                 10000,
                 PublicTag.CHARACTER.getName(),
-                List.of("빵빵이", "만원", "가족", "데이트")
+                List.of("빵빵이", "만원", "가족", "데이트"),
+                List.of("image1.png", "image2.png", "image3.png")
         );
     }
 
@@ -43,7 +43,7 @@ public class PopupsRequestFixtures {
                 """
                         평일 09:00 ~ 18:00,
                         주말 12:00 ~ 21:00 
-                         """,
+                        """,
                 "37.556725",
                 "126.9234952",
                 true,
@@ -53,7 +53,8 @@ public class PopupsRequestFixtures {
                 true,
                 10000,
                 PublicTag.CHARACTER.getName(),
-                List.of("빵빵이", "만원", "가족", "데이트")
+                List.of("빵빵이", "만원", "가족", "데이트"),
+                List.of("image1.png", "image2.png", "image3.png")
         );
     }
 }

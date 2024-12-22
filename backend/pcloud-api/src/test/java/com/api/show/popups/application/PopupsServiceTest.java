@@ -1,12 +1,11 @@
 package com.api.show.popups.application;
 
 import com.api.show.popups.application.request.PopupsCreateRequest;
-import com.common.exception.AuthException;
-import com.common.exception.AuthExceptionType;
 import com.domain.show.popups.cache.PopupsCacheRepository;
 import com.domain.show.popups.domain.Popups;
 import com.domain.show.popups.domain.PopupsRepository;
 import com.domain.show.popups.exception.PopupsException;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -15,15 +14,12 @@ import org.junit.jupiter.api.Test;
 import show.popups.infrastructure.FakePopupsCacheRepository;
 import show.popups.infrastructure.FakePopupsRepository;
 
-import java.util.Optional;
-
 import static com.api.show.popups.fixture.request.PopupsRequestFixtures.팝업스토어_생성_요청;
 import static com.domain.show.popups.exception.PopupsExceptionType.POPUPS_NOT_FOUND_EXCEPTION;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static show.popups.domain.PopupsFixture.일반_팝업_스토어_생성_뷰티;
-import static show.popups.domain.PopupsFixture.일반_팝업_스토어_생성_뷰티_유효하지_않은_주인;
 import static show.popups.domain.PopupsFixture.일반_팝업_스토어_생성_펫샵;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -75,18 +71,6 @@ class PopupsServiceTest {
                         .ignoringFields("id")
                         .isEqualTo(updatedPopups);
             });
-        }
-
-        @Test
-        void 유저가_다르면_업데이트하지_못한다() {
-            // given
-            Popups savedPopups = popupsRepository.save(일반_팝업_스토어_생성_뷰티());
-            Popups updatedPopups = 일반_팝업_스토어_생성_뷰티_유효하지_않은_주인();
-
-            // when & then
-            assertThatThrownBy(() -> savedPopups.update(updatedPopups))
-                    .isInstanceOf(AuthException.class)
-                    .hasMessageContaining(AuthExceptionType.AUTH_NOT_EQUALS_EXCEPTION.message());
         }
     }
 

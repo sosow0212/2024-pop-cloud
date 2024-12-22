@@ -110,7 +110,6 @@ public class Popups extends BaseEntity {
     }
 
     public void update(final Popups updatedPopups) {
-        validateOwnerEquals(updatedPopups.getOwnerId());
         this.showDetails = updatedPopups.getShowDetails();
         this.showSchedule = updatedPopups.getShowSchedule();
         this.position = updatedPopups.getPosition();
@@ -119,7 +118,7 @@ public class Popups extends BaseEntity {
         this.publicTag = updatedPopups.getPublicTag();
     }
 
-    private void validateOwnerEquals(final Long ownerId) {
+    public void validateOwnerEquals(final Long ownerId) {
         if (!this.getOwnerId().equals(ownerId)) {
             throw new AuthException(AUTH_NOT_EQUALS_EXCEPTION);
         }

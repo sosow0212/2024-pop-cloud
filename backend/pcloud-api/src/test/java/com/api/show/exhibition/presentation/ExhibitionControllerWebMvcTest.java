@@ -6,6 +6,7 @@ import com.api.show.exhibition.application.dto.ExhibitionCreateRequest;
 import com.api.show.exhibition.application.dto.ExhibitionUpdateRequest;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Optional;
 
 import static com.api.helper.RestDocsHelper.customDocument;
 import static com.api.show.exhibition.fixture.ExhibitionRequestFixtures.개인전시회_생성_요청_생성;
@@ -93,7 +92,8 @@ class ExhibitionControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("isWifiAvailable").description("와이파이 사용가능 여부"),
                                 fieldWithPath("fee").description("입장 요금 (없다면 0)"),
                                 fieldWithPath("publicTag").description("큰 범주 안에서 퍼블릭 태그"),
-                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그")
+                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그"),
+                                fieldWithPath("imageNames").description("업로더의 이미지명(프론트에서 UUID로 변환한 이미지명)")
                         ),
                         responseHeaders(
                                 headerWithName("location").description("생성된 개인전시회 redirection URL")
@@ -136,7 +136,8 @@ class ExhibitionControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("publicTag").description("공용 퍼블릭 태그"),
                                 fieldWithPath("visitedCount").description("개인전시회 게시글 방문자 수"),
                                 fieldWithPath("likedCount").description("개인전시회 게시글 좋아요 수"),
-                                fieldWithPath("tags[]").description("커스텀 태그")
+                                fieldWithPath("tags[]").description("커스텀 태그"),
+                                fieldWithPath("imageNames[]").description("이미지 이름")
                         )
                 ));
     }
@@ -177,10 +178,10 @@ class ExhibitionControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("isWifiAvailable").description("와이파이 사용가능 여부"),
                                 fieldWithPath("fee").description("입장 요금 (없다면 0)"),
                                 fieldWithPath("publicTag").description("큰 범주 안에서 퍼블릭 태그"),
-                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그")
+                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그"),
+                                fieldWithPath("imageNames").description("업로더의 새로 저장할 이미지명(프론트에서 UUID로 변환한 이미지명)")
                         )
                 ));
-
     }
 
     @Test

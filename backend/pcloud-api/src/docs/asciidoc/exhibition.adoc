@@ -1,11 +1,10 @@
-= exhibition API 문서
+= Exhibition API 문서
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
 :toc: left
 :toclevels: 3
 
-= Exhibiton
 
 == 개인전시회를 생성한다 (POST /api/exhibitions)
 
@@ -45,7 +44,7 @@ include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/request-
 
 include::{snippets}/exhibition-controller-web-mvc-test/patch_exhibition/http-response.adoc[]
 
-== 개인전시회를 삭제한다 (DELETE /api/exhibitions)
+== 개인전시회를 삭제한다 (DELETE /api/exhibitions/{exhibitionId})
 
 === Request
 

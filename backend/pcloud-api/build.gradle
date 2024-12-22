@@ -39,6 +39,10 @@ dependencies {
     // actuator, prometheus
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+
+    // AWS S3
+    implementation platform("software.amazon.awssdk:bom:2.20.143")
+    implementation "software.amazon.awssdk:s3"
 }
 
 def generated = 'src/main/generated'

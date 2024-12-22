@@ -87,4 +87,9 @@ public class FakePopupsRepository implements PopupsRepository {
 
         return savedPopups;
     }
+
+    @Override
+    public void deleteById(Long popupsId) {
+
+    }
 }

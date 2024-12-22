@@ -17,3 +17,18 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+
+file:
+  show:
+    upload:
+      location: /Users/yoon/Desktop/images/
+
+cloud:
+  aws:
+    stack:
+      auto: local
+    region:
+      static: local
+    credentials:
+      accessKey: local
+      secretKey: local

@@ -9,6 +9,8 @@ import com.api.show.exhibition.presentation.dto.ExhibitionLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.exhibition.domain.dto.ExhibitionSpecificResponse;
+import jakarta.validation.Valid;
+import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
 
 import static com.domain.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.member.domain.vo.MemberRole.MANAGER;
@@ -35,13 +35,10 @@ public class ExhibitionController {
     private final ExhibitionService exhibitionService;
     private final ExhibitionQueryService exhibitionQueryService;
 
-    /**
-     * TODO: 이미지 처리
-     */
     @PostMapping
     public ResponseEntity<Void> create(
             @AuthMembers(permit = {MANAGER, ADMIN}) final Long memberId,
-            @RequestBody final ExhibitionCreateRequest request
+            @RequestBody @Valid final ExhibitionCreateRequest request
     ) {
         Long createdExhibitionId = exhibitionService.create(memberId, request);
         return ResponseEntity.created(URI.create(URI_PREFIX + createdExhibitionId))
@@ -51,7 +48,8 @@ public class ExhibitionController {
     @GetMapping("/{exhibitionId}")
     public ResponseEntity<ExhibitionSpecificResponse> findById(
             @PathVariable final Long exhibitionId,
-            @ClientIpFinder final String clientIp) {
+            @ClientIpFinder final String clientIp
+    ) {
         return ResponseEntity.ok(exhibitionQueryService.findById(exhibitionId, clientIp));
     }
 
@@ -59,13 +57,9 @@ public class ExhibitionController {
     public ResponseEntity<Void> patchById(
             @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
             @PathVariable final Long exhibitionId,
-            @RequestBody final ExhibitionUpdateRequest request
+            @RequestBody @Valid final ExhibitionUpdateRequest request
     ) {
-        exhibitionService.patchById(
-                memberId,
-                exhibitionId,
-                request
-        );
+        exhibitionService.patchById(memberId, exhibitionId, request);
 
         return ResponseEntity.noContent()
                 .build();

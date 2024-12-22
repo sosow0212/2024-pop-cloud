@@ -9,8 +9,11 @@ import com.api.show.popups.presentation.response.PopupLikedStatusResponse;
 import com.domain.annotation.AuthMember;
 import com.domain.annotation.AuthMembers;
 import com.domain.show.popups.domain.response.PopupsSpecificResponse;
+import jakarta.validation.Valid;
+import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
 
 import static com.domain.member.domain.vo.MemberRole.ADMIN;
 import static com.domain.member.domain.vo.MemberRole.MANAGER;
@@ -32,13 +33,10 @@ public class PopupsController {
     private final PopupsService popupsService;
     private final PopupsQueryService popupsQueryService;
 
-    /**
-     * TODO : 이미지 처리 방식 회의 필요
-     */
     @PostMapping
     public ResponseEntity<Void> create(
             @AuthMembers(permit = {MANAGER, ADMIN}) final Long memberId,
-            @RequestBody final PopupsCreateRequest request
+            @RequestBody @Valid final PopupsCreateRequest request
     ) {
         Long createdPopupsId = popupsService.create(memberId, request);
         return ResponseEntity.created(URI.create("/popups/" + createdPopupsId))
@@ -57,9 +55,19 @@ public class PopupsController {
     public ResponseEntity<Void> patchById(
             @AuthMember final Long memberId,
             @PathVariable final Long popupsId,
-            @RequestBody final PopupsUpdateRequest request
+            @RequestBody @Valid final PopupsUpdateRequest request
     ) {
         popupsService.patchById(memberId, popupsId, request);
+        return ResponseEntity.noContent()
+                .build();
+    }
+
+    @DeleteMapping("/{popupsId}")
+    public ResponseEntity<Void> deleteById(
+            @AuthMembers(permit = {ADMIN, MANAGER}) final Long memberId,
+            @PathVariable final Long popupsId
+    ) {
+        popupsService.deleteById(memberId, popupsId);
         return ResponseEntity.noContent()
                 .build();
     }

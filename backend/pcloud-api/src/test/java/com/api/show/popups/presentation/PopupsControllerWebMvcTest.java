@@ -31,6 +31,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
@@ -47,6 +48,8 @@ import static show.popups.domain.PopupsSpecificResponseFixture.팝업스토어_�
 @AutoConfigureRestDocs
 @WebMvcTest(PopupsController.class)
 class PopupsControllerWebMvcTest extends MockBeanInjection {
+
+    private static final String BEARER_TOKEN = "Bearer tokenInfo ~~";
 
     @Autowired
     private MockMvc mockMvc;
@@ -66,7 +69,7 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
 
         // when & then
         mockMvc.perform(post("/popups")
-                        .header(AUTHORIZATION, "Bearer tokenInfo ~~")
+                        .header(AUTHORIZATION, BEARER_TOKEN)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request))
                 ).andExpect(status().isCreated())
@@ -90,7 +93,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("latitude").description("latitude, 위도 정보 (String)"),
                                 fieldWithPath("longitude").description("longitude, 경도 정보 (String)"),
                                 fieldWithPath("publicTag").description("큰 범주 안에서 퍼블릭 태그"),
-                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그")
+                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그"),
+                                fieldWithPath("imageNames").description("업로더의 이미지명(프론트에서 UUID로 변환한 이미지명)")
                         ),
                         responseHeaders(
                                 headerWithName("location").description("생성된 팝업스토어 redirection URL")
@@ -133,7 +137,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("publicTag").description("공용 퍼블릭 태그"),
                                 fieldWithPath("visitedCount").description("팝업스토어 게시글 방문자 수"),
                                 fieldWithPath("likedCount").description("팝업스토어 게시글 좋아요 수"),
-                                fieldWithPath("tags[]").description("커스텀 태그")
+                                fieldWithPath("tags[]").description("커스텀 태그"),
+                                fieldWithPath("imageNames[]").description("이미지 이름")
                         )
                 ));
     }
@@ -146,7 +151,7 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
 
         // when & then
         mockMvc.perform(patch("/popups/{popupsId}", 1)
-                        .header(AUTHORIZATION, "Bearer tokenInfo ~~")
+                        .header(AUTHORIZATION, BEARER_TOKEN)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request))
                 ).andExpect(status().isNoContent())
@@ -170,7 +175,28 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                                 fieldWithPath("latitude").description("latitude, 위도 정보 (String)"),
                                 fieldWithPath("longitude").description("longitude, 경도 정보 (String)"),
                                 fieldWithPath("publicTag").description("큰 범주 안에서 퍼블릭 태그"),
-                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그")
+                                fieldWithPath("tags").description("업로더가 설정하는 커스텀 태그"),
+                                fieldWithPath("imageNames").description("업로더의 새로 저장할 이미지명(프론트에서 UUID로 변환한 이미지명)")
+                        )
+                ));
+    }
+
+    @Test
+    void 팝업스토어를_삭제한다() throws Exception {
+        // given
+        when(memberRepository.findById(anyLong())).thenReturn(Optional.of(어드민_멤버_생성_id_없음_kakao_oauth_가입()));
+        doNothing().when(popupsService).deleteById(anyLong(), anyLong());
+
+        // when & then
+        mockMvc.perform(delete("/popups/{popupsId}", 1L)
+                        .header(AUTHORIZATION, BEARER_TOKEN)
+                ).andExpect(status().isNoContent())
+                .andDo(customDocument("delete_popups",
+                        requestHeaders(
+                                headerWithName(AUTHORIZATION).description("유저 토큰 정보")
+                        ),
+                        pathParameters(
+                                parameterWithName("popupsId").description("팝업스토어 id")
                         )
                 ));
     }
@@ -194,7 +220,8 @@ class PopupsControllerWebMvcTest extends MockBeanInjection {
                         ),
                         responseFields(
                                 fieldWithPath("popupsId").description("팝업스토어 id"),
-                                fieldWithPath("isStatusLiked").description("팝업스토어 좋아요 상태 (true면 좋아요 처리되고, false면 좋아요 취소 처리됨)")
+                                fieldWithPath("isStatusLiked").description(
+                                        "팝업스토어 좋아요 상태 (true면 좋아요 처리되고, false면 좋아요 취소 처리됨)")
                         )
                 ));
     }

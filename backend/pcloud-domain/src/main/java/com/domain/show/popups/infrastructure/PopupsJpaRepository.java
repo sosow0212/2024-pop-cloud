@@ -18,4 +18,6 @@ public interface PopupsJpaRepository extends JpaRepository<Popups, Long> {
     Optional<Popups> findByIdWithOptimisticLock(@Param("id") Long id);
 
     Popups save(Popups popups);
+
+    void deleteById(Long id);
 }

@@ -32,4 +32,13 @@ public class AuthService {
     private Member signup(final Member member) {
         return memberRepository.save(member);
     }
+
+    // ADMIN test용 로그인 기능입니다.(추후에 삭제 예정)
+    @Transactional
+    public String test() {
+        Member member = memberRepository.save(Member.createWithNormalRole("1234", "kakao", "email"));
+        member.changeMemberRoleToAdmin();
+
+        return tokenProvider.create(member.getId());
+    }
 }

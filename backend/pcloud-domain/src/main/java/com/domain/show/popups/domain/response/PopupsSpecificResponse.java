@@ -1,11 +1,10 @@
 package com.domain.show.popups.domain.response;
 
 import com.domain.show.common.PublicTag;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 public record PopupsSpecificResponse(
         Long id,
@@ -27,7 +26,8 @@ public record PopupsSpecificResponse(
         String publicTag,
         Integer visitedCount,
         Integer likedCount,
-        List<String> tags
+        Set<String> tags,
+        Set<String> imageNames
 ) implements Serializable {
 
     public PopupsSpecificResponse(
@@ -50,7 +50,8 @@ public record PopupsSpecificResponse(
             PublicTag publicTag,
             Integer visitedCount,
             Integer likedCount,
-            List<String> tags
+            Set<String> tags,
+            Set<String> imageNames
     ) {
         this(
                 id,
@@ -72,7 +73,8 @@ public record PopupsSpecificResponse(
                 publicTag.getName(),
                 visitedCount,
                 likedCount,
-                tags
+                tags,
+                imageNames
         );
     }
 }

@@ -1,14 +1,30 @@
 spring:
   datasource:
-    url: jdbc:mysql://prod:3306/pcloud?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
-    username: prod
-    password: prod
+    url: jdbc:mysql://localhost:3306/pcloud?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   flyway:
-    enabled: true
-    baseline-on-migrate: true
+    enabled: false
+    baseline-on-migrate: false
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
+
+file:
+  show:
+    upload:
+      location: ENC(BhTPOrqCYaDXNnQxelJwoKDldhvxBi0H4VgXUYjOXoM=)
+
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ENC(OqbCfhf9eS35s5y0MSOSkR6eOnCh04/Q)
+    credentials:
+      accessKey: ENC(GhaAryKVCSC5A17CEBaOSYaGIcafn3USgw+P61cp7R8=)
+      secretKey: ENC(WuJWPMVt3b3ezCBbpLvS1K44mqaMy1FXhaC4CjWdBhSh+PIQmt/SXMKTIodjPUV2jlySuZ7Qh/8=)
