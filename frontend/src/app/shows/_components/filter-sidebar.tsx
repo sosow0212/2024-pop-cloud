@@ -99,23 +99,26 @@ export default function FilterSidebar({ onClose }: FilterSidebarProps) {
   };
 
   return (
-    <aside className="flex size-full flex-col border-r border-gray-200 bg-white px-12 pt-40 md:h-screen lg:h-screen">
+    <aside className="flex size-full flex-col border-r border-gray-1 bg-gray-1 px-12 pt-40 md:h-screen lg:h-screen">
       <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 md:px-5">
         <div className="mb-8 flex items-center gap-9">
-          <BsFilterLeft className="size-20" />
-          <h2 className="text-18-400">필터</h2>
+          <BsFilterLeft className="size-20 text-white" />
+          <h2 className="text-18-400 text-white">필터</h2>
         </div>
         <button
           type="button"
           onClick={handleReset}
           className="mb-8 size-18 text-gray-400 transition-colors hover:text-gray-600"
         >
-          <FiRefreshCw className="size-20" />
+          <FiRefreshCw className="size-20 text-white" />
         </button>
       </div>
 
       <div className="flex-1 overflow-y-auto">
-        <FilterAccordion title="태그" icon={<FiTag className="size-20" />}>
+        <FilterAccordion
+          title="태그"
+          icon={<FiTag className="size-20 text-white" />}
+        >
           <TagButtonList
             items={placeTypes}
             selectedItems={selectedTags}
@@ -123,7 +126,10 @@ export default function FilterSidebar({ onClose }: FilterSidebarProps) {
           />
         </FilterAccordion>
 
-        <FilterAccordion title="지역" icon={<FiMapPin className="size-22" />}>
+        <FilterAccordion
+          title="지역"
+          icon={<FiMapPin className="size-22 text-white" />}
+        >
           <RegionSelector
             selectedRegion={selectedRegion}
             onChange={setSelectedRegion}
@@ -132,7 +138,7 @@ export default function FilterSidebar({ onClose }: FilterSidebarProps) {
 
         <FilterAccordion
           title="날짜"
-          icon={<LuCalendarDays className="size-20" />}
+          icon={<LuCalendarDays className="size-20 text-white" />}
         >
           <DateFilter
             selectedDateRange={selectedDateRange}

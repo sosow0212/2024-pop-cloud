@@ -30,7 +30,7 @@ export default function CheckboxList({
             onCheckedChange={() => handleItemChange(item)}
             className="mb-7 size-18 rounded-sm border-gray-300"
           />
-          <label htmlFor={item} className="mb-7 ml-5 text-16-400">
+          <label htmlFor={item} className="mb-7 ml-5 text-16-400 text-white">
             {item}
           </label>
         </div>

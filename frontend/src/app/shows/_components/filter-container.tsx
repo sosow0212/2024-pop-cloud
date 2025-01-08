@@ -41,7 +41,7 @@ export default function FilterContainer() {
             "absolute top-1/2 -translate-y-1/2",
             "flex h-50 w-30 items-center justify-center rounded-r-md border",
             isFilterOpen
-              ? "border-gray-200 bg-white"
+              ? "border-gray-1 bg-gray-1"
               : "border-gray-1 bg-gray-1",
           )}
           animate={{
@@ -53,7 +53,7 @@ export default function FilterContainer() {
           <HiOutlineAdjustmentsVertical
             className={clsx(
               "size-50",
-              isFilterOpen ? "text-gray-600" : "text-gray-3",
+              isFilterOpen ? "text-gray-3" : "text-gray-3",
             )}
           />
         </motion.button>
